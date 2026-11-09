@@ -365,6 +365,32 @@ class CorePulseIntegrationTests(unittest.TestCase):
                 relay_srv.stop()
 
 
+    def test_feedback_intake_api(self):
+        """Verifies POST /api/feedback records sentiment and GET /api/feedback lists entries."""
+        # 1. Validation error on empty message
+        status_err, data_err, _ = self._request("POST", "/api/feedback", {"message": ""})
+        self.assertEqual(status_err, 400)
+        self.assertIn("error", data_err)
+
+        # 2. Successful feedback submission
+        status, data, _ = self._request("POST", "/api/feedback", {
+            "sentiment": "great",
+            "category": "Performance",
+            "message": "Sub-15ms response time on local SQLite WAL is fantastic!",
+            "contact": "founder@example.com"
+        })
+        self.assertEqual(status, 201)
+        self.assertEqual(data.get("status"), "success")
+        self.assertTrue(data.get("feedback_id", "").startswith("FB-"))
+
+        # 3. GET /api/feedback retrieves saved entries
+        status_get, data_get, _ = self._request("GET", "/api/feedback")
+        self.assertEqual(status_get, 200)
+        self.assertGreaterEqual(data_get.get("total", 0), 1)
+        found = any(f.get("message") == "Sub-15ms response time on local SQLite WAL is fantastic!" for f in data_get.get("feedback", []))
+        self.assertTrue(found, "Submitted feedback entry must be present in local log")
+
+
 if __name__ == "__main__":
     unittest.main()
 

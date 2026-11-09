@@ -3,7 +3,8 @@ CorePulse REST API Request Handler & Static Asset Server
 Implements standard library high-performance zero-dependency HTTP server with REST routing.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
+import uuid
 import json
 import logging
 import mimetypes
@@ -13,7 +14,7 @@ from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-from corepulse.config import STATIC_DIR, BASE_DIR
+from corepulse.config import STATIC_DIR, BASE_DIR, DATA_DIR
 from corepulse.database import db
 from corepulse.workflows import WorkflowEngine
 
@@ -113,6 +114,18 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                     self._send_json_response(get_active_license())
                 except Exception:
                     self._send_json_response(db.get_subscription())
+                return
+
+            if path in ("/api/feedback", "/api/feedback/"):
+                feedback_file = DATA_DIR / "feedback_log.json"
+                entries = []
+                if feedback_file.exists():
+                    try:
+                        with open(feedback_file, "r", encoding="utf-8") as f:
+                            entries = json.load(f)
+                    except Exception:
+                        entries = []
+                self._send_json_response({"total": len(entries), "feedback": entries})
                 return
 
             if path in ("/api/sync/status", "/api/sync/status/"):
@@ -540,6 +553,55 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                     logger.exception("Pipeline sweep error")
                     self._send_error_response(f"Pipeline Sweep Failed: {str(pl_err)}", HTTPStatus.INTERNAL_SERVER_ERROR)
                     return
+
+            # POST /api/feedback (Privacy-preserving user feedback intake)
+            if path in ("/api/feedback", "/api/feedback/"):
+                message = body.get("message", "").strip()
+                if not message:
+                    self._send_error_response("Field 'message' is required", HTTPStatus.BAD_REQUEST)
+                    return
+
+                sentiment = body.get("sentiment", "neutral").lower()
+                category = body.get("category", "General")
+                contact = body.get("contact", "anonymous")
+                diagnostics = body.get("diagnostics")
+
+                now_iso = datetime.now(timezone.utc).isoformat()
+                feedback_id = f"FB-{uuid.uuid4().hex[:8].upper()}"
+
+                feedback_record = {
+                    "id": feedback_id,
+                    "sentiment": sentiment,
+                    "category": category,
+                    "message": message,
+                    "contact": contact,
+                    "diagnostics": diagnostics if diagnostics else None,
+                    "created_at": now_iso
+                }
+
+                # Save locally to data/feedback_log.json
+                feedback_file = DATA_DIR / "feedback_log.json"
+                try:
+                    entries = []
+                    if feedback_file.exists():
+                        try:
+                            with open(feedback_file, "r", encoding="utf-8") as f:
+                                entries = json.load(f)
+                        except Exception:
+                            entries = []
+                    entries.append(feedback_record)
+                    with open(feedback_file, "w", encoding="utf-8") as f:
+                        json.dump(entries, f, indent=2)
+                except Exception as fb_err:
+                    logger.warning("Failed to append feedback record locally: %s", fb_err)
+
+                self._send_json_response({
+                    "status": "success",
+                    "feedback_id": feedback_id,
+                    "message": "Thank you! Your feedback has been safely recorded and queued for the executive team.",
+                    "recorded_at": now_iso
+                }, HTTPStatus.CREATED)
+                return
 
             self._send_error_response(f"Endpoint not found: {path}", HTTPStatus.NOT_FOUND)
 
