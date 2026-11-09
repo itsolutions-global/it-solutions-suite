@@ -3,31 +3,31 @@
     "system": "IT Solutions Global Corporate Health Monitor",
     "version": "1.0.0",
     "auditor": "Chief Quality Officer & Corporate Auditor",
-    "generated_at": "2026-11-09T17:09:05.874091+00:00",
+    "generated_at": "2026-11-09T17:41:07.549111+00:00",
     "host_os": "Windows 10",
     "python_version": "3.13.0"
   },
   "corporate_health_index": {
-    "score": 99.8,
+    "score": 99.4,
     "status": "HEALTHY",
     "breakdown": {
-      "api_weight_score": 34.9,
+      "api_weight_score": 34.8,
       "database_weight_score": 30.0,
-      "test_weight_score": 34.8
+      "test_weight_score": 34.4
     }
   },
   "api_health": {
     "endpoint": "http://127.0.0.1:8080/api/health",
     "reachable": true,
     "status_code": 200,
-    "latency_ms": 46.91,
+    "latency_ms": 6.2,
     "api_status": "healthy",
     "service": "CorePulse Engine",
     "version": "1.0.0",
     "build_id": "CP-2026-RELEASE-1.0",
-    "uptime_seconds": 12388.81,
-    "uptime_human": "03h 26m 28s",
-    "records_tracked": 2172,
+    "uptime_seconds": 14310.44,
+    "uptime_human": "03h 58m 30s",
+    "records_tracked": 2423,
     "thread_count": 2,
     "db_status": "synced",
     "error": null
@@ -40,17 +40,17 @@
         "engine": "JSON",
         "file_path": "E:\\It solution\\products\\corepulse\\data\\corepulse_store.json",
         "exists": true,
-        "size_bytes": 1137072,
-        "size_human": "1.08 MB",
-        "last_modified": "2026-11-09T17:08:57.694668+00:00",
+        "size_bytes": 1266621,
+        "size_human": "1.21 MB",
+        "last_modified": "2026-11-09T17:38:59.892885+00:00",
         "integrity_check": "PASS",
         "schema_valid": true,
         "missing_keys": [],
         "records": {
-          "total_tasks": 2172,
+          "total_tasks": 2423,
           "habits": 3,
-          "completed": 4,
-          "pending": 2168
+          "completed": 3,
+          "pending": 2420
         }
       },
       {
@@ -59,7 +59,7 @@
         "exists": true,
         "size_bytes": 6828032,
         "size_human": "6.51 MB",
-        "last_modified": "2026-11-09T17:08:38.579401+00:00",
+        "last_modified": "2026-11-09T17:38:22.412888+00:00",
         "integrity_check": "PASS",
         "journal_mode": "wal",
         "tables": [
@@ -78,13 +78,13 @@
         ],
         "table_row_counts": {
           "subscription": 1,
-          "tasks": 2287,
+          "tasks": 2538,
           "metrics": 1,
           "workflow_history": 0,
-          "sync_outbox": 954,
+          "sync_outbox": 965,
           "sync_state": 9,
           "crdt_metadata": 2,
-          "supabase_sync_outbox": 7612,
+          "supabase_sync_outbox": 8644,
           "sqlite_sequence": 1,
           "supabase_sync_inbox": 0,
           "supabase_sync_state": 3,
@@ -96,23 +96,24 @@
   "test_suite_health": {
     "overall_status": "FAIL",
     "total_products_scanned": 4,
-    "global_total_tests": 153,
-    "global_passed_tests": 152,
+    "global_total_tests": 62,
+    "global_passed_tests": 61,
     "global_failed_tests": 1,
     "global_error_tests": 0,
-    "global_pass_rate_percent": 99.35,
+    "global_pass_rate_percent": 98.39,
     "products": [
       {
         "product": "corepulse",
         "test_directory": "E:\\It solution\\products\\corepulse\\tests",
-        "total_tests": 91,
-        "passed": 91,
+        "total_tests": 0,
+        "passed": 0,
         "failed": 0,
-        "errors": 0,
-        "pass_rate_percent": 100.0,
-        "duration_seconds": 51.258,
-        "exit_code": 0,
-        "status": "PASS"
+        "errors": 1,
+        "pass_rate_percent": 0.0,
+        "duration_seconds": 60.0,
+        "exit_code": -1,
+        "status": "TIMEOUT",
+        "error": "Test suite exceeded 60s execution timeout"
       },
       {
         "product": "echostream",
@@ -122,7 +123,7 @@
         "failed": 0,
         "errors": 0,
         "pass_rate_percent": 100.0,
-        "duration_seconds": 8.037,
+        "duration_seconds": 12.953,
         "exit_code": 0,
         "status": "PASS"
       },
@@ -134,7 +135,7 @@
         "failed": 1,
         "errors": 0,
         "pass_rate_percent": 96.88,
-        "duration_seconds": 4.287,
+        "duration_seconds": 5.889,
         "exit_code": 1,
         "status": "FAIL"
       },
@@ -146,7 +147,7 @@
         "failed": 0,
         "errors": 0,
         "pass_rate_percent": 100.0,
-        "duration_seconds": 0.725,
+        "duration_seconds": 2.836,
         "exit_code": 0,
         "status": "PASS"
       }
