@@ -6,6 +6,7 @@ Fulfills the exact database contract as database.py.
 
 import json
 import logging
+import os
 import sqlite3
 import threading
 import time
@@ -144,6 +145,67 @@ class Database:
                     lamport_clock INTEGER NOT NULL DEFAULT 0,
                     client_id TEXT NOT NULL DEFAULT '',
                     updated_at TEXT NOT NULL
+                );
+            """)
+
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS supabase_sync_outbox (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    entity_type TEXT NOT NULL,
+                    entity_id TEXT NOT NULL,
+                    action TEXT NOT NULL,
+                    payload JSON NOT NULL,
+                    hlc TEXT NOT NULL,
+                    lamport_clock INTEGER NOT NULL DEFAULT 1,
+                    client_id TEXT NOT NULL,
+                    tenant_id TEXT NOT NULL,
+                    attempts INTEGER DEFAULT 0,
+                    last_error TEXT,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    is_synced INTEGER DEFAULT 0
+                );
+            """)
+
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_supabase_outbox_pending 
+                ON supabase_sync_outbox (is_synced, id);
+            """)
+
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS supabase_sync_inbox (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    entity_type TEXT NOT NULL,
+                    entity_id TEXT NOT NULL,
+                    action TEXT NOT NULL,
+                    payload JSON NOT NULL,
+                    hlc TEXT NOT NULL,
+                    client_id TEXT NOT NULL,
+                    tenant_id TEXT NOT NULL,
+                    received_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    processed INTEGER DEFAULT 0
+                );
+            """)
+
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS supabase_sync_state (
+                    key TEXT PRIMARY KEY,
+                    value TEXT NOT NULL,
+                    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                );
+            """)
+
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS supabase_conflict_ledger (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    entity_type TEXT NOT NULL,
+                    entity_id TEXT NOT NULL,
+                    field_name TEXT NOT NULL,
+                    winner TEXT NOT NULL,
+                    winning_val TEXT,
+                    winning_hlc TEXT NOT NULL,
+                    losing_val TEXT,
+                    losing_hlc TEXT NOT NULL,
+                    resolved_at DATETIME DEFAULT CURRENT_TIMESTAMP
                 );
             """)
 
@@ -393,6 +455,7 @@ class Database:
                 }
 
             self._recalculate_metrics_unlocked(cursor)
+            self._enqueue_supabase_mutation(cursor, "task", result["id"], "update" if existing_row else "create", result)
             cursor.close()
             return result
 
@@ -429,6 +492,7 @@ class Database:
             result = self._row_to_task_dict(updated_row)
 
             self._recalculate_metrics_unlocked(cursor)
+            self._enqueue_supabase_mutation(cursor, "task", task_id, "update", result)
             cursor.close()
             return result
 
@@ -443,9 +507,39 @@ class Database:
 
             if affected:
                 self._recalculate_metrics_unlocked(cursor)
+                self._enqueue_supabase_mutation(cursor, "task", task_id, "delete", {"id": task_id, "is_deleted": True})
 
             cursor.close()
             return affected
+
+    def _enqueue_supabase_mutation(self, cursor: sqlite3.Cursor, entity_type: str, entity_id: str, action: str, payload: Dict[str, Any]):
+        """Safely enqueues a mutation into supabase_sync_outbox in < 2ms."""
+        try:
+            now_us = int(time.time() * 1_000_000)
+            node_id = "local"
+            hlc = f"{now_us}:0:{node_id}"
+            tenant_id = os.getenv("SUPABASE_TENANT_ID", "org_enterprise_alpha")
+            cursor.execute("""
+                INSERT INTO supabase_sync_outbox (
+                    entity_type, entity_id, action, payload, hlc,
+                    lamport_clock, client_id, tenant_id, is_synced
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0);
+            """, (
+                entity_type,
+                entity_id,
+                action,
+                json.dumps(payload),
+                hlc,
+                now_us,
+                node_id,
+                tenant_id
+            ))
+            cursor.execute("SELECT COUNT(*) FROM supabase_sync_outbox WHERE is_synced = 0;")
+            pending = cursor.fetchone()[0]
+            cursor.execute("INSERT OR REPLACE INTO supabase_sync_state (key, value) VALUES ('pending_count', ?);", (str(pending),))
+            cursor.execute("INSERT OR REPLACE INTO supabase_sync_state (key, value) VALUES ('sync_state', 'PENDING');")
+        except Exception as ex:
+            logger.debug("Non-critical supabase outbox enqueue: %s", ex)
 
     def _recalculate_metrics_unlocked(self, cursor: sqlite3.Cursor):
         """Recomputes internal productivity metrics dynamically within the active connection."""

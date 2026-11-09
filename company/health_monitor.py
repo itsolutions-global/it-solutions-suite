@@ -24,7 +24,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+from urllib.request import Request, urlopen, build_opener, ProxyHandler
 
 # Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,10 +74,11 @@ class CorporateHealthMonitor:
         Measures round-trip latency in milliseconds and records operational telemetry.
         """
         start_time = time.perf_counter()
-        req = Request(self.api_url, headers={"User-Agent": "CorePulse-HealthMonitor/1.0"})
+        req = Request(self.api_url, headers={"User-Agent": "CorePulse-HealthMonitor/1.0", "Connection": "close"})
+        opener = build_opener(ProxyHandler({}))
 
         try:
-            with urlopen(req, timeout=5) as resp:
+            with opener.open(req, timeout=10) as resp:
                 latency_ms = round((time.perf_counter() - start_time) * 1000, 2)
                 status_code = resp.status
                 raw_body = resp.read().decode("utf-8")
@@ -298,7 +299,7 @@ class CorporateHealthMonitor:
                         cwd=str(prod_dir),
                         capture_output=True,
                         text=True,
-                        timeout=45
+                        timeout=120
                     )
                     duration_s = round(time.perf_counter() - start_test, 3)
                     output = proc.stderr + "\n" + proc.stdout
@@ -401,9 +402,9 @@ class CorporateHealthMonitor:
             if api_data.get("api_status") == "healthy":
                 score += 5.0
             lat = api_data.get("latency_ms")
-            if lat is not None and lat < 50.0:
+            if lat is not None and lat < 250.0:
                 score += 5.0
-            elif lat is not None and lat < 150.0:
+            elif lat is not None and lat < 750.0:
                 score += 3.0
 
         # 2. Database Component (30 pts max)

@@ -48,13 +48,16 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
 
     def _send_json_response(self, data: any, status_code: int = HTTPStatus.OK):
         """Serializes and transmits a JSON response."""
-        payload = json.dumps(data, indent=2, ensure_ascii=False).encode("utf-8")
-        self.send_response(status_code)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Content-Length", str(len(payload)))
-        self._send_cors_headers()
-        self.end_headers()
-        self.wfile.write(payload)
+        try:
+            payload = json.dumps(data, indent=2, ensure_ascii=False).encode("utf-8")
+            self.send_response(status_code)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(payload)))
+            self._send_cors_headers()
+            self.end_headers()
+            self.wfile.write(payload)
+        except (ConnectionResetError, ConnectionAbortedError, BrokenPipeError, OSError) as conn_err:
+            logger.debug(f"Client disconnected during transmission: {conn_err}")
 
     def _send_error_response(self, message: str, status_code: int = HTTPStatus.BAD_REQUEST, details: any = None):
         """Transmits structured error response."""
@@ -64,7 +67,10 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
             "status_code": status_code,
             "details": details
         }
-        self._send_json_response(resp, status_code)
+        try:
+            self._send_json_response(resp, status_code)
+        except (ConnectionResetError, ConnectionAbortedError, BrokenPipeError, OSError):
+            pass
 
     def do_OPTIONS(self):
         """Handles CORS preflight requests."""
@@ -115,6 +121,32 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                     self._send_json_response(sync_engine.get_sync_status())
                 except Exception as ex:
                     self._send_error_response(f"Sync status error: {str(ex)}", HTTPStatus.INTERNAL_SERVER_ERROR)
+                return
+
+            if path in ("/api/supabase/status", "/api/supabase/status/"):
+                try:
+                    from sync_supabase import supabase_sync
+                    self._send_json_response(supabase_sync.get_status())
+                except Exception as ex:
+                    self._send_error_response(f"Supabase status error: {str(ex)}", HTTPStatus.INTERNAL_SERVER_ERROR)
+                return
+
+            if path in ("/api/supabase/outbox", "/api/supabase/outbox/"):
+                try:
+                    from sync_supabase import supabase_sync
+                    outbox = supabase_sync.get_outbox()
+                    self._send_json_response({"total_pending": len(outbox), "records": outbox})
+                except Exception as ex:
+                    self._send_error_response(f"Supabase outbox error: {str(ex)}", HTTPStatus.INTERNAL_SERVER_ERROR)
+                return
+
+            if path in ("/api/supabase/conflicts", "/api/supabase/conflicts/"):
+                try:
+                    from sync_supabase import supabase_sync
+                    conflicts = supabase_sync.get_conflicts()
+                    self._send_json_response({"total_conflicts": len(conflicts), "conflicts": conflicts})
+                except Exception as ex:
+                    self._send_error_response(f"Supabase conflicts error: {str(ex)}", HTTPStatus.INTERNAL_SERVER_ERROR)
                 return
 
             if path == "/api/workflows":
@@ -346,6 +378,51 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                     self._send_error_response(f"Sync pull error: {str(ex)}", HTTPStatus.INTERNAL_SERVER_ERROR)
                 return
 
+            # POST /api/supabase/sync (Immediate two-way push/pull synchronization)
+            if path in ("/api/supabase/sync", "/api/supabase/sync/"):
+                try:
+                    from sync_supabase import supabase_sync
+                    res = supabase_sync.sync()
+                    self._send_json_response(res, HTTPStatus.OK)
+                except Exception as ex:
+                    self._send_error_response(f"Supabase sync error: {str(ex)}", HTTPStatus.INTERNAL_SERVER_ERROR)
+                return
+
+            # POST /api/supabase/configure (Configure URL, API Key, Tenant, User ID)
+            if path in ("/api/supabase/configure", "/api/supabase/configure/"):
+                new_url = body.get("supabase_url") or body.get("url")
+                new_key = body.get("api_key") or body.get("key")
+                new_tenant = body.get("tenant_id")
+                new_user = body.get("user_id")
+
+                try:
+                    from sync_supabase import supabase_sync, SupabaseRestClient
+                    if new_url:
+                        supabase_sync.config.url = new_url.rstrip("/")
+                    if new_key:
+                        supabase_sync.config.key = new_key
+                    if new_tenant:
+                        supabase_sync.config.tenant_id = new_tenant
+                    if new_user:
+                        supabase_sync.config.user_id = new_user
+
+                    # Re-instantiate client
+                    supabase_sync.client = SupabaseRestClient(supabase_sync.config)
+
+                    # Test reachability
+                    reachable, latency, err = supabase_sync.client.ping()
+                    self._send_json_response({
+                        "success": True,
+                        "configured": supabase_sync.config.is_configured,
+                        "reachable": reachable,
+                        "latency_ms": latency,
+                        "message": "Supabase configuration updated successfully",
+                        "error": err
+                    }, HTTPStatus.OK)
+                except Exception as ex:
+                    self._send_error_response(f"Supabase configuration error: {str(ex)}", HTTPStatus.INTERNAL_SERVER_ERROR)
+                return
+
             # POST /api/tools/shield/scan (Execute NexusShield security audit)
             if path in ("/api/tools/shield/scan", "/api/tools/shield/scan/"):
                 target_path = body.get("path")
@@ -549,6 +626,10 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
         except Exception as ex:
             logger.error("Failed to read static file %s: %s", target_file, ex)
             self._send_error_response("Internal Server Error reading static asset", HTTPStatus.INTERNAL_SERVER_ERROR)
+
+    def address_string(self):
+        """Bypasses slow reverse DNS lookup on Windows."""
+        return self.client_address[0] if self.client_address else "127.0.0.1"
 
     def log_message(self, format, *args):
         """Overridden to suppress noise or use clean standard logging format."""
