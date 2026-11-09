@@ -1,0 +1,33 @@
+# ==============================================================================
+# IT Solutions Global Corporation — Unified Enterprise Stack
+# CorePulse Executive Cockpit + SQLite WAL Persistent Storage
+# ==============================================================================
+
+version: "3.8"
+
+services:
+  corepulse:
+    build:
+      context: ./products/corepulse
+      dockerfile: Dockerfile
+    image: itsolutionsglobal/corepulse:1.0.0
+    container_name: isgc-corepulse
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - COREPULSE_HOST=0.0.0.0
+      - COREPULSE_PORT=8080
+      - COREPULSE_DEBUG=False
+    volumes:
+      - corepulse-data:/app/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/api/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+volumes:
+  corepulse-data:
+    name: isgc-corepulse-data

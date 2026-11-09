@@ -4,12 +4,14 @@
 
 ---
 
+[![PyPI Version](https://img.shields.io/pypi/v/it-solutions-suite?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/it-solutions-suite/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/it-solutions-suite?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/it-solutions-suite/)
+[![GitHub Release](https://img.shields.io/badge/Release-v1.0.0-3b82f6?style=for-the-badge&logo=github&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite/releases/tag/v1.0.0)
+[![License MIT](https://img.shields.io/badge/License-MIT-amber?style=for-the-badge)](LICENSE)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20(Pure%20Python%20stdlib)-8b5cf6?style=for-the-badge&logo=python&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
 [![Python Version](https://img.shields.io/badge/Python-3.8%2B-38bdf8?style=for-the-badge&logo=python&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
 [![Tests Passing](https://img.shields.io/badge/Tests-94%2F94%20Passing-22c55e?style=for-the-badge&logo=checkmarx&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
-[![License MIT](https://img.shields.io/badge/License-MIT-amber?style=for-the-badge)](LICENSE)
 [![Security Audited](https://img.shields.io/badge/Security-Audited%20%26%20Zero--Leak-00f2fe?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
-[![Architecture](https://img.shields.io/badge/Architecture-100%25%20Local--First-f43f5e?style=for-the-badge&logo=lock&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
 
 ---
 
@@ -25,7 +27,8 @@
      ====================================================
 ```
 
-> **Company Motto**: *"Serve humanity by solving real problems with uncompromising utility; earn deep trust and habituation before asking for reward."*
+> **Company Motto**: *"Serve humanity by solving real problems with uncompromising utility; earn deep trust and habituation before asking for reward."*  
+> **Public Cloud Portal**: [https://itsolutions-global.vercel.app](https://itsolutions-global.vercel.app)
 
 ---
 
@@ -60,33 +63,64 @@ graph TD
 
 ---
 
-## 🚀 60-Second Quickstart
+## 📦 Developer Onboarding Workflow: `pip install it-solutions-suite`
 
-No `pip install` requirements, no Docker containers, no node_modules, and zero network tracking. Runs on any computer with **Python 3.8+**.
+For individual developers and engineering teams, the easiest way to distribute and install the entire Corporate Triad across workstations is via PyPI:
 
-### 1. Clone & Verify Suite
+### Step 1: Install via PyPI
 ```bash
+pip install it-solutions-suite
+```
+*Zero external runtime dependencies. Installs cleanly in standard Python 3.8+ virtual environments.*
+
+### Step 2: Verify Suite Health
+```bash
+it-solutions health
+```
+Verifies local Python standard library modules, SQLite WAL support, and environment paths.
+
+### Step 3: Launch Executive Productivity Cockpit
+```bash
+it-solutions pulse --port 8080
+```
+👉 Open your browser to: **`http://127.0.0.1:8080/`** for the dark-mode glassmorphic control center.
+
+### Step 4: Summon Desktop Omnibar (`Ctrl+Shift+Space`)
+Run the background Omnibar daemon for global 800ms thought capture from any active window:
+```bash
+it-solutions pulse --omnibar
+```
+
+### Step 5: Enforce Codebase Security & Git Pre-Commit Gate
+Scan your repository for leaked AWS keys, OpenAI tokens, Stripe credentials, and unpatched CVEs:
+```bash
+it-solutions shield scan . --fail-under 85
+```
+
+### Step 6: Activate Ambient "Drop-and-Forget" Meeting Ingestion
+Start the automatic sentry watching your meeting transcripts directory:
+```bash
+it-solutions stream watch data/transcripts
+```
+
+---
+
+## 🚀 Alternative: 60-Second Quickstart from Source
+
+You can also run directly from source without `pip install`:
+
+```bash
+# 1. Clone repository
 git clone https://github.com/itsolutions-corp/enterprise-suite.git
 cd enterprise-suite
-```
 
-### 2. Launch CorePulse Executive Cockpit
-```bash
-# Launch via Unified Multi-Product CLI:
+# 2. Launch CorePulse
 python products/cli.py pulse --port 8080
 
-# Or via Platform Batch Script (Windows):
-.\products\corepulse.bat
-```
-👉 Open your browser to: **`http://127.0.0.1:8080/`**
-
-### 3. Run Instant Code Security Scan (NexusShield)
-```bash
+# 3. Run Security Audit
 python products/cli.py shield scan . --fail-under 85
-```
 
-### 4. Test Zero-Click Meeting Ingestion (EchoStream)
-```bash
+# 4. Run Meeting Ingestion Demo
 python products/cli.py stream demo
 ```
 
@@ -138,7 +172,7 @@ Stop leaked AWS keys, OpenAI tokens, and vulnerable dependencies before they ent
 - **Offline Dependency CVE Auditing**: Evaluates `requirements.txt` and `package.json` without leaking package manifests to external servers.
 - **Git Pre-Commit Hook**: 1-line installation prevents accidental leaks:
   ```bash
-  python products/cli.py shield scan . --fail-under 85
+  it-solutions shield scan . --fail-under 85
   ```
 
 ---
@@ -235,4 +269,5 @@ Every product in this repository is built on a strict privacy pledge:
 This enterprise suite is licensed under the **MIT License**. Free for individuals, developers, and organizations forever.
 
 ---
-*Autonomous Enterprise Architecture by IT Solutions Global Corporation*
+*Autonomous Enterprise Architecture by IT Solutions Global Corporation*  
+*Cloud Portal: [itsolutions-global.vercel.app](https://itsolutions-global.vercel.app)*

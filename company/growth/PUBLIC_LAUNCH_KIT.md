@@ -1,7 +1,16 @@
 # Official Public Launch Kit: The Corporate Triad (Option A Authorized)
 ### CorePulse • NexusShield • EchoStream
 **IT Solutions Global Corporation — Commercial & Growth Division**  
-*Document Version: 1.0.0 | Status: Active Launch Execution Blueprint | Target: Global Developer & Public Distribution*
+*Document Version: 1.1.0 | Status: Active Launch Execution Blueprint | Target: Global Developer & Public Distribution*
+
+---
+
+[![PyPI Version](https://img.shields.io/pypi/v/it-solutions-suite?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/it-solutions-suite/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/it-solutions-suite?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/it-solutions-suite/)
+[![GitHub Release](https://img.shields.io/badge/Release-v1.0.0-3b82f6?style=for-the-badge&logo=github&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite/releases/tag/v1.0.0)
+[![License MIT](https://img.shields.io/badge/License-MIT-amber?style=for-the-badge)](LICENSE)
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20(Pure%20Python%20stdlib)-8b5cf6?style=for-the-badge&logo=python&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
+[![Tests Passing](https://img.shields.io/badge/Tests-94%2F94%20Passing-22c55e?style=for-the-badge&logo=checkmarx&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
 
 ---
 
@@ -13,34 +22,64 @@ Our distribution philosophy adheres strictly to our permanent corporate motto:
 > **"Serve humanity by solving real problems with uncompromising utility; earn deep trust and habituation before asking for reward."**
 
 We do not rely on paid ad networks or spamming developer hubs. We execute authentic, code-first developer distribution across:
-1. **Hacker News (Show HN)**: Rigorous technical post focusing on pure standard library Python, Shannon entropy math, and SQLite WAL lock-free concurrency.
-2. **Product Hunt**: The premier maker community launch emphasizing the elimination of the 40% cognitive drudgery tax and accidental secret leaks.
-3. **Targeted Reddit Communities**: High-value technical discussions in `r/programming`, `r/selfhosted`, and `r/devops`.
-4. **Developer Social Threads**: Concise, visual, keyboard-velocity-first demonstrations.
+1. **PyPI Package Index (`pip install it-solutions-suite`)**: Standardized 1-command distribution for all Python environments worldwide.
+2. **Hacker News (Show HN)**: Rigorous technical post focusing on pure standard library Python, Shannon entropy math, and SQLite WAL lock-free concurrency.
+3. **Product Hunt**: The premier maker community launch emphasizing the elimination of the 40% cognitive drudgery tax and accidental secret leaks.
+4. **Targeted Reddit Communities**: High-value technical discussions in `r/programming`, `r/selfhosted`, and `r/devops`.
+5. **Developer Social Threads**: Concise, visual, keyboard-velocity-first demonstrations.
+6. **Public Cloud Portal**: Showcasing live interactive demos and documentation at [https://itsolutions-global.vercel.app](https://itsolutions-global.vercel.app).
 
 ```mermaid
 flowchart TD
     subgraph Launch_Pillars ["Unified Public Launch Vectors (Option A)"]
+        PyPI["PyPI Package (pip install it-solutions-suite)"]
         HN["Show HN: Pure Python Triad<br/>(Technical depth & benchmarks)"]
         PH["Product Hunt Maker Launch<br/>(Top 5 Product of the Day)"]
         R_Self["r/selfhosted<br/>(100% Local-First Privacy)"]
         R_Prog["r/programming<br/>(Standard Library Concurrency)"]
-        X_Thread["Twitter/X Viral Launch Thread<br/>(Sub-second Omnibar Demos)"]
+        Portal["Vercel Cloud Portal<br/>(itsolutions-global.vercel.app)"]
     end
 
-    HN --> GitHub["GitHub Open-Core Repository (94/94 Tests Passed)"]
-    PH --> GitHub
-    R_Self --> GitHub
-    R_Prog --> GitHub
-    X_Thread --> GitHub
+    PyPI --> Adoption["Sub-60s Local Install & Habituation Loop"]
+    HN --> Adoption
+    PH --> Adoption
+    R_Self --> Adoption
+    R_Prog --> Adoption
+    Portal --> Adoption
 
-    GitHub --> Habituation["Sub-60s Local Install & Habituation Loop"]
-    Habituation --> Retention["Long-Term Enterprise Advocacy & Organic Expansion"]
+    Adoption --> Retention["Long-Term Enterprise Advocacy & Organic Expansion"]
 ```
 
 ---
 
-## 2. Hacker News Show HN Submission Copy
+## 2. Developer Onboarding Workflow: `pip install it-solutions-suite`
+
+For engineering teams adopting the Corporate Triad, our standard workflow provides a frictionless 6-step path from terminal install to automated team operations:
+
+```bash
+# 1. Install via PyPI in any Python 3.8+ environment
+pip install it-solutions-suite
+
+# 2. Verify installation health and local SQLite WAL support
+it-solutions health
+
+# 3. Launch CorePulse Executive Cockpit GUI on port 8080
+it-solutions pulse --port 8080
+# Visit http://127.0.0.1:8080
+
+# 4. Activate Global Omnibar (Ctrl+Shift+Space) for 800ms quick-capture
+it-solutions pulse --omnibar
+
+# 5. Run codebase security audit & secret leak check
+it-solutions shield scan . --fail-under 85
+
+# 6. Activate ambient meeting transcript sentry
+it-solutions stream watch data/transcripts
+```
+
+---
+
+## 3. Hacker News Show HN Submission Copy
 
 - **Submission Target**: [news.ycombinator.com](https://news.ycombinator.com)
 - **Optimal Submission Window**: Tuesday or Wednesday at 06:30 AM PST (14:30 UTC).
@@ -72,7 +111,15 @@ We built the **IT Solutions Corporate Triad** to eliminate this friction using a
 3. **EchoStream v1.0 (Perception)**:
    - Ambient "Drop-and-Forget" Meeting Ingestion (`data/transcripts/`): Drop any call transcript (.txt, .vtt, .json) into the folder; our autonomous pipeline sanitizes secrets with VoiceGuard and stages structured tasks into CorePulse with zero clicks.
 
-### 60-Second Quickstart (Zero pip install):
+### 60-Second Quickstart:
+
+Option A — Install via PyPI:
+```bash
+pip install it-solutions-suite
+it-solutions pulse --port 8080
+```
+
+Option B — Clone from GitHub (Zero pip install required):
 ```bash
 git clone https://github.com/itsolutions-corp/enterprise-suite.git
 cd enterprise-suite
@@ -82,7 +129,7 @@ python products/cli.py pulse --port 8080
 
 Run an instant codebase security scan:
 ```bash
-python products/cli.py shield scan . --fail-under 85
+it-solutions shield scan . --fail-under 85
 ```
 
 All 94 automated tests across the suite execute in <3.5s with standard `unittest`:
@@ -92,7 +139,8 @@ python -m unittest discover products/nexusshield/tests -v
 python -m unittest discover products/echostream/tests -v
 ```
 
-GitHub Repository: https://github.com/itsolutions-corp/enterprise-suite
+GitHub Repository: https://github.com/itsolutions-corp/enterprise-suite  
+Public Cloud Showcase: https://itsolutions-global.vercel.app
 
 We'd love your brutal feedback on our Shannon entropy tuning, SQLite WAL multi-threaded concurrency patterns, and local-first workflow ergonomics. The engineering team will be here to answer questions all day!
 ```
@@ -110,18 +158,20 @@ We'd love your brutal feedback on our Shannon entropy tuning, SQLite WAL multi-t
 
 ---
 
-## 3. Product Hunt Launch Submission Kit
+## 4. Product Hunt Launch Submission Kit
 
-### 3.1 Listing Metadata
+### 4.1 Listing Metadata
 - **Product Name**: `IT Solutions Corporate Triad`
 - **Tagline**: `Zero-bloat, local-first executive life OS & security shield` (59 characters)
 - **Product Categories**: `Developer Tools`, `Productivity`, `Open Source`, `Artificial Intelligence`, `Task Management`
 - **Pricing Model**: Free Forever (Local Core) + Optional Pro Tier ($9.99/mo) / Triad Bundle ($19/mo)
 - **Community Promo Code**: `PHLAUNCH2026` (30% lifetime discount)
+- **Website URL**: `https://itsolutions-global.vercel.app`
+- **GitHub URL**: `https://github.com/itsolutions-corp/enterprise-suite`
 
 ---
 
-### 3.2 Short & Long Product Descriptions
+### 4.2 Short & Long Product Descriptions
 
 #### Short Description (Max 260 characters):
 > An autonomous, local-first developer productivity cockpit & code security triad engineered in pure Python standard library. Features sub-15ms Omnibar thought capture, zero-leak secret interception, and drop-and-forget meeting ingestion. Zero cloud telemetry.
@@ -144,11 +194,12 @@ We'd love your brutal feedback on our Shannon entropy tuning, SQLite WAL multi-t
 > 🎙️ **EchoStream v1.0 (Perception)**:
 > - Ambient "Drop-and-Forget" Ingestion: Drop any transcript into `data/transcripts/` to sanitize secrets with VoiceGuard and stage tasks into CorePulse with zero clicks.
 >
+> Available on PyPI: `pip install it-solutions-suite`  
 > 100% standard library Python. 0 external dependencies. 0 cloud telemetry. 94/94 tests passing.
 
 ---
 
-### 3.3 Product Hunt Official Maker First Comment
+### 4.3 Product Hunt Official Maker First Comment
 
 ```markdown
 Hey Product Hunt! 👋
@@ -165,22 +216,28 @@ We built the Corporate Triad on a radical counter-doctrine:
 2. **100% Local-First Privacy**: Your notes, code, habits, and transcripts never leave your machine.
 3. **Keyboard-Native Velocity**: Global Omnibar (`Ctrl+Shift+Space`) and Command Palette (`Ctrl+Space`).
 
+### 📦 Quick Install:
+Install in seconds from PyPI:
+`pip install it-solutions-suite`
+Or clone directly from GitHub:
+👉 https://github.com/itsolutions-corp/enterprise-suite
+
+Cloud portal showcase:
+👉 https://itsolutions-global.vercel.app
+
 ### 🎁 Exclusive Product Hunt Offer:
 The entire core suite is **100% free and open-source forever** under the MIT license. 
 
 For developers who want multi-device cloud sync and automated team audit vaults, use coupon code **`PHLAUNCH2026`** for **30% off for life** on our Pro Tier and Triad Bundle!
-
-Try the 60-second quickstart on GitHub:
-👉 https://github.com/itsolutions-corp/enterprise-suite
 
 What is the most annoying context-switching routine on your computer that you want us to automate next? We'll be answering questions in the comments all day! 🚀
 ```
 
 ---
 
-## 4. Reddit Technical Post Drafts
+## 5. Reddit Technical Post Drafts
 
-### 4.1 Post Draft for `r/selfhosted`
+### 5.1 Post Draft for `r/selfhosted`
 - **Target Subreddit**: `r/selfhosted`
 - **Post Title**: `We built a 100% local-first, zero-bloat developer cockpit and secret scanner in Python stdlib (0 dependencies)`
 - **Flair**: `Self-Hosted Project`
@@ -199,16 +256,16 @@ We decided to build the exact opposite: **The Corporate Triad** — a completely
 - **Global Desktop Omnibar (`Ctrl+Shift+Space`)**: A lightweight floating HUD that spawns in <15ms over any app. Type thoughts with `!p1`, `#tag`, `~30m`, or type `/scan` for a 1-click security audit.
 - **Drop-and-Forget Meeting Ingestion**: Drop transcripts into `data/transcripts/`. It sanitizes secrets, parses action items, and stages tasks into SQLite with zero clicks.
 - **NexusShield Local SAST**: Intercepts AWS, OpenAI, and Stripe credentials using Shannon Entropy ($H \ge 4.5$) and checks `requirements.txt` / `package.json` for known CVEs completely offline.
-- **Zero External Dependencies**: Standard library Python 3.8+. No `pip install`, no node_modules, no Docker required.
+- **Zero External Dependencies**: Standard library Python 3.8+. No `pip install` required if cloning from source, or installable via `pip install it-solutions-suite`.
 
-### 60-Second Setup:
+### Quick Setup:
 ```bash
-git clone https://github.com/itsolutions-corp/enterprise-suite.git
-cd enterprise-suite
-python products/cli.py pulse --port 8080
+pip install it-solutions-suite
+it-solutions pulse --port 8080
 ```
 
 GitHub Repo: https://github.com/itsolutions-corp/enterprise-suite  
+Cloud Portal: https://itsolutions-global.vercel.app  
 License: MIT (Free Forever)
 
 I'd love to hear feedback from the self-hosted community on integrations you’d like to see added next!
@@ -216,7 +273,7 @@ I'd love to hear feedback from the self-hosted community on integrations you’d
 
 ---
 
-### 4.2 Post Draft for `r/programming`
+### 5.2 Post Draft for `r/programming`
 - **Target Subreddit**: `r/programming`
 - **Post Title**: `Architecting a zero-dependency SAST scanner, SQLite WAL engine, and Omnibar in pure Python standard library`
 - **Flair**: `Architecture / Technical`
@@ -264,14 +321,16 @@ To eliminate post-meeting admin drag, we built a file-drop sentry monitoring `da
 
 All 94 automated tests across the codebase run in <3.5s with standard `unittest`.
 
-Open-Source Repository: https://github.com/itsolutions-corp/enterprise-suite
+PyPI Package: `pip install it-solutions-suite`  
+Open-Source Repository: https://github.com/itsolutions-corp/enterprise-suite  
+Web Showcase: https://itsolutions-global.vercel.app
 
 We'd love to discuss trade-offs, standard library concurrency edge cases, and entropy tuning in the comments!
 ```
 
 ---
 
-### 4.3 Post Draft for `r/devops`
+### 5.3 Post Draft for `r/devops`
 - **Target Subreddit**: `r/devops`
 - **Post Title**: `Stopping leaked secrets and dependency CVEs before git commit with a zero-dependency local scanner`
 - **Flair**: `Tool / Script`
@@ -286,26 +345,27 @@ We built **NexusShield**, a local-first SAST and secret interceptor designed to 
 
 - **Catches Secrets via Shannon Entropy ($H \ge 4.5$)**: Intercepts AWS keys, OpenAI project tokens (`sk-proj-`), Stripe live credentials, and private keys.
 - **Offline CVE Auditing**: Automatically checks `requirements.txt` and `package.json` for known vulnerabilities without transmitting dependency manifests over the network.
-- **Zero Dependencies**: Pure Python 3.8+ standard library. Runs out of the box on any container, VM, or workstation without `pip install`.
+- **Zero Dependencies**: Pure Python 3.8+ standard library. Runs out of the box on any container, VM, or workstation via `pip install it-solutions-suite`.
 - **Enforces Exit-Code Gates**:
   ```bash
-  python products/cli.py shield scan . --fail-under 85
+  it-solutions shield scan . --fail-under 85
   ```
 
 ### 1-Line Pre-Commit Hook:
 ```bash
 #!/bin/sh
-python path/to/products/cli.py shield scan . --fail-under 85 || exit 1
+it-solutions shield scan . --fail-under 85 || exit 1
 ```
 
-Repo: https://github.com/itsolutions-corp/enterprise-suite
+Repo: https://github.com/itsolutions-corp/enterprise-suite  
+Docs & Portal: https://itsolutions-global.vercel.app
 
 How do you currently enforce pre-commit secret scanning across diverse developer environments without toolchain headaches?
 ```
 
 ---
 
-## 5. Social Announcement Thread (Twitter / X)
+## 6. Social Announcement Thread (Twitter / X)
 
 - **Tweet 1 (The Hook)**:
   > You lose ~42 minutes every single day just opening tabs, context switching between apps, and manually typing meeting notes.
@@ -314,7 +374,8 @@ How do you currently enforce pre-commit secret scanning across diverse developer
   >
   > Meet the Corporate Triad ⚡ (0 dependencies, 100% private). 🧵👇
   > 
-  > [MEDIA: Clean screenshot of CorePulse Cockpit at http://127.0.0.1:8080]
+  > Now on PyPI: `pip install it-solutions-suite`
+  > Portal: https://itsolutions-global.vercel.app
 
 - **Tweet 2 (The Omnibar)**:
   > 1/ The Desktop Omnibar (`Ctrl+Shift+Space`)
@@ -323,17 +384,14 @@ How do you currently enforce pre-commit secret scanning across diverse developer
   > `"Fix auth cookies by 4 PM !p1 #security ~30m"`
   >
   > Spawns in <15ms. Parsed in <800ms. Stored locally in SQLite WAL. Zero cloud latency.
-  > 
-  > [MEDIA: GIF showing Omnibar floating over VS Code]
 
 - **Tweet 3 (The Security Shield)**:
   > 2/ NexusShield: Zero-Leak Code Security
   >
   > Mathematical Shannon Entropy ($H \ge 4.5$) intercepts leaked AWS, OpenAI, and Stripe credentials before git commit.
   >
-  > Type `/scan` right inside the Omnibar or add it to pre-commit in 1 line.
-  > 
-  > [MEDIA: Terminal screenshot showing Grade A score & masked key preview]
+  > Type `/scan` right inside the Omnibar or add it to pre-commit in 1 line:
+  > `it-solutions shield scan . --fail-under 85`
 
 - **Tweet 4 (Ambient Meeting Ingestion)**:
   > 3/ Drop-and-Forget Meeting Ingestion
@@ -341,33 +399,27 @@ How do you currently enforce pre-commit secret scanning across diverse developer
   > When your Zoom/Teams call ends, drop the transcript into `data/transcripts/`.
   >
   > EchoStream sanitizes credentials, isolates deliverables, and stages them into CorePulse with zero clicks. Reclaims ~45 mins/call.
-  > 
-  > [MEDIA: GIF showing transcript file drop -> tasks auto-populating in Cockpit]
 
 - **Tweet 5 (Standard Library Doctrine)**:
-  > 4/ Zero External Dependencies.
+  > 4/ Zero External Runtime Dependencies.
   >
   > Written in pure Python 3.8+ standard library.
-  > • No `pip install`
+  > • No `pip install` bloat required to run
   > • No node_modules
   > • No Docker required
   > • 94 / 94 tests passing in <3.5s
-  >
-  > Your data stays on your machine. Period.
 
 - **Tweet 6 (Call to Action)**:
   > 5/ The Corporate Triad is open-source under the MIT license:
   >
-  > 🖥️ Clone & Run:
-  > `git clone https://github.com/itsolutions-corp/enterprise-suite`
-  > `python products/cli.py pulse --port 8080`
-  >
-  > ⭐️ Star the repo: https://github.com/itsolutions-corp/enterprise-suite
-  > 🚀 Support us on Product Hunt with code `PHLAUNCH2026`!
+  > 📦 PyPI: `pip install it-solutions-suite`
+  > 🖥️ GitHub: https://github.com/itsolutions-corp/enterprise-suite
+  > 🌐 Web Portal: https://itsolutions-global.vercel.app
+  > ⭐️ Support us on Product Hunt with code `PHLAUNCH2026`!
 
 ---
 
-## 6. Launch Execution Schedule & Community Channels
+## 7. Launch Execution Schedule & Community Channels
 
 ```mermaid
 timeline
@@ -383,7 +435,9 @@ timeline
 
 | Channel | URL / Community | Priority | Primary Message |
 | :--- | :--- | :--- | :--- |
+| **PyPI** | `pypi.org/project/it-solutions-suite` | Critical | 1-line installation for global developer pods |
 | **GitHub** | `itsolutions-corp/enterprise-suite` | Critical | 60-second quickstart, 0 dependencies, MIT license |
+| **Cloud Portal**| `itsolutions-global.vercel.app` | Critical | Live public interactive showcase & docs |
 | **Product Hunt**| `producthunt.com/posts/corporate-triad` | Critical | Top 5 Product of the Day, code `PHLAUNCH2026` |
 | **Hacker News** | `news.ycombinator.com/show` | Critical | Pure Python stdlib, Shannon entropy, SQLite WAL |
 | **Reddit** | `r/selfhosted`, `r/programming`, `r/devops`| High | Local-first privacy, lock-free concurrency, pre-commit |
