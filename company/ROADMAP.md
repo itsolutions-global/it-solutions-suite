@@ -65,6 +65,8 @@ All foundational milestones through Sprint 15 have been fully delivered, verifie
 | **NexusBridge v1.0** | Sprint 14 | `v1.0.0` | Co-Pilot Core | Human-like input emulation (Bézier curves, Gaussian typing delays), dual plain-language audit vaults, isolated profile. |
 | **NexusBridge v2.0** | Sprint 15 | `v2.0.0` | OS Physical HUD | Transparent click-through HUD overlay (`WS_EX_LAYERED`), 30Hz dynamic snapping, sub-10ms emergency killswitch, GDI capture. |
 | **Cloud Infrastructure** | Sprint 15 | Global Org | Accounts Setup | Cloudflare Zero Trust, Supabase PostgreSQL, Vercel Edge, Docker Hub corporate accounts established. |
+| **Cloud Federation** | Sprint 16 | `v1.0.0` | Production Live | GitHub remote sanitized, LibSodium secrets, multi-arch Docker Hub container (`linux/amd64`, `linux/arm64`), Vercel edge deployment (`https://it-solutions-global.vercel.app`). |
+| **Turnkey 1-Line Installers** | Sprint 17 | `v1.0.0` | Live on Vercel | Zero-friction PowerShell (`install.ps1`) and Bash (`install.sh`) workstation scripts, Show HN and Product Hunt launch kits. |
 
 ---
 

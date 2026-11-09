@@ -9,9 +9,10 @@
   // 1. Multi-Platform Install Commands
   const installCommands = {
     pip: "pip install it-solutions-suite",
-    sh: "curl -fsSL https://get.itsolutions.dev | sh",
-    ps: "irm https://get.itsolutions.dev | iex",
-    git: "git clone https://github.com/itsolutions-corp/enterprise-suite.git"
+    ps: "irm https://it-solutions-global.vercel.app/install.ps1 | iex",
+    sh: "curl -fsSL https://it-solutions-global.vercel.app/install.sh | bash",
+    docker: "docker run -d -p 8080:8080 itsolutionsglobal/corepulse:latest",
+    git: "git clone https://github.com/itsolutions-global/it-solutions-suite.git"
   };
 
   let currentCliPlatform = 'pip';
@@ -130,7 +131,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     // Run live counter animation
     setTimeout(() => {
-      animateValue('metricTests', 0, 94, 1200, '/94');
+      animateValue('metricTests', 0, 155, 1200, '/155');
       animateValue('metricDeps', 10, 0, 800, '');
       animateValue('metricLatency', 60, 15, 1000, 'ms');
       animateValue('metricLocal', 0, 100, 1200, '%');

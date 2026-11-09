@@ -46,12 +46,43 @@
           "value": "public, max-age=31536000, immutable"
         }
       ]
+    },
+    {
+      "source": "/install.ps1",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/install.sh",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
     }
   ],
   "redirects": [
     {
       "source": "/github",
-      "destination": "https://github.com/itsolutions-corp/enterprise-suite",
+      "destination": "https://github.com/itsolutions-global/it-solutions-suite",
+      "permanent": false
+    },
+    {
+      "source": "/docker",
+      "destination": "https://hub.docker.com/r/itsolutionsglobal/corepulse",
       "permanent": false
     },
     {
