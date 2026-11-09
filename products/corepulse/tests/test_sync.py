@@ -468,6 +468,8 @@ class TestCorePulseSync(unittest.TestCase):
         self.assertIn('"%~dp0corepulse\\omnibar.py"', bat_content)
 
         # Safe execution of -Status
+        if sys.platform != "win32":
+            return
         proc = subprocess.run(
             ["powershell", "-ExecutionPolicy", "Bypass", "-NoProfile", "-File", str(ps1_path), "-Status"],
             capture_output=True,

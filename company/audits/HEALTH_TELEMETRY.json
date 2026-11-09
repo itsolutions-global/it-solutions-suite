@@ -3,31 +3,31 @@
     "system": "IT Solutions Global Corporate Health Monitor",
     "version": "1.0.0",
     "auditor": "Chief Quality Officer & Corporate Auditor",
-    "generated_at": "2026-11-09T08:54:39.945551+00:00",
+    "generated_at": "2026-11-09T16:59:04.373573+00:00",
     "host_os": "Windows 10",
     "python_version": "3.13.0"
   },
   "corporate_health_index": {
-    "score": 100.0,
+    "score": 99.4,
     "status": "HEALTHY",
     "breakdown": {
-      "api_weight_score": 35.0,
+      "api_weight_score": 34.8,
       "database_weight_score": 30.0,
-      "test_weight_score": 35.0
+      "test_weight_score": 34.4
     }
   },
   "api_health": {
     "endpoint": "http://127.0.0.1:8080/api/health",
     "reachable": true,
     "status_code": 200,
-    "latency_ms": 2.2,
+    "latency_ms": 3.51,
     "api_status": "healthy",
     "service": "CorePulse Engine",
     "version": "1.0.0",
     "build_id": "CP-2026-RELEASE-1.0",
-    "uptime_seconds": 142017.42,
-    "uptime_human": "39h 26m 57s",
-    "records_tracked": 27420,
+    "uptime_seconds": 11787.26,
+    "uptime_human": "03h 16m 27s",
+    "records_tracked": 2077,
     "thread_count": 2,
     "db_status": "synced",
     "error": null
@@ -40,17 +40,17 @@
         "engine": "JSON",
         "file_path": "E:\\It solution\\products\\corepulse\\data\\corepulse_store.json",
         "exists": true,
-        "size_bytes": 14327453,
-        "size_human": "13.66 MB",
-        "last_modified": "2026-11-09T08:52:35.762076+00:00",
+        "size_bytes": 1087241,
+        "size_human": "1.04 MB",
+        "last_modified": "2026-11-09T16:58:49.146281+00:00",
         "integrity_check": "PASS",
         "schema_valid": true,
         "missing_keys": [],
         "records": {
-          "total_tasks": 27420,
+          "total_tasks": 2080,
           "habits": 3,
-          "completed": 3,
-          "pending": 27417
+          "completed": 5,
+          "pending": 2075
         }
       },
       {
@@ -59,7 +59,7 @@
         "exists": true,
         "size_bytes": 6828032,
         "size_human": "6.51 MB",
-        "last_modified": "2026-11-09T08:34:19.267668+00:00",
+        "last_modified": "2026-11-09T16:56:40.511715+00:00",
         "integrity_check": "PASS",
         "journal_mode": "wal",
         "tables": [
@@ -69,28 +69,38 @@
           "workflow_history",
           "sync_outbox",
           "sync_state",
-          "crdt_metadata"
+          "crdt_metadata",
+          "supabase_sync_outbox",
+          "sqlite_sequence",
+          "supabase_sync_inbox",
+          "supabase_sync_state",
+          "supabase_conflict_ledger"
         ],
         "table_row_counts": {
           "subscription": 1,
-          "tasks": 23125,
+          "tasks": 2193,
           "metrics": 1,
           "workflow_history": 0,
-          "sync_outbox": 791,
+          "sync_outbox": 949,
           "sync_state": 9,
-          "crdt_metadata": 2
+          "crdt_metadata": 2,
+          "supabase_sync_outbox": 7162,
+          "sqlite_sequence": 1,
+          "supabase_sync_inbox": 0,
+          "supabase_sync_state": 3,
+          "supabase_conflict_ledger": 0
         }
       }
     ]
   },
   "test_suite_health": {
-    "overall_status": "PASS",
+    "overall_status": "FAIL",
     "total_products_scanned": 4,
     "global_total_tests": 62,
-    "global_passed_tests": 62,
-    "global_failed_tests": 0,
+    "global_passed_tests": 61,
+    "global_failed_tests": 1,
     "global_error_tests": 0,
-    "global_pass_rate_percent": 100.0,
+    "global_pass_rate_percent": 98.39,
     "products": [
       {
         "product": "corepulse",
@@ -113,7 +123,7 @@
         "failed": 0,
         "errors": 0,
         "pass_rate_percent": 100.0,
-        "duration_seconds": 33.67,
+        "duration_seconds": 11.624,
         "exit_code": 0,
         "status": "PASS"
       },
@@ -121,13 +131,13 @@
         "product": "nexusbridge",
         "test_directory": "E:\\It solution\\products\\nexusbridge\\tests",
         "total_tests": 32,
-        "passed": 32,
-        "failed": 0,
+        "passed": 31,
+        "failed": 1,
         "errors": 0,
-        "pass_rate_percent": 100.0,
-        "duration_seconds": 3.043,
-        "exit_code": 0,
-        "status": "PASS"
+        "pass_rate_percent": 96.88,
+        "duration_seconds": 5.545,
+        "exit_code": 1,
+        "status": "FAIL"
       },
       {
         "product": "nexusshield",
@@ -137,7 +147,7 @@
         "failed": 0,
         "errors": 0,
         "pass_rate_percent": 100.0,
-        "duration_seconds": 1.145,
+        "duration_seconds": 0.987,
         "exit_code": 0,
         "status": "PASS"
       }

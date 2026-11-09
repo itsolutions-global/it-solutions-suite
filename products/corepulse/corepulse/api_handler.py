@@ -579,11 +579,15 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
 
     def _serve_static(self, path: str):
         """Serves static files safely from the STATIC_DIR directory."""
-        if path == "/" or not path:
+        clean_path = path.replace("\\", "/")
+        path_segments = [seg for seg in clean_path.split("/") if seg]
+        if ".." in path_segments:
+            self._send_error_response("Forbidden", HTTPStatus.FORBIDDEN)
+            return
+        if not path_segments:
             relative_path = "index.html"
         else:
-            relative_path = path.lstrip("/")
-
+            relative_path = "/".join(path_segments)
         target_file = (STATIC_DIR / relative_path).resolve()
 
         # Path traversal guard
