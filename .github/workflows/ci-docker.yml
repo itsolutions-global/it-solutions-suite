@@ -50,7 +50,11 @@ jobs:
 
       - name: Verify Corporate Health Telemetry
         run: |
+          python products/corepulse/main.py &
+          SERVER_PID=$!
+          sleep 3
           python company/health_monitor.py --once
+          kill $SERVER_PID || true
 
   # ============================================================================
   # 2. Multi-Arch Production Docker Image Build & Push to Docker Hub

@@ -171,7 +171,7 @@ class TestEchoStream(unittest.TestCase):
             errors="replace",
             timeout=10
         )
-        self.assertEqual(proc.returncode, 0)
+        self.assertEqual(proc.returncode, 0, f"STDOUT: {proc.stdout}\nSTDERR: {proc.stderr}")
         data = json.loads(proc.stdout)
         self.assertFalse(data["is_clean"])
         self.assertGreaterEqual(data["incidents_count"], 1)
@@ -189,7 +189,7 @@ class TestEchoStream(unittest.TestCase):
             errors="replace",
             timeout=10
         )
-        self.assertEqual(proc.returncode, 0)
+        self.assertEqual(proc.returncode, 0, f"STDOUT: {proc.stdout}\nSTDERR: {proc.stderr}")
         data = json.loads(proc.stdout)
         self.assertIn("parsed_structure", data)
         self.assertGreaterEqual(len(data["parsed_structure"]["action_items"]), 1)
@@ -205,7 +205,7 @@ class TestEchoStream(unittest.TestCase):
             errors="replace",
             timeout=15
         )
-        self.assertEqual(proc.returncode, 0)
+        self.assertEqual(proc.returncode, 0, f"STDOUT: {proc.stdout}\nSTDERR: {proc.stderr}")
         self.assertIn("ECHOSTREAM COGNITIVE INTAKE & TRIAGE BRIEF", proc.stdout)
         self.assertIn("SECURITY INTERCEPT", proc.stdout)
 

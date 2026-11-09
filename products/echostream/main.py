@@ -96,11 +96,14 @@ def cmd_scan(args):
 def cmd_parse(args):
     """Parses meeting transcript or thought stream text."""
     input_val = args.input
-    p = Path(input_val)
-    if p.exists() and p.is_file():
-        text_content = p.read_text(encoding="utf-8", errors="replace")
-    else:
-        text_content = input_val
+    text_content = input_val
+    if "\n" not in input_val and len(input_val) < 256:
+        try:
+            p = Path(input_val)
+            if p.exists() and p.is_file():
+                text_content = p.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            pass
 
     # 1. VoiceGuard DLP Sanitize
     guard = VoiceGuard()
