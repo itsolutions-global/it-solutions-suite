@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "it-solutions-suite"
+version = "1.0.0"
+description = "Autonomous Corporate Enterprise Suite: CorePulse + NexusShield + EchoStream"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    { name = "IT Solutions Global Corporation", email = "engineering@itsolutions.corp" }
+]
+keywords = [
+    "productivity",
+    "executive-cockpit",
+    "security-scanner",
+    "sast",
+    "speech-perception",
+    "dlp",
+    "omnibar",
+    "workflow-automation"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Office/Business",
+    "Operating System :: OS Independent"
+]
+dependencies = []
+
+[project.scripts]
+it-solutions = "products.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/itsolutions-corp/it-solutions-suite"
+Repository = "https://github.com/itsolutions-corp/it-solutions-suite"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["products*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.html", "*.css", "*.js", "*.json", "*.md", "*.svg", "*.ico", "*.txt"]

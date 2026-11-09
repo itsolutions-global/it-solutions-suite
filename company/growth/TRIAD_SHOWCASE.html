@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Solutions Global Corporate Triad | CorePulse • NexusShield • EchoStream</title>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-card: rgba(16, 22, 34, 0.65);
+      --bg-card-hover: rgba(22, 30, 48, 0.85);
+      --border-glass: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(0, 242, 254, 0.35);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --cyan: #00f2fe;
+      --blue: #38bdf8;
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.25);
+      --purple: #a855f7;
+      --purple-glow: rgba(168, 85, 247, 0.25);
+      --amber: #f59e0b;
+      --glow-cyan: rgba(0, 242, 254, 0.18);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Ambient background glowing orbs */
+    .ambient-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.15;
+    }
+    .glow-1 { top: -100px; left: -100px; background: var(--cyan); }
+    .glow-2 { top: 40%; right: -150px; background: var(--purple); }
+    .glow-3 { bottom: 10%; left: 20%; background: var(--emerald); }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(7, 9, 14, 0.75);
+      border-bottom: 1px solid var(--border-glass);
+      z-index: 100;
+      padding: 16px 0;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #00f2fe, #4facfe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+      font-weight: 800;
+      font-size: 18px;
+      color: #000;
+    }
+    .logo-text {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .logo-sub {
+      font-size: 11px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      display: block;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #34d399;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulse-dot 2s infinite ease-in-out;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 90px 0 60px;
+      text-align: center;
+    }
+    .hero-badge-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: var(--blue);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(180deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 50%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 19px;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin: 0 auto 36px;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* Terminal Installation Command Box */
+    .install-box-wrapper {
+      max-width: 680px;
+      margin: 0 auto 50px;
+      background: rgba(13, 17, 23, 0.8);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .install-tabs {
+      display: flex;
+      background: rgba(22, 27, 34, 0.7);
+      border-bottom: 1px solid var(--border-glass);
+      padding: 6px 12px 0;
+      gap: 8px;
+    }
+    .install-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      padding: 8px 16px;
+      font-size: 13px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      border-radius: 8px 8px 0 0;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+    .install-tab.active {
+      color: var(--cyan);
+      background: rgba(13, 17, 23, 0.95);
+      border: 1px solid var(--border-glass);
+      border-bottom-color: transparent;
+    }
+    .install-cli-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: #38bdf8;
+      background: #090d14;
+    }
+    .install-text {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .install-prompt {
+      color: var(--emerald);
+      user-select: none;
+    }
+    .copy-btn {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .copy-btn:hover {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+    }
+    .copy-btn.copied {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--emerald);
+      color: #34d399;
+    }
+
+    /* Triad Pillar Nav / Switcher */
+    .triad-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .triad-tab-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      padding: 24px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+    }
+    .triad-tab-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .triad-tab-card.active {
+      background: rgba(18, 25, 42, 0.95);
+      border-color: var(--cyan);
+      box-shadow: 0 0 30px -5px var(--glow-cyan);
+    }
+    .triad-tab-card.active.defense {
+      border-color: var(--emerald);
+      box-shadow: 0 0 30px -5px var(--emerald-glow);
+    }
+    .triad-tab-card.active.perception {
+      border-color: var(--purple);
+      box-shadow: 0 0 30px -5px var(--purple-glow);
+    }
+    .tab-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .badge-action { background: rgba(0, 242, 254, 0.15); color: var(--cyan); border: 1px solid rgba(0, 242, 254, 0.3); }
+    .badge-defense { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-perception { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+
+    .triad-tab-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .triad-tab-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Interactive Showcase Console Display */
+    .showcase-display {
+      background: rgba(12, 17, 27, 0.85);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(20px);
+      margin-bottom: 90px;
+      position: relative;
+    }
+    .showcase-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .showcase-title-group h2 {
+      font-size: 28px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .showcase-tagline {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .cockpit-specs {
+      display: flex;
+      gap: 20px;
+    }
+    .spec-item {
+      text-align: right;
+    }
+    .spec-val {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--cyan);
+      font-family: var(--font-mono);
+    }
+    .spec-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Dynamic Showcase Viewports */
+    .showcase-panel {
+      display: none;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .showcase-panel.active {
+      display: grid;
+      animation: fadeIn 0.35s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .feature-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .feature-bullet {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .bullet-action { background: rgba(0, 242, 254, 0.15); color: var(--cyan); border: 1px solid rgba(0, 242, 254, 0.25); }
+    .bullet-defense { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.25); }
+    .bullet-perception { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.25); }
+
+    .feature-item h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 3px;
+      color: var(--text-main);
+    }
+    .feature-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Glassmorphic Mock Terminals / Consoles */
+    .mock-console {
+      background: #090d15;
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: #94a3b8;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .console-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+    .console-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .console-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .console-title {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .console-body {
+      line-height: 1.7;
+    }
+    .log-info { color: #38bdf8; }
+    .log-success { color: #34d399; }
+    .log-warn { color: #fbbf24; }
+    .log-purple { color: #c084fc; }
+    .log-dim { color: #475569; }
+
+    /* Triad Convergence Section */
+    .triad-convergence {
+      margin-bottom: 90px;
+      text-align: center;
+    }
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 48px;
+    }
+
+    .convergence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .convergence-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: left;
+      position: relative;
+    }
+    .convergence-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .conv-1 { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3); }
+    .conv-2 { background: rgba(0, 242, 254, 0.15); border: 1px solid rgba(0, 242, 254, 0.3); }
+    .conv-3 { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .convergence-card h3 {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .convergence-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Dynamic Pricing Section */
+    .pricing-section {
+      margin-bottom: 90px;
+      text-align: center;
+    }
+    .billing-toggle {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(18, 25, 42, 0.9);
+      border: 1px solid var(--border-glass);
+      border-radius: 30px;
+      padding: 4px;
+      margin-bottom: 40px;
+      gap: 6px;
+    }
+    .toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 20px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .toggle-btn.active {
+      background: rgba(0, 242, 254, 0.15);
+      color: var(--cyan);
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.25);
+    }
+    .save-badge {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 40px 28px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .pricing-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+    }
+    .pricing-card.featured {
+      background: rgba(16, 25, 45, 0.95);
+      border-color: var(--cyan);
+      box-shadow: 0 0 40px -10px var(--glow-cyan);
+    }
+    .popular-ribbon {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #00f2fe, #38bdf8);
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 14px;
+      border-radius: 20px;
+    }
+    .pricing-tier-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .pricing-tier-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      min-height: 40px;
+    }
+    .pricing-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 24px;
+    }
+    .price-currency {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .price-number {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      line-height: 1;
+    }
+    .price-period {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .pricing-features li {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pricing-features li.check::before {
+      content: "✓";
+      color: var(--emerald);
+      font-weight: 800;
+    }
+    .pricing-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 12px 0;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border-glass);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+    }
+    .pricing-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .pricing-btn.featured {
+      background: linear-gradient(135deg, #00f2fe, #38bdf8);
+      color: #000;
+      border: none;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
+    }
+    .pricing-btn.featured:hover {
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.6);
+      transform: scale(1.02);
+    }
+
+    /* Testimonials Section */
+    .testimonials-section {
+      margin-bottom: 90px;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .testimonial-quote {
+      font-size: 14px;
+      color: var(--text-main);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #38bdf8, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+    }
+    .author-name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .author-title {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-glass);
+      padding: 60px 0 40px;
+      background: rgba(7, 9, 14, 0.85);
+      position: relative;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .footer-brand {
+      max-width: 380px;
+    }
+    .footer-motto {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-top: 12px;
+      border-left: 2px solid var(--cyan);
+      padding-left: 12px;
+      font-style: italic;
+    }
+    .footer-links-group {
+      display: flex;
+      gap: 50px;
+    }
+    .footer-col h5 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-col a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s ease;
+    }
+    .footer-col a:hover {
+      color: var(--cyan);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-dim);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero h1 { font-size: 38px; }
+      .triad-nav, .pricing-grid, .convergence-grid, .testimonial-grid { grid-template-columns: 1fr; }
+      .showcase-panel { grid-template-columns: 1fr; }
+      .cockpit-specs { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glowing Backdrops -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo-badge">
+        <div class="logo-icon">IT</div>
+        <div>
+          <div class="logo-text">IT Solutions Global</div>
+          <span class="logo-sub">Corporate Triad OS</span>
+        </div>
+      </a>
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        <span>All Engines Operational • 0 External Runtime Deps</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero container">
+      <div class="hero-badge-wrap">
+        <div class="privacy-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Zero Cloud Telemetry • 100% On-Device
+        </div>
+        <div class="privacy-badge" style="color: #34d399; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.08);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          Python Standard Library • Pure Edge Architecture
+        </div>
+      </div>
+
+      <h1>
+        The Autonomous Enterprise Triad<br>
+        <span class="hero-gradient">Perception. Action. Defense.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Eliminate the 40% cognitive drudgery tax and shield software supply chains. Three autonomous, zero-dependency engines operating in seamless local unison.
+      </p>
+
+      <!-- Terminal 1-Click Install Command Box -->
+      <div class="install-box-wrapper">
+        <div class="install-tabs">
+          <button class="install-tab active" data-platform="sh" onclick="setInstallPlatform('sh')">curl / bash (macOS & Linux)</button>
+          <button class="install-tab" data-platform="ps" onclick="setInstallPlatform('ps')">PowerShell (Windows)</button>
+          <button class="install-tab" data-platform="git" onclick="setInstallPlatform('git')">Git Clone Direct</button>
+        </div>
+        <div class="install-cli-content">
+          <div class="install-text">
+            <span class="install-prompt">&gt;</span>
+            <code id="installCmd">curl -fsSL https://get.itsolutions.dev | sh</code>
+          </div>
+          <button class="copy-btn" id="copyBtn" onclick="copyInstallCommand()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="copyBtnText">Copy Command</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Triad Pillar Switcher Cards -->
+      <div class="triad-nav">
+        <!-- Tab 1: CorePulse -->
+        <div class="triad-tab-card active" id="tab-action" onclick="switchTriad('action')">
+          <span class="tab-badge badge-action">System of Action</span>
+          <h3>⚡ CorePulse v1.0</h3>
+          <p>Local-first workspace orchestrator, sub-15ms Command Palette HUD, and daily habit loop engine.</p>
+        </div>
+
+        <!-- Tab 2: NexusShield -->
+        <div class="triad-tab-card" id="tab-defense" onclick="switchTriad('defense')">
+          <span class="tab-badge badge-defense">System of Defense</span>
+          <h3>🛡️ NexusShield v1.0</h3>
+          <p>High-entropy Shannon secret interceptor, offline CVE dependency auditor, and Git pre-commit guard.</p>
+        </div>
+
+        <!-- Tab 3: EchoStream -->
+        <div class="triad-tab-card" id="tab-perception" onclick="switchTriad('perception')">
+          <span class="tab-badge badge-perception">System of Perception</span>
+          <h3>🎙️ EchoStream v1.0</h3>
+          <p>Stealth zero-bot meeting triage, OS loopback audio capture, and live verbal commitment extraction.</p>
+        </div>
+      </div>
+
+      <!-- Interactive Showcase Display -->
+      <div class="showcase-display">
+        
+        <!-- Showcase Panel: CorePulse -->
+        <div class="showcase-panel active" id="panel-action">
+          <div>
+            <div class="showcase-header">
+              <div class="showcase-title-group">
+                <h2>⚡ CorePulse: Executive Life OS</h2>
+                <div class="showcase-tagline">Transform fragmented tools into an effortless, single-command operating rhythm.</div>
+              </div>
+              <div class="cockpit-specs">
+                <div class="spec-item">
+                  <div class="spec-val">&lt; 15 ms</div>
+                  <div class="spec-label">HUD Latency</div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-val">SQLite WAL</div>
+                  <div class="spec-label">Engine</div>
+                </div>
+              </div>
+            </div>
+
+            <ul class="feature-list">
+              <li class="feature-item">
+                <div class="feature-bullet bullet-action">⌘</div>
+                <div>
+                  <h4>Universal Command Palette (Ctrl+Space / Cmd+K)</h4>
+                  <p>Summon instant task triage, notes capture, or automation execution from any window without mouse friction.</p>
+                </div>
+              </li>
+              <li class="feature-item">
+                <div class="feature-bullet bullet-action">⚡</div>
+                <div>
+                  <h4>One-Click Autonomous Workflows</h4>
+                  <p>Execute multi-step daily protocols (Morning Dev Boot, Inbox Zero, Deep Work Shield) saving 20–45 mins daily.</p>
+                </div>
+              </li>
+              <li class="feature-item">
+                <div class="feature-bullet bullet-action">🔥</div>
+                <div>
+                  <h4>Workstation-Native Habit Streak Engine</h4>
+                  <p>Reinforce positive productive habits through on-device visual streaks and real-time velocity metrics.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Mock Console Display -->
+          <div class="mock-console">
+            <div class="console-bar">
+              <div class="console-dots">
+                <div class="console-dot dot-red"></div>
+                <div class="console-dot dot-yellow"></div>
+                <div class="console-dot dot-green"></div>
+              </div>
+              <div class="console-title">corepulse — workflow-runner — port 8080</div>
+            </div>
+            <div class="console-body">
+              <p class="log-dim">[08:30:00] Trigger: Morning Boot Routine detected.</p>
+              <p class="log-info">&gt; Initializing Morning Focus Protocol (morning_focus_init)...</p>
+              <p class="log-info">  ✓ Syncing calendar timeboxes &amp; detecting fragmentation</p>
+              <p class="log-info">  ✓ Engaging Do Not Disturb shield on Slack and Teams</p>
+              <p class="log-info">  ✓ Spawning development containers &amp; terminal tabs</p>
+              <p class="log-success">⚡ Morning Focus Protocol executed in 780ms.</p>
+              <p class="log-success">Reclaimed 25 mins of executive time. Streak: 🔥 4 Days.</p>
+              <br>
+              <p class="log-dim">&gt; SQLite WAL status: 300 ops / 0 lock contention errors.</p>
+            </div>
+            <div style="font-size: 11px; color: var(--text-dim); text-align: right;">
+              Status: 200 OK • http://127.0.0.1:8080/
+            </div>
+          </div>
+        </div>
+
+        <!-- Showcase Panel: NexusShield -->
+        <div class="showcase-panel" id="panel-defense">
+          <div>
+            <div class="showcase-header">
+              <div class="showcase-title-group">
+                <h2>🛡️ NexusShield: Autonomous SAST &amp; Secret Interceptor</h2>
+                <div class="showcase-tagline">Stop leaked credentials and vulnerable dependencies before they enter git history.</div>
+              </div>
+              <div class="cockpit-specs">
+                <div class="spec-item">
+                  <div class="spec-val">H(X) ≥ 4.5</div>
+                  <div class="spec-label">Entropy Threshold</div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-val">100% Offline</div>
+                  <div class="spec-label">CVE DB</div>
+                </div>
+              </div>
+            </div>
+
+            <ul class="feature-list">
+              <li class="feature-item">
+                <div class="feature-bullet bullet-defense">🔒</div>
+                <div>
+                  <h4>High-Entropy Shannon Secret Scanner</h4>
+                  <p>Intercepts exposed AWS keys, OpenAI tokens (sk-proj-), Stripe live keys, GitHub PATs, and private keys with automatic masking.</p>
+                </div>
+              </li>
+              <li class="feature-item">
+                <div class="feature-bullet bullet-defense">📦</div>
+                <div>
+                  <h4>Offline Dependency CVE Reconciliation</h4>
+                  <p>Audits requirements.txt and package.json manifests against embedded advisories without leaking package lists to the cloud.</p>
+                </div>
+              </li>
+              <li class="feature-item">
+                <div class="feature-bullet bullet-defense">🪝</div>
+                <div>
+                  <h4>Git Pre-Commit Quality Gate (--fail-under 85)</h4>
+                  <p>Blocks commits in &lt;500ms with exit-code enforcement and non-breaking version upgrade recommendations.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Mock Console Display -->
+          <div class="mock-console">
+            <div class="console-bar">
+              <div class="console-dots">
+                <div class="console-dot dot-red"></div>
+                <div class="console-dot dot-yellow"></div>
+                <div class="console-dot dot-green"></div>
+              </div>
+              <div class="console-title">nexusshield — security audit gate</div>
+            </div>
+            <div class="console-body">
+              <p class="log-dim">&gt; python main.py scan . --fail-under 85</p>
+              <p class="log-info">[NexusShield] Scanning 48 source files &amp; package manifests...</p>
+              <p class="log-warn">⚠ HIGH_ENTROPY_KEY in config.py:8 (Shannon H=4.82)</p>
+              <p class="log-dim">  Redacted Value: sk-proj-ab...7890 (OpenAI Project Key)</p>
+              <p class="log-warn">⚠ CVE-2023-32681 in requirements.txt: requests &lt; 2.31.0</p>
+              <p class="log-info">  Recommended Safe Fix: upgrade to requests==2.31.0</p>
+              <p class="log-success">✓ Health Score: 91 / 100 (Grade A) • Passing Gate &gt;= 85</p>
+            </div>
+            <div style="font-size: 11px; color: var(--text-dim); text-align: right;">
+              Compliance: OWASP Top 10 • SOC 2 Type II Ready
+            </div>
+          </div>
+        </div>
+
+        <!-- Showcase Panel: EchoStream -->
+        <div class="showcase-panel" id="panel-perception">
+          <div>
+            <div class="showcase-header">
+              <div class="showcase-title-group">
+                <h2>🎙️ EchoStream: Stealth Audio &amp; Thought Triage</h2>
+                <div class="showcase-tagline">Zero-bot meeting intelligence operating invisibly at the OS audio kernel level.</div>
+              </div>
+              <div class="cockpit-specs">
+                <div class="spec-item">
+                  <div class="spec-val">&lt; 150 ms</div>
+                  <div class="spec-label">Edge Latency</div>
+                </div>
+                <div class="spec-item">
+                  <div class="spec-val">0 Bots</div>
+                  <div class="spec-label">Stealth Loopback</div>
+                </div>
+              </div>
+            </div>
+
+            <ul class="feature-list">
+              <li class="feature-item">
+                <div class="feature-bullet bullet-perception">👁️</div>
+                <div>
+                  <h4>Zero-Bot Disruption (No Meeting Invites Needed)</h4>
+                  <p>Captures system audio loopback directly via WASAPI / CoreAudio. Works seamlessly on Teams, Zoom, Meet, and Slack Huddles.</p>
+                </div>
+              </li>
+              <li class="feature-item">
+                <div class="feature-bullet bullet-perception">🧠</div>
+                <div>
+                  <h4>Live Spoken Commitment Extraction</h4>
+                  <p>Small language models (SLMs) extract action items and sync directly into CorePulse tasks before your call ends.</p>
+                </div>
+              </li>
+              <li class="feature-item">
+                <div class="feature-bullet bullet-perception">🛡️</div>
+                <div>
+                  <h4>Verbal Secret Interception (NexusShield Link)</h4>
+                  <p>Alerts developer immediately if credentials or database endpoints are accidentally verbalized during screen shares.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Mock Console Display -->
+          <div class="mock-console">
+            <div class="console-bar">
+              <div class="console-dots">
+                <div class="console-dot dot-red"></div>
+                <div class="console-dot dot-yellow"></div>
+                <div class="console-dot dot-green"></div>
+              </div>
+              <div class="console-title">echostream — real-time acoustic edge triage</div>
+            </div>
+            <div class="console-body">
+              <p class="log-dim">[14:15:22] Audio Stream: WASAPI System Loopback (Stealth Mode)</p>
+              <p class="log-purple">&gt; Speaker 2: "Let's deploy the hotfix by 4 PM and update staging docs."</p>
+              <p class="log-info">  ⚡ Extracted Action Item -&gt; Dispatched to CorePulse:</p>
+              <p class="log-success">    [CorePulse Task] "Deploy hotfix &amp; update staging docs" (Due 4 PM)</p>
+              <p class="log-dim">[14:18:04] Audio Stream: Screen-share voice debugging...</p>
+              <p class="log-warn">  🛡️ NexusShield Verbal Alert: AWS credential pattern verbalized!</p>
+              <p class="log-success">✓ Transcript buffered strictly in volatile RAM. 0 Cloud egress.</p>
+            </div>
+            <div style="font-size: 11px; color: var(--text-dim); text-align: right;">
+              Audio Buffer: Pure Volatile Memory • Zero Disk Footprint
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Triad Convergence Architecture -->
+    <section class="triad-convergence container">
+      <span class="section-eyebrow">The Complete Nervous System</span>
+      <h2 class="section-title">How the Corporate Triad Operates in Unison</h2>
+      <p class="section-desc">
+        Individually powerful. Together, an insurmountable competitive advantage that completely eliminates workplace cognitive friction.
+      </p>
+
+      <div class="convergence-grid">
+        <div class="convergence-card">
+          <div class="convergence-icon conv-1">🎙️</div>
+          <h3>1. Perception (EchoStream)</h3>
+          <p>
+            Absorbs voice streams, client calls, and spontaneous audio inputs with zero bot disruptions. Automatically isolates commitments, action items, and technical context.
+          </p>
+        </div>
+
+        <div class="convergence-card">
+          <div class="convergence-icon conv-2">⚡</div>
+          <h3>2. Action (CorePulse)</h3>
+          <p>
+            Receives structured action items, schedules deep work timeboxes, manages daily habit streaks, and automates multi-step workspace workflows via keyboard HUD.
+          </p>
+        </div>
+
+        <div class="convergence-card">
+          <div class="convergence-icon conv-3">🛡️</div>
+          <h3>3. Defense (NexusShield)</h3>
+          <p>
+            Guards all code modifications, commits, and dependencies. Intercepts exposed secrets, audits package CVEs, and prevents verbal leaks during engineering calls.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Pricing Comparison -->
+    <section class="pricing-section container">
+      <span class="section-eyebrow">Predictable, Patient Monetization</span>
+      <h2 class="section-title">Transparent Tier Packaging</h2>
+      <p class="section-desc">
+        Start free forever on your local workstation. Upgrade when you demand cross-machine sync and enterprise SLA power.
+      </p>
+
+      <!-- Billing Cycle Switcher -->
+      <div class="billing-toggle">
+        <button class="toggle-btn active" id="btn-monthly" onclick="setBillingCycle('monthly')">Monthly Billing</button>
+        <button class="toggle-btn" id="btn-annual" onclick="setBillingCycle('annual')">
+          Annual Billing
+          <span class="save-badge">Save 17%</span>
+        </button>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Tier 1: Free Core -->
+        <div class="pricing-card">
+          <div>
+            <div class="pricing-tier-name">Free Core Tier</div>
+            <div class="pricing-tier-desc">Complete local power for independent builders and developers.</div>
+            <div class="pricing-price">
+              <span class="price-currency">$</span>
+              <span class="price-number">0</span>
+              <span class="price-period">/ forever</span>
+            </div>
+            <ul class="pricing-features">
+              <li class="check">CorePulse: Core Task &amp; Habit Engine</li>
+              <li class="check">3 Automated Workflows / day</li>
+              <li class="check">NexusShield: Full Local SAST Scanner</li>
+              <li class="check">Git Pre-Commit Hook Gate</li>
+              <li class="check">EchoStream: Local Audio Buffering</li>
+              <li class="check">100% Local SQLite WAL Storage</li>
+            </ul>
+          </div>
+          <a href="#install" class="pricing-btn" onclick="scrollToInstall()">Download Free Binary</a>
+        </div>
+
+        <!-- Tier 2: Triad Bundle (Featured) -->
+        <div class="pricing-card featured">
+          <div class="popular-ribbon">Most Popular</div>
+          <div>
+            <div class="pricing-tier-name" style="color: var(--cyan);">The Triad Bundle</div>
+            <div class="pricing-tier-desc">Uncapped autonomous speed, multi-device sync, and AI triage.</div>
+            <div class="pricing-price">
+              <span class="price-currency">$</span>
+              <span class="price-number" id="triadPrice">19</span>
+              <span class="price-period" id="triadPeriod">/ month</span>
+            </div>
+            <ul class="pricing-features">
+              <li class="check"><strong>Unlimited</strong> Automated Workflows</li>
+              <li class="check">Multi-Device End-to-End Encrypted Cloud Sync</li>
+              <li class="check">AI-Assisted Task Decomposition</li>
+              <li class="check">EchoStream: Real-time SLM Meeting Triage</li>
+              <li class="check">Verbal Secret Interception Alert Bridge</li>
+              <li class="check">90-Day Telemetry &amp; Velocity Reports</li>
+              <li class="check">Priority Developer Support (&lt;12h)</li>
+            </ul>
+          </div>
+          <a href="#" class="pricing-btn featured" onclick="alert('Triad Pro Bundle 14-Day Free Trial initiated with coupon PHLAUNCH2026!')">Start 14-Day Pro Pass</a>
+        </div>
+
+        <!-- Tier 3: Team / Enterprise Elite -->
+        <div class="pricing-card">
+          <div>
+            <div class="pricing-tier-name">Team &amp; Enterprise</div>
+            <div class="pricing-tier-desc">Institutional governance, shared team workspaces, and custom SLAs.</div>
+            <div class="pricing-price">
+              <span class="price-currency">$</span>
+              <span class="price-number" id="enterprisePrice">49</span>
+              <span class="price-period" id="enterprisePeriod">/ seat / mo</span>
+            </div>
+            <ul class="pricing-features">
+              <li class="check">Everything in Triad Bundle</li>
+              <li class="check">Shared Pod Routines &amp; Dashboards</li>
+              <li class="check">Immutable SHA-256 Audit Logs</li>
+              <li class="check">SAML SSO, SCIM &amp; Role-Based Access</li>
+              <li class="check">Custom On-Premises Runners</li>
+              <li class="check">99.95% Enterprise SLA Guarantee</li>
+              <li class="check">Dedicated Solutions Architect</li>
+            </ul>
+          </div>
+          <a href="mailto:enterprise@itsolutions.dev" class="pricing-btn">Contact Enterprise Sales</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section container">
+      <span class="section-eyebrow" style="text-align: center;">Verified Feedback</span>
+      <h2 class="section-title" style="text-align: center;">Trusted by Technical Leaders Worldwide</h2>
+      <p class="section-desc" style="text-align: center;">
+        Here is how high-output builders and security leads eliminate drudgery with the Corporate Triad.
+      </p>
+
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "NexusShield intercepted a production OpenAI key during a late-night debugging session before it ever touched our git repo. That single catch saved us from a catastrophic key rotation."
+          </p>
+          <div class="author-info">
+            <div class="author-avatar">SC</div>
+            <div>
+              <div class="author-name">Sarah Chen</div>
+              <div class="author-title">Staff Security Architect, FinTech</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "CorePulse is the first productivity system that actually respects keyboard velocity. My entire morning dev environment boots in 800ms. I've maintained a 42-day habit streak."
+          </p>
+          <div class="author-info">
+            <div class="author-avatar" style="background: linear-gradient(135deg, #00f2fe, #38bdf8);">AM</div>
+            <div>
+              <div class="author-name">Alex Mercer</div>
+              <div class="author-title">Founding Engineer, DevTools Inc</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "EchoStream completely eliminated meeting bot awkwardness. Clients never see a creepy third-party bot, yet my action items are automatically populated in CorePulse before the Zoom closes."
+          </p>
+          <div class="author-info">
+            <div class="author-avatar" style="background: linear-gradient(135deg, #a855f7, #ec4899);">DL</div>
+            <div>
+              <div class="author-name">David Lin</div>
+              <div class="author-title">VP of Technical Sales, CloudScale</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo-badge">
+            <div class="logo-icon">IT</div>
+            <div class="logo-text">IT Solutions Global Corporation</div>
+          </div>
+          <p class="footer-motto">
+            "Serve humanity by solving real problems with uncompromising utility; earn deep trust and habituation before asking for reward."
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h5>Corporate Triad</h5>
+            <ul>
+              <li><a href="#action" onclick="switchTriad('action')">CorePulse (Action)</a></li>
+              <li><a href="#defense" onclick="switchTriad('defense')">NexusShield (Defense)</a></li>
+              <li><a href="#perception" onclick="switchTriad('perception')">EchoStream (Perception)</a></li>
+              <li><a href="PRODUCT_DOCS.md">Technical Docs</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Resources</h5>
+            <ul>
+              <li><a href="GTM_STRATEGY.md">GTM Strategy</a></li>
+              <li><a href="LAUNCH_PLAYBOOK_2026.md">Launch Playbook</a></li>
+              <li><a href="ONBOARDING_HABIT_SEQUENCE.md">Habit Sequence</a></li>
+              <li><a href="https://github.com/itsolutions-corp">GitHub Organization</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Governance</h5>
+            <ul>
+              <li><a href="../CHARTER.md">Corporate Charter</a></li>
+              <li><a href="../ROADMAP.md">Roadmap 2026-2030</a></li>
+              <li><a href="../../COMPANY_MOTTO_AND_GOALS.md">Motto &amp; Supreme Goals</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 IT Solutions Global Corporation. Zero external runtime dependencies. Local-first privacy guaranteed.</div>
+        <div>Engineered autonomously 24/7 by the C-Suite &amp; Engineering Pods.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JS Engine -->
+  <script>
+    // Platform command strings
+    const installCommands = {
+      sh: "curl -fsSL https://get.itsolutions.dev | sh",
+      ps: "irm https://get.itsolutions.dev | iex",
+      git: "git clone https://github.com/itsolutions-corp/corepulse.git"
+    };
+
+    let currentPlatform = 'sh';
+
+    function setInstallPlatform(platform) {
+      currentPlatform = platform;
+      document.querySelectorAll('.install-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.getAttribute('data-platform') === platform);
+      });
+      document.getElementById('installCmd').textContent = installCommands[platform];
+      resetCopyButton();
+    }
+
+    function copyInstallCommand() {
+      const textToCopy = installCommands[currentPlatform];
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const copyBtn = document.getElementById('copyBtn');
+        const copyBtnText = document.getElementById('copyBtnText');
+        copyBtn.classList.add('copied');
+        copyBtnText.textContent = "Copied to Clipboard!";
+        setTimeout(resetCopyButton, 3000);
+      }).catch(err => {
+        console.error('Clipboard copy failed: ', err);
+      });
+    }
+
+    function resetCopyButton() {
+      const copyBtn = document.getElementById('copyBtn');
+      const copyBtnText = document.getElementById('copyBtnText');
+      copyBtn.classList.remove('copied');
+      copyBtnText.textContent = "Copy Command";
+    }
+
+    // Triad Switcher
+    function switchTriad(pillar) {
+      // Update Tab Cards
+      const tabs = ['action', 'defense', 'perception'];
+      tabs.forEach(t => {
+        const card = document.getElementById(`tab-${t}`);
+        const panel = document.getElementById(`panel-${t}`);
+        if (t === pillar) {
+          card.classList.add('active');
+          if (t === 'defense') card.classList.add('defense');
+          if (t === 'perception') card.classList.add('perception');
+          panel.classList.add('active');
+        } else {
+          card.classList.remove('active', 'defense', 'perception');
+          panel.classList.remove('active');
+        }
+      });
+    }
+
+    // Dynamic Pricing Billing Toggle
+    let billingCycle = 'monthly';
+    function setBillingCycle(cycle) {
+      billingCycle = cycle;
+      const btnMonthly = document.getElementById('btn-monthly');
+      const btnAnnual = document.getElementById('btn-annual');
+      const triadPrice = document.getElementById('triadPrice');
+      const triadPeriod = document.getElementById('triadPeriod');
+      const enterprisePrice = document.getElementById('enterprisePrice');
+      const enterprisePeriod = document.getElementById('enterprisePeriod');
+
+      if (cycle === 'annual') {
+        btnAnnual.classList.add('active');
+        btnMonthly.classList.remove('active');
+        triadPrice.textContent = '15.80';
+        triadPeriod.textContent = '/ month (billed $190/yr)';
+        enterprisePrice.textContent = '39.00';
+        enterprisePeriod.textContent = '/ seat / mo (billed annually)';
+      } else {
+        btnMonthly.classList.add('active');
+        btnAnnual.classList.remove('active');
+        triadPrice.textContent = '19';
+        triadPeriod.textContent = '/ month';
+        enterprisePrice.textContent = '49';
+        enterprisePeriod.textContent = '/ seat / mo';
+      }
+    }
+
+    function scrollToInstall() {
+      window.scrollTo({ top: 380, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

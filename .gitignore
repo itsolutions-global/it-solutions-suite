@@ -1,0 +1,95 @@
+# ============================================================================
+# Git Ignore Rules - IT Solutions Enterprise Suite
+# ============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dll
+
+# C extensions & build artifacts
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Local Database Stores & WAL Journals
+*.sqlite3*
+*.sqlite*
+*.db
+corepulse_store.json
+products/corepulse/data/
+data/*.sqlite3*
+data/*.json
+data/transcripts/*.txt
+data/transcripts/*.md
+data/transcripts/*.vtt
+data/transcripts/*.srt
+data/transcripts/*.json
+!data/transcripts/sample_meeting.txt
+
+# Runtime Temporary Files & Logs
+*.tmp
+*.log
+*.bak
+*.swp
+*.swo
+
+# Secrets & Environment Configurations
+.env
+.env.*
+*.pem
+*.key
+*.cert
+
+# Quarantine & Autonomous Ingestion Artifacts
+data/transcripts/quarantine/*
+!data/transcripts/quarantine/.gitkeep
+
+# IDEs & System Metadata
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Private Local NexusBridge Co-Pilot (STRICTLY LOCAL ONLY - NEVER ON GITHUB)
+products/nexusbridge/
+run_nexusbridge*.bat
+launch_copilot.bat
+unblock_main.html
+*.bat
+data/
+company/logs/BROWSER_COPILOT_SESSION_LOG.md
+company/logs/AUTONOMOUS_WEB_ACTIONS.md
+company/audits/AUDIT_SPRINT_14_NEXUSBRIDGE.md
+company/audits/AUDIT_SPRINT_15_PHYSICAL_HUD.md
+company/product/PRD_NEXUSBRIDGE*.md

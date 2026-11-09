@@ -1,0 +1,23 @@
+# NexusShield Ignore Patterns
+# Test directories with deliberate synthetic credential fixtures for SAST testing
+products/nexusshield/tests
+products/echostream/tests
+products/corepulse/tests
+products/tests
+tests
+
+# Company audit logs, daily reports, and PRDs citing synthetic mock keys
+company/audits
+company/product
+company/reports
+company/research
+
+# Local test data
+data/transcripts/processed
+data/transcripts/quarantine
+
+# Build & packaging artifacts
+it_solutions_suite.egg-info
+build
+dist
+.eggs
