@@ -6,3 +6,4 @@ include .nexusignore
 
 recursive-include products *.html *.css *.js *.json *.md *.svg *.ico *.txt *.bat *.ps1 *.sh
 recursive-include company *.md
+prune products/nexusbridge

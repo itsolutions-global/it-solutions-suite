@@ -50,6 +50,7 @@ Repository = "https://github.com/itsolutions-corp/it-solutions-suite"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["products*"]
+exclude = ["products.nexusbridge*", "products.nexusbridge"]
 
 [tool.setuptools.package-data]
 "*" = ["*.html", "*.css", "*.js", "*.json", "*.md", "*.svg", "*.ico", "*.txt"]

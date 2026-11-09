@@ -19,7 +19,7 @@ setup(
     author_email="engineering@itsolutions.corp",
     license="MIT",
     url="https://github.com/itsolutions-corp/it-solutions-suite",
-    packages=find_packages(include=["products*"]),
+    packages=find_packages(include=["products*"], exclude=["products.nexusbridge", "products.nexusbridge.*"]),
     include_package_data=True,
     package_data={
         "": [
