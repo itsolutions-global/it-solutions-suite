@@ -983,6 +983,81 @@ async function triggerSyncPull() {
 }
 
 /* ==========================================================================
+   Feedback Intake Modal & API
+   ========================================================================== */
+
+let selectedFeedbackSentiment = 'positive';
+
+function openFeedbackModal() {
+  const modal = document.getElementById('feedbackModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    selectSentiment('positive');
+    const msg = document.getElementById('feedbackMessageInput');
+    if (msg) msg.focus();
+  }
+}
+
+function closeFeedbackModal() {
+  const modal = document.getElementById('feedbackModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function selectSentiment(sentiment) {
+  selectedFeedbackSentiment = sentiment;
+  const pos = document.getElementById('lblSentimentPositive');
+  const neu = document.getElementById('lblSentimentNeutral');
+  const iss = document.getElementById('lblSentimentIssue');
+
+  if (pos) {
+    pos.style.borderColor = sentiment === 'positive' ? 'rgba(16, 185, 129, 0.6)' : 'var(--border-subtle)';
+    pos.style.background = sentiment === 'positive' ? 'rgba(16, 185, 129, 0.12)' : 'rgba(255, 255, 255, 0.02)';
+  }
+  if (neu) {
+    neu.style.borderColor = sentiment === 'neutral' ? 'rgba(0, 240, 255, 0.6)' : 'var(--border-subtle)';
+    neu.style.background = sentiment === 'neutral' ? 'rgba(0, 240, 255, 0.12)' : 'rgba(255, 255, 255, 0.02)';
+  }
+  if (iss) {
+    iss.style.borderColor = sentiment === 'issue' ? 'rgba(248, 113, 113, 0.6)' : 'var(--border-subtle)';
+    iss.style.background = sentiment === 'issue' ? 'rgba(248, 113, 113, 0.12)' : 'rgba(255, 255, 255, 0.02)';
+  }
+}
+
+async function submitUserFeedback() {
+  const msgElem = document.getElementById('feedbackMessageInput');
+  const contactElem = document.getElementById('feedbackContactInput');
+  const message = msgElem ? msgElem.value.trim() : '';
+  const contact = contactElem ? contactElem.value.trim() : 'anonymous';
+
+  if (!message) {
+    showToast('Please enter your feedback or thoughts before submitting.', 'error');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sentiment: selectedFeedbackSentiment,
+        message: message,
+        contact: contact || 'anonymous',
+        category: 'Cockpit User Interface'
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to submit feedback');
+
+    showToast(data.message || 'Feedback recorded successfully! Thank you.', 'success');
+    if (msgElem) msgElem.value = '';
+    closeFeedbackModal();
+  } catch (err) {
+    console.error('Feedback submit error:', err);
+    showToast(err.message || 'Error recording feedback', 'error');
+  }
+}
+
+/* ==========================================================================
    Utilities
    ========================================================================== */
 

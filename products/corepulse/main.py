@@ -49,9 +49,17 @@ def run_server(host: str = HOST, port: int = PORT, debug: bool = False):
     setup_logging(debug)
     logger = logging.getLogger("corepulse.server")
 
+    class ResilientThreadingHTTPServer(ThreadingHTTPServer):
+        def handle_error(self, request, client_address):
+            exc_type, exc_val, _ = sys.exc_info()
+            if exc_type in (ConnectionResetError, ConnectionAbortedError, BrokenPipeError, OSError):
+                logging.getLogger("corepulse.server").debug("Client %s disconnected abruptly: %s", client_address, exc_val)
+                return
+            super().handle_error(request, client_address)
+
     server_address = (host, port)
     try:
-        httpd = ThreadingHTTPServer(server_address, CorePulseRequestHandler)
+        httpd = ResilientThreadingHTTPServer(server_address, CorePulseRequestHandler)
         httpd.daemon_threads = True
     except OSError as e:
         logger.error(f"Failed to bind to {host}:{port}: {e}")

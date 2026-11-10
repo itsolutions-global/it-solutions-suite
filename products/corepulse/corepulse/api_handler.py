@@ -689,9 +689,18 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
             self._send_cors_headers()
             self.end_headers()
             self.wfile.write(content)
+        except (ConnectionResetError, ConnectionAbortedError, BrokenPipeError, OSError) as conn_err:
+            logger.debug(f"Client disconnected during static asset transmission: {conn_err}")
         except Exception as ex:
             logger.error("Failed to read static file %s: %s", target_file, ex)
             self._send_error_response("Internal Server Error reading static asset", HTTPStatus.INTERNAL_SERVER_ERROR)
+
+    def handle(self):
+        """Processes incoming requests, suppressing abrupt client disconnections."""
+        try:
+            super().handle()
+        except (ConnectionResetError, ConnectionAbortedError, BrokenPipeError, OSError) as e:
+            logger.debug("Client socket connection terminated abruptly: %s", e)
 
     def address_string(self):
         """Bypasses slow reverse DNS lookup on Windows."""

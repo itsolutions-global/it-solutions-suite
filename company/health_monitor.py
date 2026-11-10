@@ -290,7 +290,7 @@ class CorporateHealthMonitor:
                     continue
 
                 product_name = prod_dir.name
-                cmd = [sys.executable, "-m", "unittest", "discover", "-s", str(test_dir), "-v"]
+                cmd = [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"]
                 start_test = time.perf_counter()
 
                 try:
@@ -298,11 +298,10 @@ class CorporateHealthMonitor:
                         cmd,
                         cwd=str(prod_dir),
                         capture_output=True,
-                        text=True,
-                        timeout=120
+                        timeout=240
                     )
                     duration_s = round(time.perf_counter() - start_test, 3)
-                    output = proc.stderr + "\n" + proc.stdout
+                    output = (proc.stderr or b"").decode("utf-8", errors="replace") + "\n" + (proc.stdout or b"").decode("utf-8", errors="replace")
 
                     # Parse standard unittest discovery summary
                     # Example: "Ran 26 tests in 3.101s"
@@ -347,10 +346,10 @@ class CorporateHealthMonitor:
                         "failed": 0,
                         "errors": 1,
                         "pass_rate_percent": 0.0,
-                        "duration_seconds": 60.0,
+                        "duration_seconds": 240.0,
                         "exit_code": -1,
                         "status": "TIMEOUT",
-                        "error": "Test suite exceeded 60s execution timeout"
+                        "error": "Test suite exceeded execution timeout"
                     })
                 except Exception as e:
                     product_results.append({

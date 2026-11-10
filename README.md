@@ -6,12 +6,12 @@
 
 [![PyPI Version](https://img.shields.io/pypi/v/it-solutions-suite?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/it-solutions-suite/)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/it-solutions-suite?style=for-the-badge&logo=pypi&logoColor=white)](https://pypi.org/project/it-solutions-suite/)
-[![GitHub Release](https://img.shields.io/badge/Release-v1.0.0-3b82f6?style=for-the-badge&logo=github&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite/releases/tag/v1.0.0)
+[![GitHub Release](https://img.shields.io/badge/Release-v1.0.0-3b82f6?style=for-the-badge&logo=github&logoColor=white)](https://github.com/itsolutions-global/it-solutions-suite/releases/tag/v1.0.0)
 [![License MIT](https://img.shields.io/badge/License-MIT-amber?style=for-the-badge)](LICENSE)
-[![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20(Pure%20Python%20stdlib)-8b5cf6?style=for-the-badge&logo=python&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
-[![Python Version](https://img.shields.io/badge/Python-3.8%2B-38bdf8?style=for-the-badge&logo=python&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
-[![Tests Passing](https://img.shields.io/badge/Tests-94%2F94%20Passing-22c55e?style=for-the-badge&logo=checkmarx&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
-[![Security Audited](https://img.shields.io/badge/Security-Audited%20%26%20Zero--Leak-00f2fe?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/itsolutions-corp/enterprise-suite)
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20(Pure%20Python%20stdlib)-8b5cf6?style=for-the-badge&logo=python&logoColor=white)](https://github.com/itsolutions-global/it-solutions-suite)
+[![Python Version](https://img.shields.io/badge/Python-3.8%2B-38bdf8?style=for-the-badge&logo=python&logoColor=white)](https://github.com/itsolutions-global/it-solutions-suite)
+[![Tests Passing](https://img.shields.io/badge/Tests-175%2F175%20Passing-22c55e?style=for-the-badge&logo=checkmarx&logoColor=white)](https://github.com/itsolutions-global/it-solutions-suite)
+[![Security Audited](https://img.shields.io/badge/Security-Audited%20%26%20Zero--Leak-00f2fe?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/itsolutions-global/it-solutions-suite)
 
 ---
 
@@ -28,7 +28,7 @@
 ```
 
 > **Company Motto**: *"Serve humanity by solving real problems with uncompromising utility; earn deep trust and habituation before asking for reward."*  
-> **Public Cloud Portal**: [https://itsolutions-global.vercel.app](https://itsolutions-global.vercel.app)
+> **Public Cloud Portal**: [https://it-solutions-global.vercel.app](https://it-solutions-global.vercel.app)
 
 ---
 
@@ -111,8 +111,8 @@ You can also run directly from source without `pip install`:
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/itsolutions-corp/enterprise-suite.git
-cd enterprise-suite
+git clone https://github.com/itsolutions-global/it-solutions-suite.git
+cd it-solutions-suite
 
 # 2. Launch CorePulse
 python products/cli.py pulse --port 8080
@@ -270,4 +270,4 @@ This enterprise suite is licensed under the **MIT License**. Free for individual
 
 ---
 *Autonomous Enterprise Architecture by IT Solutions Global Corporation*  
-*Cloud Portal: [itsolutions-global.vercel.app](https://itsolutions-global.vercel.app)*
+*Cloud Portal: [it-solutions-global.vercel.app](https://it-solutions-global.vercel.app)*

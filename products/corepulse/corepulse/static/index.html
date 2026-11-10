@@ -65,6 +65,11 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
           <span>Founder Portal</span>
         </button>
+        <!-- Feedback Action -->
+        <button class="btn btn-secondary" onclick="openFeedbackModal()" style="border: 1px solid rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.08); color: #FBBF24; padding: 6px 14px; display: flex; align-items: center; gap: 6px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.82rem;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Feedback</span>
+        </button>
         <div class="tier-pill" id="navTierBadge" onclick="openTierModal()">
           <span class="tier-star">★</span>
           <span class="tier-name" id="currentTierName">PRO TIER</span>
@@ -686,6 +691,57 @@
 
       <div class="modal-footer" style="margin-top: 20px; display: flex; justify-content: flex-end;">
         <button class="btn btn-secondary" onclick="closeSyncModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div class="modal-overlay" id="feedbackModal" style="display: none;">
+    <div class="modal-box" style="max-width: 540px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-eyebrow" style="color: #FBBF24;">COMMUNITY & PRIVACY-PRESERVING INTAKE</span>
+          <h2 class="modal-title" style="display: flex; align-items: center; gap: 10px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Submit Feedback
+          </h2>
+          <p style="color: var(--text-secondary); font-size: 0.85rem; margin: 4px 0 0 0;">
+            100% private. Feedback is stored locally in your CorePulse instance and never transmitted without your consent.
+          </p>
+        </div>
+        <button class="modal-close" onclick="closeFeedbackModal()">&times;</button>
+      </div>
+
+      <div style="margin-top: 16px;">
+        <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 6px;">How is your experience with the suite?</label>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
+          <label style="cursor: pointer; border: 1px solid rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08); border-radius: 8px; padding: 10px; text-align: center; display: block;" id="lblSentimentPositive" onclick="selectSentiment('positive')">
+            <input type="radio" name="feedbackSentiment" value="positive" checked style="display: none;">
+            <div style="font-size: 1.3rem;">🚀</div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: #10B981; margin-top: 4px;">Loving it</div>
+          </label>
+          <label style="cursor: pointer; border: 1px solid var(--border-subtle); background: rgba(255, 255, 255, 0.02); border-radius: 8px; padding: 10px; text-align: center; display: block;" id="lblSentimentNeutral" onclick="selectSentiment('neutral')">
+            <input type="radio" name="feedbackSentiment" value="neutral" style="display: none;">
+            <div style="font-size: 1.3rem;">💡</div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: #00F0FF; margin-top: 4px;">Suggestion</div>
+          </label>
+          <label style="cursor: pointer; border: 1px solid var(--border-subtle); background: rgba(255, 255, 255, 0.02); border-radius: 8px; padding: 10px; text-align: center; display: block;" id="lblSentimentIssue" onclick="selectSentiment('issue')">
+            <input type="radio" name="feedbackSentiment" value="issue" style="display: none;">
+            <div style="font-size: 1.3rem;">⚠️</div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: #F87171; margin-top: 4px;">Issue / Bug</div>
+          </label>
+        </div>
+
+        <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Your Notes / Feature Requests</label>
+        <textarea id="feedbackMessageInput" rows="4" placeholder="Tell us what you love or what we should build next..." style="width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 0.88rem; resize: vertical; margin-bottom: 16px; box-sizing: border-box;"></textarea>
+
+        <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Contact Email or GitHub Handle (Optional)</label>
+        <input type="text" id="feedbackContactInput" placeholder="e.g. dev@example.com or @handle" style="width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 0.85rem; box-sizing: border-box;">
+      </div>
+
+      <div class="modal-footer" style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="btn btn-secondary" onclick="closeFeedbackModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="submitUserFeedback()" style="background: linear-gradient(135deg, #FBBF24, #F59E0B); color: #000; font-weight: 700;">Submit Feedback</button>
       </div>
     </div>
   </div>
