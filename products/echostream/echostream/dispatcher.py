@@ -6,6 +6,7 @@ with resilient in-process database fallback when the HTTP daemon is offline.
 
 import json
 import logging
+import os
 import sys
 import urllib.error
 import urllib.request
@@ -40,25 +41,26 @@ class CorePulseDispatcher:
             "tags": task.get("tags", ["echostream", "voice-intake"])
         }
 
-        # 1. Attempt REST API dispatch
-        try:
-            req = urllib.request.Request(
-                self.api_url,
-                data=json.dumps(payload).encode("utf-8"),
-                headers={"Content-Type": "application/json", "User-Agent": "EchoStream-Dispatcher/1.0"},
-                method="POST"
-            )
-            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
-                if resp.status in (200, 201):
-                    res_json = json.loads(resp.read().decode("utf-8"))
-                    return {
-                        "status": "success",
-                        "mode": "rest_api",
-                        "task_id": res_json.get("task", {}).get("id"),
-                        "task": res_json.get("task", payload)
-                    }
-        except (urllib.error.URLError, urllib.error.HTTPError, OSError) as net_err:
-            logger.debug("CorePulse HTTP daemon unavailable (%s). Engaging direct DB fallback.", net_err)
+        # 1. Attempt REST API dispatch (skip live default port when in isolated test mode)
+        if not (os.getenv("COREPULSE_TEST_MODE") == "1" and self.api_url == DEFAULT_API_URL):
+            try:
+                req = urllib.request.Request(
+                    self.api_url,
+                    data=json.dumps(payload).encode("utf-8"),
+                    headers={"Content-Type": "application/json", "User-Agent": "EchoStream-Dispatcher/1.0"},
+                    method="POST"
+                )
+                with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+                    if resp.status in (200, 201):
+                        res_json = json.loads(resp.read().decode("utf-8"))
+                        return {
+                            "status": "success",
+                            "mode": "rest_api",
+                            "task_id": res_json.get("task", {}).get("id"),
+                            "task": res_json.get("task", payload)
+                        }
+            except (urllib.error.URLError, urllib.error.HTTPError, OSError) as net_err:
+                logger.debug("CorePulse HTTP daemon unavailable (%s). Engaging direct DB fallback.", net_err)
 
         # 2. Resilient Direct Database Fallback
         try:

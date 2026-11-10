@@ -7,8 +7,13 @@ import json
 import os
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
+
+_TEST_TMP_DIR = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
+os.environ.setdefault("COREPULSE_TEST_MODE", "1")
+os.environ.setdefault("COREPULSE_DATA_DIR", _TEST_TMP_DIR.name)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 CLI_PATH = BASE_DIR / "cli.py"
@@ -100,7 +105,7 @@ class CorporateCLITests(unittest.TestCase):
     def test_09_stream_watch_integration(self):
         """Validates it-solutions stream watch --once autonomous ingestion sweep."""
         import tempfile
-        with tempfile.TemporaryDirectory() as tmpdir:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmpdir:
             watch_dir = Path(tmpdir) / "transcripts"
             watch_dir.mkdir(parents=True, exist_ok=True)
             memo_file = watch_dir / "quick_memo.txt"

@@ -352,27 +352,28 @@ class OmnibarRouter:
 
         parsed = self.parse_natural_language_task(payload_text)
 
-        # 1. Attempt REST API dispatch
-        try:
-            req = urllib.request.Request(
-                self.api_url,
-                data=json.dumps(parsed).encode("utf-8"),
-                headers={"Content-Type": "application/json", "User-Agent": "CorePulse-Omnibar/1.0"},
-                method="POST"
-            )
-            with urllib.request.urlopen(req, timeout=1.2) as resp:
-                if resp.status in (200, 201):
-                    res_json = json.loads(resp.read().decode("utf-8"))
-                    task = res_json.get("task", parsed)
-                    return {
-                        "success": True,
-                        "mode": "task",
-                        "transport": "rest_api",
-                        "summary": f"✔ Task Created [API]: {task['title']} ({task['priority'].upper()})",
-                        "data": task
-                    }
-        except Exception:
-            logger.debug("REST API unreachable. Falling back to direct SQLite persistence.")
+        # 1. Attempt REST API dispatch (skip live default port when in isolated test mode)
+        if not (os.getenv("COREPULSE_TEST_MODE") == "1" and self.api_url == DEFAULT_API_URL):
+            try:
+                req = urllib.request.Request(
+                    self.api_url,
+                    data=json.dumps(parsed).encode("utf-8"),
+                    headers={"Content-Type": "application/json", "User-Agent": "CorePulse-Omnibar/1.0"},
+                    method="POST"
+                )
+                with urllib.request.urlopen(req, timeout=1.2) as resp:
+                    if resp.status in (200, 201):
+                        res_json = json.loads(resp.read().decode("utf-8"))
+                        task = res_json.get("task", parsed)
+                        return {
+                            "success": True,
+                            "mode": "task",
+                            "transport": "rest_api",
+                            "summary": f"✔ Task Created [API]: {task['title']} ({task['priority'].upper()})",
+                            "data": task
+                        }
+            except Exception:
+                logger.debug("REST API unreachable. Falling back to direct SQLite persistence.")
 
         # 2. Resilient SQLite WAL fallback
         try:

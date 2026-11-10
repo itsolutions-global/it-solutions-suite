@@ -20,6 +20,10 @@ import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
+_TEST_TMP_DIR = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
+os.environ.setdefault("COREPULSE_TEST_MODE", "1")
+os.environ.setdefault("COREPULSE_DATA_DIR", _TEST_TMP_DIR.name)
+
 # Base Directories
 TESTS_DIR = Path(__file__).resolve().parent
 COREPULSE_DIR = TESTS_DIR.parent

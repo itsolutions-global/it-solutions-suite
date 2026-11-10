@@ -12,7 +12,10 @@ company/product
 company/reports
 company/research
 
-# Local test data
+# Local test data & runtime stores
+data
+products/corepulse/data
+products/nexusbridge/logs
 data/transcripts/processed
 data/transcripts/quarantine
 

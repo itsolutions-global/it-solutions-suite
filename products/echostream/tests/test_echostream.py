@@ -12,6 +12,10 @@ import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
+_TEST_TMP_DIR = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
+os.environ.setdefault("COREPULSE_TEST_MODE", "1")
+os.environ.setdefault("COREPULSE_DATA_DIR", _TEST_TMP_DIR.name)
+
 # Ensure project root is in sys.path
 BASE_DIR = Path(__file__).resolve().parent.parent
 SUITE_DIR = BASE_DIR.parent
@@ -214,7 +218,7 @@ class TestEchoStream(unittest.TestCase):
         import tempfile
         from echostream.watcher import TranscriptWatcher
 
-        with tempfile.TemporaryDirectory() as tmpdir:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmpdir:
             watch_dir = Path(tmpdir) / "inbox"
             archive_dir = Path(tmpdir) / "archive"
             watcher = TranscriptWatcher(watch_dir=watch_dir, archive_dir=archive_dir, settle_time=0.01)

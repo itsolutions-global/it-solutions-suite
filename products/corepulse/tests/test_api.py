@@ -6,6 +6,7 @@ Validates all REST API endpoints, workflow executions, state mutations, and stat
 import json
 import os
 import sys
+import tempfile
 import threading
 import time
 import unittest
@@ -13,6 +14,10 @@ from http.server import ThreadingHTTPServer
 from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
+
+_TEST_TMP_DIR = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
+os.environ.setdefault("COREPULSE_TEST_MODE", "1")
+os.environ.setdefault("COREPULSE_DATA_DIR", _TEST_TMP_DIR.name)
 
 # Add project root to sys.path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -290,7 +295,7 @@ class CorePulseIntegrationTests(unittest.TestCase):
         self.assertIn("drop_dir", data_s)
 
         # 2. Test Scan
-        with tempfile.TemporaryDirectory() as tmp_drop:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp_drop:
             drop_path = Path(tmp_drop)
             sample_file = drop_path / "sync.txt"
             sample_file.write_text("[Alex Lead] We need to review the Q1 sprint plan by Friday !p1 #planning", encoding="utf-8")
@@ -320,7 +325,7 @@ class CorePulseIntegrationTests(unittest.TestCase):
         self.assertEqual(status_bad, 400)
 
         # 3. Start ephemeral test relay
-        with tempfile.TemporaryDirectory() as tmp_r:
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp_r:
             relay_db = Path(tmp_r) / "test_relay.sqlite3"
             test_relay_port = 9189
             relay_srv = BlindedRelayServer(host="127.0.0.1", port=test_relay_port, db_path=relay_db)

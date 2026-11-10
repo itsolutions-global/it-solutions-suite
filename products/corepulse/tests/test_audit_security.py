@@ -7,12 +7,17 @@ Audits boundary conditions, concurrency safety, input sanitization, and security
 import json
 import os
 import sys
+import tempfile
 import threading
 import time
 import unittest
 from http.server import ThreadingHTTPServer
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
+
+_TEST_TMP_DIR = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
+os.environ.setdefault("COREPULSE_TEST_MODE", "1")
+os.environ.setdefault("COREPULSE_DATA_DIR", _TEST_TMP_DIR.name)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:

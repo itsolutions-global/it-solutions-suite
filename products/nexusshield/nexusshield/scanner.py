@@ -17,7 +17,7 @@ from nexusshield.secrets import SecretScanner
 IGNORED_DIRS: Set[str] = {
     ".git", ".hg", ".svn", "node_modules", "venv", ".venv", "env",
     "__pycache__", ".pytest_cache", "dist", "build", ".egg-info",
-    ".idea", ".vscode", "coverage", ".next", ".nuxt"
+    ".idea", ".vscode", "coverage", ".next", ".nuxt", "chrome_copilot_profile"
 }
 
 # Binary and non-code file extensions ignored during scanning
@@ -105,14 +105,17 @@ class NexusScanner:
         files_scanned = 0
         total_loc = 0
 
-        # Load .nexusignore rules if present
+        # Load .nexusignore rules if present (check target and parent root)
         ignore_patterns: Set[str] = set()
-        nexusignore_path = base / ".nexusignore"
-        if nexusignore_path.exists():
-            for line in nexusignore_path.read_text(encoding="utf-8", errors="ignore").splitlines():
-                line = line.strip()
-                if line and not line.startswith("#"):
-                    ignore_patterns.add(line.replace("\\", "/").strip("/"))
+        for candidate, prefix_to_strip in ((base / ".nexusignore", ""), (base.parent / ".nexusignore", f"{base.name}/")):
+            if candidate.exists():
+                for line in candidate.read_text(encoding="utf-8", errors="ignore").splitlines():
+                    line = line.strip()
+                    if line and not line.startswith("#"):
+                        norm = line.replace("\\", "/").strip("/")
+                        ignore_patterns.add(norm)
+                        if prefix_to_strip and norm.startswith(prefix_to_strip):
+                            ignore_patterns.add(norm[len(prefix_to_strip):])
 
         if base.is_file():
             files_to_scan = [base]

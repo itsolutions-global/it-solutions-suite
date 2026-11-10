@@ -8,10 +8,10 @@ from pathlib import Path
 
 # Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data"
+DATA_DIR = Path(os.getenv("COREPULSE_DATA_DIR", str(BASE_DIR / "data")))
 STATIC_DIR = BASE_DIR / "corepulse" / "static"
-DB_FILE = DATA_DIR / "corepulse_store.json"
-SQLITE_DB_FILE = DATA_DIR / "corepulse.sqlite3"
+DB_FILE = Path(os.getenv("COREPULSE_DB_FILE", str(DATA_DIR / "corepulse_store.json")))
+SQLITE_DB_FILE = Path(os.getenv("COREPULSE_SQLITE_FILE", str(DATA_DIR / "corepulse.sqlite3")))
 
 # Server Settings
 HOST = os.getenv("COREPULSE_HOST", "127.0.0.1")

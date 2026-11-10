@@ -294,12 +294,18 @@ class CorporateHealthMonitor:
                 start_test = time.perf_counter()
 
                 try:
-                    proc = subprocess.run(
-                        cmd,
-                        cwd=str(prod_dir),
-                        capture_output=True,
-                        timeout=240
-                    )
+                    import tempfile
+                    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp_test_dir:
+                        test_env = os.environ.copy()
+                        test_env["COREPULSE_TEST_MODE"] = "1"
+                        test_env["COREPULSE_DATA_DIR"] = tmp_test_dir
+                        proc = subprocess.run(
+                            cmd,
+                            cwd=str(prod_dir),
+                            env=test_env,
+                            capture_output=True,
+                            timeout=240
+                        )
                     duration_s = round(time.perf_counter() - start_test, 3)
                     output = (proc.stderr or b"").decode("utf-8", errors="replace") + "\n" + (proc.stdout or b"").decode("utf-8", errors="replace")
 

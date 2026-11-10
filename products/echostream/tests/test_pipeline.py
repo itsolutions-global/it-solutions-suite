@@ -22,6 +22,10 @@ import time
 import unittest
 from pathlib import Path
 
+_TEST_TMP_DIR = tempfile.TemporaryDirectory(ignore_cleanup_errors=True)
+os.environ.setdefault("COREPULSE_TEST_MODE", "1")
+os.environ.setdefault("COREPULSE_DATA_DIR", _TEST_TMP_DIR.name)
+
 # Add project paths to sys.path
 TEST_DIR = Path(__file__).resolve().parent
 ECHOSTREAM_DIR = TEST_DIR.parent
