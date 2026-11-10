@@ -178,6 +178,24 @@ class NexusScanner:
             **score_data
         }
 
+    def scan_git_history(self, repo_path: Union[str, Path], max_commits: int = 50) -> Dict[str, Any]:
+        """Scans Git commit history ('git log -p') for historical leaked secrets."""
+        from nexusshield.advanced import GitHistoryScanner
+        hist = GitHistoryScanner(entropy_threshold=self.secret_scanner.entropy_threshold)
+        return hist.scan_git_history(repo_path, max_commits=max_commits)
+
+    def generate_sbom(self, target_path: Union[str, Path]) -> Dict[str, Any]:
+        """Generates a CycloneDX v1.5 Software Bill of Materials (SBOM) for the target directory."""
+        from nexusshield.advanced import SBOMGenerator
+        gen = SBOMGenerator()
+        return gen.generate_sbom(target_path)
+
+    def remediate_file(self, file_path: Union[str, Path], env_file_path: Optional[Union[str, Path]] = None) -> Dict[str, Any]:
+        """Automatically extracts hardcoded secrets from a file into .env and rewrites source code."""
+        from nexusshield.advanced import SecretRemediator
+        rem = SecretRemediator(entropy_threshold=self.secret_scanner.entropy_threshold)
+        return rem.remediate_file(file_path, env_file_path=env_file_path)
+
 
 # Global convenience scanner instance
 scanner = NexusScanner()

@@ -154,6 +154,25 @@ def main():
     scan_parser.add_argument("--fail-under", type=float, default=0.0, help="Exit with code 1 if score < threshold")
     scan_parser.add_argument("--entropy", type=float, default=4.6, help="Shannon entropy threshold (default: 4.6)")
 
+    # scan-history command
+    hist_parser = subparsers.add_parser("scan-history", help="Scan Git commit history ('git log -p') for historical leaked secrets")
+    hist_parser.add_argument("path", nargs="?", default=".", help="Path to Git repository (default: .)")
+    hist_parser.add_argument("--commits", "-n", type=int, default=50, help="Max git commits to inspect (default: 50)")
+    hist_parser.add_argument("--json", action="store_true", help="Output raw JSON to stdout")
+    hist_parser.add_argument("--output", "-o", help="Write history report JSON to file")
+
+    # sbom command
+    sbom_parser = subparsers.add_parser("sbom", help="Generate CycloneDX v1.5 Software Bill of Materials (SBOM)")
+    sbom_parser.add_argument("path", nargs="?", default=".", help="Target project directory (default: .)")
+    sbom_parser.add_argument("--json", action="store_true", help="Output CycloneDX JSON to stdout")
+    sbom_parser.add_argument("--output", "-o", help="Write CycloneDX SBOM JSON to specified file")
+
+    # remediate command
+    rem_parser = subparsers.add_parser("remediate", help="1-Click extract hardcoded secrets to .env and rewrite source file")
+    rem_parser.add_argument("file", help="Source file to remediate")
+    rem_parser.add_argument("--env-file", help="Optional custom .env file path")
+    rem_parser.add_argument("--json", action="store_true", help="Output remediation summary in JSON")
+
     # version command
     subparsers.add_parser("version", help="Show NexusShield version and system info")
 
@@ -163,6 +182,68 @@ def main():
         print_banner()
         print(f"NexusShield Version: {__version__}")
         print(f"Zero External Dependencies: True (Pure Python 3 standard library)")
+        sys.exit(0)
+
+    if args.command == "scan-history":
+        scanner = NexusScanner()
+        res = scanner.scan_git_history(args.path, max_commits=args.commits)
+        if args.output:
+            Path(args.output).write_text(json.dumps(res, indent=2), encoding="utf-8")
+        if args.json:
+            print(json.dumps(res, indent=2))
+        else:
+            print_banner()
+            border = "=" * 80
+            print(border)
+            print(f"  {BOLD}GIT HISTORY TIME-MACHINE AUDIT{RESET} | Target: {res.get('target')}")
+            print(f"  Commits Inspected: {res.get('commits_scanned', 0)} | Score: {format_grade_badge(res.get('grade', 'A+'), res.get('score', 100.0))}")
+            print(border)
+            findings = res.get("findings", [])
+            if not findings:
+                print(f"\n  {GREEN}[OK] Clean Git Commit History! Zero historical secrets detected across {res.get('commits_scanned', 0)} commits.{RESET}\n")
+            else:
+                print(f"\n  {RED}[!] DETECTED {len(findings)} HISTORICAL SECRET LEAK(S):{RESET}\n")
+                for idx, f in enumerate(findings, start=1):
+                    print(f"    {idx}. {format_severity_badge(f.get('severity', 'High'))} {BOLD}{f.get('title')}{RESET}")
+                    print(f"       Commit: {CYAN}{f.get('commit')}{RESET} ({f.get('commit_date')}) by {f.get('author')} — \"{f.get('commit_subject')}\"")
+                    print(f"       File:   {f.get('file')}:{f.get('line')} | Preview: {YELLOW}{f.get('redacted_secret')}{RESET}\n")
+            print(border)
+        sys.exit(1 if res.get("counts", {}).get("Critical", 0) > 0 else 0)
+
+    if args.command == "sbom":
+        scanner = NexusScanner()
+        sbom_data = scanner.generate_sbom(args.path)
+        if args.output:
+            Path(args.output).write_text(json.dumps(sbom_data, indent=2), encoding="utf-8")
+        if args.json:
+            print(json.dumps(sbom_data, indent=2))
+        else:
+            print_banner()
+            border = "=" * 80
+            summary = sbom_data.get("summary", {})
+            print(border)
+            print(f"  {BOLD}CYCLONEDX v1.5 SOFTWARE BILL OF MATERIALS (SBOM){RESET}")
+            print(f"  Components Indexed: {summary.get('total_components', 0)} | Known CVEs: {summary.get('total_vulnerabilities', 0)} | Manifests: {summary.get('manifests_scanned', 0)}")
+            print(border)
+            for comp in sbom_data.get("components", []):
+                print(f"  - {CYAN}{comp['purl']}{RESET}")
+            if not sbom_data.get("components"):
+                print(f"  {GREEN}[✓] Zero 3rd-party external dependencies detected (100% Pure Standard Library Architecture).{RESET}")
+            if args.output:
+                print(f"\n  {GREEN}[+] CycloneDX SBOM written to:{RESET} {args.output}")
+            print(border)
+        sys.exit(0)
+
+    if args.command == "remediate":
+        scanner = NexusScanner()
+        rem_res = scanner.remediate_file(args.file, env_file_path=args.env_file)
+        if args.json:
+            print(json.dumps(rem_res, indent=2))
+        else:
+            print_banner()
+            print(f"  {BOLD}1-CLICK SECRET REMEDIATION:{RESET} {rem_res.get('message')}")
+            for v in rem_res.get("extracted_variables", []):
+                print(f"    - Line {v['line']}: `{v['variable']}` -> `os.environ.get(\"{v['env_key']}\")` ({v['title']})")
         sys.exit(0)
 
     if args.command == "scan":

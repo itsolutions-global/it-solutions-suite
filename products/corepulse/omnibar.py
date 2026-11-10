@@ -234,6 +234,18 @@ class OmnibarRouter:
         if re.match(r"(?i)^(?:status|pulse|vitals|habits)\b", text):
             return "status", text
 
+        # Snippet Expansion (e.g. ';;standup' or 'snippet standup')
+        if text.startswith(";;") or re.match(r"(?i)^(?:/?snippet|snip|expand)\b", text):
+            if text.startswith(";;"):
+                rest = text
+            else:
+                rest = re.sub(r"(?i)^(?:/?snippet|snip|expand)\s*", "", text).strip()
+            return "snippet", rest
+
+        # Markdown Vault Export
+        if re.match(r"(?i)^(?:export\s+vault|vault\s+export|/vault)\b", text):
+            return "vault", text
+
         # Open Cockpit
         if re.match(r"(?i)^(?:open|cockpit|ui|dashboard|browser)\b", text):
             return "cockpit", text
@@ -286,6 +298,21 @@ class OmnibarRouter:
                 "mode": "cockpit",
                 "preview": "Open CorePulse Executive Cockpit at http://127.0.0.1:8080",
                 "badge": "COCKPIT"
+            }
+
+        if mode == "snippet":
+            trig = payload or ";;standup"
+            return {
+                "mode": "snippet",
+                "preview": f"Expand dynamic snippet '{trig}' ({{{{date}}}}, {{{{git_branch}}}}) from Snippet Vault",
+                "badge": "SNIPPET VAULT"
+            }
+
+        if mode == "vault":
+            return {
+                "mode": "vault",
+                "preview": "Export Tasks, Habits & Snippets to Obsidian/Logseq Markdown Vault",
+                "badge": "MARKDOWN VAULT"
             }
 
         # Task mode
@@ -630,6 +657,67 @@ class OmnibarRouter:
                 "error": str(ex)
             }
 
+    def execute_snippet(self, trigger_or_query: str) -> Dict[str, Any]:
+        """Expands a snippet from the local SnippetVault with dynamic variables."""
+        try:
+            from corepulse.snippets import snippet_vault
+            query = trigger_or_query.strip()
+            if not query:
+                snippets = snippet_vault.list_snippets()
+                triggers = ", ".join(s["trigger"] for s in snippets[:6])
+                return {
+                    "success": True,
+                    "mode": "snippet",
+                    "summary": f"✔ Snippet Vault ({len(snippets)} saved): {triggers}",
+                    "data": {"snippets": snippets}
+                }
+            res = snippet_vault.expand_snippet(query)
+            if not res:
+                return {
+                    "success": False,
+                    "mode": "snippet",
+                    "summary": f"✖ Snippet '{query}' not found in local vault.",
+                    "error": f"Snippet '{query}' not found"
+                }
+            snip = res["snippet"]
+            expanded = res["expanded_text"]
+            first_line = expanded.splitlines()[0] if expanded else ""
+            return {
+                "success": True,
+                "mode": "snippet",
+                "summary": f"✔ Expanded [{snip['trigger']}] ({snip['title']}): {first_line[:65]}",
+                "data": res
+            }
+        except Exception as ex:
+            return {
+                "success": False,
+                "mode": "snippet",
+                "summary": f"✖ Snippet Error: {ex}",
+                "error": str(ex)
+            }
+
+    def execute_vault_export(self) -> Dict[str, Any]:
+        """Exports CorePulse tasks, habits, and snippets into a local Markdown Vault."""
+        try:
+            from corepulse.snippets import snippet_vault, export_markdown_vault
+            db = self._get_sqlite_db()
+            tasks = db.get_tasks()
+            snippets = snippet_vault.list_snippets()
+            res = export_markdown_vault(tasks, snippets)
+            return {
+                "success": True,
+                "mode": "vault",
+                "summary": f"✔ Exported {res['files_count']} Markdown files to {res['vault_dir']}",
+                "data": res
+            }
+        except Exception as ex:
+            return {
+                "success": False,
+                "mode": "vault",
+                "summary": f"✖ Vault Export Error: {ex}",
+                "error": str(ex)
+            }
+
     def parse_and_route(self, raw_command: str) -> Dict[str, Any]:
         """
         Unified dispatch entrypoint.
@@ -655,6 +743,10 @@ class OmnibarRouter:
             return self.execute_status()
         elif mode == "cockpit":
             return self.execute_cockpit()
+        elif mode == "snippet":
+            return self.execute_snippet(payload)
+        elif mode == "vault":
+            return self.execute_vault_export()
         else:
             return self.execute_task_capture(payload)
 

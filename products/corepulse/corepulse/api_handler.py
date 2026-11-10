@@ -168,6 +168,17 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                 })
                 return
 
+            if path in ("/api/snippets", "/api/snippets/"):
+                from corepulse.snippets import snippet_vault
+                q = query.get("q", [None])[0]
+                cat = query.get("category", [None])[0]
+                snippets = snippet_vault.list_snippets(query=q, category=cat)
+                self._send_json_response({
+                    "count": len(snippets),
+                    "snippets": snippets
+                })
+                return
+
             if path == "/api/founder/report":
                 report_dir = BASE_DIR.parent.parent / "company" / "reports"
                 report_file = report_dir / f"DAILY_REPORT_{datetime.now().strftime('%Y-%m-%d')}.md"
@@ -219,6 +230,20 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                 finally:
                     pipeline.close()
                 self._send_json_response(telemetry)
+                return
+
+            if path in ("/api/tools/shield/sbom", "/api/tools/shield/sbom/"):
+                from nexusshield.scanner import NexusScanner
+                scanner = NexusScanner()
+                self._send_json_response(scanner.generate_sbom(PRODUCTS_DIR))
+                return
+
+            if path in ("/api/tools/stream/commitments", "/api/tools/stream/commitments/"):
+                from echostream.copilot import CommitmentTracker
+                tracker = CommitmentTracker()
+                assignee = query.get("assignee", [None])[0]
+                q = query.get("q", [None])[0]
+                self._send_json_response(tracker.query_commitments(assignee=assignee, query=q))
                 return
 
             # Static File Serving
@@ -307,6 +332,45 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                 custom_params = body.get("parameters", {})
                 result = WorkflowEngine.run_workflow(workflow_id, custom_params)
                 self._send_json_response(result, HTTPStatus.OK)
+                return
+
+            # POST /api/snippets (Create or update snippet in local vault)
+            if path in ("/api/snippets", "/api/snippets/"):
+                from corepulse.snippets import snippet_vault
+                saved = snippet_vault.save_snippet(body)
+                self._send_json_response({
+                    "status": "success",
+                    "message": f"Snippet '{saved['trigger']}' saved to vault.",
+                    "snippet": saved
+                }, HTTPStatus.CREATED)
+                return
+
+            # POST /api/snippets/expand (Expand dynamic snippet variables)
+            if path in ("/api/snippets/expand", "/api/snippets/expand/"):
+                from corepulse.snippets import snippet_vault
+                identifier = body.get("trigger") or body.get("id") or body.get("query")
+                if not identifier:
+                    self._send_error_response("Field 'trigger' or 'id' is required", HTTPStatus.BAD_REQUEST)
+                    return
+                custom_vars = body.get("variables") or {}
+                res = snippet_vault.expand_snippet(str(identifier), custom_vars=custom_vars)
+                if not res:
+                    self._send_error_response(f"Snippet '{identifier}' not found", HTTPStatus.NOT_FOUND)
+                    return
+                self._send_json_response({
+                    "status": "success",
+                    **res
+                }, HTTPStatus.OK)
+                return
+
+            # POST /api/vault/export (Export 2-Way Markdown Vault for Obsidian/Logseq)
+            if path in ("/api/vault/export", "/api/vault/export/"):
+                from corepulse.snippets import snippet_vault, export_markdown_vault
+                vault_dir = body.get("vault_dir")
+                all_tasks = db.get_tasks()
+                all_snippets = snippet_vault.list_snippets()
+                res = export_markdown_vault(all_tasks, all_snippets, vault_dir=Path(vault_dir) if vault_dir else None)
+                self._send_json_response(res, HTTPStatus.OK)
                 return
 
             # POST /api/subscription/upgrade (Feature gate testing and cryptographic license activation)
@@ -528,6 +592,38 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                     self._send_error_response(f"EchoStream Parse Failed: {str(ps_err)}", HTTPStatus.INTERNAL_SERVER_ERROR)
                     return
 
+            # POST /api/tools/shield/history (Git Commit History Time-Machine Scanner)
+            if path in ("/api/tools/shield/history", "/api/tools/shield/history/"):
+                from nexusshield.scanner import NexusScanner
+                target_path = body.get("path") or str(PRODUCTS_DIR.parent)
+                max_commits = int(body.get("max_commits", 50))
+                scanner = NexusScanner()
+                self._send_json_response(scanner.scan_git_history(target_path, max_commits=max_commits), HTTPStatus.OK)
+                return
+
+            # POST /api/tools/stream/merge (Granola-Style Scratchpad + Transcript Merger & Email Draft)
+            if path in ("/api/tools/stream/merge", "/api/tools/stream/merge/"):
+                from echostream.copilot import ScratchpadMerger, CommitmentTracker
+                transcript_text = body.get("transcript") or body.get("text") or ""
+                scratchpad_notes = body.get("scratchpad") or body.get("notes") or ""
+                meeting_title = body.get("title") or "Executive Alignment & Next Steps"
+                if not transcript_text.strip() and not scratchpad_notes.strip():
+                    self._send_error_response("Either 'transcript' or 'scratchpad' is required", HTTPStatus.BAD_REQUEST)
+                    return
+                merger = ScratchpadMerger()
+                res = merger.merge_and_draft(
+                    transcript_text=transcript_text,
+                    scratchpad_notes=scratchpad_notes,
+                    meeting_title=meeting_title
+                )
+                tracker = CommitmentTracker()
+                tracker.record_commitments(res.get("action_items", []), meeting_source=meeting_title)
+                self._send_json_response({
+                    "status": "success",
+                    **res
+                }, HTTPStatus.OK)
+                return
+
             # POST /api/tools/pipeline/scan (Trigger autonomous ingestion sweep on drop directory)
             if path in ("/api/tools/pipeline/scan", "/api/tools/pipeline/scan/"):
                 try:
@@ -634,6 +730,22 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
             self._send_json_response({
                 "message": f"Task '{task_id}' deleted successfully",
                 "id": task_id
+            })
+            return
+
+        if path in ("/api/snippets", "/api/snippets/"):
+            snip_id = query.get("id", [None])[0]
+            if not snip_id:
+                self._send_error_response("Query parameter 'id' is required", HTTPStatus.BAD_REQUEST)
+                return
+            from corepulse.snippets import snippet_vault
+            deleted = snippet_vault.delete_snippet(snip_id)
+            if not deleted:
+                self._send_error_response(f"Snippet '{snip_id}' not found", HTTPStatus.NOT_FOUND)
+                return
+            self._send_json_response({
+                "message": f"Snippet '{snip_id}' deleted successfully",
+                "id": snip_id
             })
             return
 

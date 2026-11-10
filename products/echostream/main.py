@@ -258,6 +258,88 @@ def cmd_watch(args):
     pipeline.run_forever()
 
 
+def cmd_merge(args):
+    """Merges live scratchpad bullet notes with a meeting transcript and drafts a follow-up email."""
+    from echostream.copilot import ScratchpadMerger, CommitmentTracker
+
+    raw_transcript = args.transcript
+    if "\n" not in raw_transcript and len(raw_transcript) < 256:
+        try:
+            p = Path(raw_transcript)
+            if p.exists() and p.is_file():
+                raw_transcript = p.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            pass
+
+    raw_notes = args.notes or ""
+    if raw_notes and "\n" not in raw_notes and len(raw_notes) < 256:
+        try:
+            np = Path(raw_notes)
+            if np.exists() and np.is_file():
+                raw_notes = np.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            pass
+
+    merger = ScratchpadMerger()
+    res = merger.merge_and_draft(
+        transcript_text=raw_transcript,
+        scratchpad_notes=raw_notes,
+        meeting_title=args.title
+    )
+
+    tracker = CommitmentTracker()
+    tracker.record_commitments(res.get("action_items", []), meeting_source=args.title)
+
+    if args.dispatch and res.get("action_items"):
+        dispatcher = CorePulseDispatcher()
+        res["dispatch"] = dispatcher.dispatch_batch(res["action_items"])
+
+    if args.json:
+        print(json.dumps(res, indent=2))
+        return
+
+    print_banner()
+    border = "=" * 80
+    print(border)
+    print(f"  {BOLD}GRANOLA-STYLE SCRATCHPAD + TRANSCRIPT MERGER{RESET}")
+    print(f"  Meeting: {res['meeting_title']} | Actions Extracted: {len(res['action_items'])}")
+    print(border)
+    print(f"\n{BOLD}[+] READY-TO-SEND FOLLOW-UP EMAIL DRAFT{RESET}")
+    print(f"  {CYAN}Subject:{RESET} {res['followup_email']['subject']}\n")
+    for line in res["followup_email"]["body_markdown"].splitlines():
+        print(f"  {line}")
+    print("\n" + border)
+
+
+def cmd_commitments(args):
+    """Queries cross-meeting commitments by assignee or keyword."""
+    from echostream.copilot import CommitmentTracker
+
+    tracker = CommitmentTracker()
+    res = tracker.query_commitments(
+        assignee=args.assignee,
+        query=args.query,
+        include_dir=args.dir
+    )
+
+    if args.json:
+        print(json.dumps(res, indent=2))
+        return
+
+    print_banner()
+    border = "=" * 80
+    print(border)
+    print(f"  {BOLD}CROSS-MEETING COMMITMENT & ACCOUNTABILITY TRACKER{RESET}")
+    print(f"  Total Commitments Indexed: {res['total_commitments']}")
+    print(border)
+    for idx, c in enumerate(res.get("commitments", []), start=1):
+        print(f"  {idx}. [{CYAN}{c.get('assignee', 'Me')}{RESET}] {BOLD}{c.get('title')}{RESET}")
+        print(f"     Due: {c.get('due_date')} | Priority: {c.get('priority', 'medium').upper()} | Source: {c.get('meeting_source')}")
+    if not res.get("commitments"):
+        print(f"  {DIM}No matching commitments found.{RESET}")
+    print(border)
+
+
 def main():
     parser = argparse.ArgumentParser(
         prog="echostream",
@@ -288,6 +370,21 @@ def main():
     # demo command
     subparsers.add_parser("demo", help="Run live executive meeting triage simulation")
 
+    # merge command
+    merge_p = subparsers.add_parser("merge", help="Merge live scratchpad notes with transcript & generate follow-up email draft")
+    merge_p.add_argument("transcript", help="Meeting transcript string or file path")
+    merge_p.add_argument("--notes", "-n", default="", help="Rough live scratchpad bullet notes or file path")
+    merge_p.add_argument("--title", "-t", default="Executive Alignment & Next Steps", help="Meeting title")
+    merge_p.add_argument("--dispatch", action="store_true", help="Dispatch merged tasks to CorePulse")
+    merge_p.add_argument("--json", action="store_true", help="Output JSON payload")
+
+    # commitments command
+    comm_p = subparsers.add_parser("commitments", help="Query cross-meeting commitments by assignee or topic")
+    comm_p.add_argument("--assignee", "-a", help="Filter commitments by assignee name (e.g. Sarah)")
+    comm_p.add_argument("--query", "-q", help="Filter commitments by keyword")
+    comm_p.add_argument("--dir", "-d", help="Optional transcript directory to index before querying")
+    comm_p.add_argument("--json", action="store_true", help="Output JSON payload")
+
     # version command
     subparsers.add_parser("version", help="Display EchoStream version")
 
@@ -311,6 +408,10 @@ def main():
         cmd_watch(args)
     elif args.command == "demo":
         cmd_demo(args)
+    elif args.command == "merge":
+        cmd_merge(args)
+    elif args.command == "commitments":
+        cmd_commitments(args)
     else:
         parser.print_help()
         sys.exit(1)

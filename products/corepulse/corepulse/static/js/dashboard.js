@@ -26,6 +26,7 @@ async function initDashboard() {
     fetchMetrics(),
     fetchTasks(),
     fetchWorkflows(),
+    fetchSnippets(),
     fetchSyncStatus(),
     runQuickSecurityScan(true)
   ]);
@@ -1085,6 +1086,93 @@ function openEmailFeedback() {
     `Best regards`
   );
   window.location.href = `mailto:isgc@sedain.com?subject=${subject}&body=${body}`;
+}
+
+/* ==========================================================================
+   Snippet Vault & Markdown Export
+   ========================================================================== */
+
+async function fetchSnippets() {
+  try {
+    const res = await fetch('/api/snippets');
+    if (!res.ok) return;
+    const data = await res.json();
+    const container = document.getElementById('snippetPillsContainer');
+    if (!container) return;
+    const snippets = data.snippets || [];
+    container.innerHTML = snippets.map(s => `
+      <button class="btn btn-sm btn-secondary" onclick="expandSnippetTrigger('${escapeHtml(s.trigger)}')" title="${escapeHtml(s.title)}" style="padding: 4px 10px; font-size: 0.74rem; border-color: rgba(0,240,255,0.3); background: rgba(0,240,255,0.06); color: #00F0FF; cursor: pointer;">
+        <code>${escapeHtml(s.trigger)}</code> <span style="color: var(--text-secondary); margin-left: 4px;">${escapeHtml(s.title)}</span>
+      </button>
+    `).join('');
+  } catch (err) {
+    console.error('Snippet fetch error:', err);
+  }
+}
+
+async function expandSnippetTrigger(trigger) {
+  try {
+    const res = await fetch('/api/snippets/expand', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ trigger })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Expansion failed');
+    const expanded = data.expanded_text || '';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(expanded);
+    }
+    appendTerminalLog(`[SNIPPET EXPANDED] ${trigger} -> ${expanded.replace(/\n/g, ' | ')}`, 'success');
+    showToast(`Copied expanded '${trigger}' to clipboard!`, 'success');
+  } catch (err) {
+    showToast(err.message || 'Failed to expand snippet', 'error');
+  }
+}
+
+async function saveNewSnippet() {
+  const trigEl = document.getElementById('newSnippetTrigger');
+  const titleEl = document.getElementById('newSnippetTitle');
+  const contEl = document.getElementById('newSnippetContent');
+  const trigger = trigEl ? trigEl.value.trim() : '';
+  const title = titleEl ? titleEl.value.trim() : '';
+  const content = contEl ? contEl.value.trim() : '';
+  if (!title || !content) {
+    showToast('Please enter both a snippet title and template content.', 'error');
+    return;
+  }
+  try {
+    const res = await fetch('/api/snippets', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ trigger, title, content })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Failed to save snippet');
+    if (trigEl) trigEl.value = '';
+    if (titleEl) titleEl.value = '';
+    if (contEl) contEl.value = '';
+    await fetchSnippets();
+    showToast(`Saved snippet ${data.snippet.trigger} to local vault!`, 'success');
+  } catch (err) {
+    showToast(err.message || 'Error saving snippet', 'error');
+  }
+}
+
+async function exportMarkdownVault() {
+  try {
+    const res = await fetch('/api/vault/export', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Vault export failed');
+    appendTerminalLog(`[MARKDOWN VAULT] Exported ${data.files_count} files to ${data.vault_dir}`, 'success');
+    showToast(`Exported ${data.files_count} Markdown files to local vault!`, 'success');
+  } catch (err) {
+    showToast(err.message || 'Failed to export Markdown vault', 'error');
+  }
 }
 
 /* ==========================================================================

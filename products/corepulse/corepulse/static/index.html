@@ -316,6 +316,28 @@
             <!-- Dynamic Workflows injected here -->
           </div>
 
+          <!-- Snippet Vault & Markdown Exporter Deck -->
+          <div class="snippet-vault-deck" style="margin-top: 16px; padding: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: 10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
+              <div>
+                <span style="font-size: 0.85rem; font-weight: 700; color: #00F0FF;">⚡ Snippet Vault & Dynamic Expander</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted); margin-left: 8px;">Click any trigger to expand & copy</span>
+              </div>
+              <button class="btn btn-sm btn-secondary" onclick="exportMarkdownVault()" style="padding: 4px 10px; font-size: 0.72rem; border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.1); color: #10B981; cursor: pointer;">
+                📁 Export Markdown Vault
+              </button>
+            </div>
+            <div id="snippetPillsContainer" style="display:flex; flex-wrap:wrap; gap: 8px; margin-bottom: 10px;">
+              <!-- Populated by fetchSnippets() -->
+            </div>
+            <div style="display:flex; gap: 6px;">
+              <input type="text" id="newSnippetTrigger" placeholder=";;shortcut" style="width: 110px; padding: 6px 8px; font-size: 0.78rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: 6px; color: var(--text-primary);">
+              <input type="text" id="newSnippetTitle" placeholder="Title" style="width: 140px; padding: 6px 8px; font-size: 0.78rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: 6px; color: var(--text-primary);">
+              <input type="text" id="newSnippetContent" placeholder="Template with {{date}}, {{git_branch}}..." style="flex: 1; padding: 6px 8px; font-size: 0.78rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: 6px; color: var(--text-primary);">
+              <button class="btn btn-sm btn-primary" onclick="saveNewSnippet()" style="padding: 5px 12px; font-size: 0.75rem;">Save</button>
+            </div>
+          </div>
+
           <!-- Real-Time Workflow Terminal / Audit Trail -->
           <div class="terminal-deck">
             <div class="terminal-header">
