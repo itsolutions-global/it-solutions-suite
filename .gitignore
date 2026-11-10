@@ -39,6 +39,8 @@ venv.bak/
 *.db
 corepulse_store.json
 products/corepulse/data/
+products/echostream/data/
+products/docupulse/data/
 data/*.sqlite3*
 data/*.json
 data/transcripts/*.txt

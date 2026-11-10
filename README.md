@@ -57,9 +57,11 @@ graph TD
     NS --> SecurityAudit[("Local SAST & Secret Audit")]
 ```
 
-1. **⚡ CorePulse v1.0 (Action)**: Desktop executive workspace cockpit, habit streak engine, 1-click workflow automation, and SQLite WAL persistence.
-2. **🛡️ NexusShield v1.0 (Defense)**: High-entropy Shannon secret interceptor, offline dependency CVE auditor, and automated Git pre-commit enforcement.
-3. **🎙️ EchoStream v1.0 (Perception)**: Speech transcript triage, VoiceGuard credential DLP redaction, and zero-click meeting ingestion.
+1. **⚡ CorePulse v1.0 (Action)**: Desktop executive workspace cockpit, habit streak engine, local Snippet Vault & dynamic variable expander (`;;standup`), 2-way Markdown Vault export, and SQLite WAL persistence.
+2. **🛡️ NexusShield v1.0 (Defense)**: High-entropy Shannon secret interceptor, Git commit history time-machine scanner (`scan-history`), CycloneDX v1.5 SBOM generator (`sbom`), 1-click `.env` secret remediation (`remediate`), and offline dependency CVE auditor.
+3. **🎙️ EchoStream v1.0 (Perception)**: Speech transcript triage, VoiceGuard credential DLP redaction, Granola-style live scratchpad + transcript merger (`merge`), follow-up email draft generator, and cross-meeting commitment tracker (`commitments`).
+4. **📄 DocuPulse v1.0 (Finance & Operations)**: Autonomous invoice, receipt & purchase order extraction engine with math discrepancy auditing, duplicate billing fraud detection, and 1-click CSV financial ledger export (`it-solutions invoice demo`).
+5. **⚖️ ClauseGuard v1.0 (Legal & Contract Protection)**: 100% offline contract, NDA & MSA risk scanner that catches predatory clauses (*Uncapped Liability, Auto-Renewal Traps, Broad IP Grabs, Non-Competes, Net-90 Payment Delays*) and generates ready-to-paste redline counter-proposals (`it-solutions contract demo`).
 
 ---
 

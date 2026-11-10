@@ -24,11 +24,12 @@ import sys
 PRODUCTS_DIR = BASE_DIR.parent
 NEXUSSHIELD_DIR = PRODUCTS_DIR / "nexusshield"
 ECHOSTREAM_DIR = PRODUCTS_DIR / "echostream"
+DOCUPULSE_DIR = PRODUCTS_DIR / "docupulse"
+CLAUSEGUARD_DIR = PRODUCTS_DIR / "clauseguard"
 
-if str(NEXUSSHIELD_DIR) not in sys.path and NEXUSSHIELD_DIR.exists():
-    sys.path.insert(0, str(NEXUSSHIELD_DIR))
-if str(ECHOSTREAM_DIR) not in sys.path and ECHOSTREAM_DIR.exists():
-    sys.path.insert(0, str(ECHOSTREAM_DIR))
+for _pdir in (NEXUSSHIELD_DIR, ECHOSTREAM_DIR, DOCUPULSE_DIR, CLAUSEGUARD_DIR):
+    if str(_pdir) not in sys.path and _pdir.exists():
+        sys.path.insert(0, str(_pdir))
 
 logger = logging.getLogger("corepulse.api")
 
@@ -244,6 +245,12 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                 assignee = query.get("assignee", [None])[0]
                 q = query.get("q", [None])[0]
                 self._send_json_response(tracker.query_commitments(assignee=assignee, query=q))
+                return
+
+            if path in ("/api/tools/docupulse/ledger", "/api/tools/docupulse/ledger/"):
+                from docupulse.ledger import FinancialLedger
+                ledger = FinancialLedger()
+                self._send_json_response(ledger.get_summary())
                 return
 
             # Static File Serving
@@ -622,6 +629,32 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                     "status": "success",
                     **res
                 }, HTTPStatus.OK)
+                return
+
+            # POST /api/tools/docupulse/parse (Extract invoice/receipt & audit anomalies)
+            if path in ("/api/tools/docupulse/parse", "/api/tools/docupulse/parse/"):
+                from docupulse.ledger import FinancialLedger
+                raw_text = body.get("text") or body.get("invoice") or body.get("content") or ""
+                if not raw_text.strip():
+                    self._send_error_response("Field 'text' or 'invoice' is required", HTTPStatus.BAD_REQUEST)
+                    return
+                src = body.get("source_file", "inline_invoice.txt")
+                ledger = FinancialLedger()
+                rec = ledger.ingest_document(raw_text, source_name=src)
+                self._send_json_response({"status": "success", "invoice": rec}, HTTPStatus.OK)
+                return
+
+            # POST /api/tools/clauseguard/scan (Scan contract/NDA for predatory clauses & redlines)
+            if path in ("/api/tools/clauseguard/scan", "/api/tools/clauseguard/scan/"):
+                from clauseguard.scanner import ContractRiskScanner
+                raw_text = body.get("text") or body.get("contract") or body.get("content") or ""
+                if not raw_text.strip():
+                    self._send_error_response("Field 'text' or 'contract' is required", HTTPStatus.BAD_REQUEST)
+                    return
+                doc_name = body.get("document", "Contract.txt")
+                scanner = ContractRiskScanner()
+                rep = scanner.scan_contract(raw_text, document_name=doc_name)
+                self._send_json_response({"status": "success", **rep}, HTTPStatus.OK)
                 return
 
             # POST /api/tools/pipeline/scan (Trigger autonomous ingestion sweep on drop directory)

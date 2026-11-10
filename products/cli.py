@@ -43,22 +43,15 @@ PRODUCTS_DIR = Path(__file__).resolve().parent
 COREPULSE_DIR = PRODUCTS_DIR / "corepulse"
 NEXUSSHIELD_DIR = PRODUCTS_DIR / "nexusshield"
 ECHOSTREAM_DIR = PRODUCTS_DIR / "echostream"
+DOCUPULSE_DIR = PRODUCTS_DIR / "docupulse"
+CLAUSEGUARD_DIR = PRODUCTS_DIR / "clauseguard"
 QUANTPULSE_DIR = PRODUCTS_DIR / "quantpulse"
 NEXUSBRIDGE_DIR = PRODUCTS_DIR / "nexusbridge"
 
 # Add product paths to sys.path
-if str(COREPULSE_DIR) not in sys.path:
-    sys.path.insert(0, str(COREPULSE_DIR))
-if str(NEXUSSHIELD_DIR) not in sys.path:
-    sys.path.insert(0, str(NEXUSSHIELD_DIR))
-if str(ECHOSTREAM_DIR) not in sys.path:
-    sys.path.insert(0, str(ECHOSTREAM_DIR))
-if str(PRODUCTS_DIR) not in sys.path:
-    sys.path.insert(0, str(PRODUCTS_DIR))
-if str(QUANTPULSE_DIR) not in sys.path:
-    sys.path.insert(0, str(QUANTPULSE_DIR))
-if str(NEXUSBRIDGE_DIR) not in sys.path:
-    sys.path.insert(0, str(NEXUSBRIDGE_DIR))
+for _p in (COREPULSE_DIR, NEXUSSHIELD_DIR, ECHOSTREAM_DIR, DOCUPULSE_DIR, CLAUSEGUARD_DIR, PRODUCTS_DIR, QUANTPULSE_DIR, NEXUSBRIDGE_DIR):
+    if str(_p) not in sys.path:
+        sys.path.insert(0, str(_p))
 
 # Console encoding setup
 if hasattr(sys.stdout, "reconfigure"):
@@ -228,6 +221,32 @@ def cmd_stream(args):
     else:
         cmd.append("version")
 
+    proc = subprocess.run(cmd)
+    sys.exit(proc.returncode)
+
+
+def cmd_invoice(args):
+    """Executes DocuPulse Invoice, Receipt & Financial Ledger Extraction Engine."""
+    main_py = DOCUPULSE_DIR / "main.py"
+    cmd = [sys.executable, str(main_py), args.invoice_action]
+    if getattr(args, "input", None):
+        cmd.append(args.input)
+    if getattr(args, "export_csv", None):
+        cmd.extend(["--export-csv", args.export_csv])
+    if getattr(args, "json", False):
+        cmd.append("--json")
+    proc = subprocess.run(cmd)
+    sys.exit(proc.returncode)
+
+
+def cmd_contract(args):
+    """Executes ClauseGuard Contract, NDA & Legal Redline Risk Scanner."""
+    main_py = CLAUSEGUARD_DIR / "main.py"
+    cmd = [sys.executable, str(main_py), args.contract_action]
+    if getattr(args, "input", None):
+        cmd.append(args.input)
+    if getattr(args, "json", False):
+        cmd.append("--json")
     proc = subprocess.run(cmd)
     sys.exit(proc.returncode)
 
@@ -825,6 +844,25 @@ def main():
 
     stream_sub.add_parser("demo", help="Run live executive meeting triage simulation")
 
+    # it-solutions invoice (DocuPulse)
+    inv_parser = subparsers.add_parser("invoice", help="Execute DocuPulse Invoice, Receipt & Financial Ledger Extraction Engine")
+    inv_sub = inv_parser.add_subparsers(dest="invoice_action", required=True)
+    inv_parse = inv_sub.add_parser("parse", help="Extract & audit an invoice or receipt")
+    inv_parse.add_argument("input", help="File path or raw invoice text")
+    inv_parse.add_argument("--json", action="store_true", help="Output in JSON format")
+    inv_ledger = inv_sub.add_parser("ledger", help="View financial ledger summary or export CSV")
+    inv_ledger.add_argument("--export-csv", help="Export ledger to CSV file path")
+    inv_ledger.add_argument("--json", action="store_true", help="Output in JSON format")
+    inv_sub.add_parser("demo", help="Run live invoice extraction & anomaly audit demo")
+
+    # it-solutions contract (ClauseGuard)
+    con_parser = subparsers.add_parser("contract", help="Execute ClauseGuard Contract, NDA & Legal Redline Risk Scanner")
+    con_sub = con_parser.add_subparsers(dest="contract_action", required=True)
+    con_scan = con_sub.add_parser("scan", help="Scan a contract or NDA for predatory clauses & redlines")
+    con_scan.add_argument("input", help="File path or raw contract text")
+    con_scan.add_argument("--json", action="store_true", help="Output in JSON format")
+    con_sub.add_parser("demo", help="Run live predatory contract redlining demo")
+
     # it-solutions trade
     trade_parser = subparsers.add_parser("trade", help="Launch or manage TradeKavach Autonomous AI Trading Suite at E:\\Treding")
     trade_parser.add_argument("--host", default="0.0.0.0", help="Host interface to bind (default: 0.0.0.0)")
@@ -929,6 +967,10 @@ def main():
         cmd_shield(args)
     elif args.subcommand == "stream":
         cmd_stream(args)
+    elif args.subcommand == "invoice":
+        cmd_invoice(args)
+    elif args.subcommand == "contract":
+        cmd_contract(args)
     elif args.subcommand == "trade":
         cmd_trade(args)
     elif args.subcommand == "license":
