@@ -1,0 +1,15 @@
+{
+  "id": "sre_incident_triage",
+  "name": "SRE Sev-1 Incident Triage Routine",
+  "category": "DevOps & SRE",
+  "icon": "alert-triangle",
+  "description": "Freezes non-essential deployments, captures error traces, alerts on-call rotation, and generates war-room debrief notes.",
+  "estimated_savings_min": 45,
+  "steps": [
+    "Locking deployment pipelines across active clusters (production freeze engaged)...",
+    "Sampling last 500 error logs across ingress gateways...",
+    "Querying NexusShield for secret exposure anomalies in recently merged PRs...",
+    "Staging post-mortem action items into CorePulse Eisenhower matrix (@p1 #incident)...",
+    "Incident war-room protocol established. On-call telemetry synchronized."
+  ]
+}

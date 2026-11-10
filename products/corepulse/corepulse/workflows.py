@@ -79,19 +79,36 @@ class WorkflowEngine:
 
     @staticmethod
     def list_workflows() -> List[Dict[str, Any]]:
-        """Returns catalog of registered automation routines."""
-        return list(AVAILABLE_WORKFLOWS.values())
+        """Returns catalog of registered and custom automation routines."""
+        catalog = dict(AVAILABLE_WORKFLOWS)
+        try:
+            from corepulse.config import DATA_DIR
+            import json
+            custom_dir = DATA_DIR / "custom_workflows"
+            if custom_dir.exists() and custom_dir.is_dir():
+                for p in custom_dir.glob("*.json"):
+                    try:
+                        with open(p, "r", encoding="utf-8") as f:
+                            data = json.load(f)
+                            if isinstance(data, dict) and "id" in data and "name" in data:
+                                catalog[data["id"]] = data
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+        return list(catalog.values())
 
     @staticmethod
     def run_workflow(workflow_id: str, custom_params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Executes a workflow script, returns step-by-step logs, execution timestamp, and updates DB metrics.
         """
-        if workflow_id not in AVAILABLE_WORKFLOWS:
-            available_keys = list(AVAILABLE_WORKFLOWS.keys())
+        all_workflows = {w["id"]: w for w in WorkflowEngine.list_workflows()}
+        if workflow_id not in all_workflows:
+            available_keys = list(all_workflows.keys())
             raise ValueError(f"Workflow '{workflow_id}' not found. Available workflows: {available_keys}")
 
-        wf = AVAILABLE_WORKFLOWS[workflow_id]
+        wf = all_workflows[workflow_id]
         start_exec = time.time()
         now_iso = datetime.now(timezone.utc).isoformat()
 

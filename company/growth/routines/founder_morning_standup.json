@@ -1,0 +1,15 @@
+{
+  "id": "founder_morning_standup",
+  "name": "Founder Daily Operating Rhythm",
+  "category": "Executive Strategy",
+  "icon": "compass",
+  "description": "Reviews global suite health, habit streak continuity, cashflow metrics, and schedules 3 needle-moving priorities.",
+  "estimated_savings_min": 30,
+  "steps": [
+    "Reading autonomous corporate health index (target: 100.0/100 across Triad)...",
+    "Checking habit consistency streaks (Reading, Fitness, Code Review)...",
+    "Auditing unread customer feedback items in local intake vault...",
+    "Freezing daily calendar to protect uninterrupted deep engineering time...",
+    "Operating rhythm complete. Executive focus locked."
+  ]
+}

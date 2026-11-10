@@ -1,0 +1,15 @@
+{
+  "id": "deep_work_sprint",
+  "name": "90-Minute High-Leverage Coding Sprint",
+  "category": "Focus & Flow",
+  "icon": "zap",
+  "description": "Prunes notifications, stages top 3 engineering deliverables, and initiates a 90-minute undisturbed focus window.",
+  "estimated_savings_min": 50,
+  "steps": [
+    "Engaging workstation distraction firewall: mute Slack, Discord, and email alerts...",
+    "Selecting top 3 P1 coding objectives from local SQLite WAL backlog...",
+    "Arming NexusShield live code sentry on active IDE workspace...",
+    "Activating 90-minute countdown timer with zero audio intrusions...",
+    "Deep work sprint engaged. Flow state initialized."
+  ]
+}
