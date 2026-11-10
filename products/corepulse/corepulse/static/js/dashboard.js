@@ -1057,6 +1057,36 @@ async function submitUserFeedback() {
   }
 }
 
+function openGitHubFeedback() {
+  const msgElem = document.getElementById('feedbackMessageInput');
+  const message = msgElem ? msgElem.value.trim() : '';
+  const sentiment = selectedFeedbackSentiment || 'neutral';
+  const prefix = sentiment === 'issue' ? '[BUG]' : (sentiment === 'positive' ? '[FEEDBACK]' : '[IDEA]');
+  const shortTitle = message ? message.slice(0, 50) : 'New Community Feedback';
+  const title = encodeURIComponent(`${prefix} ${shortTitle}`);
+  const body = encodeURIComponent(
+    `### Sentiment\n${sentiment.toUpperCase()}\n\n` +
+    `### Details / Feedback\n${message || '*(No description provided)*'}\n\n` +
+    `---\n*Submitted via CorePulse Executive Cockpit*`
+  );
+  window.open(`https://github.com/itsolutions-global/it-solutions-suite/issues/new?title=${title}&body=${body}`, '_blank');
+}
+
+function openEmailFeedback() {
+  const msgElem = document.getElementById('feedbackMessageInput');
+  const message = msgElem ? msgElem.value.trim() : '';
+  const sentiment = selectedFeedbackSentiment || 'neutral';
+  const subject = encodeURIComponent(`[CorePulse Feedback] ${sentiment.toUpperCase()}`);
+  const body = encodeURIComponent(
+    `Hello IT Solutions Global Team,\n\n` +
+    `Here is my feedback on the Corporate Triad:\n\n` +
+    `${message}\n\n` +
+    `Sentiment: ${sentiment}\n\n` +
+    `Best regards`
+  );
+  window.location.href = `mailto:isgc@sedain.com?subject=${subject}&body=${body}`;
+}
+
 /* ==========================================================================
    Utilities
    ========================================================================== */
