@@ -139,7 +139,7 @@ function renderSubscriptionUI(sub) {
 
   const gateBadge = document.getElementById('workflowGateBadge');
   if (gateBadge) {
-    gateBadge.textContent = `${tier} UNLOCKED`;
+    gateBadge.textContent = 'UNMETERED';
     gateBadge.style.color = tier === 'ENTERPRISE' ? '#06b6d4' : '#10b981';
   }
 

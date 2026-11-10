@@ -42,7 +42,7 @@
       <div class="nav-actions">
         <a href="https://github.com/itsolutions-global/it-solutions-suite" class="btn-nav" target="_blank" rel="noopener">GitHub</a>
         <a href="https://pypi.org/project/it-solutions-suite/" class="btn-nav" target="_blank" rel="noopener">PyPI Package</a>
-        <a href="#pricing" class="btn-nav">Pricing</a>
+        <a href="#architecture" class="btn-nav">Architecture</a>
         <a href="#quickstart" class="btn-nav btn-nav-primary">Get Started</a>
       </div>
     </div>
@@ -383,108 +383,72 @@
       </div>
     </section>
 
-    <!-- Dynamic Pricing Section -->
-    <section class="pricing-section container" id="pricing">
-      <span class="section-tag">Predictable &amp; Patient Monetization</span>
-      <h2 class="section-headline">Transparent Tier Architecture</h2>
-      <p class="section-subtext">Free core local power forever. Upgrade when you demand cross-device sync, pod routines, and enterprise governance.</p>
-
-      <div class="billing-switcher">
-        <button class="toggle-btn-bill active" id="btnMonthly" onclick="setBillingCycle('monthly')">Monthly Billing</button>
-        <button class="toggle-btn-bill" id="btnAnnual" onclick="setBillingCycle('annual')">
-          Annual Billing
-          <span class="save-chip">Save 17%</span>
-        </button>
-      </div>
+    <!-- Architectural & Unmetered Utility Guarantees Section -->
+    <section class="pricing-section container" id="architecture">
+      <span class="section-tag">100% Free &bull; Unmetered &bull; Local-First</span>
+      <h2 class="section-headline">Built for Uncompromising Utility</h2>
+      <p class="section-subtext">Every engine in the Corporate Triad is completely free, open-source under the MIT license, and unmetered on your workstation&mdash;forever.</p>
 
       <div class="pricing-cards-grid">
-        <!-- Community Tier -->
+        <!-- Guarantee 1: Zero Dependencies -->
         <div class="price-card">
           <div>
-            <div class="card-tier-title">Community</div>
-            <div class="card-tier-sub">Complete local-first power for independent builders and engineers.</div>
+            <div class="card-tier-title">Zero Dependencies</div>
+            <div class="card-tier-sub">Engineered exclusively in the Python 3.8+ standard library.</div>
             <div class="card-price-wrap">
-              <span style="font-size: 20px; font-weight: 700; color: var(--text-muted);">$</span>
               <span class="card-price-num">0</span>
-              <span class="card-price-cadence">/ forever</span>
+              <span class="card-price-cadence">external pip wheels</span>
             </div>
             <ul class="card-features-ul">
-              <li class="check">CorePulse: Full Task &amp; Habit OS</li>
-              <li class="check">Desktop Omnibar (Ctrl+Shift+Space)</li>
-              <li class="check">3 Automated Workflows / day</li>
-              <li class="check">NexusShield: Local SAST Scanner</li>
-              <li class="check">Git Pre-Commit Hook Gate</li>
-              <li class="check">100% Local SQLite WAL Store</li>
+              <li class="check">Immune to supply-chain attacks</li>
+              <li class="check">No bloated node_modules or Electron</li>
+              <li class="check">Instant sub-second cold boot</li>
+              <li class="check">Runs on Windows, Linux, and macOS</li>
+              <li class="check">100% auditable source code</li>
             </ul>
           </div>
-          <a href="#quickstart" class="card-cta-btn">Install Free via PyPI</a>
+          <a href="#quickstart" class="card-cta-btn">Install via PyPI</a>
         </div>
 
-        <!-- Pro Tier -->
-        <div class="price-card">
-          <div>
-            <div class="card-tier-title">Pro Tier</div>
-            <div class="card-tier-sub">For high-velocity individual operators and engineers.</div>
-            <div class="card-price-wrap">
-              <span style="font-size: 20px; font-weight: 700; color: var(--text-muted);">$</span>
-              <span class="card-price-num" id="pricePro">9.99</span>
-              <span class="card-price-cadence" id="cadencePro">/ month</span>
-            </div>
-            <ul class="card-features-ul">
-              <li class="check"><strong>Unlimited</strong> Automated Workflows</li>
-              <li class="check">Zero-Knowledge Cloud Sync (AES-256)</li>
-              <li class="check">Mobile Companion Link &amp; Push Alerts</li>
-              <li class="check">AI-Assisted Task Decomposition</li>
-              <li class="check">Automated Transcript Folder Sentry</li>
-              <li class="check">90-Day Telemetry History</li>
-            </ul>
-          </div>
-          <a href="#quickstart" class="card-cta-btn" onclick="alert('Pro 14-Day Free Trial initiated with code PHLAUNCH2026!')">Start 14-Day Pro Pass</a>
-        </div>
-
-        <!-- Triad Bundle (Featured) -->
+        <!-- Guarantee 2: 100% Local-First Privacy -->
         <div class="price-card featured">
-          <div class="badge-popular">Most Popular</div>
+          <div class="badge-popular">Core Doctrine</div>
           <div>
-            <div class="card-tier-title" style="color: var(--cyan);">Triad Bundle</div>
-            <div class="card-tier-sub">All three systems unified for power engineers and consultants.</div>
+            <div class="card-tier-title" style="color: var(--cyan);">100% Local-First</div>
+            <div class="card-tier-sub">Your tasks, habits, and transcripts never leave your hardware.</div>
             <div class="card-price-wrap">
-              <span style="font-size: 20px; font-weight: 700; color: var(--text-muted);">$</span>
-              <span class="card-price-num" id="priceTriad">19</span>
-              <span class="card-price-cadence" id="cadenceTriad">/ month</span>
+              <span class="card-price-num">0</span>
+              <span class="card-price-cadence">cloud telemetry pings</span>
             </div>
             <ul class="card-features-ul">
-              <li class="check"><strong>CorePulse Pro + NexusShield + EchoStream</strong></li>
-              <li class="check">Unlimited Workflows &amp; Sync</li>
-              <li class="check">VoiceGuard DLP Audio Sanitization</li>
-              <li class="check">Continuous Drop Sentry (Multi-Folder)</li>
-              <li class="check">1-Click /scan Omnibar Integration</li>
-              <li class="check">Priority Developer Support (&lt;4h)</li>
+              <li class="check"><strong>High-Concurrency SQLite WAL Store</strong></li>
+              <li class="check">Works 100% offline &amp; air-gapped</li>
+              <li class="check">No account signup or login walls</li>
+              <li class="check">No tracking pixels or analytics SDKs</li>
+              <li class="check">Optional E2EE peer-to-peer sync</li>
             </ul>
           </div>
-          <a href="#quickstart" class="card-cta-btn featured" onclick="alert('Triad Bundle 14-Day Pass active with code PHLAUNCH2026!')">Claim Triad Pass</a>
+          <a href="https://github.com/itsolutions-global/it-solutions-suite" target="_blank" rel="noopener" class="card-cta-btn featured">Inspect on GitHub</a>
         </div>
 
-        <!-- Enterprise Tier -->
+        <!-- Guarantee 3: Unmetered Power -->
         <div class="price-card">
           <div>
-            <div class="card-tier-title">Enterprise</div>
-            <div class="card-tier-sub">Institutional governance, SOC 2 compliance, and dedicated SLA.</div>
+            <div class="card-tier-title">Unmetered Access</div>
+            <div class="card-tier-sub">Full access to all three engines with zero artificial limits.</div>
             <div class="card-price-wrap">
-              <span style="font-size: 20px; font-weight: 700; color: var(--text-muted);">$</span>
-              <span class="card-price-num" id="priceEnterprise">199</span>
-              <span class="card-price-cadence" id="cadenceEnterprise">/ month</span>
+              <span class="card-price-num">MIT</span>
+              <span class="card-price-cadence">open-source license</span>
             </div>
             <ul class="card-features-ul">
-              <li class="check">Shared Pod Workspaces &amp; Dashboards</li>
-              <li class="check">One-Click SOC 2 / ISO 27001 Evidence Export</li>
-              <li class="check">Immutable SHA-256 Audit Log Vault</li>
-              <li class="check">SAML 2.0 SSO &amp; SCIM Directory Sync</li>
-              <li class="check">On-Premises Dedicated Runners</li>
-              <li class="check">99.95% Guaranteed Uptime SLA</li>
+              <li class="check">Unlimited tasks &amp; habit streaks</li>
+              <li class="check">Unlimited automated workflows</li>
+              <li class="check">Unlimited SAST &amp; entropy secret scans</li>
+              <li class="check">Unlimited VoiceGuard transcript drops</li>
+              <li class="check">Sub-15ms global desktop Omnibar</li>
             </ul>
           </div>
-          <a href="mailto:enterprise@itsolutions.dev" class="card-cta-btn">Contact Enterprise Sales</a>
+          <a href="#quickstart" class="card-cta-btn">Get Started Now</a>
         </div>
       </div>
     </section>
@@ -568,7 +532,7 @@
             <li><a href="https://pypi.org/project/it-solutions-suite/" target="_blank" rel="noopener">PyPI Package Index</a></li>
             <li><a href="https://github.com/itsolutions-global/it-solutions-suite" target="_blank" rel="noopener">GitHub Repository</a></li>
             <li><a href="https://github.com/itsolutions-global/it-solutions-suite/releases/tag/v1.0.0" target="_blank" rel="noopener">Release v1.0.0</a></li>
-            <li><a href="#pricing">Tier Pricing Matrix</a></li>
+            <li><a href="#architecture">Architectural Guarantees</a></li>
           </ul>
         </div>
 

@@ -61,20 +61,13 @@
           <span id="navSyncBadgeText">Cloud Sync</span>
         </button>
 
-        <button class="btn btn-secondary" onclick="openFounderModal()" style="border: 1px solid rgba(0, 240, 255, 0.4); background: rgba(0, 240, 255, 0.08); color: #00F0FF; padding: 6px 14px; display: flex; align-items: center; gap: 6px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.82rem;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          <span>Founder Portal</span>
-        </button>
+        
         <!-- Feedback Action -->
         <button class="btn btn-secondary" onclick="openFeedbackModal()" style="border: 1px solid rgba(251, 191, 36, 0.4); background: rgba(251, 191, 36, 0.08); color: #FBBF24; padding: 6px 14px; display: flex; align-items: center; gap: 6px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.82rem;">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           <span>Feedback</span>
         </button>
-        <div class="tier-pill" id="navTierBadge" onclick="openTierModal()">
-          <span class="tier-star">★</span>
-          <span class="tier-name" id="currentTierName">PRO TIER</span>
-          <span class="tier-manage">MANAGE</span>
-        </div>
+        
         <button class="btn btn-primary" onclick="openNewTaskModal()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           <span>New Item</span>
@@ -313,7 +306,7 @@
           <div class="panel-header">
             <div class="header-left">
               <h2 class="panel-title">Automated Workflows</h2>
-              <span class="tier-pill-mini" id="workflowGateBadge">PRO UNLOCKED</span>
+              <span class="tier-pill-mini" id="workflowGateBadge">UNMETERED</span>
             </div>
             <span class="panel-subtext">Click to trigger autonomous routine</span>
           </div>
@@ -355,141 +348,6 @@
         <span class="api-status-link" onclick="checkApiHealth()">API Health: <span id="footerHealthBadge">Active</span></span>
       </div>
     </footer>
-  </div>
-
-  <!-- Subscription Tier Upgrade Modal -->
-  <div class="modal-overlay" id="tierModal" style="display: none;">
-    <div class="modal-box tier-modal-box">
-      <div class="modal-header">
-        <div class="modal-title-group">
-          <span class="modal-eyebrow">ENTERPRISE FEATURE GATES</span>
-          <h2 class="modal-title">Subscription & Infrastructure Tier</h2>
-        </div>
-        <button class="modal-close" onclick="closeTierModal()">&times;</button>
-      </div>
-
-      <div class="tier-grid">
-        <!-- Starter Tier -->
-        <div class="tier-card" id="tierCard-starter">
-          <div class="tier-head">
-            <h3 class="tier-card-title">Starter</h3>
-            <div class="tier-price">$0 <span>/ month</span></div>
-            <p class="tier-desc">Essential task tracking and basic habit consistency.</p>
-          </div>
-          <ul class="tier-features">
-            <li>✓ Up to 20 Tasks</li>
-            <li>✓ 5 Habit Streaks</li>
-            <li>✓ 3 Workflows per day</li>
-            <li>✓ 7-Day Velocity History</li>
-            <li class="disabled">✕ Priority Support</li>
-            <li class="disabled">✕ Custom Webhooks</li>
-            <li class="disabled">✕ Dedicated SLA</li>
-          </ul>
-          <button class="btn btn-tier-select" onclick="upgradeTier('starter')">Select Starter</button>
-        </div>
-
-        <!-- Pro Tier -->
-        <div class="tier-card recommended" id="tierCard-pro">
-          <div class="tier-badge-recommended">CURRENT PLAN</div>
-          <div class="tier-head">
-            <h3 class="tier-card-title">Professional</h3>
-            <div class="tier-price">$29 <span>/ month</span></div>
-            <p class="tier-desc">For executives and power-users driving maximum leverage.</p>
-          </div>
-          <ul class="tier-features">
-            <li>✓ 1,000 Tasks & Subtasks</li>
-            <li>✓ 50 Habit Streaks</li>
-            <li>✓ 100 Workflows per day</li>
-            <li>✓ 90-Day Velocity History</li>
-            <li>✓ AI Insights & Summaries</li>
-            <li>✓ Custom Webhooks</li>
-            <li class="disabled">✕ Dedicated SLA</li>
-          </ul>
-          <button class="btn btn-tier-select active" onclick="upgradeTier('pro')">Active Plan</button>
-        </div>
-
-        <!-- Enterprise Tier -->
-        <div class="tier-card" id="tierCard-enterprise">
-          <div class="tier-head">
-            <h3 class="tier-card-title">Enterprise Elite</h3>
-            <div class="tier-price">$99 <span>/ month</span></div>
-            <p class="tier-desc">Unlimited capacity, multi-tenant sync, and custom automations.</p>
-          </div>
-          <ul class="tier-features">
-            <li>✓ Unlimited Tasks & Habits</li>
-            <li>✓ Unlimited Automations</li>
-            <li>✓ 365-Day Historical Analytics</li>
-            <li>✓ Multi-Device Sync & Webhooks</li>
-            <li>✓ Full API & CLI Access</li>
-            <li>✓ Dedicated 99.99% SLA</li>
-            <li>✓ Priority VIP Support</li>
-          </ul>
-          <button class="btn btn-tier-select btn-upgrade" onclick="upgradeTier('enterprise')">Upgrade to Enterprise</button>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <div class="license-info">
-          <span>Active License:</span> <code id="licenseDisplay">CP-PRO-VALID</code>
-        </div>
-        <button class="btn btn-secondary" onclick="closeTierModal()">Done</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Founder's Executive Board Modal -->
-  <div class="modal-backdrop" id="founderModalBackdrop" style="display:none;" onclick="closeFounderModal(event)">
-    <div class="modal-card" style="max-width: 820px;" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <div style="display:flex; align-items:center; gap: 10px;">
-          <div style="background: rgba(0,240,255,0.15); border: 1px solid #00F0FF; border-radius: 8px; padding: 6px; display:flex; align-items:center;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00F0FF" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          </div>
-          <div>
-            <h3 style="margin:0; font-size: 1.15rem; color: #fff;">Founder's Executive Board</h3>
-            <span style="font-size: 0.75rem; color: rgba(255,255,255,0.5);">IT Solutions Global Corporation • 24x7 Autonomous Operations</span>
-          </div>
-        </div>
-        <button class="modal-close-btn" onclick="closeFounderModal()">&times;</button>
-      </div>
-      <div class="modal-body" style="max-height: 70vh; overflow-y: auto; padding: 20px;">
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
-          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px;">
-            <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase;">Company Status</div>
-            <div style="font-size: 1.05rem; font-weight: 700; color: #10B981; margin-top: 4px;">🟢 Operational 24x7</div>
-          </div>
-          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px;">
-            <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase;">Payment Gateway</div>
-            <div style="font-size: 1.05rem; font-weight: 700; color: #F59E0B; margin-top: 4px;">⏸️ Infiltration Phase</div>
-          </div>
-          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px;">
-            <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); text-transform: uppercase;">Active Obstacles</div>
-            <div style="font-size: 1.05rem; font-weight: 700; color: #3B82F6; margin-top: 4px;">0 Blockers (100% Velocity)</div>
-          </div>
-        </div>
-
-        <div style="background: rgba(0, 240, 255, 0.04); border: 1px solid rgba(0, 240, 255, 0.15); border-radius: 10px; padding: 16px; margin-bottom: 20px;">
-          <h4 style="margin: 0 0 8px 0; font-size: 0.88rem; color: #00F0FF; display:flex; align-items:center; gap: 6px;">
-            <span>⚡</span> Resolved Technical Obstacles & Engineering Fixes
-          </h4>
-          <ul style="margin: 0; padding-left: 18px; font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.6;">
-            <li><strong>Windows Console CP1252:</strong> Unicode character encode fault in startup banner resolved to universally safe ASCII.</li>
-            <li><strong>File Locking Concurrency:</strong> Replaced flat JSON writes with SQLite WAL high-concurrency engine (0 collisions under 20 threads).</li>
-          </ul>
-        </div>
-
-        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 16px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
-            <h4 style="margin: 0; font-size: 0.88rem; color: #fff;">Daily Operational Briefing (CEO Telemetry)</h4>
-            <span style="font-size: 0.72rem; color: rgba(255,255,255,0.4);">Auto-Synced from /company/reports/</span>
-          </div>
-          <pre id="founderReportText" style="white-space: pre-wrap; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: rgba(255,255,255,0.85); background: rgba(0,0,0,0.35); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); max-height: 280px; overflow-y: auto;">Loading daily briefing...</pre>
-        </div>
-      </div>
-      <div class="modal-footer" style="display:flex; justify-content:flex-end;">
-        <button class="btn btn-secondary" onclick="closeFounderModal()">Close Board</button>
-      </div>
-    </div>
   </div>
 
   <!-- Meeting & Thought Triage Modal (EchoStream Engine) -->

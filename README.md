@@ -247,9 +247,9 @@ it-solutions/
 │   ├── transcripts/         # Drop-and-forget ingestion folder
 │   └── corepulse.sqlite3    # Enterprise SQLite database in WAL mode
 ├── company/
-│   ├── growth/              # GTM strategy, product docs, public launch kit
-│   ├── product/             # Approved PRDs for CorePulse, NexusShield, EchoStream
-│   └── reports/             # Permanent corporate memory & daily reports
+│   ├── growth/portal/       # Cloud showcase & 1-line turnkey installers
+│   ├── growth/routines/     # Pre-built community automation playbooks
+│   └── health_monitor.py    # Automated suite health & test verification
 └── README.md                # Global documentation & quickstart
 ```
 

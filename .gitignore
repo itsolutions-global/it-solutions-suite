@@ -93,3 +93,14 @@ company/logs/AUTONOMOUS_WEB_ACTIONS.md
 company/audits/AUDIT_SPRINT_14_NEXUSBRIDGE.md
 company/audits/AUDIT_SPRINT_15_PHYSICAL_HUD.md
 company/product/PRD_NEXUSBRIDGE*.md
+
+# Internal Executive Strategy, Pricing & Monetization Playbooks (STRICTLY LOCAL ONLY)
+company/CHARTER.md
+company/ROADMAP.md
+company/audits/*.md
+company/reports/
+company/research/
+company/product/
+company/growth/*.md
+company/growth/TRIAD_SHOWCASE.html
+!company/growth/portal/*

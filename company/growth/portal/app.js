@@ -74,40 +74,6 @@
     });
   };
 
-  // 3. Dynamic Pricing Billing Toggle
-  let billingCycle = 'monthly';
-  window.setBillingCycle = function (cycle) {
-    billingCycle = cycle;
-    const btnMonthly = document.getElementById('btnMonthly');
-    const btnAnnual = document.getElementById('btnAnnual');
-    const proPrice = document.getElementById('pricePro');
-    const triadPrice = document.getElementById('priceTriad');
-    const enterprisePrice = document.getElementById('priceEnterprise');
-    const proCadence = document.getElementById('cadencePro');
-    const triadCadence = document.getElementById('cadenceTriad');
-    const enterpriseCadence = document.getElementById('cadenceEnterprise');
-
-    if (cycle === 'annual') {
-      if (btnAnnual) btnAnnual.classList.add('active');
-      if (btnMonthly) btnMonthly.classList.remove('active');
-      if (proPrice) proPrice.textContent = '8.25';
-      if (proCadence) proCadence.textContent = '/ month (billed $99/yr)';
-      if (triadPrice) triadPrice.textContent = '15.80';
-      if (triadCadence) triadCadence.textContent = '/ month (billed $190/yr)';
-      if (enterprisePrice) enterprisePrice.textContent = '165';
-      if (enterpriseCadence) enterpriseCadence.textContent = '/ month (billed annually)';
-    } else {
-      if (btnMonthly) btnMonthly.classList.add('active');
-      if (btnAnnual) btnAnnual.classList.remove('active');
-      if (proPrice) proPrice.textContent = '9.99';
-      if (proCadence) proCadence.textContent = '/ month';
-      if (triadPrice) triadPrice.textContent = '19';
-      if (triadCadence) triadCadence.textContent = '/ month';
-      if (enterprisePrice) enterprisePrice.textContent = '199';
-      if (enterpriseCadence) enterpriseCadence.textContent = '/ month';
-    }
-  };
-
   // 4. Animated Metric Counter Engine
   function animateValue(id, start, end, duration, suffix = '') {
     const el = document.getElementById(id);
@@ -131,7 +97,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     // Run live counter animation
     setTimeout(() => {
-      animateValue('metricTests', 0, 155, 1200, '/155');
+      animateValue('metricTests', 0, 175, 1200, '/175');
       animateValue('metricDeps', 10, 0, 800, '');
       animateValue('metricLatency', 60, 15, 1000, 'ms');
       animateValue('metricLocal', 0, 100, 1200, '%');
