@@ -3,16 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IT Solutions Global | Autonomous Enterprise Triad: CorePulse, NexusShield, EchoStream</title>
-  <meta name="description" content="Zero-bloat, local-first executive life OS, SAST secret scanner, and audio triage engine engineered in pure Python standard library. 0 external runtime dependencies.">
+  <title>IT Solutions Global | Free Browser &amp; Desktop Suite: Contract Scanner, Invoice Extractor, Meeting Co-Pilot &amp; SAST</title>
+  <meta name="description" content="Use 100% free, private, client-side tools right in your browser or desktop: ClauseGuard Contract & NDA Risk Scanner, DocuPulse Invoice-to-CSV Extractor, EchoStream Meeting Follow-Up Generator, NexusShield Secret Scanner, and CorePulse Life OS.">
+  <meta name="keywords" content="free NDA risk scanner, contract redline generator, invoice to CSV extractor, meeting notes to email generator, secret scanner, SAST, local-first productivity, zero dependencies">
   <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://it-solutions-global.vercel.app/">
 
   <!-- OpenGraph Metadata -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://it-solutions-global.vercel.app/">
-  <meta property="og:title" content="IT Solutions Global | The Autonomous Enterprise Triad">
-  <meta property="og:description" content="Eliminate the 40% cognitive drudgery tax and shield software supply chains. CorePulse, NexusShield, and EchoStream operating in 100% local-first unison.">
+  <meta property="og:title" content="IT Solutions Global | Free Local-First Browser & Desktop Suite">
+  <meta property="og:description" content="Scan contracts for predatory clauses, extract invoices to CSV, draft meeting follow-up emails, and audit code secrets 100% privately in your browser or terminal.">
   <meta property="twitter:card" content="summary_large_image">
+
+  <!-- Schema.org JSON-LD for Google & AI Search Discovery -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "IT Solutions Global Autonomous Suite",
+    "operatingSystem": "Web Browser, Windows, macOS, Linux",
+    "applicationCategory": "BusinessApplication, DeveloperApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "100% local-first, zero-dependency suite including ClauseGuard (Contract & NDA Risk Scanner), DocuPulse (Invoice to CSV Ledger Extractor), EchoStream (Meeting Notes to Follow-Up Email Co-Pilot), NexusShield (SAST & SBOM Scanner), and CorePulse (Productivity OS).",
+    "url": "https://it-solutions-global.vercel.app/"
+  }
+  </script>
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -40,10 +60,10 @@
       </div>
 
       <div class="nav-actions">
+        <a href="#live-studio" class="btn-nav btn-nav-primary" style="background: linear-gradient(135deg, #00f0ff, #3b82f6); color: #050811; font-weight: 700;">🚀 Use Live in Browser (No Install)</a>
         <a href="https://github.com/itsolutions-global/it-solutions-suite" class="btn-nav" target="_blank" rel="noopener">GitHub</a>
         <a href="https://pypi.org/project/it-solutions-suite/" class="btn-nav" target="_blank" rel="noopener">PyPI Package</a>
         <a href="#architecture" class="btn-nav">Architecture</a>
-        <a href="#quickstart" class="btn-nav btn-nav-primary">Get Started</a>
       </div>
     </div>
   </header>
@@ -103,7 +123,7 @@
       <!-- Animated Metric Counters Row -->
       <div class="metrics-row">
         <div class="metric-box">
-          <div class="metric-number" id="metricTests">155/155</div>
+          <div class="metric-number" id="metricTests">175/175</div>
           <div class="metric-label">Automated Tests Passed</div>
         </div>
         <div class="metric-box">
@@ -117,6 +137,88 @@
         <div class="metric-box">
           <div class="metric-number" id="metricLocal">100%</div>
           <div class="metric-label">Local-First Private Compute</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         DIRECT-TO-USER INTERACTIVE LIVE BROWSER WEB APP STUDIO (ZERO INSTALL)
+         ===================================================================== -->
+    <section class="switcher-section container" id="live-studio" style="padding-top: 24px;">
+      <span class="section-tag" style="background: rgba(0, 240, 255, 0.14); color: #00f0ff; border-color: rgba(0, 240, 255, 0.4);">⚡ Live Interactive Browser Studio • Zero Install Required</span>
+      <h2 class="section-headline">Use Our Engines Instantly in Your Browser</h2>
+      <p class="section-subtext">No Python, terminal, or signup needed. Everything below runs 100% privately inside your browser tab—zero data ever leaves your device.</p>
+
+      <!-- Studio Tool Selector Pills -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 24px;">
+        <button class="tab-btn-cli active" id="studioBtn-clauseguard" onclick="switchStudioTool('clauseguard')" style="padding: 10px 18px; font-size: 0.92rem; border-radius: 8px; cursor: pointer;">
+          ⚖️ ClauseGuard (Contract &amp; NDA Redliner)
+        </button>
+        <button class="tab-btn-cli" id="studioBtn-docupulse" onclick="switchStudioTool('docupulse')" style="padding: 10px 18px; font-size: 0.92rem; border-radius: 8px; cursor: pointer;">
+          📄 DocuPulse (Invoice-to-CSV Extractor)
+        </button>
+        <button class="tab-btn-cli" id="studioBtn-echostream" onclick="switchStudioTool('echostream')" style="padding: 10px 18px; font-size: 0.92rem; border-radius: 8px; cursor: pointer;">
+          🎙️ EchoStream (Meeting Follow-Up Emailer)
+        </button>
+        <button class="tab-btn-cli" id="studioBtn-nexusshield" onclick="switchStudioTool('nexusshield')" style="padding: 10px 18px; font-size: 0.92rem; border-radius: 8px; cursor: pointer;">
+          🛡️ NexusShield (Secret &amp; Key Scanner)
+        </button>
+      </div>
+
+      <!-- Studio Workspace Box -->
+      <div class="showcase-display" style="border: 1px solid rgba(0, 240, 255, 0.28); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; align-items: start;">
+
+          <!-- Left Column: Input Area -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <h3 id="studioInputTitle" style="margin: 0; font-size: 1.1rem; color: #f8fafc;">⚖️ Paste Contract, NDA, or Terms of Service</h3>
+              <button onclick="loadStudioSample()" style="background: rgba(56, 189, 248, 0.14); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 6px; padding: 5px 12px; font-size: 0.78rem; cursor: pointer; font-weight: 600;">
+                ✨ Load Sample
+              </button>
+            </div>
+            <textarea id="studioInputText" rows="11" style="width: 100%; background: #050811; color: #e2e8f0; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 14px; font-family: monospace; font-size: 0.85rem; line-height: 1.5; resize: vertical;" placeholder="Paste your text here or click 'Load Sample'..."></textarea>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;">
+              <button onclick="runStudioEngine()" style="flex: 1; background: linear-gradient(135deg, #00f0ff, #3b82f6); color: #040711; font-weight: 800; border: none; border-radius: 8px; padding: 12px 20px; font-size: 0.95rem; cursor: pointer;">
+                ⚡ Run Instant Local Audit
+              </button>
+              <button onclick="clearStudioWorkspace()" style="background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 12px 16px; font-size: 0.85rem; cursor: pointer;">
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Instant Output & Action Buttons -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span id="studioOutputBadge" style="font-size: 0.82rem; font-weight: 700; padding: 4px 10px; border-radius: 99px; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35);">
+                READY • 100% BROWSER LOCAL
+              </span>
+              <div style="display: flex; gap: 8px;">
+                <button onclick="copyStudioOutput()" style="background: rgba(168, 85, 247, 0.16); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 6px; padding: 5px 12px; font-size: 0.78rem; cursor: pointer; font-weight: 600;">
+                  📋 Copy Result
+                </button>
+                <button id="studioDownloadBtn" onclick="downloadStudioOutput()" style="background: rgba(16, 185, 129, 0.16); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 6px; padding: 5px 12px; font-size: 0.78rem; cursor: pointer; font-weight: 600;">
+                  📥 Download File
+                </button>
+              </div>
+            </div>
+
+            <div id="studioOutputContainer" style="background: #050811; border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 16px; min-height: 245px; max-height: 360px; overflow-y: auto; font-family: monospace; font-size: 0.84rem; line-height: 1.55; color: #cbd5e1; white-space: pre-wrap;">Click "⚡ Run Instant Local Audit" to execute in your browser...</div>
+
+            <!-- Built-In Viral Share Bar -->
+            <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px;">
+              <span style="font-size: 0.76rem; color: #94a3b8;">💡 Saved time? Share this free tool with a colleague:</span>
+              <div style="display: flex; gap: 6px;">
+                <button onclick="sharePortal('twitter')" style="background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.15); border-radius: 5px; padding: 4px 9px; font-size: 0.73rem; cursor: pointer;">X / Twitter</button>
+                <button onclick="sharePortal('linkedin')" style="background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.15); border-radius: 5px; padding: 4px 9px; font-size: 0.73rem; cursor: pointer;">LinkedIn</button>
+                <button onclick="sharePortal('whatsapp')" style="background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.15); border-radius: 5px; padding: 4px 9px; font-size: 0.73rem; cursor: pointer;">WhatsApp</button>
+                <button onclick="sharePortal('copy')" id="shareCopyBtn" style="background: rgba(0,240,255,0.1); color: #00f0ff; border: 1px solid rgba(0,240,255,0.3); border-radius: 5px; padding: 4px 9px; font-size: 0.73rem; cursor: pointer;">🔗 Copy Link</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
