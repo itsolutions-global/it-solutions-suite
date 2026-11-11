@@ -373,10 +373,19 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
             # POST /api/vault/export (Export 2-Way Markdown Vault for Obsidian/Logseq)
             if path in ("/api/vault/export", "/api/vault/export/"):
                 from corepulse.snippets import snippet_vault, export_markdown_vault
-                vault_dir = body.get("vault_dir")
+                vault_dir_param = body.get("vault_dir")
+                vault_dir = None
+                if vault_dir_param:
+                    try:
+                        resolved = Path(vault_dir_param).resolve() if Path(vault_dir_param).is_absolute() else (DATA_DIR / vault_dir_param).resolve()
+                        resolved.relative_to(BASE_DIR.parent.resolve())
+                        vault_dir = resolved
+                    except Exception:
+                        self._send_error_response("Forbidden: vault_dir must reside within workspace hierarchy", HTTPStatus.FORBIDDEN)
+                        return
                 all_tasks = db.get_tasks()
                 all_snippets = snippet_vault.list_snippets()
-                res = export_markdown_vault(all_tasks, all_snippets, vault_dir=Path(vault_dir) if vault_dir else None)
+                res = export_markdown_vault(all_tasks, all_snippets, vault_dir=vault_dir)
                 self._send_json_response(res, HTTPStatus.OK)
                 return
 

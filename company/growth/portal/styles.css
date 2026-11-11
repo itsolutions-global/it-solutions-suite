@@ -531,8 +531,8 @@ header {
 .c-purple { color: #c084fc; }
 .c-dim { color: #475569; }
 
-/* Dynamic Pricing Section */
-.pricing-section {
+/* Architecture Guarantees Section */
+.pricing-section, .guarantees-section {
   margin-bottom: 80px;
 }
 .billing-switcher {
@@ -569,9 +569,9 @@ header {
   font-weight: 700;
 }
 
-.pricing-cards-grid {
+.pricing-cards-grid, .guarantees-cards-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   align-items: stretch;
 }
