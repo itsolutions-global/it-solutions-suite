@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocuPulse — Free Invoice &amp; Receipt to Excel/CSV Extractor | Local Math Auditor</title>
+  <meta name="description" content="Free, 100% private invoice-to-CSV extractor and math auditor. Parse billing details, line items, and taxes into Excel/CSV and catch math errors locally in your browser. Zero cloud uploads. Free forever.">
+  <meta name="keywords" content="free invoice extractor, invoice to CSV converter, receipt to Excel, invoice math auditor, audit contractor invoices, local receipt parser, offline invoice scanner, free bookkeeping tool">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://it-solutions-global.vercel.app/invoice-extractor.html">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://it-solutions-global.vercel.app/invoice-extractor.html">
+  <meta property="og:title" content="DocuPulse — Free Invoice &amp; Receipt to Excel/CSV Extractor &amp; Math Auditor">
+  <meta property="og:description" content="Parse invoices into clean CSV/Excel spreadsheets and audit calculations locally in your browser. 100% confidential, zero server uploads.">
+  <meta property="twitter:card" content="summary_large_image">
+
+  <!-- Schema.org JSON-LD (WebApplication + FAQPage) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://it-solutions-global.vercel.app/invoice-extractor.html#webapp",
+        "name": "DocuPulse Invoice to CSV Extractor & Math Auditor",
+        "url": "https://it-solutions-global.vercel.app/invoice-extractor.html",
+        "applicationCategory": "BusinessApplication, FinanceApplication",
+        "operatingSystem": "Any (Web Browser, Offline Safe)",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "100% free and offline client-side tool to parse invoices, receipts, and purchase orders into structured Excel/CSV ledgers and verify line-item math without uploading sensitive financial data."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://it-solutions-global.vercel.app/invoice-extractor.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does DocuPulse store or send my financial invoices to the cloud?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. DocuPulse runs 100% locally inside your web browser. When you paste invoice text or upload a receipt file, the extraction and math verification algorithms run entirely on your CPU. No financial data, vendor names, or bank details are ever transmitted over the internet."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does DocuPulse audit invoice math?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "DocuPulse parses each individual line item and re-calculates the arithmetic sum. It then compares this sum against the stated subtotal, checks tax/VAT rates, and validates whether Subtotal + Tax precisely equals the Grand Total. If a discrepancy or rounding error is detected, DocuPulse highlights the exact dollar difference."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I export the extracted invoice data to Microsoft Excel or Google Sheets?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can click 'Download CSV / Excel' to receive a standardized .csv file formatted for instant import into Microsoft Excel, Google Sheets, QuickBooks, or Xero. You can also use 'Copy Table (Excel-Ready)' to paste directly into an open spreadsheet."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there a limit on how many invoices or receipts I can parse?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. DocuPulse is completely unmetered and free forever under the MIT open-source license. You can parse as many invoices as you need with zero fees, subscriptions, or login barriers."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Glow Backdrops -->
+  <div class="ambient-glow glow-cyan"></div>
+  <div class="ambient-glow glow-purple"></div>
+  <div class="ambient-glow glow-emerald"></div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">Free Autonomous Workstation Suite</span>
+        </div>
+      </a>
+
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        <span>100% Offline &bull; Zero Server Uploads</span>
+      </div>
+
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">Home</a>
+        <a href="contract-scanner.html" class="btn-nav">Contract Scanner</a>
+        <a href="meeting-followup.html" class="btn-nav">Meeting Co-Pilot</a>
+        <a href="https://github.com/itsolutions-global/it-solutions-suite" class="btn-nav" target="_blank" rel="noopener">GitHub (MIT)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <a href="index.html#live-studio">Free Web Tools</a>
+      <span>&rsaquo;</span>
+      <span style="color: var(--cyan);">DocuPulse Invoice Extractor</span>
+    </nav>
+
+    <!-- Hero Section -->
+    <section style="text-align: center; margin-top: 24px; margin-bottom: 24px;">
+      <div class="privacy-banner">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Financial Privacy Protected &bull; 100% Client-Side Processing</span>
+      </div>
+
+      <h1 style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.2; margin-bottom: 14px;">
+        DocuPulse &mdash; Free Invoice &amp; Receipt Extractor<br>
+        <span class="gradient-text">&amp; Automated Math Auditor</span>
+      </h1>
+
+      <p style="font-size: 16px; color: var(--text-muted); max-width: 780px; margin: 0 auto; line-height: 1.6;">
+        Convert raw invoice text, contractor receipts, and billing emails into clean Excel/CSV spreadsheets. Automatically verify line item sums, tax calculations, and catch vendor math errors before you pay.
+      </p>
+    </section>
+
+    <!-- Interactive Tool Workspace -->
+    <section class="tool-workspace-grid" id="extractor-workspace">
+
+      <!-- Left Column: Input Box & Samples -->
+      <div class="tool-input-col">
+        <div class="tool-col-header">
+          <span class="tool-col-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Paste Invoice Text or Drag &amp; Drop
+          </span>
+          <span style="font-size: 12px; color: var(--text-dim);" id="charCount">0 characters</span>
+        </div>
+
+        <!-- Sample Load Pills -->
+        <div class="sample-pills">
+          <span style="font-size: 11px; color: var(--text-dim); align-self: center; margin-right: 4px;">Load Sample:</span>
+          <button class="sample-pill-btn" onclick="loadSampleInvoice('contractor')">💼 Freelancer Invoice</button>
+          <button class="sample-pill-btn" onclick="loadSampleInvoice('cloud')">☁️ Multi-Line Cloud Bill</button>
+          <button class="sample-pill-btn" onclick="loadSampleInvoice('error')">⚠️ Invoice With Math Error</button>
+        </div>
+
+        <textarea 
+          id="invoiceTextInput" 
+          class="tool-textarea" 
+          placeholder="Paste plain text from an invoice, email receipt, or OCR text here..."
+          oninput="updateCharCount()"></textarea>
+
+        <div class="tool-actions-bar">
+          <button class="btn-run-action" onclick="runInvoiceExtraction()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Extract &amp; Audit Invoice
+          </button>
+          <button class="btn-tool-secondary" onclick="clearInvoiceWorkspace()">Clear</button>
+          <label class="btn-tool-secondary" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload File
+            <input type="file" id="invoiceFileInput" accept=".txt,.csv,.tsv,.eml" style="display: none;" onchange="handleInvoiceFileUpload(event)">
+          </label>
+        </div>
+      </div>
+
+      <!-- Right Column: Extracted Ledger & Math Audit -->
+      <div class="tool-output-col">
+        <div class="tool-col-header">
+          <span class="tool-col-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Structured Ledger &amp; Math Audit
+          </span>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="copyTableClipboard()">📋 Copy Table (Excel-Ready)</button>
+            <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="downloadCsvFile()">📥 Download CSV</button>
+          </div>
+        </div>
+
+        <!-- Math Audit Status Banner -->
+        <div id="mathAuditBanner" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 8px; padding: 10px 14px; margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div id="mathIcon" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(0, 240, 255, 0.15); border: 2px solid var(--cyan); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: var(--cyan);">∑</div>
+            <div>
+              <div id="mathTitle" style="font-size: 13px; font-weight: 700; color: var(--text-main);">Awaiting Invoice Data</div>
+              <div id="mathSubtitle" style="font-size: 11px; color: var(--text-dim);">Paste invoice text to automatically extract fields and audit arithmetic</div>
+            </div>
+          </div>
+          <span id="mathStatusBadge" class="risk-tag clean">IDLE</span>
+        </div>
+
+        <!-- Extracted Table Output Box -->
+        <div id="invoiceOutputContainer" class="output-panel-box">
+          <div style="text-align: center; color: var(--text-dim); padding: 48px 16px;">
+            <div style="font-size: 32px; margin-bottom: 12px;">📄</div>
+            <div style="font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">No invoice parsed yet</div>
+            <div style="font-size: 12px; max-width: 340px; margin: 0 auto;">Select "💼 Freelancer Invoice" or "⚠️ Invoice With Math Error" above to see DocuPulse extract data and verify math.</div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Why DocuPulse Section (Educational SEO Content) -->
+    <section style="margin: 64px 0;">
+      <span class="section-tag">Zero Cloud Risk</span>
+      <h2 style="font-size: 26px; font-weight: 800; margin-top: 6px; margin-bottom: 14px;">Why Local Invoicing Math Auditing Saves Real Money</h2>
+      <p style="color: var(--text-muted); font-size: 15px; line-height: 1.7; max-width: 900px; margin-bottom: 28px;">
+        Studies show that over 8% of business-to-business invoices contain mathematical errors, duplicate item charges, or incorrect sales tax rates. Manually checking line items with a handheld calculator is tedious, while uploading client invoices to cloud AI exposes confidential rates, vendor identities, and bank details. DocuPulse provides the best of both worlds: instant automated parsing and math verification that runs 100% locally in your browser.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: var(--cyan); margin-bottom: 8px;">1. Instant Excel &amp; CSV Export</h3>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            Stop retyping PDF invoices into your accounting ledger. DocuPulse extracts vendor names, dates, line items, and totals into structured CSV format ready for one-click import into Excel, Google Sheets, or bookkeeping software.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: #ef4444; margin-bottom: 8px;">2. Catch Hidden Calculation Errors</h3>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            Vendors frequently miscalculate line item quantities, round taxes incorrectly, or inflate subtotals with phantom surcharges. DocuPulse recalculates every line item to verify that Line Sum + Tax exactly equals Total Due.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: #10b981; margin-bottom: 8px;">3. Absolute Financial Confidentiality</h3>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            Your profit margins, contractor pay rates, and banking coordinates remain private. DocuPulse does not transmit invoice text to remote cloud servers, LLM APIs, or marketing analytics trackers.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comprehensive FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <span class="section-tag">Frequently Asked Questions</span>
+        <h2 style="font-size: 26px; font-weight: 800; margin-top: 6px;">Frequently Asked Questions About DocuPulse</h2>
+      </div>
+
+      <details class="faq-item" open>
+        <summary>Does DocuPulse send invoice data to any server?</summary>
+        <div class="faq-answer">
+          <p><strong>No.</strong> DocuPulse executes entirely within your local browser sandbox using client-side JavaScript. No data is sent over the network, stored on third-party servers, or shared with advertisers. You can safely disconnect from Wi-Fi and the tool will continue working perfectly.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What types of invoice formats can I parse?</summary>
+        <div class="faq-answer">
+          <p>You can paste plain text copied from any PDF invoice, receipt email, Google Doc, Word document, or OCR scan. DocuPulse intelligently identifies common invoice header patterns, dates, multi-line item breakdowns, tax rates, and totals.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>How does the automated Math Auditor work?</summary>
+        <div class="faq-answer">
+          <p>The DocuPulse Math Auditor runs three distinct verification checks:</p>
+          <ul>
+            <li><strong>Line Items Sum Check:</strong> Calculates the arithmetic sum of all detected line item amounts and compares it against the stated subtotal.</li>
+            <li><strong>Tax &amp; VAT Consistency:</strong> Validates whether the stated tax percentage accurately matches the reported tax dollar amount.</li>
+            <li><strong>Grand Total Verification:</strong> Checks that Subtotal + Tax equals the final Total Due. Any discrepancy exceeding 2 cents is prominently flagged with the exact dollar amount of the error.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I import the CSV file into Excel, QuickBooks, or Google Sheets?</summary>
+        <div class="faq-answer">
+          <p>Yes. The exported CSV file adheres to RFC 4180 standard formatting. You can open it directly in Microsoft Excel, Apple Numbers, Google Sheets, or import it into QuickBooks, Xero, Wave, or FreshBooks as an expense ledger entry.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Is DocuPulse really 100% free with no monthly limits?</summary>
+        <div class="faq-answer">
+          <p>Yes. DocuPulse is completely free, unmetered, and open-source under the MIT license. There are no monthly file limits, no paid tiers, and no watermark restrictions.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- Cross-Tools Mini Grid -->
+    <section class="cross-tools-section">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="section-tag">Explore The Free Suite</span>
+        <h3 style="font-size: 22px; font-weight: 700; margin-top: 6px;">More Free Local-First Micro-Tools</h3>
+      </div>
+
+      <div class="cross-tools-grid">
+        <a href="contract-scanner.html" class="cross-tool-card">
+          <div>
+            <div class="cross-tool-icon">⚖️</div>
+            <div class="cross-tool-title">ClauseGuard Contract &amp; NDA Scanner</div>
+            <div class="cross-tool-desc">Audit freelance contracts, MSAs, and NDAs for predatory clauses, uncapped liabilities, and IP grabs with instant redline proposals.</div>
+          </div>
+          <span class="cross-tool-link-text">Open Free Tool &rarr;</span>
+        </a>
+
+        <a href="meeting-followup.html" class="cross-tool-card">
+          <div>
+            <div class="cross-tool-icon">🎙️</div>
+            <div class="cross-tool-title">EchoStream Meeting Co-Pilot</div>
+            <div class="cross-tool-desc">Convert messy meeting transcripts and bullet notes into executive follow-up emails, action items, and decisions in 1 click.</div>
+          </div>
+          <span class="cross-tool-link-text">Open Free Tool &rarr;</span>
+        </a>
+
+        <a href="index.html" class="cross-tool-card">
+          <div>
+            <div class="cross-tool-icon">⚡</div>
+            <div class="cross-tool-title">IT Solutions Global Triad OS</div>
+            <div class="cross-tool-desc">Explore the full autonomous local-first suite: CorePulse (Action), NexusShield (Defense), and EchoStream (Perception). Pure Python, zero dependencies.</div>
+          </div>
+          <span class="cross-tool-link-text">View Triad OS &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-wrap">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-motto-box">
+          <a href="index.html" class="brand-link">
+            <div class="brand-logo-symbol">IT</div>
+            <div class="brand-name">IT Solutions Global</div>
+          </a>
+          <p class="footer-motto-text">
+            &ldquo;Serve humanity by solving real problems with uncompromising utility; earn deep trust and habituation before asking for reward.&rdquo;
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Free Browser Tools</h5>
+          <ul>
+            <li><a href="invoice-extractor.html">DocuPulse Invoice to CSV</a></li>
+            <li><a href="contract-scanner.html">ClauseGuard Contract Scanner</a></li>
+            <li><a href="meeting-followup.html">EchoStream Meeting Co-Pilot</a></li>
+            <li><a href="index.html#live-studio">All In-Browser Tools</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Open Source Suite</h5>
+          <ul>
+            <li><a href="https://pypi.org/project/it-solutions-suite/" target="_blank" rel="noopener">PyPI Package</a></li>
+            <li><a href="https://github.com/itsolutions-global/it-solutions-suite" target="_blank" rel="noopener">GitHub Repository</a></li>
+            <li><a href="https://github.com/itsolutions-global/it-solutions-suite/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+            <li><a href="index.html#architecture">System Architecture</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Zero-Knowledge Privacy</h5>
+          <ul>
+            <li><span style="color: #34d399; font-size: 13px;">✔ 100% Local-First Engine</span></li>
+            <li><span style="color: #34d399; font-size: 13px;">✔ 0 Tracking Pixels</span></li>
+            <li><span style="color: #34d399; font-size: 13px;">✔ 0 Telemetry / Cloud Logs</span></li>
+            <li><span style="color: #34d399; font-size: 13px;">✔ Free &amp; Unmetered Forever</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>&copy; 2026 IT Solutions Global. Open Source under the MIT License.</span>
+        <span>Local-First Autonomous Workstation Architecture</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DocuPulse Client-Side Interactive Engine -->
+  <script>
+  (function() {
+    'use strict';
+
+    const SAMPLES = {
+      contractor:
+        "INVOICE\n" +
+        "From: Apex Creative Studio LLC\n" +
+        "To: Acuity Growth Partners\n" +
+        "Invoice Number: INV-2026-4491\n" +
+        "Date: 2026-11-10\n" +
+        "Due Date: 2026-12-10 (Net 30)\n\n" +
+        "Description                              Amount\n" +
+        "1. Product UI/UX Architecture (40 hrs)    $3,200.00\n" +
+        "2. Design System Components & Icons        $850.00\n" +
+        "3. Interactive Prototyping Workshop       $450.00\n\n" +
+        "Subtotal: $4,500.00\n" +
+        "Tax (0% Service Exemption): $0.00\n" +
+        "Total Due: $4,500.00\n\n" +
+        "Payment via ACH / Wire Transfer: Acct #**** 8831",
+
+      cloud:
+        "BILLING STATEMENT / TAX INVOICE\n" +
+        "Vendor: Nexus Cloud Infrastructure Inc.\n" +
+        "Account ID: ACC-899124\n" +
+        "Invoice #: CLOUD-99823\n" +
+        "Issue Date: 2026-11-01\n" +
+        "Payment Due: 2026-11-15\n\n" +
+        "Line Item Details:\n" +
+        "- Dedicated Kubernetes Cluster Worker Nodes (Qty: 3): $750.00\n" +
+        "- High-Availability Managed Postgres 16 Instance: $320.00\n" +
+        "- Edge CDN & Global Anycast Bandwidth (8.4 TB): $180.00\n" +
+        "- DDoS Shield Enterprise Protection: $150.00\n\n" +
+        "Subtotal: $1,400.00\n" +
+        "Sales Tax (8.25%): $115.50\n" +
+        "Grand Total: $1,515.50",
+
+      error:
+        "INVOICE (AUDIT TEST - CONTAINS CALCULATION ERROR)\n" +
+        "Vendor: Rapid Hardware Supply Ltd.\n" +
+        "Invoice #: RHS-77102\n" +
+        "Date: 2026-11-08\n" +
+        "Due: Upon Receipt\n\n" +
+        "Items:\n" +
+        "1. High-Speed Thunderbolt 4 Docks (Qty 4): $600.00\n" +
+        "2. 4K UltraSharp Monitors (Qty 2): $900.00\n" +
+        "3. Ergonomic Wireless Keyboards (Qty 5): $250.00\n\n" +
+        "Subtotal: $1,950.00  <-- (ACTUAL SUM OF ITEMS IS $1,750.00! Overcharge of $200.00)\n" +
+        "Tax (10%): $195.00\n" +
+        "Total Amount Due: $2,145.00"
+    };
+
+    let lastExtractedData = null;
+
+    window.updateCharCount = function() {
+      const text = document.getElementById('invoiceTextInput').value;
+      const countEl = document.getElementById('charCount');
+      if (countEl) countEl.textContent = text.length.toLocaleString() + ' characters';
+    };
+
+    window.loadSampleInvoice = function(type) {
+      const input = document.getElementById('invoiceTextInput');
+      if (input && SAMPLES[type]) {
+        input.value = SAMPLES[type];
+        window.updateCharCount();
+        window.runInvoiceExtraction();
+      }
+    };
+
+    window.clearInvoiceWorkspace = function() {
+      const input = document.getElementById('invoiceTextInput');
+      const out = document.getElementById('invoiceOutputContainer');
+      const mathIcon = document.getElementById('mathIcon');
+      const mathTitle = document.getElementById('mathTitle');
+      const mathSubtitle = document.getElementById('mathSubtitle');
+      const badge = document.getElementById('mathStatusBadge');
+
+      if (input) input.value = '';
+      window.updateCharCount();
+      if (mathIcon) { mathIcon.textContent = '∑'; mathIcon.style.borderColor = 'var(--cyan)'; mathIcon.style.color = 'var(--cyan)'; }
+      if (mathTitle) mathTitle.textContent = 'Awaiting Invoice Data';
+      if (mathSubtitle) mathSubtitle.textContent = 'Paste invoice text to automatically extract fields and audit arithmetic';
+      if (badge) { badge.className = 'risk-tag clean'; badge.textContent = 'IDLE'; }
+
+      if (out) {
+        out.innerHTML = `
+          <div style="text-align: center; color: var(--text-dim); padding: 48px 16px;">
+            <div style="font-size: 32px; margin-bottom: 12px;">📄</div>
+            <div style="font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Workspace Cleared</div>
+            <div style="font-size: 12px; max-width: 340px; margin: 0 auto;">Paste your invoice on the left or select a sample to begin extraction.</div>
+          </div>
+        `;
+      }
+      lastExtractedData = null;
+    };
+
+    window.handleInvoiceFileUpload = function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const input = document.getElementById('invoiceTextInput');
+        if (input) {
+          input.value = evt.target.result;
+          window.updateCharCount();
+          window.runInvoiceExtraction();
+        }
+      };
+      reader.readAsText(file);
+    };
+
+    // Drag and drop into textarea
+    const textarea = document.getElementById('invoiceTextInput');
+    if (textarea) {
+      textarea.addEventListener('dragover', function(e) { e.preventDefault(); e.stopPropagation(); textarea.style.borderColor = 'var(--cyan)'; });
+      textarea.addEventListener('dragleave', function(e) { e.preventDefault(); e.stopPropagation(); textarea.style.borderColor = ''; });
+      textarea.addEventListener('drop', function(e) {
+        e.preventDefault(); e.stopPropagation(); textarea.style.borderColor = '';
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            textarea.value = evt.target.result;
+            window.updateCharCount();
+            window.runInvoiceExtraction();
+          };
+          reader.readAsText(e.dataTransfer.files[0]);
+        }
+      });
+    }
+
+    window.runInvoiceExtraction = function() {
+      const input = document.getElementById('invoiceTextInput');
+      const text = input ? input.value : '';
+      if (!text || text.trim().length === 0) {
+        alert('Please paste invoice text or load a sample first.');
+        return;
+      }
+
+      const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      let vendor = "Vendor Not Specified";
+      let invoiceNum = "INV-" + Math.floor(100000 + Math.random() * 900000);
+      let issueDate = new Date().toISOString().slice(0, 10);
+      let dueDate = "Upon Receipt";
+      let currency = "$";
+      let subtotal = null;
+      let tax = 0;
+      let total = null;
+      const items = [];
+
+      lines.forEach(line => {
+        // Vendor detection
+        const vMatch = line.match(/^(?:vendor|from|merchant|billed\s+by|company)\s*[:\-]\s*(.+)$/i);
+        if (vMatch && vendor === "Vendor Not Specified") vendor = vMatch[1].trim();
+
+        // Invoice # detection
+        const invMatch = line.match(/(?:invoice\s*(?:no|number|#)?|receipt\s*#?|bill\s*#?)\s*[:\-]?\s*([A-Z0-9\-_]{3,30})/i);
+        if (invMatch && !/^(number|date|due|details)$/i.test(invMatch[1])) {
+          invoiceNum = invMatch[1].trim();
+        }
+
+        // Issue Date
+        const dateMatch = line.match(/^(?:date|issue\s+date|invoice\s+date)\s*[:\-]\s*(.+)$/i);
+        if (dateMatch) issueDate = dateMatch[1].trim();
+
+        // Due Date
+        const dueMatch = line.match(/^(?:due\s+date|payment\s+due|due)\s*[:\-]\s*(.+)$/i);
+        if (dueMatch) dueDate = dueMatch[1].trim();
+
+        // Currency check
+        if (line.includes('€')) currency = '€';
+        else if (line.includes('£')) currency = '£';
+        else if (line.includes('₹')) currency = '₹';
+
+        // Extract numbers with 2 decimals
+        const numMatches = line.match(/([0-9]{1,3}(?:,[0-9]{3})*(?:\.[0-9]{2})|[0-9]+\.[0-9]{2})/g);
+        const lastAmt = numMatches ? parseFloat(numMatches[numMatches.length - 1].replace(/,/g, '')) : null;
+
+        if (/^sub[\s\-]?total/i.test(line) && lastAmt !== null) {
+          subtotal = lastAmt;
+        } else if (/^(?:tax|vat|gst|sales\s+tax)/i.test(line) && lastAmt !== null) {
+          tax = lastAmt;
+        } else if (/^(?:total|total\s+due|amount\s+due|grand\s+total)/i.test(line) && lastAmt !== null) {
+          total = lastAmt;
+        } else if (lastAmt !== null && !/invoice|date|due|account|from|to|acct/i.test(line)) {
+          // It's likely a line item!
+          const desc = line.replace(/[\$€£₹]?\s*[0-9,]+\.[0-9]{2}\s*$/, '').replace(/^[\d\.\-\*\s]+/, '').replace(/<--.*$/, '').trim();
+          if (desc.length >= 3 && !/subtotal|tax|total/i.test(desc)) {
+            items.push({ description: desc, amount: lastAmt });
+          }
+        }
+      });
+
+      const lineItemsSum = Math.round(items.reduce((acc, it) => acc + it.amount, 0) * 100) / 100;
+      if (subtotal === null) subtotal = lineItemsSum > 0 ? lineItemsSum : (total !== null ? Math.round((total - tax) * 100) / 100 : 0);
+      if (total === null) total = Math.round((subtotal + tax) * 100) / 100;
+
+      // Mathematical Verification
+      const calculatedTotal = Math.round((subtotal + tax) * 100) / 100;
+      const subtotalMatchesItems = (items.length > 0) ? (Math.abs(lineItemsSum - subtotal) < 0.05) : true;
+      const totalMatchesMath = Math.abs(calculatedTotal - total) < 0.05;
+      const isMathValid = subtotalMatchesItems && totalMatchesMath;
+
+      lastExtractedData = {
+        vendor,
+        invoiceNum,
+        issueDate,
+        dueDate,
+        currency,
+        items,
+        lineItemsSum,
+        subtotal,
+        tax,
+        total,
+        calculatedTotal,
+        isMathValid,
+        subtotalMatchesItems,
+        totalMatchesMath
+      };
+
+      // Update Math Status Banner
+      const mathIcon = document.getElementById('mathIcon');
+      const mathTitle = document.getElementById('mathTitle');
+      const mathSubtitle = document.getElementById('mathSubtitle');
+      const badge = document.getElementById('mathStatusBadge');
+
+      if (isMathValid) {
+        if (mathIcon) { mathIcon.textContent = '✔'; mathIcon.style.borderColor = '#10b981'; mathIcon.style.color = '#10b981'; }
+        if (mathTitle) mathTitle.textContent = `✔ Math Verified (${currency}${total.toFixed(2)})`;
+        if (mathSubtitle) mathSubtitle.textContent = `All ${items.length} line items sum to subtotal + tax without discrepancies.`;
+        if (badge) { badge.className = 'risk-tag clean'; badge.textContent = 'MATH VERIFIED'; }
+      } else {
+        const discrepancy = Math.abs(lineItemsSum - subtotal) >= 0.05 
+          ? Math.abs(lineItemsSum - subtotal) 
+          : Math.abs(calculatedTotal - total);
+
+        if (mathIcon) { mathIcon.textContent = '⚠'; mathIcon.style.borderColor = '#ef4444'; mathIcon.style.color = '#ef4444'; }
+        if (mathTitle) mathTitle.textContent = `⚠ Math Discrepancy Flagged (${currency}${discrepancy.toFixed(2)} Error)`;
+        if (mathSubtitle) {
+          if (!subtotalMatchesItems) {
+            mathSubtitle.textContent = `Line items sum (${currency}${lineItemsSum.toFixed(2)}) does NOT match stated Subtotal (${currency}${subtotal.toFixed(2)})!`;
+          } else {
+            mathSubtitle.textContent = `Subtotal + Tax (${currency}${calculatedTotal.toFixed(2)}) does NOT equal stated Grand Total (${currency}${total.toFixed(2)})!`;
+          }
+        }
+        if (badge) { badge.className = 'risk-tag critical'; badge.textContent = 'DISCREPANCY FLAGGED'; }
+      }
+
+      // Render Table Output
+      const out = document.getElementById('invoiceOutputContainer');
+      if (!out) return;
+
+      let html = `
+        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: 8px; padding: 14px; margin-bottom: 14px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; font-size: 13px;">
+            <div><span style="color: var(--text-dim);">Vendor:</span> <strong style="color: var(--text-main);">${escapeHtml(vendor)}</strong></div>
+            <div><span style="color: var(--text-dim);">Invoice #:</span> <strong style="color: var(--cyan);">${escapeHtml(invoiceNum)}</strong></div>
+            <div><span style="color: var(--text-dim);">Date:</span> <strong style="color: var(--text-main);">${escapeHtml(issueDate)}</strong></div>
+            <div><span style="color: var(--text-dim);">Due:</span> <strong style="color: var(--text-main);">${escapeHtml(dueDate)}</strong></div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px;">Extracted Line Items</h4>
+        <table class="invoice-table">
+          <thead>
+            <tr>
+              <th style="width: 40px;">#</th>
+              <th>Item / Service Description</th>
+              <th style="text-align: right; width: 110px;">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      if (items.length === 0) {
+        html += `<tr><td colspan="3" style="text-align: center; color: var(--text-dim); padding: 14px;">No multi-line items parsed. Single lump-sum invoice detected.</td></tr>`;
+      } else {
+        items.forEach((it, idx) => {
+          html += `
+            <tr>
+              <td style="color: var(--text-dim);">${idx + 1}</td>
+              <td>${escapeHtml(it.description)}</td>
+              <td style="text-align: right; font-family: var(--font-mono); font-weight: 600;">${currency}${it.amount.toFixed(2)}</td>
+            </tr>
+          `;
+        });
+      }
+
+      html += `
+          </tbody>
+        </table>
+
+        <!-- Math Reconciliation Summary -->
+        <div style="background: #060910; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px; margin-top: 12px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px;">
+            <span style="color: var(--text-muted);">Calculated Items Sum:</span>
+            <span style="font-family: var(--font-mono); font-weight: 600;">${currency}${lineItemsSum.toFixed(2)}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px;">
+            <span style="color: var(--text-muted);">Stated Subtotal:</span>
+            <span style="font-family: var(--font-mono); font-weight: 600; color: ${subtotalMatchesItems ? 'inherit' : '#ef4444'};">
+              ${currency}${subtotal.toFixed(2)} ${subtotalMatchesItems ? '' : '(⚠ MISMATCH)'}
+            </span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px;">
+            <span style="color: var(--text-muted);">Tax / VAT / Fees:</span>
+            <span style="font-family: var(--font-mono); font-weight: 600;">${currency}${tax.toFixed(2)}</span>
+          </div>
+          <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px; margin-top: 8px; display: flex; justify-content: space-between; font-size: 15px;">
+            <strong style="color: var(--text-main);">Grand Total Due:</strong>
+            <strong style="font-family: var(--font-mono); color: ${isMathValid ? 'var(--cyan)' : '#ef4444'};">
+              ${currency}${total.toFixed(2)}
+            </strong>
+          </div>
+        </div>
+      `;
+
+      out.innerHTML = html;
+    };
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    window.copyTableClipboard = function() {
+      if (!lastExtractedData) {
+        alert('Please extract an invoice first.');
+        return;
+      }
+
+      const d = lastExtractedData;
+      let tsv = "Vendor\tInvoice #\tIssue Date\tDue Date\tItem #\tDescription\tAmount\tSubtotal\tTax\tGrand Total\tMath Verified\n";
+
+      if (d.items.length === 0) {
+        tsv += `${d.vendor}\t${d.invoiceNum}\t${d.issueDate}\t${d.dueDate}\t1\tGeneral Services\t${d.total.toFixed(2)}\t${d.subtotal.toFixed(2)}\t${d.tax.toFixed(2)}\t${d.total.toFixed(2)}\t${d.isMathValid ? "YES" : "FLAGGED"}\n`;
+      } else {
+        d.items.forEach((it, idx) => {
+          tsv += `${d.vendor}\t${d.invoiceNum}\t${d.issueDate}\t${d.dueDate}\t${idx + 1}\t${it.description.replace(/\t/g, ' ')}\t${it.amount.toFixed(2)}\t${d.subtotal.toFixed(2)}\t${d.tax.toFixed(2)}\t${d.total.toFixed(2)}\t${d.isMathValid ? "YES" : "FLAGGED"}\n`;
+        });
+      }
+
+      navigator.clipboard.writeText(tsv).then(() => {
+        alert('✔ Invoice ledger copied to clipboard (TSV format)! You can paste it directly into Excel or Google Sheets.');
+      }).catch(err => {
+        console.error('Clipboard copy failed: ', err);
+      });
+    };
+
+    window.downloadCsvFile = function() {
+      if (!lastExtractedData) {
+        alert('Please extract an invoice first.');
+        return;
+      }
+
+      const d = lastExtractedData;
+      let csv = "Vendor,Invoice Number,Issue Date,Due Date,Item Number,Description,Amount,Subtotal,Tax,Grand Total,Math Verified\n";
+
+      if (d.items.length === 0) {
+        csv += `"${d.vendor.replace(/"/g, '""')}","${d.invoiceNum}","${d.issueDate}","${d.dueDate}",1,"General Services",${d.total.toFixed(2)},${d.subtotal.toFixed(2)},${d.tax.toFixed(2)},${d.total.toFixed(2)},${d.isMathValid ? "YES" : "FLAGGED"}\n`;
+      } else {
+        d.items.forEach((it, idx) => {
+          csv += `"${d.vendor.replace(/"/g, '""')}","${d.invoiceNum}","${d.issueDate}","${d.dueDate}",${idx + 1},"${it.description.replace(/"/g, '""')}",${it.amount.toFixed(2)},${d.subtotal.toFixed(2)},${d.tax.toFixed(2)},${d.total.toFixed(2)},${d.isMathValid ? "YES" : "FLAGGED"}\n`;
+        });
+      }
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `invoice-${d.invoiceNum}-${Date.now()}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+
+  })();
+  </script>
+
+</body>
+</html>

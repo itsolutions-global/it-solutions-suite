@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Solutions Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="brand-wrap">
+        <div class="brand-icon">⚡</div>
+        <div>
+          <div class="brand-title">IT Solutions Studio</div>
+          <div class="brand-subtitle">100% Local-First Browser Co-Pilot</div>
+        </div>
+      </div>
+      <div id="desktopStatus" class="status-badge" title="CorePulse Desktop Status">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Checking...</span>
+      </div>
+    </header>
+
+    <!-- 5 Studio Tabs Navigation -->
+    <nav class="tabs-nav" id="studioTabs">
+      <button class="tab-btn active" data-tab="clauseguard" id="tabBtn-clauseguard">
+        <span class="tab-btn-icon">⚖️</span>
+        <span>ClauseGuard</span>
+      </button>
+      <button class="tab-btn" data-tab="docupulse" id="tabBtn-docupulse">
+        <span class="tab-btn-icon">📄</span>
+        <span>DocuPulse</span>
+      </button>
+      <button class="tab-btn" data-tab="echostream" id="tabBtn-echostream">
+        <span class="tab-btn-icon">🎙️</span>
+        <span>EchoStream</span>
+      </button>
+      <button class="tab-btn" data-tab="nexusshield" id="tabBtn-nexusshield">
+        <span class="tab-btn-icon">🛡️</span>
+        <span>NexusShield</span>
+      </button>
+      <button class="tab-btn" data-tab="corepulse" id="tabBtn-corepulse">
+        <span class="tab-btn-icon">⚡</span>
+        <span>CorePulse</span>
+      </button>
+    </nav>
+
+    <!-- Tab Panels Container -->
+    <main class="tab-content">
+      <!-- 1. CLAUSEGUARD PANEL -->
+      <section class="tab-panel active" id="panel-clauseguard">
+        <div class="glass-card">
+          <div class="card-header">
+            <span class="card-title">Contract & NDA Risk Scanner</span>
+            <div class="action-links">
+              <button class="link-btn" id="btnClgSample">✨ Load Sample</button>
+              <button class="link-btn" id="btnClgClear">🧹 Clear</button>
+            </div>
+          </div>
+          <textarea id="clgInput" class="code-input" placeholder="Paste contract, NDA, freelance agreement, or terms of service here..."></textarea>
+          <div class="btn-group">
+            <button class="btn-primary" id="btnClgRun">
+              <span>⚡ Scan for Predatory Clauses</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card" id="clgResultCard">
+          <div class="card-header">
+            <span class="card-title">Audit Report & Counter-Clauses</span>
+            <span id="clgBadge" class="metric-badge badge-green">READY</span>
+          </div>
+          <div id="clgOutput" class="output-box">Paste contract text above and click Scan...</div>
+          <div class="btn-group">
+            <button class="btn-secondary" id="btnClgCopy">📋 Copy Report</button>
+            <button class="btn-secondary" id="btnClgDownload">📥 Download (.txt)</button>
+          </div>
+        </div>
+
+        <!-- Quick Redlines Reference -->
+        <div class="glass-card">
+          <div class="card-header">
+            <span class="card-title">1-Click Redline Clauses</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div class="redline-card">
+              <div class="redline-header">
+                <span class="redline-name">Mutual Liability Cap (12-Mo Fees)</span>
+                <button class="btn-secondary" style="padding: 2px 6px; font-size: 10px;" id="btnCopyRedline1">Copy</button>
+              </div>
+              <span class="redline-text">"Neither party's aggregate liability under this Agreement shall exceed the total fees paid in the 12 months preceding the claim, excluding indirect or consequential damages."</span>
+            </div>
+            <div class="redline-card">
+              <div class="redline-header">
+                <span class="redline-name">Pre-Existing IP Retention Safe-Harbor</span>
+                <button class="btn-secondary" style="padding: 2px 6px; font-size: 10px;" id="btnCopyRedline2">Copy</button>
+              </div>
+              <span class="redline-text">"Provider retains all right, title, and interest in and to pre-existing intellectual property and reusable tools; Client receives ownership of custom Deliverables upon full payment."</span>
+            </div>
+            <div class="redline-card">
+              <div class="redline-header">
+                <span class="redline-name">Net-30 Standard Payment Terms</span>
+                <button class="btn-secondary" style="padding: 2px 6px; font-size: 10px;" id="btnCopyRedline3">Copy</button>
+              </div>
+              <span class="redline-text">"All undisputed invoices shall be due and payable within thirty (30) days (Net-30) of invoice transmission date."</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. DOCUPULSE PANEL -->
+      <section class="tab-panel" id="panel-docupulse">
+        <div class="glass-card">
+          <div class="card-header">
+            <span class="card-title">Invoice & Receipt Extractor</span>
+            <div class="action-links">
+              <button class="link-btn" id="btnDocSample">✨ Load Sample</button>
+              <button class="link-btn" id="btnDocClear">🧹 Clear</button>
+            </div>
+          </div>
+          <textarea id="docInput" class="code-input" placeholder="Paste invoice text, email billing receipt, or purchase order here..."></textarea>
+          <div class="btn-group">
+            <button class="btn-primary" id="btnDocRun">
+              <span>⚡ Extract & Audit Math</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card" id="docResultCard">
+          <div class="card-header">
+            <span class="card-title">Structured Ledger Summary</span>
+            <span id="docBadge" class="metric-badge badge-green">READY</span>
+          </div>
+
+          <div class="summary-grid" id="docSummaryGrid">
+            <div class="summary-item">
+              <div class="summary-item-label">Vendor</div>
+              <div class="summary-item-val" id="docVendor">—</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-item-label">Invoice #</div>
+              <div class="summary-item-val" id="docInvNum">—</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-item-label">Issue Date</div>
+              <div class="summary-item-val" id="docDate">—</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-item-label">Total Due</div>
+              <div class="summary-item-val" id="docTotal" style="color: #34d399;">$0.00</div>
+            </div>
+          </div>
+
+          <div id="docOutput" class="output-box">Extracted invoice details will appear here...</div>
+          <div class="btn-group">
+            <button class="btn-secondary" id="btnDocDownloadCsv">📥 Download Excel / CSV (.csv)</button>
+            <button class="btn-secondary" id="btnDocCopy">📋 Copy Text</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. ECHOSTREAM PANEL -->
+      <section class="tab-panel" id="panel-echostream">
+        <div class="glass-card">
+          <div class="card-header">
+            <span class="card-title">Meeting Notes & Transcript Merger</span>
+            <div class="action-links">
+              <button class="link-btn" id="btnEchoSample">✨ Load Sample</button>
+              <button class="link-btn" id="btnEchoClear">🧹 Clear</button>
+            </div>
+          </div>
+          <textarea id="echoInput" class="code-input" placeholder="Paste rough meeting notes, scratchpad bullet points, or raw transcripts here..."></textarea>
+          <div class="btn-group">
+            <button class="btn-primary" id="btnEchoRun">
+              <span>⚡ Generate Follow-Up Email</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card" id="echoResultCard">
+          <div class="card-header">
+            <span class="card-title">Ready-to-Send Email Draft</span>
+            <span id="echoBadge" class="metric-badge badge-green">READY</span>
+          </div>
+          <div id="echoOutput" class="output-box">Follow-up email draft will appear here...</div>
+          <div class="btn-group">
+            <button class="btn-secondary" id="btnEchoCopy">📋 Copy Email Draft</button>
+            <button class="btn-secondary" id="btnEchoDownload">📥 Download (.md)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. NEXUSSHIELD PANEL -->
+      <section class="tab-panel" id="panel-nexusshield">
+        <div class="glass-card">
+          <div class="card-header">
+            <span class="card-title">Secret & SAST Code Scanner</span>
+            <div class="action-links">
+              <button class="link-btn" id="btnNxsSample">✨ Load Sample</button>
+              <button class="link-btn" id="btnNxsClear">🧹 Clear</button>
+            </div>
+          </div>
+          <textarea id="nxsInput" class="code-input" placeholder="Paste source code, .env file, JSON config, or API snippet here..."></textarea>
+          <div class="btn-group">
+            <button class="btn-primary" id="btnNxsRun">
+              <span>⚡ Scan Secrets & High Entropy</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card" id="nxsResultCard">
+          <div class="card-header">
+            <span class="card-title">Security Findings & Remediation</span>
+            <span id="nxsBadge" class="metric-badge badge-green">CLEAN</span>
+          </div>
+          <div id="nxsOutput" class="output-box">Security scan results will appear here...</div>
+          <div class="btn-group">
+            <button class="btn-secondary" id="btnNxsCopy">📋 Copy Audit</button>
+            <button class="btn-secondary" id="btnNxsDownload">📥 Download (.json)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. COREPULSE PANEL -->
+      <section class="tab-panel" id="panel-corepulse">
+        <!-- Quick Capture Bar -->
+        <div class="glass-card">
+          <div class="card-header">
+            <span class="card-title">⚡ Quick Capture Task</span>
+          </div>
+          <div class="input-row">
+            <input type="text" id="cpTaskInput" class="text-input" placeholder="!p1 Finish contract audit #legal ~45m">
+            <button class="btn-primary" id="btnCpAddTask" style="white-space: nowrap;">Capture</button>
+          </div>
+          <div style="font-size: 10px; color: var(--text-dim);">
+            Syntax: <code>!p1</code>=crit, <code>!p2</code>=high, <code>#tag</code>=category, <code>~30m</code>=duration
+          </div>
+        </div>
+
+        <!-- Dynamic Snippets Expander -->
+        <div class="glass-card">
+          <div class="card-header">
+            <span class="card-title">Dynamic Text Snippets</span>
+          </div>
+          <div class="snippet-grid" id="cpSnippetGrid">
+            <!-- Snippets will be dynamically rendered here -->
+          </div>
+        </div>
+
+        <!-- Saved Tasks List -->
+        <div class="glass-card">
+          <div class="card-header">
+            <span class="card-title">Local Tasks (<span id="cpTaskCount">0</span>)</span>
+            <div class="action-links">
+              <button class="link-btn" id="btnCpSync">🔄 Sync Desktop (:8080)</button>
+            </div>
+          </div>
+          <div class="task-list" id="cpTaskList">
+            <!-- Tasks rendered dynamically -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span>⚡ 100% Local-First & Unmetered</span>
+      </div>
+      <div>
+        <a href="https://it-solutions-global.vercel.app" target="_blank" class="footer-link">Web Studio ↗</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

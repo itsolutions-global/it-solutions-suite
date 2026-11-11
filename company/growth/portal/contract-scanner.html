@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClauseGuard — Free Offline Contract &amp; NDA Risk Scanner | Local-First Redline Generator</title>
+  <meta name="description" content="Free, 100% private contract and NDA risk scanner. Audit agreements for unlimited liability, IP grabs, auto-renewal traps, and unfair payment terms locally in your browser. Zero cloud uploads. Free forever.">
+  <meta name="keywords" content="free contract scanner, offline contract review, NDA risk analyzer, contract redline generator, freelance contract audit, private contract analysis, unmetered contract tool, local contract checker">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://it-solutions-global.vercel.app/contract-scanner.html">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://it-solutions-global.vercel.app/contract-scanner.html">
+  <meta property="og:title" content="ClauseGuard — Free Offline Contract &amp; NDA Risk Scanner &amp; Redline Generator">
+  <meta property="og:description" content="Instantly scan contracts, MSAs, and NDAs for predatory clauses right in your browser. 100% private, zero server uploads, actionable redlines.">
+  <meta property="twitter:card" content="summary_large_image">
+
+  <!-- Schema.org JSON-LD (WebApplication + FAQPage) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://it-solutions-global.vercel.app/contract-scanner.html#webapp",
+        "name": "ClauseGuard Contract Risk Scanner",
+        "url": "https://it-solutions-global.vercel.app/contract-scanner.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any (Web Browser, Offline Safe)",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "100% free and private browser tool to audit contracts, NDAs, and service agreements for legal traps, uncapped liability, IP transfer overreach, and delayed payment clauses."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://it-solutions-global.vercel.app/contract-scanner.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does ClauseGuard upload my contract or NDA to any cloud server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. ClauseGuard operates 100% in your local browser memory using client-side JavaScript. Not a single character of your agreement, client name, or pricing is ever transmitted over the network or stored on any server. You can even disconnect your internet or use it in airplane mode."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What predatory contract clauses does ClauseGuard detect?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "ClauseGuard audits for 10 common risk factors: uncapped or unlimited financial liability, pre-existing IP ownership forfeiture, restrictive non-competes, evergreen auto-renewal traps, extended payment delays (Net-60/90/Pay-When-Paid), unilateral termination without compensation, one-sided indemnification, distant jurisdiction/mandatory arbitration, excessive NDA survival duration, and unilateral contract modification terms."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does ClauseGuard provide suggested redlines?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. For every flagged clause, ClauseGuard provides plain-English risk explanations alongside production-tested, balanced counter-clauses (redlines) that you can copy and paste directly into your contract negotiations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is ClauseGuard truly 100% free with no hidden usage limits?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. ClauseGuard is 100% free, unmetered, and open-source under the MIT license. There are no subscriptions, no monthly limits, no watermarks, and no sign-up barriers."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Glow Backdrops -->
+  <div class="ambient-glow glow-cyan"></div>
+  <div class="ambient-glow glow-purple"></div>
+  <div class="ambient-glow glow-emerald"></div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">Free Autonomous Workstation Suite</span>
+        </div>
+      </a>
+
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        <span>100% Offline &bull; Zero Server Uploads</span>
+      </div>
+
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">Home</a>
+        <a href="invoice-extractor.html" class="btn-nav">Invoice Extractor</a>
+        <a href="meeting-followup.html" class="btn-nav">Meeting Co-Pilot</a>
+        <a href="https://github.com/itsolutions-global/it-solutions-suite" class="btn-nav" target="_blank" rel="noopener">GitHub (MIT)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <a href="index.html#live-studio">Free Web Tools</a>
+      <span>&rsaquo;</span>
+      <span style="color: var(--cyan);">ClauseGuard Contract Scanner</span>
+    </nav>
+
+    <!-- Hero Section -->
+    <section style="text-align: center; margin-top: 24px; margin-bottom: 24px;">
+      <div class="privacy-banner">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>100% In-Browser Execution &bull; Confidential &bull; Zero Telemetry</span>
+      </div>
+
+      <h1 style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.2; margin-bottom: 14px;">
+        ClauseGuard &mdash; Free Offline Contract &amp; NDA Risk Scanner<br>
+        <span class="gradient-text">&amp; Instant Redline Generator</span>
+      </h1>
+
+      <p style="font-size: 16px; color: var(--text-muted); max-width: 780px; margin: 0 auto; line-height: 1.6;">
+        Paste any Freelance Contract, Master Services Agreement (MSA), Statement of Work (SOW), or NDA. Instantly identify legal traps, uncapped liabilities, and IP grabs with battle-tested counter-clauses&mdash;completely offline.
+      </p>
+    </section>
+
+    <!-- Interactive Tool Workspace -->
+    <section class="tool-workspace-grid" id="scanner-workspace">
+
+      <!-- Left Column: Input Box & Samples -->
+      <div class="tool-input-col">
+        <div class="tool-col-header">
+          <span class="tool-col-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Paste Contract or Drag &amp; Drop File
+          </span>
+          <span style="font-size: 12px; color: var(--text-dim);" id="charCount">0 characters</span>
+        </div>
+
+        <!-- Sample Load Pills -->
+        <div class="sample-pills">
+          <span style="font-size: 11px; color: var(--text-dim); align-self: center; margin-right: 4px;">Load Sample:</span>
+          <button class="sample-pill-btn" onclick="loadSampleContract('freelance')">⚠️ Freelance MSA (High Risk)</button>
+          <button class="sample-pill-btn" onclick="loadSampleContract('nda')">🔒 One-Sided NDA</button>
+          <button class="sample-pill-btn" onclick="loadSampleContract('safe')">✔ Balanced Contract</button>
+        </div>
+
+        <textarea 
+          id="contractTextInput" 
+          class="tool-textarea" 
+          placeholder="Paste contract text here, or drag & drop a .txt / .md / contract file directly into this box..."
+          oninput="updateCharCount()"></textarea>
+
+        <div class="tool-actions-bar">
+          <button class="btn-run-action" onclick="runContractAudit()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Scan Contract for Risks
+          </button>
+          <button class="btn-tool-secondary" onclick="clearContractWorkspace()">Clear</button>
+          <label class="btn-tool-secondary" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload File
+            <input type="file" id="contractFileInput" accept=".txt,.md,.rtf,.doc" style="display: none;" onchange="handleContractFileUpload(event)">
+          </label>
+        </div>
+      </div>
+
+      <!-- Right Column: Audit Findings & Redlines -->
+      <div class="tool-output-col">
+        <div class="tool-col-header">
+          <span class="tool-col-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Risk Analysis &amp; Redline Proposals
+          </span>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="copyRedlinesToClipboard()">📋 Copy Redlines</button>
+            <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="downloadRedlineReport()">📥 Download Report</button>
+          </div>
+        </div>
+
+        <!-- Overall Score Bar & Verdict -->
+        <div id="auditScoreBanner" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 8px; padding: 10px 14px; margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div id="scoreCircle" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(0, 240, 255, 0.15); border: 2px solid var(--cyan); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: var(--cyan);">--</div>
+            <div>
+              <div id="scoreTitle" style="font-size: 13px; font-weight: 700; color: var(--text-main);">Awaiting Contract Text</div>
+              <div id="scoreSubtitle" style="font-size: 11px; color: var(--text-dim);">Paste your contract and click "Scan Contract for Risks"</div>
+            </div>
+          </div>
+          <span id="riskVerdictBadge" class="risk-tag clean">IDLE</span>
+        </div>
+
+        <!-- Output Container -->
+        <div id="auditOutputContainer" class="output-panel-box">
+          <div style="text-align: center; color: var(--text-dim); padding: 48px 16px;">
+            <div style="font-size: 32px; margin-bottom: 12px;">⚖️</div>
+            <div style="font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">No contract scanned yet</div>
+            <div style="font-size: 12px; max-width: 340px; margin: 0 auto;">Click "⚠️ Freelance MSA (High Risk)" above to see how ClauseGuard exposes hidden liability traps and generates redlines.</div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Why ClauseGuard Section (Deep Educational SEO Content) -->
+    <section style="margin: 64px 0;">
+      <span class="section-tag">Zero Cloud Risk</span>
+      <h2 style="font-size: 26px; font-weight: 800; margin-top: 6px; margin-bottom: 14px;">Why Never Upload Client NDAs or Contracts to Cloud AI</h2>
+      <p style="color: var(--text-muted); font-size: 15px; line-height: 1.7; max-width: 900px; margin-bottom: 28px;">
+        Standard cloud-based contract tools and general LLMs ingest your sensitive contract text onto remote third-party servers, where it can be logged, inspected by platform operators, or stored in training databases. This frequently violates the very confidentiality terms you are reviewing. ClauseGuard solves this fundamentally: the entire rule engine executes inside your browser's V8 or JavaScriptCore runtime using pure client-side regex heuristics. Your agreement never leaves your device.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: #ef4444; margin-bottom: 8px;">1. Uncapped Financial Liability</h3>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            A client contract without a liability cap puts your personal assets, bank accounts, and business at risk for indirect or consequential damages. ClauseGuard identifies missing liability caps and supplies standard "aggregate fees paid" limitation clauses.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: #f97316; margin-bottom: 8px;">2. Pre-Existing IP Assignment Overreach</h3>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            Predatory "Work for Hire" clauses often claim ownership not just of project deliverables, but of your prior inventions, background libraries, and software tools. ClauseGuard flags broad IP grabs and inserts clear background IP reservation carveouts.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: #f59e0b; margin-bottom: 8px;">3. Extended Payment &amp; Cancellation Traps</h3>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            Clauses like "Net 90 days", "Pay-When-Paid", and unilateral termination without paying for work-in-progress starve freelancers of cash flow. ClauseGuard replaces these with industry-standard Net-15 or Net-30 payment guarantees.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comprehensive FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <span class="section-tag">Frequently Asked Questions</span>
+        <h2 style="font-size: 26px; font-weight: 800; margin-top: 6px;">Frequently Asked Questions About ClauseGuard</h2>
+      </div>
+
+      <details class="faq-item" open>
+        <summary>Does ClauseGuard upload my contract or NDA to any cloud server?</summary>
+        <div class="faq-answer">
+          <p><strong>No, absolutely not.</strong> ClauseGuard runs 100% locally in your web browser. When you paste or drop a contract file, the text is evaluated solely within your browser tab’s memory. No HTTP POST requests are dispatched, no analytics track your text, and no third-party APIs are called.</p>
+          <p>You can verify this yourself by opening your browser's Developer Tools (Network tab) and hitting "Scan Contract for Risks" while offline.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What specific contract clauses does ClauseGuard scan for?</summary>
+        <div class="faq-answer">
+          <p>ClauseGuard scans for ten of the most damaging contractual traps encountered by freelancers, agencies, and small businesses:</p>
+          <ul>
+            <li><strong>Uncapped Liability:</strong> Phrases indicating unlimited damages or absence of a liability ceiling.</li>
+            <li><strong>Pre-Existing IP Forfeiture:</strong> Clauses attempting to seize background tools, reusable code, or prior inventions.</li>
+            <li><strong>Broad Non-Competes:</strong> Clauses restricting your ability to work with other clients in your industry.</li>
+            <li><strong>Evergreen Auto-Renewals:</strong> Traps locking you into recurring commitments with unreasonable cancellation windows.</li>
+            <li><strong>Delayed Payment Terms:</strong> Net-60, Net-90, or conditional "pay-when-paid" clauses.</li>
+            <li><strong>Unilateral Termination:</strong> Client rights to cancel without compensating you for work performed to date.</li>
+            <li><strong>One-Sided Indemnification:</strong> Requiring you to indemnify the client without reciprocal protection.</li>
+            <li><strong>Hostile Jurisdiction / Foreign Arbitration:</strong> Forcing legal disputes into distant or expensive venues.</li>
+            <li><strong>Perpetual NDA Survival:</strong> Overly broad non-disclosure obligations extending indefinitely without trade-secret limits.</li>
+            <li><strong>Unilateral Contract Amendments:</strong> Reserving the right to change terms without mutual written agreement.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I download or copy the redlines for my negotiation?</summary>
+        <div class="faq-answer">
+          <p>Yes. With one click on <strong>"📋 Copy Redlines"</strong>, all flagged issues and their counter-proposals are copied to your clipboard formatted in clean markdown. You can also click <strong>"📥 Download Report"</strong> to save an offline text summary for your legal archives or to attach to an email back to the client.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Is ClauseGuard a substitute for licensed legal counsel?</summary>
+        <div class="faq-answer">
+          <p>ClauseGuard is an automated heuristic auditing and drafting aid designed to flag common business traps and provide balanced commercial drafting options. It does not constitute formal legal advice. For high-stakes, multi-million dollar or specialized transactions, we always recommend consulting a qualified attorney licensed in your jurisdiction.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Is ClauseGuard completely free with no usage limits?</summary>
+        <div class="faq-answer">
+          <p>Yes. ClauseGuard is 100% free and unmetered. There are no paywalls, no monthly document quotas, no credit systems, and no account creation requirements. It is provided freely by IT Solutions Global as part of our commitment to uncompromising utility and user trust.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- Cross-Tools Mini Grid -->
+    <section class="cross-tools-section">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="section-tag">Explore The Free Suite</span>
+        <h3 style="font-size: 22px; font-weight: 700; margin-top: 6px;">More Free Local-First Micro-Tools</h3>
+      </div>
+
+      <div class="cross-tools-grid">
+        <a href="invoice-extractor.html" class="cross-tool-card">
+          <div>
+            <div class="cross-tool-icon">📄</div>
+            <div class="cross-tool-title">DocuPulse Invoice-to-CSV Extractor</div>
+            <div class="cross-tool-desc">Extract invoice numbers, line items, and totals into Excel/CSV. Automatically audits tax math and detects billing discrepancies locally.</div>
+          </div>
+          <span class="cross-tool-link-text">Open Free Tool &rarr;</span>
+        </a>
+
+        <a href="meeting-followup.html" class="cross-tool-card">
+          <div>
+            <div class="cross-tool-icon">🎙️</div>
+            <div class="cross-tool-title">EchoStream Meeting Co-Pilot</div>
+            <div class="cross-tool-desc">Convert messy meeting transcripts and bullet notes into executive follow-up emails, action items, and decisions in 1 click.</div>
+          </div>
+          <span class="cross-tool-link-text">Open Free Tool &rarr;</span>
+        </a>
+
+        <a href="index.html" class="cross-tool-card">
+          <div>
+            <div class="cross-tool-icon">⚡</div>
+            <div class="cross-tool-title">IT Solutions Global Triad OS</div>
+            <div class="cross-tool-desc">Explore the full autonomous local-first suite: CorePulse (Action), NexusShield (Defense), and EchoStream (Perception). Pure Python, zero dependencies.</div>
+          </div>
+          <span class="cross-tool-link-text">View Triad OS &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-wrap">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-motto-box">
+          <a href="index.html" class="brand-link">
+            <div class="brand-logo-symbol">IT</div>
+            <div class="brand-name">IT Solutions Global</div>
+          </a>
+          <p class="footer-motto-text">
+            &ldquo;Serve humanity by solving real problems with uncompromising utility; earn deep trust and habituation before asking for reward.&rdquo;
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Free Browser Tools</h5>
+          <ul>
+            <li><a href="contract-scanner.html">ClauseGuard Contract Scanner</a></li>
+            <li><a href="invoice-extractor.html">DocuPulse Invoice to CSV</a></li>
+            <li><a href="meeting-followup.html">EchoStream Meeting Co-Pilot</a></li>
+            <li><a href="index.html#live-studio">All In-Browser Tools</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Open Source Suite</h5>
+          <ul>
+            <li><a href="https://pypi.org/project/it-solutions-suite/" target="_blank" rel="noopener">PyPI Package</a></li>
+            <li><a href="https://github.com/itsolutions-global/it-solutions-suite" target="_blank" rel="noopener">GitHub Repository</a></li>
+            <li><a href="https://github.com/itsolutions-global/it-solutions-suite/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+            <li><a href="index.html#architecture">System Architecture</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Zero-Knowledge Privacy</h5>
+          <ul>
+            <li><span style="color: #34d399; font-size: 13px;">✔ 100% Local-First Engine</span></li>
+            <li><span style="color: #34d399; font-size: 13px;">✔ 0 Tracking Pixels</span></li>
+            <li><span style="color: #34d399; font-size: 13px;">✔ 0 Telemetry / Cloud Logs</span></li>
+            <li><span style="color: #34d399; font-size: 13px;">✔ Free &amp; Unmetered Forever</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>&copy; 2026 IT Solutions Global. Open Source under the MIT License.</span>
+        <span>Local-First Autonomous Workstation Architecture</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ClauseGuard Client-Side Interactive Engine -->
+  <script>
+  (function() {
+    'use strict';
+
+    const RULES = [
+      {
+        id: "CLG-UNCAPPED-LIABILITY",
+        title: "Uncapped / Unlimited Financial Liability",
+        severity: "CRITICAL",
+        penalty: 30,
+        regex: /unlimited\s+liability|liable\s+for\s+all\s+damages\s+without\s+limitation|no\s+limit\s+on\s+liability|shall\s+be\s+fully\s+liable\s+for\s+any\s+and\s+all/i,
+        risk: "Exposes your business and personal assets to unlimited claims, including indirect, consequential, and punitive damages.",
+        redline: "PROPOSED REDLINE: 'Neither party's aggregate liability under this Agreement shall exceed the total fees paid or payable by Client in the twelve (12) months preceding the incident giving rise to the claim, excluding direct damages resulting from gross negligence.'"
+      },
+      {
+        id: "CLG-BROAD-IP-GRAB",
+        title: "Overbroad Pre-Existing IP & Tool Assignment",
+        severity: "CRITICAL",
+        penalty: 28,
+        regex: /prior\s+inventions|pre-existing\s+intellectual\s+property\s+shall\s+become\s+the\s+sole\s+property|background\s+technology\s+shall\s+vest|all\s+tools,?\s+frameworks,?\s+and\s+know-how\s+shall\s+be\s+owned/i,
+        risk: "Seizes your pre-existing code libraries, reusable design templates, and professional toolkits, preventing you from using them for other clients.",
+        redline: "PROPOSED REDLINE: 'Provider retains sole ownership of all pre-existing IP, tools, frameworks, and generic know-how. Client receives a perpetual, non-exclusive license to use background IP incorporated into the final Deliverables upon full payment.'"
+      },
+      {
+        id: "CLG-NON-COMPETE",
+        title: "Restrictive Industry Non-Compete Covenant",
+        severity: "HIGH",
+        penalty: 22,
+        regex: /not\s+(?:directly\s+or\s+indirectly\s+)?engage\s+in\s+any\s+competing\s+business|prohibited\s+from\s+providing\s+similar\s+services|shall\s+not\s+solicit\s+or\s+provide\s+services\s+to\s+any\s+competitor/i,
+        risk: "Prevents you from earning a living by barring you from working with clients in your area of expertise.",
+        redline: "PROPOSED REDLINE: 'Delete non-compete clause in its entirety. The parties agree that strict adherence to Section [Confidentiality] provides sufficient protection without restricting Provider's right to pursue its trade.'"
+      },
+      {
+        id: "CLG-AUTO-RENEWAL",
+        title: "Evergreen Auto-Renewal Trap (Long Notice Window)",
+        severity: "HIGH",
+        penalty: 18,
+        regex: /automatically\s+renew(?:s)?\s+for\s+successive|automatically\s+renew\s+unless\s+written\s+notice\s+is\s+provided\s+(?:60|90|120)\s+days/i,
+        risk: "Automatically locks you into multi-year commitments unless cancelled 60 to 90 days before the contract anniversary.",
+        redline: "PROPOSED REDLINE: 'This Agreement shall renew only upon mutual written confirmation of the parties prior to expiration, or may be cancelled at any time upon thirty (30) days notice.'"
+      },
+      {
+        id: "CLG-DELAYED-PAYMENT",
+        title: "Extended Payment Terms (Net-60 / Net-90 / Pay-When-Paid)",
+        severity: "MEDIUM",
+        penalty: 14,
+        regex: /net\s*(?:60|90|120)|payable\s+within\s+(?:sixty|ninety|120|60|90)\s+days|pay-when-paid|paid\s+only\s+after\s+client\s+receives\s+payment/i,
+        risk: "Delays payment for your completed work by 2-3 months or ties payment to third-party actions you cannot control.",
+        redline: "PROPOSED REDLINE: 'All undisputed invoices shall be due and payable within thirty (30) calendar days (Net-30) of invoice date. Overdue amounts shall accrue interest at 1.5% per month.'"
+      },
+      {
+        id: "CLG-UNILATERAL-TERMINATION",
+        title: "Unilateral Termination Without Payment for Work in Progress",
+        severity: "HIGH",
+        penalty: 18,
+        regex: /terminate\s+without\s+compensation|without\s+liability\s+for\s+work\s+in\s+progress|cancel\s+at\s+any\s+time\s+without\s+paying/i,
+        risk: "Allows the client to cancel the project midway without paying for hours or milestones already completed.",
+        redline: "PROPOSED REDLINE: 'Either party may terminate for convenience upon thirty (30) days written notice. In the event of termination, Client shall pay Provider for all services performed and approved expenses incurred up to the date of termination.'"
+      },
+      {
+        id: "CLG-ONE-SIDED-INDEMNITY",
+        title: "One-Sided / Asymmetric Indemnification",
+        severity: "HIGH",
+        penalty: 16,
+        regex: /consultant\s+shall\s+indemnify,?\s+defend,?\s+and\s+hold\s+harmless\s+client(?!\s+and\s+client\s+shall\s+indemnify)/i,
+        risk: "Forces you to pay client legal fees and claims without providing reciprocal indemnification if the client breaches or provides infringing assets.",
+        redline: "PROPOSED REDLINE: 'The parties agree to mutual indemnification: each party shall defend and hold harmless the other against third-party claims arising from gross negligence, willful misconduct, or IP infringement.'"
+      },
+      {
+        id: "CLG-PERPETUAL-NDA",
+        title: "Perpetual or Indefinite NDA Survival Duration",
+        severity: "MEDIUM",
+        penalty: 10,
+        regex: /confidentiality\s+obligations\s+shall\s+survive\s+in\s+perpetuity|survive\s+indefinitely|shall\s+never\s+expire/i,
+        risk: "Burdens you with legal tracking of informal communications forever, long after commercial value has expired.",
+        redline: "PROPOSED REDLINE: 'Confidentiality obligations shall survive for a period of two (2) years following the termination of this Agreement, except for bona fide trade secrets which shall survive as long as they retain trade secret status.'"
+      },
+      {
+        id: "CLG-UNILATERAL-AMENDMENT",
+        title: "Unilateral Modification / Change of Terms Without Consent",
+        severity: "HIGH",
+        penalty: 15,
+        regex: /reserve\s+the\s+right\s+to\s+modify\s+these\s+terms\s+at\s+any\s+time|may\s+change\s+this\s+agreement\s+without\s+notice/i,
+        risk: "Gives one party the power to silently change fees, deadlines, or scope without your explicit written sign-off.",
+        redline: "PROPOSED REDLINE: 'No modification, amendment, or waiver of any provision of this Agreement shall be effective unless in writing and signed by authorized representatives of both parties.'"
+      }
+    ];
+
+    const SAMPLES = {
+      freelance: 
+        "MASTER SERVICES AGREEMENT (FREELANCER ENGAGEMENT)\n\n" +
+        "1. SCOPE OF SERVICES & COMMENCEMENT:\n" +
+        "Contractor agrees to deliver software engineering and UI services as specified in Schedule A.\n\n" +
+        "2. LIABILITY & DAMAGES:\n" +
+        "Contractor shall have unlimited liability for any and all damages, claims, losses, or legal expenses arising out of this Agreement, including any consequential or incidental damages.\n\n" +
+        "3. INTELLECTUAL PROPERTY & TOOLS:\n" +
+        "Contractor hereby assigns all right, title, and interest in and to all deliverables, prior inventions, and pre-existing intellectual property shall become the sole property of Client upon creation.\n\n" +
+        "4. EXCLUSIVITY & RESTRICTION:\n" +
+        "Contractor shall not directly or indirectly engage in any competing business or provide similar services to any competitor of Client during the term and for 12 months thereafter.\n\n" +
+        "5. PAYMENT TERMS:\n" +
+        "Invoices shall be payable on Net 90 terms following formal Client board approval.\n\n" +
+        "6. TERM & EVERGREEN RENEWAL:\n" +
+        "This Agreement shall automatically renew for successive 12-month periods unless written notice is provided at least 90 days prior to expiration.\n\n" +
+        "7. TERMINATION:\n" +
+        "Client reserves the right to terminate without compensation for work in progress if milestones are adjusted.",
+
+      nda:
+        "MUTUAL NON-DISCLOSURE AGREEMENT (ONE-WAY PROVISIONS)\n\n" +
+        "1. Definition: Confidential Information includes all technical, business, and design material shared.\n" +
+        "2. Survival: The confidentiality obligations shall survive in perpetuity and shall never expire.\n" +
+        "3. Indemnification: Consultant shall indemnify, defend, and hold harmless Client against any disclosure, including legal fees.\n" +
+        "4. Amendments: Disclosing Party reserves the right to modify these terms at any time without notice.",
+
+      safe:
+        "BALANCED CONSULTING AGREEMENT\n\n" +
+        "1. Services: Consultant will provide specialized technical advisory services as agreed.\n" +
+        "2. Limitation of Liability: Neither party's aggregate liability shall exceed the total fees paid under this Agreement in the preceding 12 months. Neither party shall be liable for consequential damages.\n" +
+        "3. Intellectual Property: Client owns custom Deliverables upon full payment. Consultant retains all pre-existing tools, libraries, and background know-how.\n" +
+        "4. Payment: Undisputed invoices are payable Net 30 days.\n" +
+        "5. Mutual NDA: Confidentiality obligations survive for 2 years post-termination.\n" +
+        "6. Termination: Either party may terminate with 30 days written notice, with payment due for all work performed to date."
+    };
+
+    let lastAuditFindings = [];
+    let lastContractScore = 100;
+
+    window.updateCharCount = function() {
+      const text = document.getElementById('contractTextInput').value;
+      const countEl = document.getElementById('charCount');
+      if (countEl) countEl.textContent = text.length.toLocaleString() + ' characters';
+    };
+
+    window.loadSampleContract = function(type) {
+      const input = document.getElementById('contractTextInput');
+      if (input && SAMPLES[type]) {
+        input.value = SAMPLES[type];
+        window.updateCharCount();
+        window.runContractAudit();
+      }
+    };
+
+    window.clearContractWorkspace = function() {
+      const input = document.getElementById('contractTextInput');
+      const out = document.getElementById('auditOutputContainer');
+      const scoreCircle = document.getElementById('scoreCircle');
+      const scoreTitle = document.getElementById('scoreTitle');
+      const scoreSubtitle = document.getElementById('scoreSubtitle');
+      const badge = document.getElementById('riskVerdictBadge');
+
+      if (input) input.value = '';
+      window.updateCharCount();
+      if (scoreCircle) { scoreCircle.textContent = '--'; scoreCircle.style.borderColor = 'var(--cyan)'; scoreCircle.style.color = 'var(--cyan)'; }
+      if (scoreTitle) scoreTitle.textContent = 'Awaiting Contract Text';
+      if (scoreSubtitle) scoreSubtitle.textContent = 'Paste your contract and click "Scan Contract for Risks"';
+      if (badge) { badge.className = 'risk-tag clean'; badge.textContent = 'IDLE'; }
+
+      if (out) {
+        out.innerHTML = `
+          <div style="text-align: center; color: var(--text-dim); padding: 48px 16px;">
+            <div style="font-size: 32px; margin-bottom: 12px;">⚖️</div>
+            <div style="font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Workspace Cleared</div>
+            <div style="font-size: 12px; max-width: 340px; margin: 0 auto;">Paste your contract on the left or select a sample to begin auditing.</div>
+          </div>
+        `;
+      }
+      lastAuditFindings = [];
+      lastContractScore = 100;
+    };
+
+    window.handleContractFileUpload = function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const input = document.getElementById('contractTextInput');
+        if (input) {
+          input.value = evt.target.result;
+          window.updateCharCount();
+          window.runContractAudit();
+        }
+      };
+      reader.readAsText(file);
+    };
+
+    // Drag and drop into textarea
+    const textarea = document.getElementById('contractTextInput');
+    if (textarea) {
+      textarea.addEventListener('dragover', function(e) { e.preventDefault(); e.stopPropagation(); textarea.style.borderColor = 'var(--cyan)'; });
+      textarea.addEventListener('dragleave', function(e) { e.preventDefault(); e.stopPropagation(); textarea.style.borderColor = ''; });
+      textarea.addEventListener('drop', function(e) {
+        e.preventDefault(); e.stopPropagation(); textarea.style.borderColor = '';
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            textarea.value = evt.target.result;
+            window.updateCharCount();
+            window.runContractAudit();
+          };
+          reader.readAsText(e.dataTransfer.files[0]);
+        }
+      });
+    }
+
+    window.runContractAudit = function() {
+      const input = document.getElementById('contractTextInput');
+      const text = input ? input.value : '';
+      if (!text || text.trim().length === 0) {
+        alert('Please paste contract text or choose a sample to audit.');
+        return;
+      }
+
+      const lines = text.split(/\r?\n/);
+      const findings = [];
+      let penalty = 0;
+
+      lines.forEach((line, idx) => {
+        RULES.forEach(rule => {
+          if (rule.regex.test(line)) {
+            penalty += rule.penalty;
+            findings.push({
+              lineNum: idx + 1,
+              id: rule.id,
+              title: rule.title,
+              severity: rule.severity,
+              excerpt: line.trim(),
+              risk: rule.risk,
+              redline: rule.redline
+            });
+          }
+        });
+      });
+
+      const score = Math.max(0, 100 - penalty);
+      lastContractScore = score;
+      lastAuditFindings = findings;
+
+      // Update Score Banner
+      const scoreCircle = document.getElementById('scoreCircle');
+      const scoreTitle = document.getElementById('scoreTitle');
+      const scoreSubtitle = document.getElementById('scoreSubtitle');
+      const badge = document.getElementById('riskVerdictBadge');
+
+      let grade = 'A+';
+      let gradeColor = '#10b981';
+      let verdict = 'SAFE TO SIGN';
+      let badgeClass = 'risk-tag clean';
+
+      if (score < 50) {
+        grade = 'F';
+        gradeColor = '#ef4444';
+        verdict = 'DANGEROUS — DO NOT SIGN WITHOUT REDLINES';
+        badgeClass = 'risk-tag critical';
+      } else if (score < 75) {
+        grade = 'C';
+        gradeColor = '#f59e0b';
+        verdict = 'HIGH RISK — NEGOTIATE REDLINES FIRST';
+        badgeClass = 'risk-tag high';
+      } else if (score < 90) {
+        grade = 'B';
+        gradeColor = '#38bdf8';
+        verdict = 'MODERATE RISK — MINOR TWEAKS RECOMMENDED';
+        badgeClass = 'risk-tag medium';
+      }
+
+      if (scoreCircle) {
+        scoreCircle.textContent = grade;
+        scoreCircle.style.borderColor = gradeColor;
+        scoreCircle.style.color = gradeColor;
+      }
+      if (scoreTitle) scoreTitle.textContent = `${verdict} (${score}/100)`;
+      if (scoreSubtitle) scoreSubtitle.textContent = `${findings.length} risk clause${findings.length === 1 ? '' : 's'} detected in ${lines.length} lines`;
+      if (badge) {
+        badge.className = badgeClass;
+        badge.textContent = `${findings.length} RISKS FOUND`;
+      }
+
+      // Render Findings Cards
+      const out = document.getElementById('auditOutputContainer');
+      if (!out) return;
+
+      if (findings.length === 0) {
+        out.innerHTML = `
+          <div class="finding-card clean">
+            <div class="finding-title-row">
+              <span class="finding-title" style="color: #34d399;">✔ Clean Agreement! No Predatory Clauses Detected</span>
+              <span class="risk-tag clean">PASS</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">
+              No uncapped liabilities, overreaching IP grabs, restrictive non-competes, or evergreen traps were detected in this text.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      findings.forEach((f, idx) => {
+        const cardClass = f.severity.toLowerCase();
+        html += `
+          <div class="finding-card ${cardClass}">
+            <div class="finding-title-row">
+              <span class="finding-title">${idx + 1}. ${f.title} <span style="font-size: 11px; color: var(--text-dim); font-weight: 400;">(Line ${f.lineNum})</span></span>
+              <span class="risk-tag ${cardClass}">${f.severity}</span>
+            </div>
+            <div class="finding-excerpt">&ldquo;${escapeHtml(f.excerpt)}&rdquo;</div>
+            <div style="font-size: 12px; color: #cbd5e1; margin-top: 6px;">
+              <strong style="color: #f87171;">Risk:</strong> ${f.risk}
+            </div>
+            <div class="finding-redline">
+              <strong style="color: #34d399;">Suggested Redline:</strong><br>
+              ${escapeHtml(f.redline.replace('PROPOSED REDLINE: ', ''))}
+            </div>
+          </div>
+        `;
+      });
+
+      out.innerHTML = html;
+    };
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    window.copyRedlinesToClipboard = function() {
+      if (lastAuditFindings.length === 0) {
+        alert('Please run a contract scan first to generate redlines.');
+        return;
+      }
+
+      let text = `# ClauseGuard Contract Risk Audit & Proposed Redlines\n`;
+      text += `Score: ${lastContractScore}/100 | Risks Detected: ${lastAuditFindings.length}\n`;
+      text += `Generated locally via IT Solutions Global (https://it-solutions-global.vercel.app/contract-scanner.html)\n\n`;
+
+      lastAuditFindings.forEach((f, idx) => {
+        text += `## ${idx + 1}. [${f.severity}] ${f.title} (Line ${f.lineNum})\n`;
+        text += `- Flagged Clause: "${f.excerpt}"\n`;
+        text += `- Legal/Commercial Risk: ${f.risk}\n`;
+        text += `- ${f.redline}\n\n`;
+      });
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✔ Redlines copied to clipboard! You can paste them directly into your negotiation email or Word/Google Doc.');
+      }).catch(err => {
+        console.error('Copy failed:', err);
+      });
+    };
+
+    window.downloadRedlineReport = function() {
+      if (lastAuditFindings.length === 0) {
+        alert('Please run a contract scan first to download the report.');
+        return;
+      }
+
+      let text = `====================================================================\n`;
+      text += `  CLAUSEGUARD CONTRACT RISK & REDLINE AUDIT REPORT\n`;
+      text += `  Score: ${lastContractScore}/100 | Total Risks: ${lastAuditFindings.length}\n`;
+      text += `  Generated: ${new Date().toISOString()}\n`;
+      text += `  100% Offline Client-Side Execution (Zero Cloud Uploads)\n`;
+      text += `====================================================================\n\n`;
+
+      lastAuditFindings.forEach((f, idx) => {
+        text += `ITEM ${idx + 1}: [${f.severity}] ${f.title} (Line ${f.lineNum})\n`;
+        text += `• Flawed Clause: "${f.excerpt}"\n`;
+        text += `• Why It Hurts: ${f.risk}\n`;
+        text += `• ${f.redline}\n\n`;
+      });
+
+      text += `--------------------------------------------------------------------\n`;
+      text += `Audit completed via ClauseGuard — IT Solutions Global\n`;
+      text += `https://it-solutions-global.vercel.app/contract-scanner.html\n`;
+
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `contract-redline-audit-${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+
+  })();
+  </script>
+
+</body>
+</html>

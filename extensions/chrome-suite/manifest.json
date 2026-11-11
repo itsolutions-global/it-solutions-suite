@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "IT Solutions Global Suite - Founder Co-Pilot",
+  "version": "1.0.0",
+  "description": "100% Local-First Browser Studio: ClauseGuard legal audit, DocuPulse invoices, EchoStream recaps, NexusShield security & CorePulse capture.",
+  "author": "IT Solutions Global Corporation",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab",
+    "sidePanel",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8080/*",
+    "http://localhost:8080/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "IT Solutions Studio",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "side_panel": {
+    "default_path": "popup.html"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      },
+      "description": "Open IT Solutions Studio"
+    }
+  }
+}

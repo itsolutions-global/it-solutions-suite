@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EchoStream — Free Meeting Notes &amp; Transcript to Follow-Up Email Generator | Offline Co-Pilot</title>
+  <meta name="description" content="Free, 100% private meeting notes to follow-up email generator. Turn messy meeting transcripts and bullet notes into executive summaries, action items, and follow-up emails in 1 click. Zero server uploads. Free forever.">
+  <meta name="keywords" content="free meeting notes generator, transcript to follow up email, meeting action items extractor, meeting recap generator, offline meeting assistant, local AI meeting co-pilot, zero upload meeting summary, free productivity tool">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://it-solutions-global.vercel.app/meeting-followup.html">
+
+  <!-- OpenGraph Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://it-solutions-global.vercel.app/meeting-followup.html">
+  <meta property="og:title" content="EchoStream — Free Meeting Notes &amp; Transcript to Follow-Up Email Generator">
+  <meta property="og:description" content="Turn messy transcripts and notes into polished follow-up emails with assigned action items in 1 click right in your browser. 100% private, zero uploads.">
+  <meta property="twitter:card" content="summary_large_image">
+
+  <!-- Schema.org JSON-LD (WebApplication + FAQPage) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://it-solutions-global.vercel.app/meeting-followup.html#webapp",
+        "name": "EchoStream Meeting Notes to Email Co-Pilot",
+        "url": "https://it-solutions-global.vercel.app/meeting-followup.html",
+        "applicationCategory": "BusinessApplication, ProductivityApplication",
+        "operatingSystem": "Any (Web Browser, Offline Safe)",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "100% free and offline client-side tool to convert messy meeting notes, bullet lists, and Zoom/Teams transcripts into structured action items, decisions, and ready-to-send follow-up emails without uploading confidential discussions."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://it-solutions-global.vercel.app/meeting-followup.html#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does EchoStream upload my confidential meeting notes or transcripts to any server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. EchoStream executes 100% locally in your web browser. Neither your notes, client names, project milestones, nor transcript texts are ever transmitted over the network or stored on remote servers. It even includes built-in VoiceGuard pattern redaction to sanitize accidental secrets."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does EchoStream extract action items and owners from raw notes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "EchoStream uses advanced heuristic pattern matching to detect speaker tags (e.g., [Sarah], David:), commitment verbs ('will deploy', 'need to send', 'agreed to', 'todo:'), and timing signals ('by tomorrow', 'next Wednesday'). It groups deliverables under named owners and synthesizes an executive email draft."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I choose different email tones for clients vs. internal team syncs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can switch between Professional Client Follow-Up, Agile Internal Team Sync, and 3-Bullet Executive Brief modes with a single click. The generator re-formats the draft instantly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is EchoStream completely free with no subscription or word count limits?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. EchoStream is completely free, unmetered, and open-source under the MIT license. There are no monthly quotas, no credits, and no sign-up barriers."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Glow Backdrops -->
+  <div class="ambient-glow glow-cyan"></div>
+  <div class="ambient-glow glow-purple"></div>
+  <div class="ambient-glow glow-emerald"></div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">Free Autonomous Workstation Suite</span>
+        </div>
+      </a>
+
+      <div class="status-pill">
+        <div class="status-dot"></div>
+        <span>100% Offline &bull; Zero Server Uploads</span>
+      </div>
+
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">Home</a>
+        <a href="contract-scanner.html" class="btn-nav">Contract Scanner</a>
+        <a href="invoice-extractor.html" class="btn-nav">Invoice Extractor</a>
+        <a href="https://github.com/itsolutions-global/it-solutions-suite" class="btn-nav" target="_blank" rel="noopener">GitHub (MIT)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span>&rsaquo;</span>
+      <a href="index.html#live-studio">Free Web Tools</a>
+      <span>&rsaquo;</span>
+      <span style="color: var(--cyan);">EchoStream Meeting Co-Pilot</span>
+    </nav>
+
+    <!-- Hero Section -->
+    <section style="text-align: center; margin-top: 24px; margin-bottom: 24px;">
+      <div class="privacy-banner">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Zero Cloud AI Exposure &bull; 100% Browser Local &bull; Built-in VoiceGuard Sanitizer</span>
+      </div>
+
+      <h1 style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.2; margin-bottom: 14px;">
+        EchoStream &mdash; Free Meeting Notes &amp; Transcript<br>
+        <span class="gradient-text">to Follow-Up Email Generator</span>
+      </h1>
+
+      <p style="font-size: 16px; color: var(--text-muted); max-width: 780px; margin: 0 auto; line-height: 1.6;">
+        Never waste 30 minutes drafting meeting recap emails again. Paste rough bullet notes or Zoom/Teams transcripts, and instantly generate an executive follow-up email with clear action items and owner assignments.
+      </p>
+    </section>
+
+    <!-- Interactive Tool Workspace -->
+    <section class="tool-workspace-grid" id="meeting-workspace">
+
+      <!-- Left Column: Input Box & Samples -->
+      <div class="tool-input-col">
+        <div class="tool-col-header">
+          <span class="tool-col-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            Paste Raw Notes or Transcript
+          </span>
+          <span style="font-size: 12px; color: var(--text-dim);" id="charCount">0 characters</span>
+        </div>
+
+        <!-- Sample Load Pills -->
+        <div class="sample-pills">
+          <span style="font-size: 11px; color: var(--text-dim); align-self: center; margin-right: 4px;">Load Sample:</span>
+          <button class="sample-pill-btn" onclick="loadSampleMeeting('client')">🤝 Client Project Kickoff</button>
+          <button class="sample-pill-btn" onclick="loadSampleMeeting('sprint')">⚡ Engineering Sprint Sync</button>
+          <button class="sample-pill-btn" onclick="loadSampleMeeting('sales')">💼 Sales Strategy Call</button>
+        </div>
+
+        <!-- Tone Selector Row -->
+        <div style="display: flex; gap: 8px; margin-bottom: 12px; align-items: center; flex-wrap: wrap;">
+          <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Tone / Format:</span>
+          <select id="meetingToneSelect" onchange="runMeetingGeneration()" style="background: #060910; color: #f8fafc; border: 1px solid var(--border-glass); border-radius: 6px; padding: 4px 10px; font-size: 12px; outline: none; cursor: pointer;">
+            <option value="client" selected>👔 Professional Client Follow-Up</option>
+            <option value="internal">🛠️ Internal Team Action Plan</option>
+            <option value="executive">📊 Executive 3-Bullet Brief</option>
+          </select>
+        </div>
+
+        <textarea 
+          id="meetingTextInput" 
+          class="tool-textarea" 
+          placeholder="Paste shorthand meeting notes, bullet points, or transcript text here..."
+          oninput="updateCharCount()"></textarea>
+
+        <div class="tool-actions-bar">
+          <button class="btn-run-action" onclick="runMeetingGeneration()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Generate Follow-Up Email
+          </button>
+          <button class="btn-tool-secondary" onclick="clearMeetingWorkspace()">Clear</button>
+          <label class="btn-tool-secondary" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload Notes (.txt/.md)
+            <input type="file" id="meetingFileInput" accept=".txt,.md,.rtf" style="display: none;" onchange="handleMeetingFileUpload(event)">
+          </label>
+        </div>
+      </div>
+
+      <!-- Right Column: Formatted Email Draft -->
+      <div class="tool-output-col">
+        <div class="tool-col-header">
+          <span class="tool-col-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Generated Email &amp; Action Plan
+          </span>
+          <div style="display: flex; gap: 6px;">
+            <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="copyEmailToClipboard()">📋 Copy Email</button>
+            <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="openMailClient()">📧 Open in Mail Client</button>
+            <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="downloadEmailMarkdown()">📥 Download (.md)</button>
+          </div>
+        </div>
+
+        <!-- Metric Pill Banner -->
+        <div id="emailSummaryBanner" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 8px; padding: 10px 14px; margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div id="emailIcon" style="width: 36px; height: 36px; border-radius: 50%; background: rgba(0, 240, 255, 0.15); border: 2px solid var(--cyan); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: var(--cyan);">✉️</div>
+            <div>
+              <div id="emailStatusTitle" style="font-size: 13px; font-weight: 700; color: var(--text-main);">Awaiting Meeting Input</div>
+              <div id="emailStatusSubtitle" style="font-size: 11px; color: var(--text-dim);">Paste meeting bullet notes or a transcript excerpt on the left</div>
+            </div>
+          </div>
+          <span id="emailStatusBadge" class="risk-tag clean">IDLE</span>
+        </div>
+
+        <!-- Output Box -->
+        <div id="emailOutputContainer" class="output-panel-box" style="white-space: pre-wrap; font-family: var(--font-sans); font-size: 13px; line-height: 1.65; color: #f1f5f9;">
+          <div style="text-align: center; color: var(--text-dim); padding: 48px 16px; white-space: normal;">
+            <div style="font-size: 32px; margin-bottom: 12px;">🎙️</div>
+            <div style="font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">No meeting notes processed yet</div>
+            <div style="font-size: 12px; max-width: 340px; margin: 0 auto;">Select "🤝 Client Project Kickoff" above to see EchoStream extract action items and structure a clean follow-up email.</div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Educational SEO Section -->
+    <section style="margin: 64px 0;">
+      <span class="section-tag">Zero Cloud Risk</span>
+      <h2 style="font-size: 26px; font-weight: 800; margin-top: 6px; margin-bottom: 14px;">Why Sending Prompt Meeting Recaps Multiplies Project Success</h2>
+      <p style="color: var(--text-muted); font-size: 15px; line-height: 1.7; max-width: 900px; margin-bottom: 28px;">
+        Over 60% of client project disputes and missed deadlines stem from unrecorded verbal agreements. When you send a crisp, written recap email within two hours of a call, you establish an undisputed paper trail, assign accountability, and reassure clients that their budget is in capable hands. EchoStream automates this entire discipline in seconds without risking client privacy.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: var(--cyan); margin-bottom: 8px;">1. Stop Scope Creep Before It Starts</h3>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            Clients frequently remember casual brainstorming as committed deliverables. EchoStream segregates "Decisions Approved" from "Open Questions", ensuring new features require formal scope adjustments.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: #10b981; margin-bottom: 8px;">2. Explicit Task Owners &amp; Deadlines</h3>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            A task without an owner is a task that never gets completed. EchoStream extracts individual speaker commitments and tags them with clear checkboxes `[ ] [Name]` and due dates.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; padding: 20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: #a855f7; margin-bottom: 8px;">3. Built-in VoiceGuard Credential Stripping</h3>
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+            Teams often paste API keys, database credentials, or staging passwords into chat logs during calls. EchoStream automatically masks credentials (`[REDACTED_CREDENTIAL]`) before producing your email.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comprehensive FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <span class="section-tag">Frequently Asked Questions</span>
+        <h2 style="font-size: 26px; font-weight: 800; margin-top: 6px;">Frequently Asked Questions About EchoStream</h2>
+      </div>
+
+      <details class="faq-item" open>
+        <summary>Does EchoStream record or upload my meeting audio or text?</summary>
+        <div class="faq-answer">
+          <p><strong>No.</strong> EchoStream does not access your microphone, record audio, or send pasted text to any cloud servers. Everything operates 100% locally in your web browser. Your client conversations and internal discussions remain strictly confidential on your physical device.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I use transcripts from Zoom, Microsoft Teams, Google Meet, or Otter?</summary>
+        <div class="faq-answer">
+          <p>Yes. You can copy the transcript output from any meeting software (Zoom AI Companion, Teams transcript, Google Meet captions, Otter.ai, or Whisper) and paste it directly into EchoStream. The engine automatically parses speaker identifiers and extracts key points.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>How does the built-in VoiceGuard sanitizer protect my passwords and keys?</summary>
+        <div class="faq-answer">
+          <p>Before analyzing meeting notes, EchoStream’s client-side sanitizer runs regex scans for AWS keys, OpenAI API keys, Stripe tokens, GitHub Personal Access Tokens, and database connection URIs. Any matched secrets are replaced with <code>[REDACTED_CREDENTIAL]</code> so they are never accidentally included in the email draft you send to clients.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I directly open the generated draft in Outlook, Gmail, or Apple Mail?</summary>
+        <div class="faq-answer">
+          <p>Yes. When you click <strong>"📧 Open in Mail Client"</strong>, EchoStream creates a standardized <code>mailto:</code> link that opens your default email client with the Subject line and Body pre-filled and ready to send.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Is EchoStream completely free forever?</summary>
+        <div class="faq-answer">
+          <p>Yes. EchoStream is completely free, unmetered, and open-source under the MIT license. There are no monthly usage limits, no credit balances, and no paid upgrades.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- Cross-Tools Mini Grid -->
+    <section class="cross-tools-section">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="section-tag">Explore The Free Suite</span>
+        <h3 style="font-size: 22px; font-weight: 700; margin-top: 6px;">More Free Local-First Micro-Tools</h3>
+      </div>
+
+      <div class="cross-tools-grid">
+        <a href="contract-scanner.html" class="cross-tool-card">
+          <div>
+            <div class="cross-tool-icon">⚖️</div>
+            <div class="cross-tool-title">ClauseGuard Contract &amp; NDA Scanner</div>
+            <div class="cross-tool-desc">Audit freelance contracts, MSAs, and NDAs for predatory clauses, uncapped liabilities, and IP grabs with instant redline proposals.</div>
+          </div>
+          <span class="cross-tool-link-text">Open Free Tool &rarr;</span>
+        </a>
+
+        <a href="invoice-extractor.html" class="cross-tool-card">
+          <div>
+            <div class="cross-tool-icon">📄</div>
+            <div class="cross-tool-title">DocuPulse Invoice-to-CSV Extractor</div>
+            <div class="cross-tool-desc">Extract invoice numbers, line items, and totals into Excel/CSV. Automatically audits tax math and detects billing discrepancies locally.</div>
+          </div>
+          <span class="cross-tool-link-text">Open Free Tool &rarr;</span>
+        </a>
+
+        <a href="index.html" class="cross-tool-card">
+          <div>
+            <div class="cross-tool-icon">⚡</div>
+            <div class="cross-tool-title">IT Solutions Global Triad OS</div>
+            <div class="cross-tool-desc">Explore the full autonomous local-first suite: CorePulse (Action), NexusShield (Defense), and EchoStream (Perception). Pure Python, zero dependencies.</div>
+          </div>
+          <span class="cross-tool-link-text">View Triad OS &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-wrap">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-motto-box">
+          <a href="index.html" class="brand-link">
+            <div class="brand-logo-symbol">IT</div>
+            <div class="brand-name">IT Solutions Global</div>
+          </a>
+          <p class="footer-motto-text">
+            &ldquo;Serve humanity by solving real problems with uncompromising utility; earn deep trust and habituation before asking for reward.&rdquo;
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Free Browser Tools</h5>
+          <ul>
+            <li><a href="meeting-followup.html">EchoStream Meeting Co-Pilot</a></li>
+            <li><a href="contract-scanner.html">ClauseGuard Contract Scanner</a></li>
+            <li><a href="invoice-extractor.html">DocuPulse Invoice to CSV</a></li>
+            <li><a href="index.html#live-studio">All In-Browser Tools</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Open Source Suite</h5>
+          <ul>
+            <li><a href="https://pypi.org/project/it-solutions-suite/" target="_blank" rel="noopener">PyPI Package</a></li>
+            <li><a href="https://github.com/itsolutions-global/it-solutions-suite" target="_blank" rel="noopener">GitHub Repository</a></li>
+            <li><a href="https://github.com/itsolutions-global/it-solutions-suite/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a></li>
+            <li><a href="index.html#architecture">System Architecture</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h5>Zero-Knowledge Privacy</h5>
+          <ul>
+            <li><span style="color: #34d399; font-size: 13px;">✔ 100% Local-First Engine</span></li>
+            <li><span style="color: #34d399; font-size: 13px;">✔ 0 Tracking Pixels</span></li>
+            <li><span style="color: #34d399; font-size: 13px;">✔ 0 Telemetry / Cloud Logs</span></li>
+            <li><span style="color: #34d399; font-size: 13px;">✔ Free &amp; Unmetered Forever</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>&copy; 2026 IT Solutions Global. Open Source under the MIT License.</span>
+        <span>Local-First Autonomous Workstation Architecture</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- EchoStream Client-Side Interactive Engine -->
+  <script>
+  (function() {
+    'use strict';
+
+    const SAMPLES = {
+      client:
+        "# Client Kickoff Notes - Horizon Fintech App:\n" +
+        "- Primary objective is launching the MVP by December 15\n" +
+        "- Client confirmed brand guidelines and Figma assets are in Google Drive\n" +
+        "- Need to ensure SOC2 Type II compliance audit readiness\n\n" +
+        "# Meeting Transcript:\n" +
+        "[David VP Product] We agreed to prioritize the biometric onboarding flow over crypto payments for v1.\n" +
+        "[Sarah Lead Architect] I will deliver the database schema and API specification by Thursday afternoon.\n" +
+        "[David VP Product] Perfect. I will review and sign off on the architecture doc by Friday 12 PM.\n" +
+        "[Sarah Lead Architect] Question: will the client provide the sandbox KYC provider API credentials by Monday?\n" +
+        "[David VP Product] Yes, I will send the sandbox API keys before end of day Monday.",
+
+      sprint:
+        "# Sprint Planning - Backend & Security:\n" +
+        "- Goal: Complete zero-trust mTLS encryption on staging cluster\n" +
+        "- Blocker: Awaiting updated TLS certificate from security team\n\n" +
+        "# Transcript Notes:\n" +
+        "[Alex Dev] I will deploy the new SQLite WAL database connection pool by tomorrow.\n" +
+        "[Maya DevOps] We decided to deprecate legacy node 18 runners across CI/CD.\n" +
+        "[Alex Dev] Question: do we have benchmark latency numbers for the new cache layer?\n" +
+        "[Maya DevOps] I will run the k6 load testing suite before Wednesday standup.",
+
+      sales:
+        "# Discovery Call - Nexus Corp:\n" +
+        "- Prospect is looking to replace legacy contract management tool\n" +
+        "- Current pain point: manual redlining takes 4 hours per MSA\n\n" +
+        "# Discussion Highlights:\n" +
+        "[Prospect Director] We decided to pilot ClauseGuard and DocuPulse with 15 legal operations team members.\n" +
+        "[Account Exec] I will send the tailored pilot agreement and onboarding guide by tomorrow morning.\n" +
+        "[Prospect Director] Question: does the desktop suite work 100% offline inside our air-gapped environment?"
+    };
+
+    let lastGeneratedEmail = '';
+    let lastSubjectLine = '';
+
+    window.updateCharCount = function() {
+      const text = document.getElementById('meetingTextInput').value;
+      const countEl = document.getElementById('charCount');
+      if (countEl) countEl.textContent = text.length.toLocaleString() + ' characters';
+    };
+
+    window.loadSampleMeeting = function(type) {
+      const input = document.getElementById('meetingTextInput');
+      if (input && SAMPLES[type]) {
+        input.value = SAMPLES[type];
+        window.updateCharCount();
+        window.runMeetingGeneration();
+      }
+    };
+
+    window.clearMeetingWorkspace = function() {
+      const input = document.getElementById('meetingTextInput');
+      const out = document.getElementById('emailOutputContainer');
+      const emailIcon = document.getElementById('emailIcon');
+      const title = document.getElementById('emailStatusTitle');
+      const subtitle = document.getElementById('emailStatusSubtitle');
+      const badge = document.getElementById('emailStatusBadge');
+
+      if (input) input.value = '';
+      window.updateCharCount();
+      if (emailIcon) { emailIcon.textContent = '✉️'; emailIcon.style.borderColor = 'var(--cyan)'; emailIcon.style.color = 'var(--cyan)'; }
+      if (title) title.textContent = 'Awaiting Meeting Input';
+      if (subtitle) subtitle.textContent = 'Paste meeting bullet notes or a transcript excerpt on the left';
+      if (badge) { badge.className = 'risk-tag clean'; badge.textContent = 'IDLE'; }
+
+      if (out) {
+        out.innerHTML = `
+          <div style="text-align: center; color: var(--text-dim); padding: 48px 16px; white-space: normal;">
+            <div style="font-size: 32px; margin-bottom: 12px;">🎙️</div>
+            <div style="font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Workspace Cleared</div>
+            <div style="font-size: 12px; max-width: 340px; margin: 0 auto;">Paste your notes on the left or select a sample to generate an email draft.</div>
+          </div>
+        `;
+      }
+      lastGeneratedEmail = '';
+      lastSubjectLine = '';
+    };
+
+    window.handleMeetingFileUpload = function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const input = document.getElementById('meetingTextInput');
+        if (input) {
+          input.value = evt.target.result;
+          window.updateCharCount();
+          window.runMeetingGeneration();
+        }
+      };
+      reader.readAsText(file);
+    };
+
+    // Drag and drop into textarea
+    const textarea = document.getElementById('meetingTextInput');
+    if (textarea) {
+      textarea.addEventListener('dragover', function(e) { e.preventDefault(); e.stopPropagation(); textarea.style.borderColor = 'var(--cyan)'; });
+      textarea.addEventListener('dragleave', function(e) { e.preventDefault(); e.stopPropagation(); textarea.style.borderColor = ''; });
+      textarea.addEventListener('drop', function(e) {
+        e.preventDefault(); e.stopPropagation(); textarea.style.borderColor = '';
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            textarea.value = evt.target.result;
+            window.updateCharCount();
+            window.runMeetingGeneration();
+          };
+          reader.readAsText(e.dataTransfer.files[0]);
+        }
+      });
+    }
+
+    window.runMeetingGeneration = function() {
+      const input = document.getElementById('meetingTextInput');
+      const text = input ? input.value : '';
+      if (!text || text.trim().length === 0) {
+        alert('Please paste meeting notes or choose a sample to generate the email.');
+        return;
+      }
+
+      // VoiceGuard Sanitizer: strip API keys or secrets
+      const sanitized = text
+        .replace(/\b(sk-(?:proj-)?[A-Za-z0-9_\-]{20,})\b/g, '[REDACTED_API_KEY]')
+        .replace(/\b(AKIA[0-9A-Z]{16})\b/g, '[REDACTED_AWS_KEY]')
+        .replace(/\b(ghp_[0-9a-zA-Z]{30,})\b/g, '[REDACTED_GITHUB_TOKEN]');
+
+      const tone = document.getElementById('meetingToneSelect') ? document.getElementById('meetingToneSelect').value : 'client';
+      const lines = sanitized.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+
+      const highlights = [];
+      const decisions = [];
+      const actionItems = [];
+      const questions = [];
+
+      lines.forEach(line => {
+        if (line.startsWith("#")) return; // skip markdown headers
+        if (line.startsWith("-") || line.startsWith("*")) {
+          const clean = line.replace(/^[\-\*\s]+/, "");
+          if (clean.length > 3) {
+            highlights.push(clean);
+            if (/\b(todo|send|deploy|need to|must|prepare|deliver|review)\b/i.test(clean)) {
+              actionItems.push({ owner: "Action Owner", task: clean.replace(/^(?:todo|action):\s*/i, "") });
+            }
+          }
+          return;
+        }
+
+        // Speaker pattern matching [Speaker] or Speaker:
+        const spkMatch = line.match(/^\[([^\]]+)\]\s*(.+)$/) || line.match(/^([A-Z][A-Za-z0-9\s]{1,20}):\s*(.+)$/);
+        const speaker = spkMatch ? spkMatch[1].trim() : "Team";
+        const content = spkMatch ? spkMatch[2].trim() : line;
+
+        // Check for decisions
+        if (/\b(agreed to|decided to|approved|confirmed|aligned on|will prioritize)\b/i.test(content)) {
+          decisions.push(`${content} (${speaker})`);
+        }
+        // Check for actions
+        else if (/\b(i will|we will|i'll|must|deploy|send|deliver|review|run|schedule)\b/i.test(content)) {
+          actionItems.push({ owner: speaker, task: content });
+        }
+        // Check for questions / blockers
+        if (content.endsWith("?") || /\b(question:|blocker:|clarify:)\b/i.test(content)) {
+          questions.push(`${content} (${speaker})`);
+        }
+      });
+
+      const today = new Date().toISOString().slice(0, 10);
+      let subject = `Meeting Summary & Action Items — ${today}`;
+      let body = '';
+
+      if (tone === 'executive') {
+        subject = `Executive Brief: Decisions & Next Milestones (${today})`;
+        body = `Subject: ${subject}\n\n`;
+        body += `Hi Everyone,\n\nHere is a 60-second executive summary of our session today:\n\n`;
+        body += `KEY OUTCOMES & DECISIONS:\n`;
+        if (decisions.length > 0) {
+          decisions.forEach(d => { body += `• ${d}\n`; });
+        } else {
+          body += `• Project scope and immediate objectives confirmed for upcoming milestone.\n`;
+        }
+        body += `\nCRITICAL DELIVERABLES & OWNERS:\n`;
+        if (actionItems.length > 0) {
+          actionItems.slice(0, 4).forEach(a => { body += `[ ] [${a.owner}] ${a.task}\n`; });
+        } else {
+          body += `[ ] Team proceeding with agreed operational plan.\n`;
+        }
+        if (questions.length > 0) {
+          body += `\nOPEN DECISION POINTS:\n`;
+          questions.forEach(q => { body += `? ${q}\n`; });
+        }
+        body += `\nBest regards,\n[Your Name]`;
+      } 
+      else if (tone === 'internal') {
+        subject = `Sprint Sync: Action Plan & Blockers (${today})`;
+        body = `Subject: ${subject}\n\n`;
+        body += `Hey Team,\n\nQuick recap and task breakdown from today's sync:\n\n`;
+        if (decisions.length > 0) {
+          body += `DECISIONS ALIGNED:\n`;
+          decisions.forEach(d => { body += `✔ ${d}\n`; });
+          body += `\n`;
+        }
+        body += `ACTION ITEMS & OWNERS:\n`;
+        if (actionItems.length > 0) {
+          actionItems.forEach(a => { body += `[ ] [${a.owner}] ${a.task}\n`; });
+        } else {
+          body += `[ ] No new action items created.\n`;
+        }
+        body += `\n`;
+        if (questions.length > 0) {
+          body += `BLOCKERS / OPEN QUESTIONS:\n`;
+          questions.forEach(q => { body += `⚠ ${q}\n`; });
+          body += `\n`;
+        }
+        body += `Let's keep momentum high!\n[Your Name]`;
+      } 
+      else {
+        // Professional Client Follow-Up
+        subject = `Project Follow-Up: Recap, Next Steps & Action Plan (${today})`;
+        body = `Subject: ${subject}\n\n`;
+        body += `Dear Team,\n\nThank you for the productive discussion today. Below is a structured summary of our discussion, key decisions reached, and next steps to maintain project velocity:\n\n`;
+        
+        if (highlights.length > 0) {
+          body += `DISCUSSION HIGHLIGHTS:\n`;
+          highlights.forEach(h => { body += `• ${h}\n`; });
+          body += `\n`;
+        }
+
+        if (decisions.length > 0) {
+          body += `APPROVED DECISIONS:\n`;
+          decisions.forEach(d => { body += `✔ ${d}\n`; });
+          body += `\n`;
+        }
+
+        body += `ACTION ITEMS & NEXT STEPS:\n`;
+        if (actionItems.length > 0) {
+          actionItems.forEach(a => { body += `[ ] [${a.owner}] ${a.task}\n`; });
+        } else {
+          body += `[ ] Continuing delivery according to current roadmap milestones.\n`;
+        }
+        body += `\n`;
+
+        if (questions.length > 0) {
+          body += `ITEMS PENDING CLARIFICATION:\n`;
+          questions.forEach(q => { body += `? ${q}\n`; });
+          body += `\n`;
+        }
+
+        body += `Please reply with any additions or adjustments. We look forward to our continued collaboration.\n\n`;
+        body += `Warm regards,\n[Your Name]\nIT Solutions Global Partner`;
+      }
+
+      lastGeneratedEmail = body;
+      lastSubjectLine = subject;
+
+      // Update Metric Banner
+      const emailIcon = document.getElementById('emailIcon');
+      const title = document.getElementById('emailStatusTitle');
+      const subtitle = document.getElementById('emailStatusSubtitle');
+      const badge = document.getElementById('emailStatusBadge');
+
+      if (emailIcon) { emailIcon.textContent = '✔'; emailIcon.style.borderColor = '#10b981'; emailIcon.style.color = '#10b981'; }
+      if (title) title.textContent = `Email Drafted (${actionItems.length} Actions, ${decisions.length} Decisions)`;
+      if (subtitle) subtitle.textContent = `Tone: ${tone.toUpperCase()} • VoiceGuard Sanitized • Ready to copy or send`;
+      if (badge) { badge.className = 'risk-tag clean'; badge.textContent = 'DRAFT READY'; }
+
+      // Render into output box
+      const out = document.getElementById('emailOutputContainer');
+      if (out) {
+        out.textContent = body;
+      }
+    };
+
+    window.copyEmailToClipboard = function() {
+      if (!lastGeneratedEmail) {
+        alert('Please generate an email draft first.');
+        return;
+      }
+
+      navigator.clipboard.writeText(lastGeneratedEmail).then(() => {
+        alert('✔ Email draft copied to clipboard! You can paste it directly into Gmail, Outlook, or Slack.');
+      }).catch(err => {
+        console.error('Clipboard copy failed: ', err);
+      });
+    };
+
+    window.openMailClient = function() {
+      if (!lastGeneratedEmail) {
+        alert('Please generate an email draft first.');
+        return;
+      }
+
+      const bodyWithoutSubject = lastGeneratedEmail.replace(/^Subject:[^\n]+\n\n/, '');
+      const mailtoUrl = `mailto:?subject=${encodeURIComponent(lastSubjectLine)}&body=${encodeURIComponent(bodyWithoutSubject)}`;
+      window.location.href = mailtoUrl;
+    };
+
+    window.downloadEmailMarkdown = function() {
+      if (!lastGeneratedEmail) {
+        alert('Please generate an email draft first.');
+        return;
+      }
+
+      const blob = new Blob([lastGeneratedEmail], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `meeting-recap-${Date.now()}.md`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+
+  })();
+  </script>
+
+</body>
+</html>
