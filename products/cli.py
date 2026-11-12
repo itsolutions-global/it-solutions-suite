@@ -231,6 +231,10 @@ def cmd_invoice(args):
     cmd = [sys.executable, str(main_py), args.invoice_action]
     if getattr(args, "input", None):
         cmd.append(args.input)
+    if getattr(args, "today", None):
+        cmd.extend(["--today", args.today])
+    if getattr(args, "interest_rate", None) is not None:
+        cmd.extend(["--interest-rate", str(args.interest_rate)])
     if getattr(args, "export_csv", None):
         cmd.extend(["--export-csv", args.export_csv])
     if getattr(args, "json", False):
@@ -245,6 +249,8 @@ def cmd_contract(args):
     cmd = [sys.executable, str(main_py), args.contract_action]
     if getattr(args, "input", None):
         cmd.append(args.input)
+    if getattr(args, "recipient", None):
+        cmd.extend(["--recipient", args.recipient])
     if getattr(args, "json", False):
         cmd.append("--json")
     proc = subprocess.run(cmd)
@@ -853,6 +859,13 @@ def main():
     inv_ledger = inv_sub.add_parser("ledger", help="View financial ledger summary or export CSV")
     inv_ledger.add_argument("--export-csv", help="Export ledger to CSV file path")
     inv_ledger.add_argument("--json", action="store_true", help="Output in JSON format")
+    inv_chase = inv_sub.add_parser("chase", help="Analyze overdue accounts receivable & draft reminder emails")
+    inv_chase.add_argument("--today", help="Evaluate as-of date (YYYY-MM-DD)")
+    inv_chase.add_argument("--interest-rate", type=float, help="Optional late-fee interest rate for Stage 3")
+    inv_chase.add_argument("--json", action="store_true", help="Output in JSON format")
+    inv_cat = inv_sub.add_parser("categorize", help="Categorize ledger expenses by operational category")
+    inv_cat.add_argument("--export-csv", help="Export categorized expenses to CSV file path")
+    inv_cat.add_argument("--json", action="store_true", help="Output in JSON format")
     inv_sub.add_parser("demo", help="Run live invoice extraction & anomaly audit demo")
 
     # it-solutions contract (ClauseGuard)
@@ -861,6 +874,10 @@ def main():
     con_scan = con_sub.add_parser("scan", help="Scan a contract or NDA for predatory clauses & redlines")
     con_scan.add_argument("input", help="File path or raw contract text")
     con_scan.add_argument("--json", action="store_true", help="Output in JSON format")
+    con_neg = con_sub.add_parser("negotiate", help="Generate word-level redline diffs and collaborative cover letter")
+    con_neg.add_argument("input", help="File path or raw contract text")
+    con_neg.add_argument("--recipient", default="Client Team", help="Counterparty recipient name")
+    con_neg.add_argument("--json", action="store_true", help="Output in JSON format")
     con_sub.add_parser("demo", help="Run live predatory contract redlining demo")
 
     # it-solutions trade

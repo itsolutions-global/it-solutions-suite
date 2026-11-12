@@ -395,6 +395,62 @@ class CorePulseIntegrationTests(unittest.TestCase):
         found = any(f.get("message") == "Sub-15ms response time on local SQLite WAL is fantastic!" for f in data_get.get("feedback", []))
         self.assertTrue(found, "Submitted feedback entry must be present in local log")
 
+    def test_17_docupulse_and_clauseguard_expansion_endpoints(self):
+        """Verifies POST /api/tools/docupulse/chase, /categorize, and /api/tools/clauseguard/negotiate."""
+        # 1. POST /api/tools/docupulse/chase
+        sample_invoices = [
+            {
+                "invoice_number": "INV-API-001",
+                "vendor": "Acme Media",
+                "issue_date": "2026-10-01",
+                "due_date": "2026-10-15",
+                "total": 1500.0,
+                "currency": "USD"
+            }
+        ]
+        status_c, data_c, _ = self._request("POST", "/api/tools/docupulse/chase", {
+            "invoices": sample_invoices,
+            "today": "2026-11-15",
+            "interest_rate": 1.5
+        })
+        self.assertEqual(status_c, 200)
+        self.assertEqual(data_c["status"], "success")
+        self.assertEqual(data_c["overdue_count"], 1)
+        self.assertIn("Not tax or legal advice", data_c["disclaimer"])
+
+        # 2. POST /api/tools/docupulse/categorize
+        cat_invoices = [
+            {
+                "invoice_number": "INV-CAT-001",
+                "vendor": "Amazon Web Services",
+                "issue_date": "2026-11-01",
+                "total": 850.0,
+                "currency": "USD",
+                "line_items": [{"description": "Production database hosting"}]
+            }
+        ]
+        status_cat, data_cat, _ = self._request("POST", "/api/tools/docupulse/categorize", {
+            "invoices": cat_invoices
+        })
+        self.assertEqual(status_cat, 200)
+        self.assertEqual(data_cat["status"], "success")
+        self.assertEqual(data_cat["categories"]["Cloud Hosting"]["count"], 1)
+        self.assertIn("Not tax or legal advice", data_cat["disclaimer"])
+
+        # 3. POST /api/tools/clauseguard/negotiate
+        sample_sow = "Developer agrees to unlimited revisions until client is satisfied."
+        status_neg, data_neg, _ = self._request("POST", "/api/tools/clauseguard/negotiate", {
+            "text": sample_sow,
+            "document": "Test_SOW.txt"
+        })
+        self.assertEqual(status_neg, 200)
+        self.assertEqual(data_neg["status"], "success")
+        self.assertEqual(data_neg["findings_count"], 1)
+        self.assertTrue(len(data_neg["redlines"]) > 0)
+        self.assertIn("[-", data_neg["redlines"][0]["redline_diff"])
+        self.assertIn("{+", data_neg["redlines"][0]["redline_diff"])
+        self.assertIn("Automated heuristic review", data_neg["disclaimer"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -653,6 +653,29 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                 self._send_json_response({"status": "success", "invoice": rec}, HTTPStatus.OK)
                 return
 
+            # POST /api/tools/docupulse/chase (Analyze overdue receivables & draft reminder emails)
+            if path in ("/api/tools/docupulse/chase", "/api/tools/docupulse/chase/"):
+                from docupulse.receivables import ReceivablesChaser
+                chaser = ReceivablesChaser()
+                today_val = body.get("today")
+                interest_rate = body.get("interest_rate")
+                invoices = body.get("invoices")
+                rep = chaser.chase_invoices(records=invoices, today=today_val, interest_rate=interest_rate)
+                self._send_json_response({"status": "success", **rep}, HTTPStatus.OK)
+                return
+
+            # POST /api/tools/docupulse/categorize (Categorize expense records by operational category)
+            if path in ("/api/tools/docupulse/categorize", "/api/tools/docupulse/categorize/"):
+                from docupulse.tax_mapper import ExpenseCategorizer
+                categorizer = ExpenseCategorizer()
+                invoices = body.get("invoices")
+                export_csv_path = body.get("export_csv")
+                rep = categorizer.categorize_records(records=invoices)
+                if export_csv_path:
+                    categorizer.export_csv(rep, output_path=export_csv_path)
+                self._send_json_response({"status": "success", **rep}, HTTPStatus.OK)
+                return
+
             # POST /api/tools/clauseguard/scan (Scan contract/NDA for predatory clauses & redlines)
             if path in ("/api/tools/clauseguard/scan", "/api/tools/clauseguard/scan/"):
                 from clauseguard.scanner import ContractRiskScanner
@@ -664,6 +687,23 @@ class CorePulseRequestHandler(BaseHTTPRequestHandler):
                 scanner = ContractRiskScanner()
                 rep = scanner.scan_contract(raw_text, document_name=doc_name)
                 self._send_json_response({"status": "success", **rep}, HTTPStatus.OK)
+                return
+
+            # POST /api/tools/clauseguard/negotiate (Generate redline diffs and collaborative cover letter)
+            if path in ("/api/tools/clauseguard/negotiate", "/api/tools/clauseguard/negotiate/"):
+                from clauseguard.scanner import ContractRiskScanner
+                from clauseguard.negotiator import NegotiationDrafter
+                raw_text = body.get("text") or body.get("contract") or body.get("content") or ""
+                if not raw_text.strip():
+                    self._send_error_response("Field 'text' or 'contract' is required", HTTPStatus.BAD_REQUEST)
+                    return
+                doc_name = body.get("document", "Contract.txt")
+                recipient = body.get("recipient", "Client Team")
+                scanner = ContractRiskScanner()
+                scan_rep = scanner.scan_contract(raw_text, document_name=doc_name)
+                negotiator = NegotiationDrafter()
+                pkg = negotiator.generate_negotiation_package(scan_rep, recipient_name=recipient)
+                self._send_json_response({"status": "success", **pkg}, HTTPStatus.OK)
                 return
 
             # POST /api/tools/pipeline/scan (Trigger autonomous ingestion sweep on drop directory)
