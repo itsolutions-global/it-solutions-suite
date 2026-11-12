@@ -250,6 +250,7 @@
       setBadge("clgBadge", `${findings.length} RISKS • ${grade}`, score >= 75 ? "amber" : "red");
     }
     out += `--------------------------------------------------------------------\n`;
+    out += `⚠ Automated heuristic review — not legal advice. Have a qualified lawyer review important agreements.\n`;
     out += `⚡ Audited 100% locally via ClauseGuard (${PORTAL_URL})`;
 
     lastClgOutput = out;

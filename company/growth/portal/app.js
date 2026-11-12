@@ -270,6 +270,7 @@
       });
     }
     out += `--------------------------------------------------------------------\n`;
+    out += `⚠ Automated heuristic review — not legal advice. Have a qualified lawyer review important agreements.\n`;
     out += `⚡ Audited 100% locally via ClauseGuard (${PORTAL_URL})`;
 
     lastDownloadContent = out;

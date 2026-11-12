@@ -268,7 +268,7 @@ Every product in this repository is built on a strict privacy pledge:
 
 ## 📄 License
 
-This enterprise suite is licensed under the **MIT License**. Free for individuals, developers, and organizations forever.
+This enterprise suite is licensed under the **MIT License**. Free to use, modify, and distribute for individuals, developers, and organizations.
 
 ---
 *Autonomous Enterprise Architecture by IT Solutions Global Corporation*  
