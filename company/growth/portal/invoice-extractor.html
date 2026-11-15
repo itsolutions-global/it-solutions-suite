@@ -78,6 +78,7 @@
   </script>
 
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="feedback.css">
 </head>
 <body>
 
@@ -211,6 +212,28 @@
             <div style="font-size: 32px; margin-bottom: 12px;">📄</div>
             <div style="font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">No invoice parsed yet</div>
             <div style="font-size: 12px; max-width: 340px; margin: 0 auto;">Select "💼 Freelancer Invoice" or "⚠️ Invoice With Math Error" above to see DocuPulse extract data and verify math.</div>
+          </div>
+        </div>
+
+        <!-- In-Result Sentiment & Feedback Widget -->
+        <div id="toolFeedbackCard" class="feedback-widget-card" style="display: none;">
+          <div class="feedback-prompt">
+            <span class="feedback-icon">💬</span>
+            <span>Was this invoice extraction accurate and helpful?</span>
+          </div>
+          <div class="feedback-buttons">
+            <button class="feedback-btn feedback-thumbs-up" onclick="submitSentiment('positive', lastExtractedData ? lastExtractedData.items.length : 0)">👍 Accurate &amp; Helpful</button>
+            <button class="feedback-btn feedback-thumbs-down" onclick="submitSentiment('negative', lastExtractedData ? lastExtractedData.items.length : 0)">👎 Missed Items / Inaccurate</button>
+          </div>
+          <div class="feedback-comment-drawer" id="feedbackCommentDrawer" style="display: none;">
+            <textarea class="feedback-input" id="feedbackCommentText" placeholder="What worked well, or what invoice field was missed? (Optional — your confidential invoice data is never sent)"></textarea>
+            <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 6px;">
+              <button class="feedback-btn-secondary" onclick="skipFeedbackComment()">Done</button>
+              <button class="feedback-btn-primary" onclick="submitDetailedFeedback()">Send Feedback</button>
+            </div>
+          </div>
+          <div class="feedback-thankyou" id="feedbackThankYou" style="display: none;">
+            ✔ Thank you! Your anonymous feedback directly shapes our parser rules.
           </div>
         </div>
 
@@ -707,6 +730,11 @@
       `;
 
       out.innerHTML = html;
+      const fbCard = document.getElementById('toolFeedbackCard');
+      if (fbCard) fbCard.style.display = 'block';
+      if (window.checkZeroMatch) {
+        window.checkZeroMatch('invoiceOutputContainer', text.length, items.length);
+      }
     };
 
     function escapeHtml(str) {
@@ -768,5 +796,6 @@
   })();
   </script>
 
+  <script src="feedback.js"></script>
 </body>
 </html>
