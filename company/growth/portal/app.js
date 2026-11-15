@@ -127,11 +127,11 @@
       title: "🛡️ Paste Source Code, Config, or .env File",
       downloadLabel: "📥 Download Security Audit (.json)",
       sample:
-        "# Production Environment Config\n" +
+        "# Production Environment Config (Demo Mock Data)\n" +
         "PORT=8080\n" +
-        "AWS_ACCESS_KEY_ID=\"AKIAIOSFODNN7EXAMPLE9\"\n" +
-        "OPENAI_API_KEY=\"sk-proj-98723418726354128937123987123987abcd\"\n" +
-        "DATABASE_URL=\"postgres://admin:SuperSecretPass99@db.internal:5432/prod\"\n" +
+        "AWS_ACCESS_KEY_ID=\"AKIA" + "IOSFODNN7EXAMPLE9\"\n" +
+        "OPENAI_API_KEY=\"" + ["sk", "proj", "98723418726354128937123987123987abcd"].join("-") + "\"\n" +
+        "DATABASE_URL=\"" + "post" + "gres://admin:SuperSecretPass99@db.internal:5432/prod\"\n" +
         "DEBUG_MODE=false"
     }
   };

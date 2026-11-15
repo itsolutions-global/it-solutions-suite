@@ -145,6 +145,40 @@
     });
   });
 
+  // 4b. Modern Non-Blocking Toast System
+  window.showToast = function (message, type = 'info') {
+    let container = document.getElementById('appToastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'appToastContainer';
+      container.className = 'app-toast-container';
+      document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    const isSuccess = type === 'success' || message.includes('✔') || message.includes('copied');
+    const isWarn = type === 'warning' || message.includes('⚠️') || message.includes('Please');
+    toast.className = `app-toast-item ${isSuccess ? 'success' : isWarn ? 'warning' : ''}`;
+    
+    const icon = isSuccess ? '✔' : isWarn ? '⚠️' : '📋';
+    const cleanMsg = message.replace(/^✔\s*/, '').replace(/^⚠️\s*/, '');
+    toast.innerHTML = `<span style="font-size: 15px;">${icon}</span> <span>${cleanMsg}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('fade-out');
+      setTimeout(() => {
+        if (toast.parentElement) toast.remove();
+        if (container.children.length === 0) container.remove();
+      }, 300);
+    }, 3400);
+  };
+
+  // Replace legacy blocking browser alert with non-blocking toast
+  window.alert = function (msg) {
+    window.showToast(msg);
+  };
+
   function showErrorToast(msg) {
     let toast = document.getElementById('globalErrorToast');
     if (!toast) {

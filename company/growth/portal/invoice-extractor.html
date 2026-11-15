@@ -512,6 +512,10 @@
     window.handleInvoiceFileUpload = function(e) {
       const file = e.target.files[0];
       if (!file) return;
+      if (file.name.toLowerCase().endsWith('.pdf')) {
+        alert('ℹ️ For PDF invoices: Please open the PDF, select and copy the invoice text, and paste it directly into the box to ensure 100% offline accuracy.');
+        return;
+      }
       const reader = new FileReader();
       reader.onload = function(evt) {
         const input = document.getElementById('invoiceTextInput');
@@ -532,13 +536,18 @@
       textarea.addEventListener('drop', function(e) {
         e.preventDefault(); e.stopPropagation(); textarea.style.borderColor = '';
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          const file = e.dataTransfer.files[0];
+          if (file.name.toLowerCase().endsWith('.pdf')) {
+            alert('ℹ️ For PDF invoices: Please copy & paste the invoice text directly into the box to ensure 100% offline accuracy.');
+            return;
+          }
           const reader = new FileReader();
           reader.onload = function(evt) {
             textarea.value = evt.target.result;
             window.updateCharCount();
             window.runInvoiceExtraction();
           };
-          reader.readAsText(e.dataTransfer.files[0]);
+          reader.readAsText(file);
         }
       });
     }
