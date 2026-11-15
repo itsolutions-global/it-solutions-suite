@@ -187,9 +187,10 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             Risk Analysis &amp; Redline Proposals
           </span>
-          <div style="display: flex; gap: 6px;">
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
             <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="copyRedlinesToClipboard()">📋 Copy Redlines</button>
-            <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="downloadRedlineReport()">📥 Download Report</button>
+            <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="downloadRedlineReport()">📥 Download TXT</button>
+            <button class="btn-tool-secondary" style="padding: 4px 10px; font-size: 11px; background: rgba(0, 240, 255, 0.12); border-color: var(--cyan); color: var(--cyan);" onclick="downloadMarkdownAudit()">📄 Export Audit (MD)</button>
           </div>
         </div>
 
@@ -774,6 +775,45 @@
       const a = document.createElement('a');
       a.href = url;
       a.download = `contract-redline-audit-${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+
+    window.downloadMarkdownAudit = function() {
+      if (lastAuditFindings.length === 0) {
+        alert('Please run a contract scan first to export the audit report.');
+        return;
+      }
+
+      let md = `# Contract Risk Assessment & Proposed Redlines\n\n`;
+      md += `> **Audit Score:** \`${lastContractScore}/100\` &nbsp;|&nbsp; **Identified Risks:** \`${lastAuditFindings.length}\` &nbsp;|&nbsp; **Generated:** ${new Date().toLocaleDateString()}\n\n`;
+      md += `*Prepared using [ClauseGuard — IT Solutions Global](https://it-solutions-global.vercel.app/contract-scanner.html) (100% Client-Side Local Verification &bull; Zero Server Uploads)*\n\n`;
+      md += `---\n\n`;
+      md += `## Executive Summary of Risks\n\n`;
+
+      lastAuditFindings.forEach((f, idx) => {
+        const icon = f.severity === 'HIGH' ? '🔴' : f.severity === 'MEDIUM' ? '🟡' : '🔵';
+        md += `### ${icon} ${idx + 1}. ${f.title} \`[${f.severity} RISK - Line ${f.lineNum}]\`\n\n`;
+        md += `**Flagged Agreement Language:**\n`;
+        md += `> "${f.excerpt}"\n\n`;
+        md += `**Commercial & Legal Exposure:**\n`;
+        md += `${f.risk}\n\n`;
+        md += `**Proposed Counter-Redline:**\n`;
+        md += `\`\`\`markdown\n${f.redline.replace('PROPOSED REDLINE: ', '')}\n\`\`\`\n\n`;
+        md += `---\n\n`;
+      });
+
+      md += `### Audit Disclaimer\n`;
+      md += `This report was generated via automated heuristic review with ClauseGuard. It helps identify commercial exposure and drafting issues for negotiation, but does not constitute formal legal counsel.\n\n`;
+      md += `*Want to scan agreements without uploading confidential files to third-party servers? Try the free offline studio at [https://it-solutions-global.vercel.app/contract-scanner.html](https://it-solutions-global.vercel.app/contract-scanner.html)*\n`;
+
+      const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `contract-risk-report-${Date.now()}.md`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
