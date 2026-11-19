@@ -1,0 +1,46 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/company/growth/portal/index.html" },
+    { "source": "/index.html", "destination": "/company/growth/portal/index.html" },
+    { "source": "/contract-scanner.html", "destination": "/company/growth/portal/contract-scanner.html" },
+    { "source": "/invoice-extractor.html", "destination": "/company/growth/portal/invoice-extractor.html" },
+    { "source": "/meeting-followup.html", "destination": "/company/growth/portal/meeting-followup.html" },
+    { "source": "/contract-scanner", "destination": "/company/growth/portal/contract-scanner.html" },
+    { "source": "/invoice-extractor", "destination": "/company/growth/portal/invoice-extractor.html" },
+    { "source": "/meeting-followup", "destination": "/company/growth/portal/meeting-followup.html" },
+    { "source": "/styles.css", "destination": "/company/growth/portal/styles.css" },
+    { "source": "/app.js", "destination": "/company/growth/portal/app.js" },
+    { "source": "/feedback.js", "destination": "/company/growth/portal/feedback.js" },
+    { "source": "/feedback.css", "destination": "/company/growth/portal/feedback.css" },
+    { "source": "/sitemap.xml", "destination": "/company/growth/portal/sitemap.xml" },
+    { "source": "/robots.txt", "destination": "/company/growth/portal/robots.txt" },
+    { "source": "/api/(.*)", "destination": "/company/growth/portal/api/$1" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/github",
+      "destination": "https://github.com/itsolutions-global/it-solutions-suite",
+      "permanent": false
+    },
+    {
+      "source": "/pypi",
+      "destination": "https://pypi.org/project/it-solutions-suite",
+      "permanent": false
+    }
+  ]
+}
