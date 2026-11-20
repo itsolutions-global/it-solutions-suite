@@ -107,3 +107,5 @@ company/product/
 company/growth/*.md
 company/growth/TRIAD_SHOWCASE.html
 !company/growth/portal/*
+
+.vercel

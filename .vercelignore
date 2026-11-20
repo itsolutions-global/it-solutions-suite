@@ -1,0 +1,12 @@
+data/
+scratch/
+.git/
+.gemini/
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env*
+screenshots/
+company/growth/portal/screenshots/
+*.log
