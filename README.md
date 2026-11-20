@@ -10,7 +10,7 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-amber?style=for-the-badge)](LICENSE)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20(Pure%20Python%20stdlib)-8b5cf6?style=for-the-badge&logo=python&logoColor=white)](https://github.com/itsolutions-global/it-solutions-suite)
 [![Python Version](https://img.shields.io/badge/Python-3.8%2B-38bdf8?style=for-the-badge&logo=python&logoColor=white)](https://github.com/itsolutions-global/it-solutions-suite)
-[![Tests Passing](https://img.shields.io/badge/Tests-175%2F175%20Passing-22c55e?style=for-the-badge&logo=checkmarx&logoColor=white)](https://github.com/itsolutions-global/it-solutions-suite)
+[![Tests Passing](https://img.shields.io/badge/Tests-208%2F208%20Passing-22c55e?style=for-the-badge&logo=checkmarx&logoColor=white)](https://github.com/itsolutions-global/it-solutions-suite)
 [![Security Audited](https://img.shields.io/badge/Security-Audited%20%26%20Zero--Leak-00f2fe?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/itsolutions-global/it-solutions-suite)
 
 ---
@@ -28,7 +28,18 @@
 ```
 
 > **Company Motto**: *"Serve humanity by solving real problems with uncompromising utility; earn deep trust and habituation before asking for reward."*  
-> **Public Cloud Portal**: [https://it-solutions-global.vercel.app](https://it-solutions-global.vercel.app)
+> **Official Web Suite**: [https://itsolutions-global.vercel.app](https://itsolutions-global.vercel.app) • **HF Mirror**: [https://itsolutions-global-it-solutions-suite.static.hf.space](https://itsolutions-global-it-solutions-suite.static.hf.space)
+
+---
+
+## 🌐 Zero-Install Web Tools (Browser Studio)
+*Instant in-browser productivity. 100% Client-Side. No account required. Zero cloud uploads.*
+
+| Web Tool | Purpose & Capabilities | Direct Live Access |
+| :--- | :--- | :--- |
+| **⚖️ ClauseGuard** | **Contract, NDA & MSA Audit**: Instant local scanner detecting uncapped liability, non-competes, IP assignment overreach, and multi-jurisdiction clauses (US / UK UCTA 1977 / EU GDPR & AI Act / Indian Contract Act § 27/28). | [Launch ClauseGuard](https://itsolutions-global.vercel.app/contract-scanner) |
+| **📄 DocuPulse** | **Invoice & Receipt to CSV/TSV**: In-browser OCR & structured table extractor with line-item math reconciliation, subtotal/tax auditing, and RFC 4180 export. | [Launch DocuPulse](https://itsolutions-global.vercel.app/invoice-extractor) |
+| **🎙️ EchoStream** | **Meeting Copilot & Calendar Action Sync**: Audio transcript triage with VoiceGuard PII/secret scrubbing and 1-click RFC 5545 iCalendar (`.ics`) action items sync. | [Launch EchoStream](https://itsolutions-global.vercel.app/meeting-followup) |
 
 ---
 
