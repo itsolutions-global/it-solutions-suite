@@ -37,9 +37,13 @@
 
 | Web Tool | Purpose & Capabilities | Direct Live Access |
 | :--- | :--- | :--- |
-| **⚖️ ClauseGuard** | **Contract, NDA & MSA Audit**: Instant local scanner detecting uncapped liability, non-competes, IP assignment overreach, and multi-jurisdiction clauses (US / UK UCTA 1977 / EU GDPR & AI Act / Indian Contract Act § 27/28). | [Launch ClauseGuard](https://itsolutions-global.vercel.app/contract-scanner) |
+| **⚖️ ClaimForge** | **Statutory Late-Payment & Overdue Invoice Recovery**: Calculates India MSME Sec 16 compound interest & Sec 43B(h) corporate tax disallowance penalties, UK Late Payment Act 1998 (£40/£70/£100), EU Directive 2011/7/EU (€40), and US 2x Double Damages + CFO Demand Dossiers. | [Launch ClaimForge](https://itsolutions-global.vercel.app/payment-recovery) |
+| **🏛️ ComplianceForge** | **Enterprise Security, GDPR Art. 28, SOC 2 & EU AI Act Dossier**: Generates 5-part Enterprise Procurement Dossiers including GDPR Art. 28 DPA, EU AI Act (2024/1689) Attestation, NIST SP 800-61 Incident Plan, CISO SIG-Lite Matrix & CycloneDX v1.5 SBOMs. | [Launch ComplianceForge](https://itsolutions-global.vercel.app/compliance-dossier) |
+| **📐 ScopeShield** | **Out-of-Scope Change-Order Pricer & IP Escrow Gatekeeper**: Converts informal client scope creep into priced Bilateral Change Orders (SOW-CO) and Conditional Intellectual Property Handover Certificates. | [Launch ScopeShield](https://itsolutions-global.vercel.app/scope-shield) |
+| **🛡️ ClauseGuard** | **Contract, NDA & MSA Audit**: Instant local scanner detecting uncapped liability, non-competes, IP assignment overreach, and multi-jurisdiction clauses (US / UK UCTA 1977 / EU GDPR & AI Act / Indian Contract Act § 27/28). | [Launch ClauseGuard](https://itsolutions-global.vercel.app/contract-scanner) |
 | **📄 DocuPulse** | **Invoice & Receipt to CSV/TSV**: In-browser OCR & structured table extractor with line-item math reconciliation, subtotal/tax auditing, and RFC 4180 export. | [Launch DocuPulse](https://itsolutions-global.vercel.app/invoice-extractor) |
 | **🎙️ EchoStream** | **Meeting Copilot & Calendar Action Sync**: Audio transcript triage with VoiceGuard PII/secret scrubbing and 1-click RFC 5545 iCalendar (`.ics`) action items sync. | [Launch EchoStream](https://itsolutions-global.vercel.app/meeting-followup) |
+| **💼 B2B & White-Label Desk** | **Agency White-Label Licensing & Turnkey Audits**: Perpetual cryptographic white-label branding keys (`ITSG-WL-...`) for law/CA firms & agencies, plus turnkey SAST/SBOM & compliance packages. | [Open Commercial Desk](https://itsolutions-global.vercel.app/solutions) |
 
 ---
 

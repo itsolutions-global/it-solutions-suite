@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClaimForge | Statutory Late-Payment &amp; Unpaid Invoice Recovery Engine (UK, EU, India MSME, US)</title>
+  <meta name="description" content="Recover unpaid and overdue B2B invoices fast. Calculate statutory compound interest, fixed recovery fees, and Section 43B(h) tax disallowance penalties across India MSME Act, UK Late Payment Act 1998, EU Directive 2011/7/EU, and US Prompt Payment laws. 100% Client-Side.">
+  <meta name="keywords" content="overdue invoice interest calculator, statutory late payment demand letter generator, India MSME Section 16 compound interest calculator, Section 43B(h) tax disallowance notice, UK Late Payment of Commercial Debts Act 1998 calculator, Freelance Isn't Free double damages notice">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/payment-recovery">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ClaimForge — Statutory Late-Payment & Overdue Invoice Recovery Engine",
+    "url": "https://itsolutions-global.vercel.app/payment-recovery",
+    "applicationCategory": "FinanceApplication, LegalService",
+    "operatingSystem": "All (Web Browser)",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "100% client-side overdue invoice statutory penalty calculator and legal demand generator for India MSMED Act Sec 15/16 & 43B(h), UK Late Payment Act 1998, EU Directive 2011/7/EU, and US Freelance Protection laws."
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="feedback.css">
+  <style>
+    .recovery-hero { padding: 42px 0 24px; text-align: center; }
+    .recovery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px; margin-bottom: 40px; }
+    .panel-card { background: rgba(13, 19, 34, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+    .form-group { margin-bottom: 14px; text-align: left; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; }
+    .form-control { width: 100%; background: #050811; color: #f8fafc; border: 1px solid rgba(255,255,255,0.16); border-radius: 8px; padding: 10px 12px; font-size: 0.9rem; }
+    .form-control:focus { outline: none; border-color: #00f0ff; }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 18px; }
+    .stat-card { background: #050811; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 14px; text-align: left; }
+    .stat-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-val { font-size: 1.35rem; font-weight: 800; color: #f8fafc; margin-top: 4px; }
+    .doc-tabs { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+    .doc-tab { background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 8px 14px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+    .doc-tab.active { background: rgba(0, 240, 255, 0.16); color: #00f0ff; border-color: rgba(0, 240, 255, 0.45); }
+    .output-box { background: #050811; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 16px; min-height: 330px; max-height: 460px; overflow-y: auto; font-family: monospace; font-size: 0.84rem; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap; text-align: left; }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow glow-cyan"></div>
+  <div class="ambient-glow glow-emerald"></div>
+
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">ClaimForge Recovery Engine</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">&larr; All Tools</a>
+        <a href="contract-scanner.html" class="btn-nav">ClauseGuard</a>
+        <a href="invoice-extractor.html" class="btn-nav">DocuPulse</a>
+        <a href="compliance-dossier.html" class="btn-nav">ComplianceForge</a>
+        <a href="scope-shield.html" class="btn-nav">ScopeShield</a>
+        <a href="solutions.html" class="btn-nav" style="border-color:rgba(16,185,129,0.45);color:#34d399;font-weight:700;">💼 B2B &amp; White-Label</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="recovery-hero">
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.35);font-size:0.8rem;font-weight:700;margin-bottom:14px;">
+        🔒 100% Client-Side Financial Computation • Zero Cloud Uploads
+      </div>
+      <h1 style="font-size:2.3rem;margin:0 0 12px;">
+        ⚖️ ClaimForge: Statutory Overdue Invoice &amp; <span class="gradient-text">Late-Fee Recovery Engine</span>
+      </h1>
+      <p style="color:#94a3b8;max-width:780px;margin:0 auto;font-size:1rem;line-height:1.6;">
+        Polite reminder emails get ignored. Calculate exact statutory compound interest, mandatory fixed recovery penalties, and corporate tax disallowance liabilities—and generate an executive <strong>CFO Tax &amp; Statutory Demand Dossier</strong> that gets overdue invoices paid within 48 hours.
+      </p>
+    </section>
+
+    <section class="recovery-grid">
+      <!-- Left Column: Invoice & Jurisdiction Parameters -->
+      <div class="panel-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <h2 style="margin:0;font-size:1.15rem;color:#fff;">1. Overdue Invoice &amp; Statutory Framework</h2>
+          <button onclick="loadRecoverySample()" style="background:rgba(56,189,248,0.14);color:#38bdf8;border:1px solid rgba(56,189,248,0.4);border-radius:6px;padding:5px 12px;font-size:0.78rem;cursor:pointer;font-weight:600;">
+            ✨ Load Overdue Sample
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label for="recJurisdiction">Statutory Enforcement Jurisdiction</label>
+          <select id="recJurisdiction" class="form-control" onchange="updateJurisdictionDefaults()">
+            <option value="IN_MSME">🇮🇳 India — MSMED Act Sec 15/16 (3x RBI Compound Interest) + Income Tax Sec 43B(h) Disallowance</option>
+            <option value="UK_LATE">🇬🇧 United Kingdom — Late Payment of Commercial Debts Act 1998 (8% + BoE Base + £40/£70/£100)</option>
+            <option value="EU_DIR">🇪🇺 European Union — EU Late Payment Directive 2011/7/EU (8% + ECB Rate + €40 Flat Compensation)</option>
+            <option value="US_PROMPT">🇺🇸 United States — Commercial Breach Interest (10% APR) + Freelance Double Damages (2x Principal)</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="recCreditor">Your Company / Creditor Name</label>
+            <input id="recCreditor" type="text" class="form-control" value="Apex Digital Engineering LLP">
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="recRegId">Udyam / Company / Tax ID (Optional)</label>
+            <input id="recRegId" type="text" class="form-control" value="UDYAM-MH-19-0048291">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="recDebtor">Client / Debtor Company Name</label>
+            <input id="recDebtor" type="text" class="form-control" value="Vanguard Global Logistics Pvt Ltd">
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="recInvoiceNo">Invoice Number</label>
+            <input id="recInvoiceNo" type="text" class="form-control" value="INV-2026-0842">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="recCurrency">Currency Symbol</label>
+            <select id="recCurrency" class="form-control" onchange="runRecoveryEngine()">
+              <option value="₹">₹ (INR)</option>
+              <option value="£">£ (GBP)</option>
+              <option value="€">€ (EUR)</option>
+              <option value="$">$ (USD)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="recPrincipal">Unpaid Principal Amount</label>
+            <input id="recPrincipal" type="number" step="0.01" class="form-control" value="250000" oninput="runRecoveryEngine()">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="recDaysOverdue">Days Past Statutory / Due Date</label>
+            <input id="recDaysOverdue" type="number" class="form-control" value="75" oninput="runRecoveryEngine()">
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="recRate">Statutory Annual Interest Rate (%)</label>
+            <input id="recRate" type="number" step="0.01" class="form-control" value="20.25" oninput="runRecoveryEngine()">
+          </div>
+        </div>
+
+        <button onclick="runRecoveryEngine()" style="width:100%;background:linear-gradient(135deg,#00f0ff,#3b82f6);color:#040711;font-weight:800;border:none;border-radius:10px;padding:13px 20px;font-size:0.98rem;cursor:pointer;margin-top:8px;">
+          ⚡ Calculate Statutory Penalties &amp; Generate Legal Dossier
+        </button>
+      </div>
+
+      <!-- Right Column: Computed Statutory Recovery & Deliverables -->
+      <div class="panel-card">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-label">Accrued Statutory Interest</div>
+            <div class="stat-val" id="statInterest" style="color:#fbbf24;">₹0.00</div>
+            <div id="statDailyRate" style="font-size:0.74rem;color:#94a3b8;margin-top:3px;">Compounded Monthly (3x RBI)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Fixed Recovery / Tax Penalty</div>
+            <div class="stat-val" id="statFixedFee" style="color:#f43f5e;">₹0.00</div>
+            <div id="statFixedNote" style="font-size:0.74rem;color:#94a3b8;margin-top:3px;">Sec 43B(h) Buyer Tax Exposure</div>
+          </div>
+          <div class="stat-card" style="grid-column: span 2; background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.35);">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div class="stat-label" style="color:#34d399;">Total Immediate Statutory Claim Payable</div>
+                <div class="stat-val" id="statTotalClaim" style="color:#34d399;font-size:1.65rem;">₹0.00</div>
+              </div>
+              <div style="text-align:right;">
+                <span id="statLawBadge" style="font-size:0.75rem;padding:4px 10px;border-radius:99px;background:rgba(0,240,255,0.12);color:#00f0ff;border:1px solid rgba(0,240,255,0.3);font-weight:700;">MSMED Act § 16</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-tabs">
+          <button class="doc-tab active" id="tabBtn-cfo" onclick="switchRecoveryTab('cfo')">1. CFO Tax &amp; Interest Warning</button>
+          <button class="doc-tab" id="tabBtn-demand" onclick="switchRecoveryTab('demand')">2. Pre-Action Statutory Demand</button>
+          <button class="doc-tab" id="tabBtn-invoice" onclick="switchRecoveryTab('invoice')">3. Amended Penalty Invoice</button>
+        </div>
+
+        <div id="recoveryOutput" class="output-box"></div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;">
+          <button onclick="copyRecoveryDoc()" style="flex:1;background:rgba(168,85,247,0.18);color:#c084fc;border:1px solid rgba(168,85,247,0.45);border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer;font-size:0.85rem;">
+            📋 Copy Notice
+          </button>
+          <button onclick="printAmendedInvoice()" style="flex:1;background:rgba(16,185,129,0.18);color:#34d399;border:1px solid rgba(16,185,129,0.45);border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer;font-size:0.85rem;">
+            🖨️ Printable Penalty Invoice (PDF)
+          </button>
+          <button onclick="window.ITSGWhiteLabel && window.ITSGWhiteLabel.openWhiteLabelModal()" style="background:rgba(0,240,255,0.12);color:#00f0ff;border:1px solid rgba(0,240,255,0.35);border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer;font-size:0.85rem;">
+            🏢 Firm White-Label
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="whitelabel.js"></script>
+  <script src="feedback.js"></script>
+  <script>
+    let currentRecoveryTab = 'cfo';
+    let generatedDocs = { cfo: '', demand: '', invoice: '', meta: {} };
+
+    function updateJurisdictionDefaults() {
+      const jur = document.getElementById('recJurisdiction').value;
+      const currEl = document.getElementById('recCurrency');
+      const rateEl = document.getElementById('recRate');
+      const regEl = document.getElementById('recRegId');
+      const prinEl = document.getElementById('recPrincipal');
+
+      if (jur === 'IN_MSME') {
+        currEl.value = '₹';
+        rateEl.value = '20.25'; // 3x RBI Bank Rate (6.75% * 3)
+        regEl.value = 'UDYAM-MH-19-0048291';
+        if (Number(prinEl.value) < 10000) prinEl.value = '250000';
+      } else if (jur === 'UK_LATE') {
+        currEl.value = '£';
+        rateEl.value = '12.75'; // 8% + BoE Base Rate
+        regEl.value = 'UK-COMP-11489201';
+        if (Number(prinEl.value) > 50000) prinEl.value = '4800';
+      } else if (jur === 'EU_DIR') {
+        currEl.value = '€';
+        rateEl.value = '11.15'; // 8% + ECB Rate
+        regEl.value = 'EU-VAT-DE3094812';
+        if (Number(prinEl.value) > 50000) prinEl.value = '5200';
+      } else if (jur === 'US_PROMPT') {
+        currEl.value = '$';
+        rateEl.value = '10.00'; // CA/NY Statutory Default
+        regEl.value = 'EIN-84-3920194';
+        if (Number(prinEl.value) > 50000) prinEl.value = '6500';
+      }
+      runRecoveryEngine();
+    }
+
+    function loadRecoverySample() {
+      document.getElementById('recCreditor').value = 'Apex Systems & Advisory LLP';
+      document.getElementById('recDebtor').value = 'Vanguard Enterprise Logistics Ltd';
+      document.getElementById('recInvoiceNo').value = 'INV-2026-0914';
+      document.getElementById('recDaysOverdue').value = '75';
+      runRecoveryEngine();
+    }
+
+    function fmtMoney(sym, val) {
+      return sym + Number(val || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function runRecoveryEngine() {
+      const jur = document.getElementById('recJurisdiction').value;
+      const creditor = document.getElementById('recCreditor').value.trim() || 'Creditor Enterprise';
+      const regId = document.getElementById('recRegId').value.trim() || 'Registered Supplier';
+      const debtor = document.getElementById('recDebtor').value.trim() || 'Debtor Organization';
+      const invNo = document.getElementById('recInvoiceNo').value.trim() || 'INV-001';
+      const sym = document.getElementById('recCurrency').value || '$';
+      const principal = Math.max(0, parseFloat(document.getElementById('recPrincipal').value) || 0);
+      const days = Math.max(1, parseInt(document.getElementById('recDaysOverdue').value, 10) || 1);
+      const annualRatePct = Math.max(0, parseFloat(document.getElementById('recRate').value) || 0);
+      const r = annualRatePct / 100;
+
+      let interest = 0;
+      let fixedComp = 0;
+      let taxExposure = 0;
+      let statuteName = '';
+      let shortBadge = '';
+      let dailyAccrual = (principal * r) / 365;
+
+      if (jur === 'IN_MSME') {
+        // Compound interest with monthly rests under Section 16 of MSMED Act, 2006
+        const fullMonths = Math.floor(days / 30);
+        const remDays = days % 30;
+        const monthlyRate = r / 12;
+        const compoundedPrincipal = principal * Math.pow(1 + monthlyRate, fullMonths) * (1 + (r * remDays) / 365);
+        interest = compoundedPrincipal - principal;
+        dailyAccrual = (compoundedPrincipal * r) / 365;
+        // Section 43B(h) Income Tax disallowance risk to buyer (~25.17% corporate tax on disallowed expense)
+        taxExposure = principal * 0.2517;
+        statuteName = 'Sections 15, 16 & 23 of the MSMED Act, 2006 read with Section 43B(h) of the Income Tax Act, 1961';
+        shortBadge = 'MSMED § 16 + IT Act § 43B(h)';
+        document.getElementById('statDailyRate').textContent = `Monthly Rests Compound (${annualRatePct}% APR)`;
+        document.getElementById('statFixedFee').textContent = fmtMoney(sym, taxExposure);
+        document.getElementById('statFixedNote').textContent = 'Buyer Sec 43B(h) Tax Disallowance Risk';
+      } else if (jur === 'UK_LATE') {
+        interest = principal * r * (days / 365);
+        if (principal < 1000) fixedComp = 40;
+        else if (principal < 10000) fixedComp = 70;
+        else fixedComp = 100;
+        statuteName = 'Late Payment of Commercial Debts (Interest) Act 1998 & 2013 Regulations';
+        shortBadge = 'UK Late Payment Act 1998';
+        document.getElementById('statDailyRate').textContent = `Daily Accrual: ${fmtMoney(sym, dailyAccrual)}/day`;
+        document.getElementById('statFixedFee').textContent = fmtMoney(sym, fixedComp);
+        document.getElementById('statFixedNote').textContent = 'Mandatory Statutory Fixed Recovery Fee';
+      } else if (jur === 'EU_DIR') {
+        interest = principal * r * (days / 365);
+        fixedComp = 40;
+        statuteName = 'European Union Late Payment Directive (2011/7/EU) Articles 3 & 6';
+        shortBadge = 'EU Directive 2011/7/EU';
+        document.getElementById('statDailyRate').textContent = `Daily Accrual: ${fmtMoney(sym, dailyAccrual)}/day`;
+        document.getElementById('statFixedFee').textContent = fmtMoney(sym, fixedComp);
+        document.getElementById('statFixedNote').textContent = 'Article 6 Flat Compensation (€40)';
+      } else {
+        interest = principal * r * (days / 365);
+        taxExposure = principal * 2; // Double damages under Freelance Worker Protection Acts
+        statuteName = 'UCC § 2-710, State Prompt Payment Statutes & Freelance Worker Protection Act (Double Damages Provision)';
+        shortBadge = 'US Statutory Breach + 2x Damages';
+        document.getElementById('statDailyRate').textContent = `Daily Accrual: ${fmtMoney(sym, dailyAccrual)}/day`;
+        document.getElementById('statFixedFee').textContent = fmtMoney(sym, taxExposure);
+        document.getElementById('statFixedNote').textContent = 'Statutory 2x Double-Damages Exposure';
+      }
+
+      const totalPayable = principal + interest + fixedComp;
+      document.getElementById('statInterest').textContent = fmtMoney(sym, interest);
+      document.getElementById('statTotalClaim').textContent = fmtMoney(sym, totalPayable);
+      document.getElementById('statLawBadge').textContent = shortBadge;
+
+      const dateStr = new Date().toISOString().split('T')[0];
+      const attribution = window.ITSGWhiteLabel
+        ? window.ITSGWhiteLabel.getAttribution('ClaimForge', 'Statutory Debt & Late-Fee Recovery Dossier')
+        : '*Statutory Debt & Late-Fee Recovery Dossier generated by ClaimForge — IT Solutions Global (100% Client-Side Local Verification • Zero Cloud Uploads)*';
+
+      // 1. CFO Warning Notice
+      let cfoSpecificBlock = '';
+      if (jur === 'IN_MSME') {
+        cfoSpecificBlock = `CRITICAL CFO & TAX AUDIT ADVISORY (SECTION 43B(h) & SECTION 23):
+1. Mandatory Monthly-Rests Compound Interest (Section 16): Accrued interest currently stands at ${fmtMoney(sym, interest)} (${annualRatePct}% p.a., 3x RBI Bank Rate compounded monthly). Under Section 23 of the MSMED Act, this interest of ${fmtMoney(sym, interest)} is STATUTORILY DISALLOWED as a deductible expense under the Income Tax Act, 1961.
+2. Principal Expense Disallowance (Section 43B(h)): Failure to settle MSME Invoice ${invNo} within the statutory window triggers disallowance of the entire ${fmtMoney(sym, principal)} expenditure in your current assessment year, creating an estimated immediate corporate tax liability of ${fmtMoney(sym, taxExposure)} (~25.17% tax impact) in addition to mandatory Form MSME-1 MCA disclosure.`;
+      } else if (jur === 'UK_LATE' || jur === 'EU_DIR') {
+        cfoSpecificBlock = `STATUTORY INTEREST & FIXED COMPENSATION NOTICE:
+1. Statutory Interest: Under ${statuteName}, interest accrues automatically at ${annualRatePct}% per annum (${fmtMoney(sym, dailyAccrual)} per day), currently totaling ${fmtMoney(sym, interest)}.
+2. Mandatory Fixed Recovery Compensation: A statutory fixed sum of ${fmtMoney(sym, fixedComp)} has attached to Invoice ${invNo} automatically by operation of law, alongside entitlement to reasonable third-party legal recovery costs.`;
+      } else {
+        cfoSpecificBlock = `STATUTORY BREACH INTEREST & DOUBLE DAMAGES EXPOSURE:
+1. Accrued Default Interest: Interest at ${annualRatePct}% per annum currently totals ${fmtMoney(sym, interest)} (${fmtMoney(sym, dailyAccrual)}/day).
+2. Statutory Double Damages Warning: Under applicable Freelance Worker Protection / Prompt Payment statutes (NY Labor Law § 191-c / CA SB 988 / IL HB 1122), non-payment past the statutory 30-day window entitles the contractor to recover DOUBLE DAMAGES (${fmtMoney(sym, taxExposure)}) plus mandatory reasonable attorney's fees and costs.`;
+      }
+
+      generatedDocs.cfo = `SUBJECT: STATUTORY INTEREST ACCRUAL & CFO COMPLIANCE NOTICE — INVOICE ${invNo} (${days} DAYS OVERDUE)
+
+DATE: ${dateStr}
+TO: Chief Financial Officer & Accounts Payable Department, ${debtor}
+FROM: ${creditor} (${regId})
+RE: Overdue Invoice ${invNo} | Principal: ${fmtMoney(sym, principal)} | Total Now Payable: ${fmtMoney(sym, totalPayable)}
+
+Dear Finance & Accounts Payable Team,
+
+We are writing regarding Invoice ${invNo} in the principal amount of ${fmtMoney(sym, principal)}, which is currently ${days} days past its statutory payment due date.
+
+Because this account has exceeded the statutory credit threshold, mandatory statutory interest and recovery provisions under ${statuteName} have automatically attached to the balance:
+
+  • Original Invoice Principal : ${fmtMoney(sym, principal)}
+  • Days Overdue               : ${days} Days
+  • Statutory Interest (${annualRatePct}%) : ${fmtMoney(sym, interest)}
+  • Statutory Fixed Recovery   : ${fmtMoney(sym, fixedComp)}
+  ------------------------------------------------------------
+  • TOTAL STATUTORY BALANCE    : ${fmtMoney(sym, totalPayable)}
+
+${cfoSpecificBlock}
+
+GOOD-FAITH SETTLEMENT WINDOW (48 HOURS):
+To close this ledger item amicably before formal statutory escalation and amended tax reporting, please remit ${fmtMoney(sym, totalPayable)} (or contact us within 48 hours with confirmed wire remittance of the principal ${fmtMoney(sym, principal)}) no later than 5:00 PM on ${new Date(Date.now() + 2*86400000).toISOString().split('T')[0]}.
+
+Sincerely,
+Authorized Signatory
+${creditor} (${regId})
+
+${attribution}`;
+
+      // 2. Formal Pre-Action Statutory Demand Letter
+      generatedDocs.demand = `WITHOUT PREJUDICE SAVE AS TO COSTS
+FORMAL PRE-ACTION STATUTORY DEMAND FOR PAYMENT
+
+DATE: ${dateStr}
+CREDITOR: ${creditor} (Registration: ${regId})
+DEBTOR: ${debtor}
+INVOICE REFERENCE: ${invNo} (${days} Days Overdue)
+STATUTORY AUTHORITY: ${statuteName}
+
+TAKE NOTICE that ${debtor} is justly and truly indebted to ${creditor} in the sum of ${fmtMoney(sym, totalPayable)}, comprising:
+  1. Unpaid Principal Debt under Invoice ${invNo}: ${fmtMoney(sym, principal)}
+  2. Accrued Statutory Interest (${annualRatePct}% p.a. over ${days} days): ${fmtMoney(sym, interest)}
+  3. Statutory Fixed Debt Recovery Compensation: ${fmtMoney(sym, fixedComp)}
+
+Interest continues to accrue at the daily statutory rate of ${fmtMoney(sym, dailyAccrual)} per day until full and final settlement.
+
+FINAL NOTICE BEFORE STATUTORY FILING:
+Unless cleared funds in the amount of ${fmtMoney(sym, totalPayable)} are received within seven (7) calendar days of the date of this Notice, ${creditor} will immediatelyand without further notice initiate formal recovery proceedings (${jur === 'IN_MSME' ? 'MSEFC Conciliation & Arbitration Reference via MSME Samadhaan Portal & ROC Form MSME-1 Notification' : 'Summary Commercial Debt Claim & Statutory Penalty Enforcement'}), seeking full principal, compounding statutory interest, and all legal costs.
+
+Issued by: ${creditor}
+
+${attribution}`;
+
+      // 3. Amended Penalty Invoice Text
+      generatedDocs.invoice = `====================================================================
+AMENDED STATUTORY PENALTY INVOICE: ${invNo}-STAT
+====================================================================
+ISSUED BY : ${creditor} (${regId})
+BILLED TO : ${debtor}
+DATE      : ${dateStr}
+STATUTE   : ${shortBadge}
+--------------------------------------------------------------------
+LINE ITEM DESCRIPTION                                      AMOUNT
+--------------------------------------------------------------------
+1. Original Principal Balance (Invoice ${invNo})          ${fmtMoney(sym, principal)}
+2. Statutory Late-Payment Interest (${days} days @ ${annualRatePct}%)     ${fmtMoney(sym, interest)}
+3. Mandatory Statutory Fixed Recovery Compensation         ${fmtMoney(sym, fixedComp)}
+--------------------------------------------------------------------
+TOTAL IMMEDIATELY PAYABLE:                                 ${fmtMoney(sym, totalPayable)}
+====================================================================
+Daily Accrual After ${dateStr}: +${fmtMoney(sym, dailyAccrual)} / day
+Payment Due: UPON RECEIPT
+
+${attribution}`;
+
+      generatedDocs.meta = { creditor, regId, debtor, invNo, sym, principal, days, annualRatePct, interest, fixedComp, totalPayable, statuteName, shortBadge, dateStr, attribution };
+      renderActiveTab();
+    }
+
+    function switchRecoveryTab(tab) {
+      currentRecoveryTab = tab;
+      ['cfo', 'demand', 'invoice'].forEach(t => {
+        document.getElementById('tabBtn-' + t).classList.toggle('active', t === tab);
+      });
+      renderActiveTab();
+    }
+
+    function renderActiveTab() {
+      document.getElementById('recoveryOutput').textContent = generatedDocs[currentRecoveryTab] || '';
+    }
+
+    function copyRecoveryDoc() {
+      const txt = generatedDocs[currentRecoveryTab] || '';
+      navigator.clipboard.writeText(txt);
+      alert('Copied statutory document to clipboard!');
+    }
+
+    function printAmendedInvoice() {
+      const m = generatedDocs.meta;
+      const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Amended Statutory Invoice ${m.invNo}-STAT</title>
+      <style>body{font-family:sans-serif;max-width:780px;margin:40px auto;padding:30px;color:#0f172a;border:1px solid #cbd5e1;border-radius:10px;}
+      table{width:100%;border-collapse:collapse;margin:24px 0;}th,td{padding:12px;border-bottom:1px solid #e2e8f0;text-align:left;}
+      th{background:#f8fafc;}.tot td{font-weight:800;font-size:1.15rem;background:#fef2f2;border-top:2px solid #0f172a;}</style></head>
+      <body>
+      <div style="display:flex;justify-content:space-between;border-bottom:2px solid #0f172a;padding-bottom:16px;">
+        <div><h2 style="margin:0;color:#b91c1c;">AMENDED STATUTORY PENALTY INVOICE</h2><p style="margin:4px 0 0;font-size:0.85rem;">Issued Under ${m.statuteName}</p></div>
+        <div style="text-align:right;"><strong>Ref: ${m.invNo}-STAT</strong><br>Date: ${m.dateStr}</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin:20px 0;font-size:0.92rem;">
+        <div><strong>Creditor / Payee:</strong><br>${m.creditor}<br>ID: ${m.regId}</div>
+        <div style="text-align:right;"><strong>Debtor / Payer:</strong><br>${m.debtor}<br>Overdue Duration: ${m.days} Days</div>
+      </div>
+      <table><thead><tr><th>Description</th><th style="text-align:right;">Amount</th></tr></thead><tbody>
+        <tr><td>1. Unpaid Principal Balance (Original Invoice ${m.invNo})</td><td style="text-align:right;">${fmtMoney(m.sym, m.principal)}</td></tr>
+        <tr><td>2. Accrued Statutory Late-Payment Interest (${m.days} Days @ ${m.annualRatePct}% p.a.)</td><td style="text-align:right;">${fmtMoney(m.sym, m.interest)}</td></tr>
+        <tr><td>3. Statutory Fixed Debt Recovery Compensation (${m.shortBadge})</td><td style="text-align:right;">${fmtMoney(m.sym, m.fixedComp)}</td></tr>
+        <tr class="tot"><td>TOTAL STATUTORY BALANCE DUE IMMEDIATELY</td><td style="text-align:right;">${fmtMoney(m.sym, m.totalPayable)}</td></tr>
+      </tbody></table>
+      <p style="font-size:0.82rem;color:#475569;margin-top:28px;">${m.attribution}</p>
+      <script>window.print();<\/script></body></html>`;
+      const blob = new Blob([html], { type: 'text/html' });
+      window.open(URL.createObjectURL(blob), '_blank');
+    }
+
+    window.addEventListener('DOMContentLoaded', runRecoveryEngine);
+  </script>
+</body>
+</html>
