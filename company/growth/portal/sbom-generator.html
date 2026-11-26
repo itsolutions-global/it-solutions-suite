@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online CycloneDX v1.5 SBOM Generator (package.json, requirements.txt, go.mod, Cargo.toml) | 100% Client-Side</title>
+  <meta name="description" content="Generate a standards-compliant CycloneDX v1.5 JSON Software Bill of Materials (SBOM) from package.json, requirements.txt, go.mod, or Cargo.toml 100% locally in your browser. Zero server uploads for EU Cyber Resilience Act & enterprise security audits.">
+  <meta name="keywords" content="online CycloneDX SBOM generator, package.json to CycloneDX SBOM, requirements.txt to SBOM online, free SBOM generator browser, EU Cyber Resilience Act SBOM tool, client-side SBOM generator">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/sbom-generator">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Client-Side CycloneDX v1.5 SBOM Generator",
+        "url": "https://itsolutions-global.vercel.app/sbom-generator",
+        "applicationCategory": "DeveloperApplication, SecurityApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does this online SBOM generator upload my package.json or requirements.txt to a server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Parsing and CycloneDX v1.5 JSON serialization execute 100% inside your local browser tab using client-side JavaScript. Your proprietary dependency graph never leaves your workstation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which manifest formats are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The parser supports Node.js package.json, Python requirements.txt, Go go.mod require blocks, and Rust Cargo.toml dependency sections, generating Package URLs (purl) for npm, pypi, golang, and cargo ecosystems."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="feedback.css">
+  <style>
+    .sbom-wrap { max-width: 1060px; margin: 0 auto; padding: 38px 16px 60px; }
+    .sbom-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px; margin-top: 24px; }
+    .sbom-card { background: rgba(13,19,34,0.9); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 24px; text-align: left; }
+    .f-input { width: 100%; padding: 10px 12px; border-radius: 8px; background: #050811; color: #f8fafc; border: 1px solid rgba(255,255,255,0.22); font-size: max(1rem, 0.86rem); box-sizing: border-box; }
+    .f-input:focus-visible { outline: 2px solid #00f0ff; outline-offset: 2px; border-color: #00f0ff; }
+    .code-out { background: #050811; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 14px; min-height: 310px; max-height: 430px; overflow-y: auto; font-family: monospace; font-size: 0.8rem; line-height: 1.5; color: #34d399; white-space: pre; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">CycloneDX v1.5 SBOM Studio</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">&larr; All Tools</a>
+        <a href="compliance-dossier.html" class="btn-nav">Full GDPR/AI Act Dossier</a>
+        <a href="solutions.html" class="btn-nav" style="color:#34d399;border-color:rgba(16,185,129,0.45);font-weight:700;">💼 Agency White-Label</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="sbom-wrap">
+    <div style="text-align:center;">
+      <span style="font-size:0.78rem;font-weight:700;padding:4px 12px;border-radius:99px;background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.35);">
+        📦 Zero-Upload Supply Chain Inventory • npm • PyPI • Go • Cargo
+      </span>
+      <h1 style="font-size:2.1rem;margin:14px 0 10px;">Instant Client-Side <span class="gradient-text">CycloneDX v1.5 SBOM Generator</span></h1>
+      <p style="color:#94a3b8;max-width:760px;margin:0 auto;line-height:1.6;">
+        Convert <code>package.json</code>, <code>requirements.txt</code>, <code>go.mod</code>, or <code>Cargo.toml</code> into a compliant CycloneDX v1.5 JSON Software Bill of Materials without sending proprietary manifest files over the network.
+      </p>
+    </div>
+
+    <div class="sbom-grid">
+      <div class="sbom-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px;">
+          <label for="sbomInput" style="font-weight:700;font-size:0.9rem;color:#fff;">1. Paste Dependency Manifest</label>
+          <div style="display:flex;gap:6px;">
+            <button type="button" onclick="loadSample('npm')" style="background:rgba(56,189,248,0.14);color:#38bdf8;border:1px solid rgba(56,189,248,0.4);border-radius:6px;padding:4px 9px;font-size:0.74rem;cursor:pointer;">npm</button>
+            <button type="button" onclick="loadSample('pypi')" style="background:rgba(168,85,247,0.14);color:#c084fc;border:1px solid rgba(168,85,247,0.4);border-radius:6px;padding:4px 9px;font-size:0.74rem;cursor:pointer;">PyPI</button>
+            <button type="button" onclick="loadSample('go')" style="background:rgba(16,185,129,0.14);color:#34d399;border:1px solid rgba(16,185,129,0.4);border-radius:6px;padding:4px 9px;font-size:0.74rem;cursor:pointer;">go.mod</button>
+          </div>
+        </div>
+        <div style="margin-bottom:10px;">
+          <label for="sbomAppName" style="display:block;font-size:0.78rem;color:#cbd5e1;margin-bottom:4px;">Application / Project Name</label>
+          <input id="sbomAppName" type="text" value="acme-production-api" oninput="generateSbom()" autocorrect="off" autocapitalize="none" spellcheck="false" class="f-input">
+        </div>
+        <textarea id="sbomInput" rows="12" oninput="generateSbom()" autocorrect="off" autocapitalize="none" spellcheck="false" class="f-input" style="font-family:monospace;"></textarea>
+      </div>
+
+      <div class="sbom-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span id="sbomBadge" style="font-size:0.78rem;font-weight:700;color:#00f0ff;">CycloneDX v1.5 JSON</span>
+          <div style="display:flex;gap:8px;">
+            <button type="button" onclick="copySbom()" style="background:rgba(168,85,247,0.18);color:#c084fc;border:1px solid rgba(168,85,247,0.45);border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;">📋 Copy JSON</button>
+            <button type="button" onclick="downloadSbom()" style="background:rgba(16,185,129,0.18);color:#34d399;border:1px solid rgba(16,185,129,0.45);border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;">📥 Download .sbom.json</button>
+          </div>
+        </div>
+        <div id="sbomOut" class="code-out"></div>
+        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:0.8rem;color:#94a3b8;">
+          <span>Need CI/CD CLI secret &amp; SBOM scanning? <code>pip install it-solutions-suite</code></span>
+          <a href="compliance-dossier.html" style="color:#00f0ff;font-weight:700;">+ Add GDPR DPA &amp; AI Act &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="whitelabel.js"></script>
+  <script src="feedback.js"></script>
+  <script>
+    const SAMPLES = {
+      npm: JSON.stringify({
+        name: "acme-production-api",
+        version: "3.1.0",
+        dependencies: { "fastify": "^4.28.1", "pg": "^8.12.0", "zod": "^3.23.8", "jose": "^5.6.3" },
+        devDependencies: { "vitest": "^2.0.5" }
+      }, null, 2),
+      pypi: "fastapi==0.115.0\nuvicorn==0.30.6\npydantic>=2.9.0\nsqlalchemy==2.0.35\nhttpx~=0.27.2",
+      go: "module github.com/acme/api\n\ngo 1.23\n\nrequire (\n\tgithub.com/gin-gonic/gin v1.10.0\n\tgithub.com/jackc/pgx/v5 v5.7.1\n\tgolang.org/x/crypto v0.27.0\n)"
+    };
+
+    function parseAnyManifest(raw) {
+      const comps = [];
+      const txt = (raw || '').trim();
+      if (!txt) return comps;
+
+      // 1. JSON (package.json)
+      if (txt.startsWith('{')) {
+        try {
+          const pkg = JSON.parse(txt);
+          if (pkg.name) document.getElementById('sbomAppName').value = pkg.name;
+          const all = Object.assign({}, pkg.dependencies || {}, pkg.devDependencies || {});
+          Object.keys(all).forEach(k => {
+            const v = String(all[k]).replace(/^[\^~>=<]+/, '') || 'latest';
+            comps.push({ type: 'library', name: k, version: v, purl: `pkg:npm/${encodeURIComponent(k)}@${encodeURIComponent(v)}` });
+          });
+          return comps;
+        } catch (e) {}
+      }
+
+      // 2. go.mod
+      if (txt.includes('module ') || txt.includes('require (')) {
+        txt.split(/\r?\n/).forEach(line => {
+          const m = line.trim().match(/^([a-zA-Z0-9.\-_/]+)\s+(v[0-9]+\.[0-9]+\.[0-9]+[^\s]*)/);
+          if (m && m[1] !== 'module' && m[1] !== 'go') {
+            comps.push({ type: 'library', name: m[1], version: m[2], purl: `pkg:golang/${m[1]}@${m[2]}` });
+          }
+        });
+        if (comps.length) return comps;
+      }
+
+      // 3. Cargo.toml or requirements.txt
+      txt.split(/\r?\n/).forEach(line => {
+        const clean = line.split('#')[0].trim();
+        if (!clean || clean.startsWith('[')) return;
+        const cargoMatch = clean.match(/^([a-zA-Z0-9_-]+)\s*=\s*"([^"]+)"/);
+        if (cargoMatch) {
+          comps.push({ type: 'library', name: cargoMatch[1], version: cargoMatch[2], purl: `pkg:cargo/${cargoMatch[1]}@${cargoMatch[2]}` });
+          return;
+        }
+        const pyParts = clean.split(/==|>=|~=|<=|>/);
+        const name = pyParts[0].trim();
+        const ver = (pyParts[1] || 'latest').trim();
+        if (name && !name.includes(' ')) {
+          comps.push({ type: 'library', name, version: ver, purl: `pkg:pypi/${encodeURIComponent(name)}@${encodeURIComponent(ver)}` });
+        }
+      });
+      return comps;
+    }
+
+    function loadSample(kind) {
+      document.getElementById('sbomInput').value = SAMPLES[kind] || SAMPLES.npm;
+      generateSbom();
+    }
+
+    function generateSbom() {
+      const raw = document.getElementById('sbomInput').value;
+      const comps = parseAnyManifest(raw);
+      const appName = document.getElementById('sbomAppName').value.trim() || 'application';
+      const wl = window.ITSGWhiteLabel && window.ITSGWhiteLabel.getConfig();
+      const vendorName = (wl && wl.active && wl.firmName) ? wl.firmName : 'IT Solutions Global';
+
+      const sbom = {
+        bomFormat: 'CycloneDX',
+        specVersion: '1.5',
+        serialNumber: 'urn:uuid:' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+          const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        }),
+        version: 1,
+        metadata: {
+          timestamp: new Date().toISOString(),
+          tools: [{ vendor: vendorName, name: 'ComplianceForge CycloneDX Engine', version: '1.1.0' }],
+          component: { type: 'application', name: appName, version: '1.0.0' }
+        },
+        components: comps
+      };
+
+      document.getElementById('sbomBadge').textContent = `CycloneDX v1.5 JSON • ${comps.length} Components`;
+      document.getElementById('sbomOut').textContent = JSON.stringify(sbom, null, 2);
+    }
+
+    function copySbom() {
+      navigator.clipboard.writeText(document.getElementById('sbomOut').textContent);
+      alert('Copied CycloneDX v1.5 SBOM JSON!');
+    }
+
+    function downloadSbom() {
+      const blob = new Blob([document.getElementById('sbomOut').textContent], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'cyclonedx-sbom-v1.5.json';
+      a.click();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => loadSample('npm'));
+  </script>
+</body>
+</html>

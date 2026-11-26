@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ComplianceForge | Instant B2B Vendor Security, GDPR Art. 28, SOC 2 &amp; EU AI Act Dossier Generator</title>
-  <meta name="description" content="Unblock enterprise B2B software deals in 60 seconds. Generate custom GDPR Article 28 DPAs, EU AI Act Regulation (EU) 2024/1689 Technical Attestations, SOC 2 Incident Response Plans, CISO Security Questionnaires, and CycloneDX v1.5 SBOMs 100% locally in your browser.">
+  <meta name="description" content="Unblock enterprise B2B software deals accurately. Configure your actual security controls and dependency manifest to generate truthful GDPR Article 28 DPAs, EU AI Act Technical Attestations, SOC 2 Incident Response Plans, CISO Security Questionnaires, and CycloneDX v1.5 SBOMs 100% locally.">
   <meta name="keywords" content="GDPR Article 28 DPA generator, EU AI Act compliance attestation generator, SOC 2 vendor security questionnaire generator, CycloneDX SBOM generator online, B2B procurement security dossier">
   <meta name="theme-color" content="#06080d">
   <link rel="canonical" href="https://itsolutions-global.vercel.app/compliance-dossier">
@@ -22,7 +22,7 @@
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": "100% client-side generator for GDPR Article 28 Data Processing Addendums, EU AI Act Risk Attestations, SOC 2 Incident Response Policies, CISO Security Questionnaires, and CycloneDX v1.5 SBOMs."
+    "description": "100% client-side generator for GDPR Article 28 Data Processing Addendums, EU AI Act Risk Attestations, SOC 2 Incident Response Policies, truthful user-attested CISO Security Questionnaires, and CycloneDX v1.5 SBOMs."
   }
   </script>
 
@@ -34,12 +34,20 @@
     .panel-card { background: rgba(13, 19, 34, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
     .form-group { margin-bottom: 12px; text-align: left; }
-    .form-group label { display: block; font-size: 0.81rem; font-weight: 700; color: #cbd5e1; margin-bottom: 5px; }
-    .form-control { width: 100%; background: #050811; color: #f8fafc; border: 1px solid rgba(255,255,255,0.16); border-radius: 8px; padding: 9px 12px; font-size: 0.88rem; }
+    .form-group label { display: block; font-size: 0.81rem; font-weight: 700; color: #cbd5e1; margin-bottom: 4px; }
+    .form-control { width: 100%; background: #050811; color: #f8fafc; border: 1px solid rgba(255,255,255,0.22); border-radius: 8px; padding: 10px 12px; font-size: max(1rem, 0.9rem); box-sizing: border-box; }
+    .form-control:focus-visible { outline: 2px solid #00f0ff; outline-offset: 2px; border-color: #00f0ff; }
+    .controls-fieldset { border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 10px; padding: 12px 14px; margin: 0 0 14px; background: #050811; text-align: left; }
+    .controls-fieldset legend { font-size: 0.8rem; font-weight: 800; color: #38bdf8; padding: 0 6px; }
+    .chk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 8px; margin-top: 6px; }
+    .chk-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: #e2e8f0; }
+    .chk-item input[type="checkbox"] { accent-color: #10b981; width: 16px; height: 16px; flex-shrink: 0; }
+    .chk-item input[type="checkbox"]:focus-visible { outline: 2px solid #00f0ff; outline-offset: 2px; }
     .doc-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
     .doc-tab { background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 7px 11px; font-size: 0.78rem; font-weight: 700; cursor: pointer; }
     .doc-tab.active { background: rgba(0, 240, 255, 0.16); color: #00f0ff; border-color: rgba(0, 240, 255, 0.45); }
     .output-box { background: #050811; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 16px; min-height: 360px; max-height: 480px; overflow-y: auto; font-family: monospace; font-size: 0.82rem; line-height: 1.58; color: #e2e8f0; white-space: pre-wrap; text-align: left; }
+    .disclaimer-bar { background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 8px; padding: 10px 12px; font-size: 0.77rem; color: #fde68a; line-height: 1.5; margin-top: 12px; text-align: left; }
   </style>
 </head>
 <body>
@@ -61,7 +69,7 @@
         <a href="contract-scanner.html" class="btn-nav">ClauseGuard</a>
         <a href="payment-recovery.html" class="btn-nav">ClaimForge</a>
         <a href="scope-shield.html" class="btn-nav">ScopeShield</a>
-        <a href="solutions.html" class="btn-nav" style="border-color:rgba(16,185,129,0.45);color:#34d399;font-weight:700;">💼 B2B &amp; White-Label</a>
+        <a href="solutions.html" class="btn-nav" style="border-color:rgba(16,185,129,0.45);color:#34d399;font-weight:700;">💼 White-Label &amp; Bundles</a>
       </div>
     </div>
   </header>
@@ -69,13 +77,13 @@
   <main class="container">
     <section class="comp-hero">
       <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;background:rgba(0,240,255,0.12);color:#00f0ff;border:1px solid rgba(0,240,255,0.35);font-size:0.8rem;font-weight:700;margin-bottom:14px;">
-        🛡️ Enterprise Procurement Unblocker • 100% Client-Side Synthesis
+        🛡️ Truthful Vendor Self-Attestation • 100% Client-Side Synthesis
       </div>
       <h1 style="font-size:2.25rem;margin:0 0 12px;">
         🏛️ ComplianceForge: B2B Security, GDPR Art. 28, SOC 2 &amp; <span class="gradient-text">EU AI Act Dossier Generator</span>
       </h1>
       <p style="color:#94a3b8;max-width:800px;margin:0 auto;font-size:0.98rem;line-height:1.6;">
-        Stop losing enterprise contracts in CISO security reviews. Configure your architecture and dependency manifest to generate a complete <strong>5-Document Enterprise Procurement &amp; CycloneDX v1.5 SBOM Dossier</strong> in seconds.
+        Prepare structured enterprise procurement documentation accurately. Select only the security controls you have genuinely implemented, paste your dependency manifest, and generate a <strong>5-Document Security &amp; CycloneDX v1.5 SBOM Dossier</strong> locally.
       </p>
     </section>
 
@@ -83,58 +91,75 @@
       <!-- Left Column: Architecture & Stack Inputs -->
       <div class="panel-card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
-          <h2 style="margin:0;font-size:1.12rem;color:#fff;">1. Vendor Architecture &amp; Dependency Manifest</h2>
-          <button onclick="loadComplianceSample()" style="background:rgba(56,189,248,0.14);color:#38bdf8;border:1px solid rgba(56,189,248,0.4);border-radius:6px;padding:5px 12px;font-size:0.76rem;cursor:pointer;font-weight:600;">
+          <h2 style="margin:0;font-size:1.12rem;color:#fff;">1. Vendor Architecture &amp; Attested Controls</h2>
+          <button type="button" onclick="loadComplianceSample()" style="background:rgba(56,189,248,0.14);color:#38bdf8;border:1px solid rgba(56,189,248,0.4);border-radius:6px;padding:5px 12px;font-size:0.76rem;cursor:pointer;font-weight:600;">
             ✨ Load SaaS Sample
           </button>
         </div>
 
-        <div class="form-row">
-          <div class="form-group" style="margin-bottom:0;">
-            <label for="cfVendor">Your Company / Vendor Legal Name</label>
-            <input id="cfVendor" type="text" class="form-control" value="NovaCloud AI Systems Inc.">
+        <form id="cfForm" onsubmit="event.preventDefault(); runComplianceEngine();">
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="cfVendor">Your Company / Vendor Legal Name</label>
+              <input id="cfVendor" name="vendor" type="text" class="form-control" autocomplete="organization" value="NovaCloud AI Systems Inc.">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="cfClient">Enterprise Customer / Controller Name</label>
+              <input id="cfClient" name="client" type="text" class="form-control" value="Meridian Enterprise Holdings PLC">
+            </div>
           </div>
-          <div class="form-group" style="margin-bottom:0;">
-            <label for="cfClient">Enterprise Customer / Controller Name</label>
-            <input id="cfClient" type="text" class="form-control" value="Meridian Enterprise Holdings PLC">
-          </div>
-        </div>
 
-        <div class="form-row">
-          <div class="form-group" style="margin-bottom:0;">
-            <label for="cfDpoEmail">Security / DPO Contact Email</label>
-            <input id="cfDpoEmail" type="text" class="form-control" value="security@novacloud.example">
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="cfDpoEmail">Security / DPO Contact Email</label>
+              <input id="cfDpoEmail" name="dpoEmail" type="email" class="form-control" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false" value="security@novacloud.example">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="cfRegion">Primary Data Residency Region</label>
+              <select id="cfRegion" name="region" class="form-control" onchange="runComplianceEngine()">
+                <option value="EU (Frankfurt / Dublin - GDPR Adequacy)">EU (Frankfurt / Dublin - GDPR Adequacy)</option>
+                <option value="US-East / US-West (SOC 2 Type II Datacenters)">US-East / US-West (SOC 2 Type II Datacenters)</option>
+                <option value="UK (London - UK GDPR Adequacy)">UK (London - UK GDPR Adequacy)</option>
+                <option value="India (Mumbai - DPDP Act 2023 Compliant)">India (Mumbai - DPDP Act 2023 Compliant)</option>
+                <option value="100% Client-Side / On-Premise Air-Gapped (Zero Cloud Storage)">100% Client-Side / On-Premise Air-Gapped</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group" style="margin-bottom:0;">
-            <label for="cfRegion">Primary Data Residency Region</label>
-            <select id="cfRegion" class="form-control" onchange="runComplianceEngine()">
-              <option value="EU (Frankfurt / Dublin - GDPR Adequacy)">EU (Frankfurt / Dublin - GDPR Adequacy)</option>
-              <option value="US-East / US-West (SOC 2 Type II Datacenters)">US-East / US-West (SOC 2 Type II Datacenters)</option>
-              <option value="UK (London - UK GDPR Adequacy)">UK (London - UK GDPR Adequacy)</option>
-              <option value="India (Mumbai - DPDP Act 2023 Compliant)">India (Mumbai - DPDP Act 2023 Compliant)</option>
-              <option value="100% Client-Side / On-Premise Air-Gapped (Zero Cloud Storage)">100% Client-Side / On-Premise Air-Gapped</option>
-            </select>
-          </div>
-        </div>
 
-        <div class="form-row">
-          <div class="form-group" style="margin-bottom:0;">
-            <label for="cfCloud">Cloud &amp; Sub-Processor Infrastructure</label>
-            <input id="cfCloud" type="text" class="form-control" value="AWS (ISO 27001), Cloudflare Edge, Stripe">
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="cfCloud">Cloud &amp; Sub-Processor Infrastructure</label>
+              <input id="cfCloud" name="cloud" type="text" class="form-control" value="AWS (ISO 27001), Cloudflare Edge, Stripe">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="cfAiMode">AI / LLM Governance Posture (EU AI Act)</label>
+              <select id="cfAiMode" name="aiMode" class="form-control" onchange="runComplianceEngine()">
+                <option value="MINIMAL_RISK">Minimal / Limited Risk — Zero Training on Customer Data (Art. 50 Compliant)</option>
+                <option value="LOCAL_DETERMINISTIC">100% Deterministic / Local-First Execution (Zero Third-Party LLM Calls)</option>
+                <option value="PRIVATE_VPC">Private Dedicated VPC Model Endpoint (SOC 2 / Zero Retention BAA)</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group" style="margin-bottom:0;">
-            <label for="cfAiMode">AI / LLM Governance Posture (EU AI Act)</label>
-            <select id="cfAiMode" class="form-control" onchange="runComplianceEngine()">
-              <option value="MINIMAL_RISK">Minimal / Limited Risk — Zero Training on Customer Data (Art. 50 Compliant)</option>
-              <option value="LOCAL_DETERMINISTIC">100% Deterministic / Local-First Execution (Zero Third-Party LLM Calls)</option>
-              <option value="PRIVATE_VPC">Private Dedicated VPC Model Endpoint (SOC 2 / Zero Retention BAA)</option>
-            </select>
-          </div>
-        </div>
 
-        <div class="form-group">
-          <label for="cfManifest">Optional: Paste <code>package.json</code> or <code>requirements.txt</code> for CycloneDX v1.5 SBOM Generation</label>
-          <textarea id="cfManifest" rows="5" class="form-control" style="font-family:monospace;font-size:0.8rem;" placeholder="Paste package.json or requirements.txt lines...">{
+          <fieldset class="controls-fieldset">
+            <legend>2. Implemented Security Controls (Uncheck any control not yet active)</legend>
+            <div class="chk-grid">
+              <div class="chk-item"><input type="checkbox" id="ctrl_mfa" name="ctrl_mfa" checked onchange="runComplianceEngine()"><label for="ctrl_mfa">MFA on Production Systems</label></div>
+              <div class="chk-item"><input type="checkbox" id="ctrl_rbac" name="ctrl_rbac" checked onchange="runComplianceEngine()"><label for="ctrl_rbac">RBAC &amp; Least Privilege</label></div>
+              <div class="chk-item"><input type="checkbox" id="ctrl_tls" name="ctrl_tls" checked onchange="runComplianceEngine()"><label for="ctrl_tls">TLS 1.3 In-Transit Encryption</label></div>
+              <div class="chk-item"><input type="checkbox" id="ctrl_aes" name="ctrl_aes" checked onchange="runComplianceEngine()"><label for="ctrl_aes">AES-256 Encryption at Rest</label></div>
+              <div class="chk-item"><input type="checkbox" id="ctrl_sast" name="ctrl_sast" checked onchange="runComplianceEngine()"><label for="ctrl_sast">Automated SAST / Secret Scan</label></div>
+              <div class="chk-item"><input type="checkbox" id="ctrl_sbom" name="ctrl_sbom" checked onchange="runComplianceEngine()"><label for="ctrl_sbom">CycloneDX SBOM Maintained</label></div>
+              <div class="chk-item"><input type="checkbox" id="ctrl_dpa" name="ctrl_dpa" checked onchange="runComplianceEngine()"><label for="ctrl_dpa">GDPR Art. 28 DPA Available</label></div>
+              <div class="chk-item"><input type="checkbox" id="ctrl_zdr" name="ctrl_zdr" checked onchange="runComplianceEngine()"><label for="ctrl_zdr">Zero AI Training on Client Data</label></div>
+              <div class="chk-item"><input type="checkbox" id="ctrl_irp" name="ctrl_irp" checked onchange="runComplianceEngine()"><label for="ctrl_irp">&lt;72h Breach Notification SLA</label></div>
+              <div class="chk-item"><input type="checkbox" id="ctrl_bcp" name="ctrl_bcp" onchange="runComplianceEngine()"><label for="ctrl_bcp">Annual Multi-AZ DR Drills</label></div>
+            </div>
+          </fieldset>
+
+          <div class="form-group">
+            <label for="cfManifest">Optional: Paste <code>package.json</code> or <code>requirements.txt</code> for CycloneDX v1.5 SBOM Generation</label>
+            <textarea id="cfManifest" name="manifest" rows="4" class="form-control" autocorrect="off" autocapitalize="none" spellcheck="false" style="font-family:monospace;font-size:0.8rem;" placeholder="Paste package.json or requirements.txt lines...">{
   "name": "novacloud-enterprise-platform",
   "version": "2.4.0",
   "dependencies": {
@@ -144,43 +169,48 @@
     "pg": "^8.12.0"
   }
 }</textarea>
-        </div>
+          </div>
 
-        <button onclick="runComplianceEngine()" style="width:100%;background:linear-gradient(135deg,#00f0ff,#3b82f6);color:#040711;font-weight:800;border:none;border-radius:10px;padding:12px 20px;font-size:0.96rem;cursor:pointer;">
-          ⚡ Synthesize 5-Part Enterprise Compliance &amp; SBOM Dossier
-        </button>
+          <button type="submit" style="width:100%;background:linear-gradient(135deg,#00f0ff,#3b82f6);color:#040711;font-weight:800;border:none;border-radius:10px;padding:12px 20px;font-size:0.96rem;cursor:pointer;">
+            ⚡ Synthesize 5-Part Enterprise Compliance &amp; SBOM Dossier
+          </button>
+        </form>
+
+        <div class="disclaimer-bar">
+          <strong>⚠ Accuracy &amp; Legal Notice:</strong> Never claim security controls your organization has not implemented. Generated DPAs, AI Act statements, and questionnaires are operational drafting templates and do not constitute formal legal advice or third-party CPA/ISO certification.
+        </div>
       </div>
 
       <!-- Right Column: 5-Tab Dossier Output -->
       <div class="panel-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <span style="font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:99px;background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(16,185,129,0.35);">
-            ✔ 5 REGULATOR-READY DELIVERABLES GENERATED
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+          <span id="cfControlsSummaryBadge" style="font-size:0.78rem;font-weight:700;padding:4px 12px;border-radius:99px;background:rgba(16,185,129,0.16);color:#34d399;border:1px solid rgba(16,185,129,0.35);">
+            ✔ 9/10 CONTROLS IMPLEMENTED
           </span>
           <span id="cfSbomCountBadge" style="font-size:0.78rem;color:#38bdf8;font-weight:700;">4 SBOM Components</span>
         </div>
 
         <div class="doc-tabs">
-          <button class="doc-tab active" id="cfTab-dpa" onclick="switchComplianceTab('dpa')">1. GDPR Art. 28 DPA</button>
-          <button class="doc-tab" id="cfTab-ai" onclick="switchComplianceTab('ai')">2. EU AI Act Attestation</button>
-          <button class="doc-tab" id="cfTab-irp" onclick="switchComplianceTab('irp')">3. SOC 2 Incident Plan</button>
-          <button class="doc-tab" id="cfTab-sig" onclick="switchComplianceTab('sig')">4. CISO SIG-Lite Matrix</button>
-          <button class="doc-tab" id="cfTab-sbom" onclick="switchComplianceTab('sbom')">5. CycloneDX v1.5 SBOM</button>
+          <button type="button" class="doc-tab active" id="cfTab-dpa" onclick="switchComplianceTab('dpa')">1. GDPR Art. 28 DPA</button>
+          <button type="button" class="doc-tab" id="cfTab-ai" onclick="switchComplianceTab('ai')">2. EU AI Act Attestation</button>
+          <button type="button" class="doc-tab" id="cfTab-irp" onclick="switchComplianceTab('irp')">3. Incident Response Plan</button>
+          <button type="button" class="doc-tab" id="cfTab-sig" onclick="switchComplianceTab('sig')">4. CISO SIG-Lite Matrix</button>
+          <button type="button" class="doc-tab" id="cfTab-sbom" onclick="switchComplianceTab('sbom')">5. CycloneDX v1.5 SBOM</button>
         </div>
 
         <div id="complianceOutput" class="output-box"></div>
 
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">
-          <button onclick="copyComplianceDoc()" style="flex:1;background:rgba(168,85,247,0.18);color:#c084fc;border:1px solid rgba(168,85,247,0.45);border-radius:8px;padding:10px 12px;font-weight:700;cursor:pointer;font-size:0.83rem;">
+          <button type="button" onclick="copyComplianceDoc()" style="flex:1;background:rgba(168,85,247,0.18);color:#c084fc;border:1px solid rgba(168,85,247,0.45);border-radius:8px;padding:10px 12px;font-weight:700;cursor:pointer;font-size:0.83rem;">
             📋 Copy Active Document
           </button>
-          <button onclick="downloadSbomJson()" style="flex:1;background:rgba(56,189,248,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.4);border-radius:8px;padding:10px 12px;font-weight:700;cursor:pointer;font-size:0.83rem;">
+          <button type="button" onclick="downloadSbomJson()" style="flex:1;background:rgba(56,189,248,0.16);color:#38bdf8;border:1px solid rgba(56,189,248,0.4);border-radius:8px;padding:10px 12px;font-weight:700;cursor:pointer;font-size:0.83rem;">
             📦 Download .sbom.json
           </button>
-          <button onclick="printFullDossier()" style="flex:1;background:rgba(16,185,129,0.18);color:#34d399;border:1px solid rgba(16,185,129,0.45);border-radius:8px;padding:10px 12px;font-weight:700;cursor:pointer;font-size:0.83rem;">
+          <button type="button" onclick="printFullDossier()" style="flex:1;background:rgba(16,185,129,0.18);color:#34d399;border:1px solid rgba(16,185,129,0.45);border-radius:8px;padding:10px 12px;font-weight:700;cursor:pointer;font-size:0.83rem;">
             🖨️ Print Full Dossier (PDF)
           </button>
-          <button onclick="window.ITSGWhiteLabel && window.ITSGWhiteLabel.openWhiteLabelModal()" style="background:rgba(0,240,255,0.12);color:#00f0ff;border:1px solid rgba(0,240,255,0.35);border-radius:8px;padding:10px 12px;font-weight:700;cursor:pointer;font-size:0.83rem;">
+          <button type="button" onclick="window.ITSGWhiteLabel && window.ITSGWhiteLabel.openWhiteLabelModal()" style="background:rgba(0,240,255,0.12);color:#00f0ff;border:1px solid rgba(0,240,255,0.35);border-radius:8px;padding:10px 12px;font-weight:700;cursor:pointer;font-size:0.83rem;">
             🏢 White-Label
           </button>
         </div>
@@ -193,6 +223,19 @@
   <script>
     let activeCfTab = 'dpa';
     let cfDocs = { dpa: '', ai: '', irp: '', sig: '', sbom: '' };
+
+    const CONTROL_DEFINITIONS = [
+      { id: 'ctrl_mfa', code: 'IAM-01', q: 'Multi-Factor Authentication (MFA) on all prod systems?' },
+      { id: 'ctrl_rbac', code: 'IAM-02', q: 'Role-Based Access Control (RBAC) & Least Privilege?' },
+      { id: 'ctrl_tls', code: 'ENC-01', q: 'TLS 1.3 enforced for all data in transit?' },
+      { id: 'ctrl_aes', code: 'ENC-02', q: 'AES-256 encryption enforced for all data at rest?' },
+      { id: 'ctrl_sast', code: 'APP-01', q: 'Automated SAST & Secret Scanning in CI/CD pipeline?' },
+      { id: 'ctrl_sbom', code: 'APP-02', q: 'CycloneDX v1.5 SBOM maintained for third-party deps?' },
+      { id: 'ctrl_dpa', code: 'PRI-01', q: 'GDPR Article 28 DPA & Sub-processor list available?' },
+      { id: 'ctrl_zdr', code: 'PRI-02', q: 'Zero customer data used to train external AI models?' },
+      { id: 'ctrl_irp', code: 'INC-01', q: 'Documented Incident Response Plan with <72h Breach SLA?' },
+      { id: 'ctrl_bcp', code: 'BCP-01', q: 'Automated backups & Multi-AZ recovery tested annually?' }
+    ];
 
     function parseManifestToComponents(rawText) {
       const components = [];
@@ -213,7 +256,6 @@
         });
         return components;
       } catch (e) {
-        // Fallback: parse requirements.txt lines
         trimmed.split(/\r?\n/).forEach(line => {
           const clean = line.split('#')[0].trim();
           if (!clean) return;
@@ -240,12 +282,16 @@
       runComplianceEngine();
     }
 
+    function isChecked(id) {
+      return !!document.getElementById(id)?.checked;
+    }
+
     function runComplianceEngine() {
       const vendor = document.getElementById('cfVendor').value.trim() || 'Vendor Corp';
       const client = document.getElementById('cfClient').value.trim() || 'Enterprise Controller';
       const email = document.getElementById('cfDpoEmail').value.trim() || 'security@vendor.example';
       const region = document.getElementById('cfRegion').value;
-      const cloud = document.getElementById('cfCloud').value.trim() || 'ISO 27001 Certified Cloud';
+      const cloud = document.getElementById('cfCloud').value.trim() || 'Cloud Hosting Provider';
       const aiMode = document.getElementById('cfAiMode').value;
       const manifestRaw = document.getElementById('cfManifest').value;
       const dateStr = new Date().toISOString().split('T')[0];
@@ -253,35 +299,48 @@
       const components = parseManifestToComponents(manifestRaw);
       document.getElementById('cfSbomCountBadge').textContent = `${components.length} SBOM Components`;
 
+      let activeControlsCount = 0;
+      const sigRows = CONTROL_DEFINITIONS.map(ctrl => {
+        const active = isChecked(ctrl.id);
+        if (active) activeControlsCount++;
+        const statusStr = active ? 'YES (IMPLEMENTED)' : 'PLANNED / ROADMAP';
+        return `${ctrl.code.padEnd(10, ' ')} | ${ctrl.q.padEnd(55, ' ')} | ${statusStr}`;
+      }).join('\n');
+
+      document.getElementById('cfControlsSummaryBadge').textContent = `✔ ${activeControlsCount}/${CONTROL_DEFINITIONS.length} CONTROLS ATTESTED`;
+
       const attribution = window.ITSGWhiteLabel
-        ? window.ITSGWhiteLabel.getAttribution('ComplianceForge', 'Enterprise Security & Regulatory Compliance Dossier')
-        : '*Enterprise Security & Regulatory Compliance Dossier generated by ComplianceForge — IT Solutions Global (100% Client-Side Local Verification • Zero Cloud Uploads)*';
+        ? window.ITSGWhiteLabel.getAttribution('ComplianceForge', 'Vendor Self-Attested Security & Compliance Dossier')
+        : '*Vendor Self-Attested Security & Compliance Dossier generated by ComplianceForge — IT Solutions Global (100% Client-Side Local Verification • Zero Cloud Uploads)*';
+
+      const legalDisclaimer = `DISCLAIMER: This document is a vendor-configured operational template based solely on ${vendor}'s self-attested inputs. It does not constitute legal advice or an independent third-party CPA/ISO audit opinion. Review with qualified counsel prior to execution.`;
 
       // 1. GDPR Article 28 DPA
-      cfDocs.dpa = `DATA PROCESSING ADDENDUM (GDPR ARTICLE 28 & UK GDPR STANDARD)
+      cfDocs.dpa = `DATA PROCESSING ADDENDUM (GDPR ARTICLE 28 & UK GDPR TEMPLATE)
 EFFECTIVE DATE: ${dateStr}
 DATA CONTROLLER: ${client} ("Controller")
 DATA PROCESSOR: ${vendor} ("Processor" | DPO Contact: ${email})
 PRIMARY DATA RESIDENCY: ${region}
 
 1. SUBJECT MATTER & DURATION OF PROCESSING (ARTICLE 28(3))
-Processor shall process Personal Data solely on documented instructions from Controller for the provision of contracted B2B services. Processing shall continue only for the term of the Master Services Agreement plus a maximum 30-day cryptographic purge window.
+Processor shall process Personal Data solely on documented instructions from Controller for the provision of contracted B2B services. Processing shall continue only for the term of the Master Services Agreement plus a maximum 30-day purge window.
 
 2. TECHNICAL & ORGANIZATIONAL SECURITY MEASURES (ANNEX II - ARTICLE 32)
-  • Encryption in Transit : Mandatory TLS 1.3 (ECDHE-RSA-AES256-GCM-SHA384) with HSTS preload.
-  • Encryption at Rest    : AES-256-GCM volume and field-level encryption with automated key rotation.
-  • Access Control        : Least-privilege RBAC, mandatory hardware/FIDO2 MFA, and zero standing production access.
-  • Tenant Isolation      : Strict logical and cryptographic tenant separation.
+  • Encryption in Transit : ${isChecked('ctrl_tls') ? 'TLS 1.3 enforced across external endpoints.' : 'Standard HTTPS transport encryption (TLS upgrade scheduled).'}
+  • Encryption at Rest    : ${isChecked('ctrl_aes') ? 'AES-256 volume and database encryption enforced.' : 'Managed storage provider baseline controls.'}
+  • Access Control        : ${isChecked('ctrl_rbac') ? 'Role-Based Access Control (RBAC) & least privilege' : 'Standard administrative access controls'}${isChecked('ctrl_mfa') ? ' with MFA enforced.' : '.'}
 
 3. SUB-PROCESSOR AUTHORIZATION REGISTRY (ANNEX III - ARTICLE 28(2))
 Authorized Infrastructure & Sub-processors: ${cloud}.
-Processor shall provide Controller at least thirty (30) days prior written notice before engaging any new sub-processor.
+Processor shall provide Controller prior written notice before engaging any new sub-processor.
 
 4. PERSONAL DATA BREACH NOTIFICATION (ARTICLE 33)
-Processor shall notify Controller without undue delay—and in no event later than forty-eight (48) hours after becoming aware of a confirmed Personal Data Breach—via ${email}.
+Processor shall notify Controller without undue delay${isChecked('ctrl_irp') ? ' and within seventy-two (72) hours' : ''} after becoming aware of a confirmed Personal Data Breach via ${email}.
 
 5. AUDIT RIGHTS & DELETION (ARTICLE 28(3)(g)-(h))
-Upon contract termination or written request, Processor shall cryptographically wipe all Controller Personal Data within 30 days and issue a signed Certificate of Destruction.
+Upon contract termination or written request, Processor shall delete or return all Controller Personal Data within 30 days unless retention is required by applicable law.
+
+${legalDisclaimer}
 
 ${attribution}`;
 
@@ -289,71 +348,64 @@ ${attribution}`;
       const aiDesc = aiMode === 'LOCAL_DETERMINISTIC'
         ? '100% Deterministic / Local-First Client-Side Execution. Zero Customer Data is transmitted to external generative AI models.'
         : (aiMode === 'PRIVATE_VPC'
-            ? 'Dedicated Private VPC Model Endpoints with Zero Data Retention (ZDR) and contractual prohibition on model training.'
-            : 'Limited/Minimal Risk Assistive AI under Article 50 of Regulation (EU) 2024/1689 with strict Zero-Training API enforcement.');
+            ? 'Dedicated Private VPC Model Endpoints with contractual prohibition on foundation model training.'
+            : 'Limited/Minimal Risk Assistive AI under Article 50 of Regulation (EU) 2024/1689.');
 
-      cfDocs.ai = `EU AI ACT (REGULATION (EU) 2024/1689) COMPLIANCE & RISK CLASSIFICATION ATTESTATION
+      cfDocs.ai = `EU AI ACT (REGULATION (EU) 2024/1689) SELF-ASSESSMENT & TRANSPARENCY STATEMENT
 ISSUED BY: ${vendor} (AI Governance Contact: ${email})
 PREPARED FOR: ${client}
-ATTESTATION DATE: ${dateStr}
+STATEMENT DATE: ${dateStr}
 
-1. REGULATORY RISK CLASSIFICATION (TITLE II & TITLE III ASSESSMENT)
-  • Prohibited AI Practices (Article 5) : NONE. System performs zero subliminal manipulation, biometric categorization, or social scoring.
-  • High-Risk AI Annex III Screening    : EXEMPT / NON-HIGH-RISK. System operates strictly as a B2B productivity and commercial workflow engine under human-in-the-loop oversight (Article 14).
-  • Governance Posture                  : ${aiDesc}
+1. REGULATORY RISK SELF-CLASSIFICATION (TITLE II & TITLE III)
+  • Prohibited AI Practices (Article 5) : NONE ATTESTED.
+  • High-Risk AI Annex III Screening    : Self-assessed as B2B assistive/productivity software operating under human-in-the-loop oversight (Article 14).
+  • Architecture Posture                : ${aiDesc}
 
-2. DATA GOVERNANCE & ZERO-TRAINING COVENANT (ARTICLE 10)
-${vendor} hereby warrants and attests that:
-  (a) Customer confidential data, prompts, documents, and outputs are NEVER used to train, fine-tune, or enrich foundation models available to third parties.
-  (b) All inference operations execute within ephemeral memory buffers within ${region}.
-  (c) Human-in-the-Loop (HITL) verification is enforced prior to any external action or final export.
+2. DATA GOVERNANCE STATEMENT
+  • External Model Training Policy      : ${isChecked('ctrl_zdr') ? 'Customer data and prompts are NOT used to train third-party foundation models.' : 'Refer to applicable sub-processor model data usage terms.'}
+  • Residency & Processing Scope        : ${region}.
 
-3. TRANSPARENCY & TECHNICAL DOCUMENTATION (ARTICLE 50 & ANNEX IV)
-All machine-assisted outputs carry clear provenance metadata, deterministic audit logs, and software bill of materials (CycloneDX v1.5 SBOM attached in Section 5).
+3. TRANSPARENCY & SOFTWARE INVENTORY (ARTICLE 50 & ANNEX IV)
+Third-party software dependencies are cataloged in the accompanying CycloneDX v1.5 SBOM (Section 5).
 
-Signed on behalf of ${vendor}
-Contact: ${email}
+${legalDisclaimer}
 
 ${attribution}`;
 
-      // 3. SOC 2 Incident Response Plan
-      cfDocs.irp = `NIST SP 800-61 / SOC 2 TYPE II INCIDENT RESPONSE & BREACH NOTIFICATION PROTOCOL
+      // 3. Incident Response Plan
+      cfDocs.irp = `NIST SP 800-61 ALIGNED INCIDENT RESPONSE & BREACH NOTIFICATION PROTOCOL
 ORGANIZATION: ${vendor}
 INCIDENT COMMANDER / SECURITY DESK: ${email}
 EFFECTIVE DATE: ${dateStr}
 
-1. INCIDENT SEVERITY CLASSIFICATION & SLA MATRIX
-  • SEV-1 (Critical / Confirmed Data Breach) : < 15 Minutes Triage | < 24-48 Hours Customer Notification (${client})
-  • SEV-2 (High / Service or Auth Anomaly)   : < 1 Hour Triage     | < 4 Hours Mitigation Containment
-  • SEV-3 (Moderate / Non-Data Vulnerability): < 24 Hours Triage   | < 7 Days Patch Deployment
+1. INCIDENT SEVERITY CLASSIFICATION & TARGET RESPONSE SLAS
+  • SEV-1 (Critical / Confirmed Data Breach) : Immediate Triage | ${isChecked('ctrl_irp') ? '< 72 Hours Customer Notification (' + client + ')' : 'Prompt Statutory Notification'}
+  • SEV-2 (High / Service or Auth Anomaly)   : Same-Day Triage  | Containment & Credential Rotation
+  • SEV-3 (Moderate / Non-Data Vulnerability): Scheduled Triage | Standard Patch Cycle
 
 2. FOUR-PHASE NIST SP 800-61 EXECUTION LIFECYCLE
-  Phase 1 — Preparation: Continuous SAST/secret scanning, immutable audit logging, and CycloneDX SBOM tracking.
-  Phase 2 — Detection & Analysis: Automated anomaly alerting, cryptographic hash verification, and blast-radius scoping.
-  Phase 3 — Containment, Eradication & Recovery: Immediate credential rotation, ephemeral container isolation, and clean restoration.
-  Phase 4 — Post-Incident Root Cause Analysis (RCA): Delivery of a formal written 5-Whys RCA report to ${client} within 5 business days.
+  Phase 1 — Preparation: ${isChecked('ctrl_sast') ? 'Automated SAST/secret scanning' : 'Code review'} and ${isChecked('ctrl_sbom') ? 'CycloneDX SBOM dependency tracking.' : 'dependency inventory.'}
+  Phase 2 — Detection & Analysis: Log triage, indicator validation, and blast-radius scoping.
+  Phase 3 — Containment, Eradication & Recovery: Credential rotation, workload isolation, and ${isChecked('ctrl_bcp') ? 'tested Multi-AZ backup restoration.' : 'system restoration.'}
+  Phase 4 — Post-Incident Root Cause Analysis (RCA): Written post-mortem summary delivered to affected stakeholders.
+
+${legalDisclaimer}
 
 ${attribution}`;
 
-      // 4. CISO SIG-Lite Security Matrix
-      cfDocs.sig = `ENTERPRISE VENDOR SECURITY QUESTIONNAIRE (SIG-LITE / CAIQ STANDARD)
+      // 4. CISO SIG-Lite Security Matrix (Truthful User-Selected Statuses)
+      cfDocs.sig = `ENTERPRISE VENDOR SECURITY QUESTIONNAIRE (VENDOR SELF-ATTESTED SIG-LITE MATRIX)
 VENDOR: ${vendor} | PREPARED FOR: ${client} | DATE: ${dateStr}
-================================================================================
-CONTROL ID | DOMAIN & CISO QUESTION                                  | STATUS
---------------------------------------------------------------------------------
-IAM-01     | Multi-Factor Authentication (MFA) on all prod systems?  | YES (PASS)
-IAM-02     | Role-Based Access Control (RBAC) & Least Privilege?     | YES (PASS)
-ENC-01     | TLS 1.3 enforced for all data in transit?               | YES (PASS)
-ENC-02     | AES-256 encryption enforced for all data at rest?       | YES (PASS)
-APP-01     | Automated SAST & Secret Scanning in CI/CD pipeline?     | YES (PASS)
-APP-02     | CycloneDX v1.5 SBOM maintained for third-party deps?    | YES (PASS)
-PRI-01     | GDPR Article 28 DPA & Sub-processor list available?     | YES (PASS)
-PRI-02     | Zero customer data used to train external AI models?    | YES (PASS)
-INC-01     | Documented Incident Response Plan with <72h Breach SLA? | YES (PASS)
-BCP-01     | Automated backups & Multi-AZ recovery tested annually?  | YES (PASS)
-================================================================================
- Primary Hosting & Sub-processors: ${cloud}
- Data Residency: ${region}
+ATTESTED CONTROLS ACTIVE: ${activeControlsCount} of ${CONTROL_DEFINITIONS.length}
+========================================================================================
+CONTROL ID | DOMAIN & CISO QUESTION                                  | VENDOR STATUS
+----------------------------------------------------------------------------------------
+${sigRows}
+========================================================================================
+ Primary Hosting & Sub-processors : ${cloud}
+ Data Residency                   : ${region}
+
+${legalDisclaimer}
 
 ${attribution}`;
 
@@ -368,7 +420,7 @@ ${attribution}`;
         version: 1,
         metadata: {
           timestamp: new Date().toISOString(),
-          tools: [{ vendor: 'IT Solutions Global', name: 'ComplianceForge SBOM Engine', version: '1.0.0' }],
+          tools: [{ vendor: 'IT Solutions Global', name: 'ComplianceForge SBOM Engine', version: '1.1.0' }],
           component: { type: 'application', name: vendor, version: '1.0.0' }
         },
         components: components
@@ -406,18 +458,19 @@ ${attribution}`;
     function printFullDossier() {
       const vendor = document.getElementById('cfVendor').value.trim();
       const client = document.getElementById('cfClient').value.trim();
-      const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Enterprise Security & Compliance Dossier — ${vendor}</title>
+      const escapeHtml = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Vendor Security & Compliance Dossier — ${escapeHtml(vendor)}</title>
       <style>body{font-family:sans-serif;max-width:840px;margin:30px auto;padding:24px;color:#0f172a;line-height:1.55;}
       pre{background:#f8fafc;border:1px solid #cbd5e1;padding:16px;border-radius:8px;white-space:pre-wrap;font-size:0.82rem;page-break-inside:avoid;}
       h2{border-bottom:2px solid #0284c7;padding-bottom:6px;margin-top:28px;color:#0f172a;}</style></head>
       <body>
-      <h1>ENTERPRISE SECURITY &amp; REGULATORY COMPLIANCE DOSSIER</h1>
-      <p><strong>Vendor / Processor:</strong> ${vendor} &nbsp;|&nbsp; <strong>Prepared For:</strong> ${client}</p>
-      <h2>1. GDPR Article 28 Data Processing Addendum (DPA)</h2><pre>${cfDocs.dpa}</pre>
-      <h2>2. EU AI Act (Regulation (EU) 2024/1689) Attestation</h2><pre>${cfDocs.ai}</pre>
-      <h2>3. NIST SP 800-61 / SOC 2 Incident Response Plan</h2><pre>${cfDocs.irp}</pre>
-      <h2>4. Enterprise CISO Security Questionnaire (SIG-Lite)</h2><pre>${cfDocs.sig}</pre>
-      <h2>5. CycloneDX v1.5 Software Bill of Materials (SBOM)</h2><pre>${cfDocs.sbom}</pre>
+      <h1>VENDOR SELF-ATTESTED SECURITY &amp; COMPLIANCE DOSSIER</h1>
+      <p><strong>Vendor / Processor:</strong> ${escapeHtml(vendor)} &nbsp;|&nbsp; <strong>Prepared For:</strong> ${escapeHtml(client)}</p>
+      <h2>1. GDPR Article 28 Data Processing Addendum (Template)</h2><pre>${escapeHtml(cfDocs.dpa)}</pre>
+      <h2>2. EU AI Act (Regulation (EU) 2024/1689) Self-Assessment</h2><pre>${escapeHtml(cfDocs.ai)}</pre>
+      <h2>3. NIST SP 800-61 Aligned Incident Response Plan</h2><pre>${escapeHtml(cfDocs.irp)}</pre>
+      <h2>4. Vendor Self-Attested Security Questionnaire (SIG-Lite)</h2><pre>${escapeHtml(cfDocs.sig)}</pre>
+      <h2>5. CycloneDX v1.5 Software Bill of Materials (SBOM)</h2><pre>${escapeHtml(cfDocs.sbom)}</pre>
       <script>window.print();<\/script></body></html>`;
       const blob = new Blob([html], { type: 'text/html' });
       window.open(URL.createObjectURL(blob), '_blank');

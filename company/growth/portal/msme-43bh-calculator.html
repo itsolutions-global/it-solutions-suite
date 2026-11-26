@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSME Section 16 Compound Interest &amp; Income Tax Section 43B(h) Disallowance Calculator | Free Online Tool</title>
+  <meta name="description" content="Calculate MSME overdue invoice compound interest with monthly rests (3x RBI Bank Rate under Section 16 of MSMED Act 2006) and Section 43B(h) Income Tax expense disallowance impact. 100% private client-side calculator for CAs, CFOs, and MSMEs.">
+  <meta name="keywords" content="MSME interest calculator, Section 43B(h) calculator, MSMED Act Section 16 compound interest calculator, 3 times RBI bank rate calculator, MSME overdue payment notice format, CA MSME 43B(h) tool">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/msme-43bh-calculator">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "MSME Section 16 Interest & Section 43B(h) Tax Impact Calculator",
+        "url": "https://itsolutions-global.vercel.app/msme-43bh-calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How is MSME late payment interest calculated under Section 16 of the MSMED Act, 2006?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Under Section 16 of the MSMED Act, 2006, if a buyer fails to pay a registered Micro or Small Enterprise within the Section 15 timeline (maximum 15 days without written agreement, or up to 45 days max with written agreement), the buyer is liable to pay compound interest with monthly rests at three times (3x) the Bank Rate notified by the Reserve Bank of India (RBI)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the impact of Section 43B(h) of the Income Tax Act on unpaid MSME invoices?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Under Section 43B(h) of the Income Tax Act, 1961, any sum payable by an assessee to a registered Micro or Small Enterprise beyond the Section 15 time limit of the MSMED Act is allowed as a tax deduction only in the financial year in which it is actually paid. Furthermore, under Section 23 of the MSMED Act, interest paid under Section 16 is permanently disallowed as an income tax deduction."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="feedback.css">
+  <style>
+    .calc-wrap { max-width: 980px; margin: 0 auto; padding: 38px 16px 60px; }
+    .calc-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 22px; background: rgba(13,19,34,0.9); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 26px; margin-top: 24px; }
+    .f-group { margin-bottom: 14px; text-align: left; }
+    .f-group label { display: block; font-size: 0.82rem; font-weight: 700; color: #cbd5e1; margin-bottom: 5px; }
+    .f-input { width: 100%; padding: 10px 12px; border-radius: 8px; background: #050811; color: #fff; border: 1px solid rgba(255,255,255,0.22); font-size: max(1rem, 0.92rem); box-sizing: border-box; }
+    .f-input:focus-visible { outline: 2px solid #00f0ff; outline-offset: 2px; border-color: #00f0ff; }
+    .res-card { background: #050811; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 16px; margin-bottom: 12px; text-align: left; }
+    .faq-sec { margin-top: 42px; text-align: left; background: rgba(13,19,34,0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 24px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">MSME 43B(h) &amp; Sec 16 Calculator</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">&larr; All Tools</a>
+        <a href="payment-recovery.html" class="btn-nav">Full ClaimForge Dossier</a>
+        <a href="invoice-extractor.html" class="btn-nav">DocuPulse CSV</a>
+        <a href="solutions.html" class="btn-nav" style="color:#34d399;border-color:rgba(16,185,129,0.45);font-weight:700;">💼 CA Firm White-Label</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="calc-wrap">
+    <div style="text-align:center;">
+      <span style="font-size:0.78rem;font-weight:700;padding:4px 12px;border-radius:99px;background:rgba(251,191,36,0.14);color:#fbbf24;border:1px solid rgba(251,191,36,0.35);">
+        🇮🇳 Built for Chartered Accountants, CFOs &amp; Udyam Micro/Small Suppliers • 100% Browser Local
+      </span>
+      <h1 style="font-size:2.1rem;margin:14px 0 10px;">MSME Section 16 Compound Interest &amp; <span class="gradient-text">Section 43B(h) Tax Impact Calculator</span></h1>
+      <p style="color:#94a3b8;max-width:740px;margin:0 auto;line-height:1.6;">
+        Instantly compute monthly-rests compound interest (3x RBI Bank Rate) and fiscal year-end corporate income tax disallowance timing impact on overdue Micro &amp; Small Enterprise invoices.
+      </p>
+    </div>
+
+    <div class="calc-box">
+      <form onsubmit="event.preventDefault(); calcMsme();">
+        <div class="f-group">
+          <label for="mPrin">Unpaid Invoice Principal (₹ INR)</label>
+          <input id="mPrin" type="number" min="0" step="1" value="500000" oninput="calcMsme()" class="f-input">
+        </div>
+        <div class="f-group">
+          <label for="mCreditTerm">Written Agreement Credit Period (Section 15 Cap: Max 45 Days; 15 Days if No Agreement)</label>
+          <select id="mCreditTerm" onchange="calcMsme()" class="f-input">
+            <option value="15">15 Days (No Written Credit Agreement)</option>
+            <option value="30">30 Days Written Agreement</option>
+            <option value="45" selected>45 Days Maximum Statutory Cap</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label for="mTotalDays">Total Days Elapsed Since Acceptance of Goods/Services</label>
+          <input id="mTotalDays" type="number" min="1" value="110" oninput="calcMsme()" class="f-input">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="f-group">
+            <label for="mRbiRate">RBI Bank Rate (%) — Editable</label>
+            <input id="mRbiRate" type="number" step="0.05" min="0" value="6.50" oninput="calcMsme()" class="f-input">
+          </div>
+          <div class="f-group">
+            <label for="mTaxRate">Buyer Tax Bracket (%)</label>
+            <input id="mTaxRate" type="number" step="0.01" min="0" value="25.17" oninput="calcMsme()" class="f-input">
+          </div>
+        </div>
+        <p style="font-size:0.76rem;color:#94a3b8;line-height:1.45;margin:4px 0 0;">
+          Note: Applies only to Udyam-registered Micro and Small Enterprises registered prior to supply. Informational estimate; verify RBI Bank Rate for the relevant period with your CA.
+        </p>
+      </form>
+
+      <div>
+        <div class="res-card">
+          <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Overdue Days Past Appointed Day (Sec 15)</div>
+          <div id="mOutDays" style="font-size:1.4rem;font-weight:800;color:#38bdf8;margin-top:4px;">65 Days Overdue</div>
+        </div>
+        <div class="res-card">
+          <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Sec 16 Compound Interest (Monthly Rests @ 3x RBI = <span id="mOut3x">19.50%</span>)</div>
+          <div id="mOutInt" style="font-size:1.5rem;font-weight:800;color:#fbbf24;margin-top:4px;">₹0.00</div>
+          <div style="font-size:0.74rem;color:#fca5a5;margin-top:3px;">Permanently Non-Deductible Expense for Buyer under MSMED Sec 23</div>
+        </div>
+        <div class="res-card">
+          <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Buyer Year-End Sec 43B(h) Tax Cashflow Impact (If Unpaid by Mar 31)</div>
+          <div id="mOutTax" style="font-size:1.4rem;font-weight:800;color:#fb7185;margin-top:4px;">₹0.00</div>
+        </div>
+        <div class="res-card" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.4);">
+          <div style="font-size:0.75rem;color:#34d399;text-transform:uppercase;">Total Principal + Section 16 Interest Payable</div>
+          <div id="mOutTotal" style="font-size:1.65rem;font-weight:800;color:#34d399;margin-top:4px;">₹0.00</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+          <a href="payment-recovery.html" style="flex:1;text-align:center;text-decoration:none;background:linear-gradient(135deg,#00f0ff,#3b82f6);color:#040711;font-weight:800;padding:11px 14px;border-radius:8px;font-size:0.86rem;">
+            ⚡ Generate Formal CFO Notice in ClaimForge &rarr;
+          </a>
+          <button type="button" onclick="copyMsmeSummary()" style="background:rgba(255,255,255,0.08);color:#e2e8f0;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:11px 14px;font-weight:700;cursor:pointer;font-size:0.84rem;">
+            📋 Copy Summary
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="faq-sec">
+      <h2 style="margin-top:0;font-size:1.3rem;color:#fff;">Statutory Reference Guide: MSMED Act Section 15, 16, 23 &amp; Income Tax Section 43B(h)</h2>
+      <p style="font-size:0.9rem;color:#cbd5e1;line-height:1.65;">
+        <strong>1. Maximum Credit Window (Section 15):</strong> Even if a purchase order states Net-60 or Net-90 days, Section 15 caps the maximum legal credit period for registered Micro and Small Enterprises at <strong>45 days</strong> (or <strong>15 days</strong> where no written credit term exists).<br><br>
+        <strong>2. Monthly-Rests Compounding (Section 16):</strong> Unlike simple commercial interest, unpaid interest at 3x RBI Bank Rate compounds at the end of every month from the appointed day.<br><br>
+        <strong>3. CA Practice White-Labeling:</strong> Chartered Accountants and tax practitioners preparing Form 3CD Clause 22 / MSME-1 schedules can white-label full statutory reconciliation notices via our <a href="solutions.html" style="color:#00f0ff;">Digital White-Label Licensing Desk</a>.
+      </p>
+    </section>
+  </main>
+
+  <script src="whitelabel.js"></script>
+  <script src="feedback.js"></script>
+  <script>
+    let lastSummary = '';
+    function fmtInr(n) {
+      return '₹' + Number(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function calcMsme() {
+      const p = Math.max(0, parseFloat(document.getElementById('mPrin').value) || 0);
+      const term = parseInt(document.getElementById('mCreditTerm').value, 10) || 45;
+      const elapsed = Math.max(0, parseInt(document.getElementById('mTotalDays').value, 10) || 0);
+      const overdue = Math.max(0, elapsed - term);
+      const rbi = Math.max(0, parseFloat(document.getElementById('mRbiRate').value) || 6.5);
+      const rate3x = rbi * 3;
+      const r = rate3x / 100;
+      const taxPct = Math.max(0, parseFloat(document.getElementById('mTaxRate').value) || 25.17);
+
+      let interest = 0;
+      if (overdue > 0) {
+        const months = Math.floor(overdue / 30);
+        const rem = overdue % 30;
+        const comp = p * Math.pow(1 + r / 12, months) * (1 + (r * rem) / 365);
+        interest = comp - p;
+      }
+      const taxImpact = overdue > 0 ? p * (taxPct / 100) : 0;
+      const total = p + interest;
+
+      document.getElementById('mOut3x').textContent = rate3x.toFixed(2) + '%';
+      document.getElementById('mOutDays').textContent = `${overdue} Days Overdue (Past ${term}-Day Cap)`;
+      document.getElementById('mOutInt').textContent = fmtInr(interest);
+      document.getElementById('mOutTax').textContent = fmtInr(taxImpact);
+      document.getElementById('mOutTotal').textContent = fmtInr(total);
+
+      const brand = window.ITSGWhiteLabel ? window.ITSGWhiteLabel.getAttribution('ClaimForge MSME Calculator', 'MSME Sec 16 & 43B(h) Schedule') : '*Generated by ClaimForge — IT Solutions Global*';
+      lastSummary = `MSME SECTION 16 & 43B(h) CALCULATION SUMMARY\nPrincipal: ${fmtInr(p)}\nStatutory Credit Cap: ${term} Days | Overdue: ${overdue} Days\n3x RBI Rate (${rate3x.toFixed(2)}% Monthly Rests Interest): ${fmtInr(interest)}\nEst. Buyer Sec 43B(h) Year-End Tax Impact (@ ${taxPct}%): ${fmtInr(taxImpact)}\nTotal Payable: ${fmtInr(total)}\n\nNote: Informational mathematical estimate; not formal legal/tax advice.\n${brand}`;
+    }
+    function copyMsmeSummary() {
+      navigator.clipboard.writeText(lastSummary);
+      alert('Copied MSME calculation summary!');
+    }
+    window.addEventListener('DOMContentLoaded', calcMsme);
+  </script>
+</body>
+</html>

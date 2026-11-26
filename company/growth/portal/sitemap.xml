@@ -2,49 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://itsolutions-global.vercel.app/</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://itsolutions-global.vercel.app/msme-43bh-calculator.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.99</priority>
+  </url>
+  <url>
+    <loc>https://itsolutions-global.vercel.app/uk-late-payment-calculator.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.99</priority>
+  </url>
+  <url>
+    <loc>https://itsolutions-global.vercel.app/sbom-generator.html</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.99</priority>
+  </url>
+  <url>
     <loc>https://itsolutions-global.vercel.app/payment-recovery.html</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.98</priority>
   </url>
   <url>
     <loc>https://itsolutions-global.vercel.app/compliance-dossier.html</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.98</priority>
   </url>
   <url>
     <loc>https://itsolutions-global.vercel.app/scope-shield.html</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.98</priority>
   </url>
   <url>
     <loc>https://itsolutions-global.vercel.app/solutions.html</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.98</priority>
   </url>
   <url>
     <loc>https://itsolutions-global.vercel.app/contract-scanner.html</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://itsolutions-global.vercel.app/invoice-extractor.html</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://itsolutions-global.vercel.app/meeting-followup.html</loc>
-    <lastmod>2026-11-21</lastmod>
+    <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>

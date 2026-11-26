@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UK Statutory Late Payment Interest &amp; Compensation Calculator (8% + BoE Base Rate + £40/£70/£100)</title>
+  <meta name="description" content="Free 100% client-side UK commercial late payment calculator under the Late Payment of Commercial Debts (Interest) Act 1998. Compute daily statutory interest (8% + Bank of England base rate) and £40, £70, or £100 fixed debt recovery compensation.">
+  <meta name="keywords" content="UK statutory late payment interest calculator, Late Payment of Commercial Debts Act 1998 calculator, 8% plus Bank of England base rate calculator, 40 70 100 debt recovery compensation UK, overdue B2B invoice UK">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/uk-late-payment-calculator">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "UK Statutory Late Payment Interest & Compensation Calculator",
+        "url": "https://itsolutions-global.vercel.app/uk-late-payment-calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much statutory interest can a UK business charge on a late commercial invoice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Under the Late Payment of Commercial Debts (Interest) Act 1998, where no specific contract interest clause overrides it, UK B2B suppliers can claim statutory interest at 8% above the Bank of England reference base rate, calculated daily across the overdue period."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are the £40, £70, and £100 fixed late payment compensation tiers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In addition to statutory interest, creditors may claim a fixed debt recovery sum per overdue commercial invoice: £40 for unpaid debts under £1,000; £70 for debts from £1,000 to £9,999.99; and £100 for debts of £10,000 or more."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="feedback.css">
+  <style>
+    .calc-wrap { max-width: 980px; margin: 0 auto; padding: 38px 16px 60px; }
+    .calc-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 22px; background: rgba(13,19,34,0.9); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 26px; margin-top: 24px; }
+    .f-group { margin-bottom: 14px; text-align: left; }
+    .f-group label { display: block; font-size: 0.82rem; font-weight: 700; color: #cbd5e1; margin-bottom: 5px; }
+    .f-input { width: 100%; padding: 10px 12px; border-radius: 8px; background: #050811; color: #fff; border: 1px solid rgba(255,255,255,0.22); font-size: max(1rem, 0.92rem); box-sizing: border-box; }
+    .f-input:focus-visible { outline: 2px solid #00f0ff; outline-offset: 2px; border-color: #00f0ff; }
+    .res-card { background: #050811; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 16px; margin-bottom: 12px; text-align: left; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">UK Commercial Late-Pay Calculator</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">&larr; All Tools</a>
+        <a href="payment-recovery.html" class="btn-nav">Full ClaimForge Dossier</a>
+        <a href="contract-scanner.html" class="btn-nav">UK UCTA Contract Scanner</a>
+        <a href="solutions.html" class="btn-nav" style="color:#34d399;border-color:rgba(16,185,129,0.45);font-weight:700;">💼 Practice White-Label</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="calc-wrap">
+    <div style="text-align:center;">
+      <span style="font-size:0.78rem;font-weight:700;padding:4px 12px;border-radius:99px;background:rgba(56,189,248,0.14);color:#38bdf8;border:1px solid rgba(56,189,248,0.35);">
+        🇬🇧 Late Payment of Commercial Debts (Interest) Act 1998 • 100% Client-Side
+      </span>
+      <h1 style="font-size:2.1rem;margin:14px 0 10px;">UK Statutory Late Payment Interest &amp; <span class="gradient-text">£40/£70/£100 Compensation Calculator</span></h1>
+      <p style="color:#94a3b8;max-width:740px;margin:0 auto;line-height:1.6;">
+        Calculate daily statutory commercial interest (8% + Bank of England Reference Base Rate) and fixed recovery fees across single or multiple overdue B2B invoices.
+      </p>
+    </div>
+
+    <div class="calc-box">
+      <form onsubmit="event.preventDefault(); calcUk();">
+        <div class="f-group">
+          <label for="ukPrin">Unpaid Invoice Gross Total (£ GBP)</label>
+          <input id="ukPrin" type="number" min="0" step="0.01" value="3450.00" oninput="calcUk()" class="f-input">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="f-group">
+            <label for="ukDays">Days Overdue</label>
+            <input id="ukDays" type="number" min="1" value="62" oninput="calcUk()" class="f-input">
+          </div>
+          <div class="f-group">
+            <label for="ukInvCount">Number of Invoices</label>
+            <input id="ukInvCount" type="number" min="1" value="1" oninput="calcUk()" class="f-input">
+          </div>
+        </div>
+        <div class="f-group">
+          <label for="ukBoe">Bank of England Reference Base Rate (%) — Editable (+8% Statutory Margin Added Automatically)</label>
+          <input id="ukBoe" type="number" step="0.25" min="0" value="4.75" oninput="calcUk()" class="f-input">
+        </div>
+        <p style="font-size:0.76rem;color:#94a3b8;line-height:1.45;margin:4px 0 0;">
+          Informational calculation for UK B2B commercial transactions where no substantial contractual remedy applies. Verify current BoE reference rate (30 June / 31 Dec) before issuing formal claims.
+        </p>
+      </form>
+
+      <div>
+        <div class="res-card">
+          <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Combined Statutory Rate (8% + BoE Base) &amp; Daily Accrual</div>
+          <div id="ukOutRate" style="font-size:1.35rem;font-weight:800;color:#38bdf8;margin-top:4px;">12.75% APR (£1.21 / day)</div>
+        </div>
+        <div class="res-card">
+          <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Accrued Statutory Interest</div>
+          <div id="ukOutInt" style="font-size:1.45rem;font-weight:800;color:#fbbf24;margin-top:4px;">£0.00</div>
+        </div>
+        <div class="res-card">
+          <div style="font-size:0.75rem;color:#94a3b8;text-transform:uppercase;">Fixed Debt Recovery Compensation (£40 / £70 / £100 Tier)</div>
+          <div id="ukOutComp" style="font-size:1.45rem;font-weight:800;color:#c084fc;margin-top:4px;">£70.00</div>
+        </div>
+        <div class="res-card" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.4);">
+          <div style="font-size:0.75rem;color:#34d399;text-transform:uppercase;">Total Updated Commercial Balance</div>
+          <div id="ukOutTotal" style="font-size:1.65rem;font-weight:800;color:#34d399;margin-top:4px;">£0.00</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;">
+          <a href="payment-recovery.html" style="flex:1;text-align:center;text-decoration:none;background:linear-gradient(135deg,#00f0ff,#3b82f6);color:#040711;font-weight:800;padding:11px 14px;border-radius:8px;font-size:0.86rem;">
+            ⚡ Draft Pre-Action Notice in ClaimForge &rarr;
+          </a>
+          <button type="button" onclick="copyUkSummary()" style="background:rgba(255,255,255,0.08);color:#e2e8f0;border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:11px 14px;font-weight:700;cursor:pointer;font-size:0.84rem;">
+            📋 Copy Summary
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="whitelabel.js"></script>
+  <script src="feedback.js"></script>
+  <script>
+    let ukSummary = '';
+    function fmtGbp(n) {
+      return '£' + Number(n || 0).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function calcUk() {
+      const p = Math.max(0, parseFloat(document.getElementById('ukPrin').value) || 0);
+      const days = Math.max(1, parseInt(document.getElementById('ukDays').value, 10) || 1);
+      const count = Math.max(1, parseInt(document.getElementById('ukInvCount').value, 10) || 1);
+      const boe = Math.max(0, parseFloat(document.getElementById('ukBoe').value) || 0);
+      const totalRate = boe + 8.0;
+      const daily = (p * (totalRate / 100)) / 365;
+      const interest = daily * days;
+
+      let tierFee = 40;
+      if (p >= 10000) tierFee = 100;
+      else if (p >= 1000) tierFee = 70;
+      else if (p <= 0) tierFee = 0;
+
+      const comp = tierFee * count;
+      const total = p + interest + comp;
+
+      document.getElementById('ukOutRate').textContent = `${totalRate.toFixed(2)}% APR (${fmtGbp(daily)} / day)`;
+      document.getElementById('ukOutInt').textContent = fmtGbp(interest);
+      document.getElementById('ukOutComp').textContent = `${fmtGbp(comp)} (${count} x £${tierFee})`;
+      document.getElementById('ukOutTotal').textContent = fmtGbp(total);
+
+      const brand = window.ITSGWhiteLabel ? window.ITSGWhiteLabel.getAttribution('ClaimForge UK Calculator', 'Statutory Late-Payment Schedule') : '*Generated by ClaimForge — IT Solutions Global*';
+      ukSummary = `UK STATUTORY LATE PAYMENT CALCULATION (1998 ACT)\nPrincipal: ${fmtGbp(p)} (${days} Days Overdue)\nStatutory Rate (8% + ${boe}% BoE): ${totalRate.toFixed(2)}% APR (${fmtGbp(daily)}/day)\nAccrued Interest: ${fmtGbp(interest)}\nFixed Compensation: ${fmtGbp(comp)}\nTotal Balance: ${fmtGbp(total)}\n\nNote: Informational mathematical estimate; not formal legal advice.\n${brand}`;
+    }
+    function copyUkSummary() {
+      navigator.clipboard.writeText(ukSummary);
+      alert('Copied UK late-payment summary!');
+    }
+    window.addEventListener('DOMContentLoaded', calcUk);
+  </script>
+</body>
+</html>

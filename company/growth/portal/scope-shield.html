@@ -321,6 +321,7 @@ Upon irrevocable bank settlement of the total balance of ${fmtCurr(sym, totalFee
 
 Issued & Signed by: ${agency}
 
+NOTE: Operational commercial drafting template; verify compatibility with your underlying Master Services Agreement / SOW before execution. Not formal legal advice.
 ${attribution}`;
 
       scDocs.meta = { agency, client, sowRef, coRef, sym, totalHours, addedDays, totalFee, depositFee, effectiveRate, rushMult, parsedItems, dateStr, attribution };
@@ -346,26 +347,28 @@ ${attribution}`;
 
     function printChangeOrder() {
       const m = scDocs.meta;
+      const esc = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       const rowsHtml = m.parsedItems.map((it, i) =>
-        `<tr><td>${i+1}. ${it.desc}</td><td>${it.hrs} hrs</td><td style="text-align:right;">${fmtCurr(m.sym, it.lineTotal)}</td></tr>`
+        `<tr><td>${i+1}. ${esc(it.desc)}</td><td>${esc(it.hrs)} hrs</td><td style="text-align:right;">${esc(fmtCurr(m.sym, it.lineTotal))}</td></tr>`
       ).join('');
-      const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Change Order ${m.coRef}</title>
+      const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Change Order ${esc(m.coRef)}</title>
       <style>body{font-family:sans-serif;max-width:780px;margin:36px auto;padding:30px;color:#0f172a;border:1px solid #cbd5e1;border-radius:10px;}
       table{width:100%;border-collapse:collapse;margin:20px 0;}th,td{padding:11px;border-bottom:1px solid #e2e8f0;text-align:left;}
       th{background:#f8fafc;}.tot td{font-weight:800;font-size:1.1rem;background:#f0fdf4;border-top:2px solid #0f172a;}</style></head>
       <body>
       <div style="display:flex;justify-content:space-between;border-bottom:2px solid #0f172a;padding-bottom:14px;">
-        <div><h2 style="margin:0;">BILATERAL CHANGE ORDER ADDENDUM</h2><p style="margin:4px 0 0;font-size:0.85rem;">Amending Statement of Work: ${m.sowRef}</p></div>
-        <div style="text-align:right;"><strong>Ref: ${m.coRef}</strong><br>Date: ${m.dateStr}</div>
+        <div><h2 style="margin:0;">BILATERAL CHANGE ORDER ADDENDUM</h2><p style="margin:4px 0 0;font-size:0.85rem;">Amending Statement of Work: ${esc(m.sowRef)}</p></div>
+        <div style="text-align:right;"><strong>Ref: ${esc(m.coRef)}</strong><br>Date: ${esc(m.dateStr)}</div>
       </div>
-      <p><strong>Provider:</strong> ${m.agency} &nbsp;|&nbsp; <strong>Client:</strong> ${m.client} &nbsp;|&nbsp; <strong>Timeline Impact:</strong> +${m.addedDays} Business Days</p>
+      <p><strong>Provider:</strong> ${esc(m.agency)} &nbsp;|&nbsp; <strong>Client:</strong> ${esc(m.client)} &nbsp;|&nbsp; <strong>Timeline Impact:</strong> +${esc(m.addedDays)} Business Days</p>
       <table><thead><tr><th>Out-of-Scope Deliverable</th><th>Effort</th><th style="text-align:right;">Fee (${m.rushMult.toFixed(1)}x Tier)</th></tr></thead>
-      <tbody>${rowsHtml}<tr class="tot"><td>TOTAL CHANGE ORDER FEE (50% Deposit: ${fmtCurr(m.sym, m.depositFee)})</td><td>${m.totalHours} hrs</td><td style="text-align:right;">${fmtCurr(m.sym, m.totalFee)}</td></tr></tbody></table>
+      <tbody>${rowsHtml}<tr class="tot"><td>TOTAL CHANGE ORDER FEE (50% Deposit: ${esc(fmtCurr(m.sym, m.depositFee))})</td><td>${esc(m.totalHours)} hrs</td><td style="text-align:right;">${esc(fmtCurr(m.sym, m.totalFee))}</td></tr></tbody></table>
       <div style="display:flex;justify-content:space-between;margin-top:40px;">
-        <div><strong>Provider Signature (${m.agency}):</strong><br><br>___________________________</div>
-        <div><strong>Client Approval (${m.client}):</strong><br><br>___________________________</div>
+        <div><strong>Provider Signature (${esc(m.agency)}):</strong><br><br>___________________________</div>
+        <div><strong>Client Approval (${esc(m.client)}):</strong><br><br>___________________________</div>
       </div>
-      <p style="font-size:0.8rem;color:#64748b;margin-top:30px;">${m.attribution}</p>
+      <p style="font-size:0.78rem;color:#64748b;margin-top:24px;">NOTE: Commercial drafting template; not formal legal advice.</p>
+      <p style="font-size:0.8rem;color:#475569;margin-top:8px;">${esc(m.attribution)}</p>
       <script>window.print();<\/script></body></html>`;
       const blob = new Blob([html], { type: 'text/html' });
       window.open(URL.createObjectURL(blob), '_blank');

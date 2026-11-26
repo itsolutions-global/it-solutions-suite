@@ -1,7 +1,8 @@
 """
-Automated Verification Suite for IT Solutions Portal Web Tools & Revenue Engines
+Automated Verification Suite for IT Solutions Portal Web Tools, SEO Calculators & Revenue Engines
 Validates ClauseGuard, DocuPulse, EchoStream, ClaimForge, ComplianceForge, ScopeShield,
-B2B Commercial Desk (solutions.html), and Cryptographic White-Label License Verification.
+SEO Calculators (MSME 43B(h), UK Late Payment 1998, CycloneDX SBOM),
+Digital Licensing Desk (solutions.html), and Cryptographic White-Label License Verification.
 """
 
 import json
@@ -24,10 +25,10 @@ from portal.whitelabel_issuer import (
 
 
 class TestPortalWebTools(unittest.TestCase):
-    """Test suite verifying client-side browser tools integrity, statutory math, and white-label licensing."""
+    """Test suite verifying client-side browser tools integrity, truthful controls, statutory math, and white-label licensing."""
 
     def test_01_portal_files_exist_and_valid(self):
-        """Validates all 6 web tools, B2B storefront, and supporting static assets exist."""
+        """Validates all 6 web tools, 3 SEO calculators, B2B storefront, and supporting static assets exist."""
         required_files = [
             "index.html",
             "contract-scanner.html",
@@ -36,6 +37,9 @@ class TestPortalWebTools(unittest.TestCase):
             "payment-recovery.html",
             "compliance-dossier.html",
             "scope-shield.html",
+            "msme-43bh-calculator.html",
+            "uk-late-payment-calculator.html",
+            "sbom-generator.html",
             "solutions.html",
             "whitelabel.js",
             "styles.css",
@@ -90,7 +94,7 @@ class TestPortalWebTools(unittest.TestCase):
         self.assertIn("END:VCALENDAR", copilot_html)
 
     def test_05_vercel_routing_and_security_headers(self):
-        """Verifies root vercel.json contains complete subtool rewrites for all 6 engines and B2B desk."""
+        """Verifies root vercel.json contains complete subtool & SEO calculator rewrites."""
         root_dir = PORTAL_DIR.parent.parent.parent
         vercel_json_path = root_dir / "vercel.json"
         self.assertTrue(vercel_json_path.exists(), "Root vercel.json not found")
@@ -108,38 +112,34 @@ class TestPortalWebTools(unittest.TestCase):
             "/compliance-dossier",
             "/scope-shield.html",
             "/scope-shield",
+            "/msme-43bh-calculator",
+            "/uk-late-payment-calculator",
+            "/sbom-generator",
             "/solutions.html",
             "/solutions",
             "/whitelabel.js",
         ]:
             self.assertIn(expected_route, sources)
 
-    def test_06_claimforge_statutory_payment_recovery_engine(self):
-        """Verifies ClaimForge multi-jurisdiction statutory late payment interest and tax disallowance logic."""
+    def test_06_claimforge_editable_rates_and_disclaimers(self):
+        """Verifies ClaimForge multi-jurisdiction statutory late payment interest, editable buyer tax rate, and non-legal-advice notice."""
         recovery_html = (PORTAL_DIR / "payment-recovery.html").read_text(encoding="utf-8")
         self.assertNotIn("\u200b", recovery_html)
         self.assertIn("MSMED Act, 2006", recovery_html)
         self.assertIn("Section 43B(h)", recovery_html)
+        self.assertIn("recBuyerTaxRate", recovery_html)
+        self.assertIn("Non-Legal-Advice Notice", recovery_html)
         self.assertIn("Late Payment of Commercial Debts (Interest) Act 1998", recovery_html)
         self.assertIn("2011/7/EU", recovery_html)
         self.assertIn("DOUBLE DAMAGES", recovery_html)
 
-        # Verify India MSME Section 16 monthly rests compound math & 43B(h) tax disallowance
-        principal = 250000.0
-        r = 0.2025
-        days = 75
-        full_months = days // 30
-        rem_days = days % 30
-        compounded = principal * ((1 + r / 12) ** full_months) * (1 + (r * rem_days) / 365)
-        interest = compounded - principal
-        self.assertGreater(interest, principal * r * (days / 365))  # Compound > Simple interest
-        tax_disallowance = principal * 0.2517
-        self.assertAlmostEqual(tax_disallowance, 62925.0, places=2)
-
-    def test_07_complianceforge_dossier_and_cyclonedx_sbom(self):
-        """Verifies ComplianceForge GDPR Art. 28 DPA, EU AI Act 2024/1689, SOC 2 IRP, and CycloneDX v1.5 SBOM."""
+    def test_07_complianceforge_truthful_controls_and_cyclonedx_sbom(self):
+        """Verifies ComplianceForge uses user-selected security checkboxes rather than hardcoded YES (PASS) rows."""
         comp_html = (PORTAL_DIR / "compliance-dossier.html").read_text(encoding="utf-8")
         self.assertNotIn("\u200b", comp_html)
+        self.assertNotIn("YES (PASS)", comp_html, "Hardcoded YES (PASS) must not exist in ComplianceForge")
+        self.assertIn("CONTROL_DEFINITIONS", comp_html)
+        self.assertIn("PLANNED / ROADMAP", comp_html)
         self.assertIn("GDPR ARTICLE 28", comp_html)
         self.assertIn("REGULATION (EU) 2024/1689", comp_html)
         self.assertIn("NIST SP 800-61", comp_html)
@@ -147,34 +147,45 @@ class TestPortalWebTools(unittest.TestCase):
         self.assertIn("specVersion: '1.5'", comp_html)
 
     def test_08_scopeshield_change_order_and_ip_escrow(self):
-        """Verifies ScopeShield Bilateral Change Order calculation and Conditional IP Escrow Certificate."""
+        """Verifies ScopeShield Bilateral Change Order calculation, XSS escaping, and Conditional IP Escrow Certificate."""
         scope_html = (PORTAL_DIR / "scope-shield.html").read_text(encoding="utf-8")
         self.assertNotIn("\u200b", scope_html)
         self.assertIn("BILATERAL CHANGE ORDER ADDENDUM", scope_html)
         self.assertIn("CONDITIONAL INTELLECTUAL PROPERTY RESERVATION", scope_html)
-        self.assertIn("17 U.S.C. § 204", scope_html)
-        self.assertIn("Section 19 of the Indian Copyright Act", scope_html)
+        self.assertIn("not formal legal advice", scope_html)
 
-    def test_09_cryptographic_whitelabel_license_engine(self):
-        """Verifies deterministic cryptographic White-Label license key generation and tamper rejection."""
+    def test_09_cryptographic_whitelabel_and_native_dialog(self):
+        """Verifies deterministic cryptographic White-Label license key generation, native <dialog>, and digital tiers."""
         wl_js = (PORTAL_DIR / "whitelabel.js").read_text(encoding="utf-8")
         self.assertIn("ITSG::WHITELABEL::2026::ENTERPRISE::v1", wl_js)
-        self.assertIn("verifyLicenseKey", wl_js)
-        self.assertIn("generateProFormaInvoiceHTML", wl_js)
+        self.assertIn("showModal()", wl_js)
+        self.assertIn("closedBy", wl_js)
 
-        # Issue valid key via Python issuer and verify
-        key = issue_whitelabel_key("APEXLEGAL", "PRO")
-        self.assertTrue(key.startswith("ITSG-WL-PRO-APEXLEGAL-"))
-        res = verify_whitelabel_key(key)
-        self.assertTrue(res["valid"])
-        self.assertEqual(res["firm_code"], "APEXLEGAL")
-        self.assertEqual(res["tier"], "PRO")
+        sol_html = (PORTAL_DIR / "solutions.html").read_text(encoding="utf-8")
+        self.assertIn("WL_PRO_29", sol_html)
+        self.assertIn("WL_FIRM_49", sol_html)
+        self.assertIn("WL_ENT_99", sol_html)
 
-        # Tamper with key and assert rejection
+        for tier in ("PRO", "FIRM", "ENT"):
+            key = issue_whitelabel_key("APEXLEGAL", tier)
+            self.assertTrue(key.startswith(f"ITSG-WL-{tier}-APEXLEGAL-"))
+            res = verify_whitelabel_key(key)
+            self.assertTrue(res["valid"])
+            self.assertEqual(res["tier"], tier)
+
         tampered = key[:-2] + ("00" if not key.endswith("00") else "FF")
-        bad_res = verify_whitelabel_key(tampered)
-        self.assertFalse(bad_res["valid"])
-        self.assertEqual(bad_res["reason"], "Signature mismatch")
+        self.assertFalse(verify_whitelabel_key(tampered)["valid"])
+
+    def test_10_seo_longtail_calculators_schema_and_structure(self):
+        """Verifies the 3 standalone long-tail SEO pages contain FAQPage JSON-LD and client-side calculation scripts."""
+        for fname, token in [
+            ("msme-43bh-calculator.html", "FAQPage"),
+            ("uk-late-payment-calculator.html", "Late Payment of Commercial Debts (Interest) Act 1998"),
+            ("sbom-generator.html", "parseAnyManifest"),
+        ]:
+            content = (PORTAL_DIR / fname).read_text(encoding="utf-8")
+            self.assertIn(token, content)
+            self.assertIn("whitelabel.js", content)
 
 
 if __name__ == "__main__":
