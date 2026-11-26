@@ -6,13 +6,13 @@
 (function () {
   'use strict';
 
-  const PORTAL_URL = "https://it-solutions-global.vercel.app";
+  const PORTAL_URL = "https://itsolutions-global.vercel.app";
 
   // 1. Multi-Platform Install Commands
   const installCommands = {
     pip: "pip install it-solutions-suite",
-    ps: "irm https://it-solutions-global.vercel.app/install.ps1 | iex",
-    sh: "curl -fsSL https://it-solutions-global.vercel.app/install.sh | bash",
+    ps: "irm https://itsolutions-global.vercel.app/install.ps1 | iex",
+    sh: "curl -fsSL https://itsolutions-global.vercel.app/install.sh | bash",
     docker: "docker run -d -p 8080:8080 itsolutionsglobal/corepulse:latest",
     git: "git clone https://github.com/itsolutions-global/it-solutions-suite.git"
   };

@@ -7,11 +7,11 @@
   <meta name="description" content="Free, 100% private meeting notes to follow-up email generator. Turn messy meeting transcripts and bullet notes into executive summaries, action items, and follow-up emails in 1 click. Zero server uploads. Free & open-source.">
   <meta name="keywords" content="free meeting notes generator, transcript to follow up email, meeting action items extractor, meeting recap generator, offline meeting assistant, local AI meeting co-pilot, zero upload meeting summary, free productivity tool">
   <meta name="theme-color" content="#06080d">
-  <link rel="canonical" href="https://it-solutions-global.vercel.app/meeting-followup.html">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/meeting-followup.html">
 
   <!-- OpenGraph Metadata -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://it-solutions-global.vercel.app/meeting-followup.html">
+  <meta property="og:url" content="https://itsolutions-global.vercel.app/meeting-followup.html">
   <meta property="og:title" content="EchoStream — Free Meeting Notes &amp; Transcript to Follow-Up Email Generator">
   <meta property="og:description" content="Turn messy transcripts and notes into polished follow-up emails with assigned action items in 1 click right in your browser. 100% private, zero uploads.">
   <meta property="twitter:card" content="summary_large_image">
@@ -23,9 +23,9 @@
     "@graph": [
       {
         "@type": "WebApplication",
-        "@id": "https://it-solutions-global.vercel.app/meeting-followup.html#webapp",
+        "@id": "https://itsolutions-global.vercel.app/meeting-followup.html#webapp",
         "name": "EchoStream Meeting Notes to Email Co-Pilot",
-        "url": "https://it-solutions-global.vercel.app/meeting-followup.html",
+        "url": "https://itsolutions-global.vercel.app/meeting-followup.html",
         "applicationCategory": "BusinessApplication, ProductivityApplication",
         "operatingSystem": "Any (Web Browser, Offline Safe)",
         "offers": {
@@ -37,7 +37,7 @@
       },
       {
         "@type": "FAQPage",
-        "@id": "https://it-solutions-global.vercel.app/meeting-followup.html#faq",
+        "@id": "https://itsolutions-global.vercel.app/meeting-followup.html#faq",
         "mainEntity": [
           {
             "@type": "Question",
@@ -764,16 +764,23 @@
         provenanceHash = Math.random().toString(36).substring(2) + Date.now().toString(36);
       }
 
+      const wlCfg = window.ITSGWhiteLabel && window.ITSGWhiteLabel.getConfig();
+      const issuerName = (wlCfg && wlCfg.active && wlCfg.firmName)
+        ? `${wlCfg.firmName}${wlCfg.firmCredential ? ' (' + wlCfg.firmCredential + ')' : ''}`
+        : 'IT Solutions Global Corporation (EchoStream Triad OS v1.2)';
+
       let exportContent = `${lastGeneratedEmail}\n\n`;
       exportContent += `---\n\n`;
       exportContent += `### 🛡️ Cryptographic Provenance & Authenticity Seal\n`;
       exportContent += `\`\`\`text\n`;
-      exportContent += `ISSUER:           IT Solutions Global Corporation (EchoStream Triad OS v1.2)\n`;
+      exportContent += `ISSUER:           ${issuerName}\n`;
       exportContent += `PROVENANCE HASH:  SHA256:${provenanceHash}\n`;
       exportContent += `ACTION ITEMS:     ${lastActionItems.length} parsed milestones\n`;
       exportContent += `DECISIONS LOGGED: ${lastDecisions.length} recorded agreements\n`;
       exportContent += `EXECUTION MODE:   100% Client-Side Air-Gapped Heuristics (Zero Server Ingestion)\n`;
-      exportContent += `VERIFY AUTHENTIC: https://it-solutions-global.vercel.app/meeting-followup.html\n`;
+      if (!wlCfg || !wlCfg.active) {
+        exportContent += `VERIFY AUTHENTIC: https://itsolutions-global.vercel.app/meeting-followup\n`;
+      }
       exportContent += `\`\`\`\n`;
 
       const blob = new Blob([exportContent], { type: 'text/markdown;charset=utf-8' });
@@ -820,7 +827,7 @@
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
         "BEGIN:VEVENT",
-        `UID:echostream-${Date.now()}@it-solutions-global.vercel.app`,
+        `UID:echostream-${Date.now()}@itsolutions-global.vercel.app`,
         `DTSTAMP:${dtStamp}`,
         `DTSTART:${dtStart}`,
         `DTEND:${dtEnd}`,

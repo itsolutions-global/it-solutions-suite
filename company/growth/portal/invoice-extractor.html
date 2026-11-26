@@ -7,11 +7,11 @@
   <meta name="description" content="Free, 100% private invoice-to-CSV extractor and math auditor. Parse billing details, line items, and taxes into Excel/CSV and catch math errors locally in your browser. Zero cloud uploads. Free & open-source.">
   <meta name="keywords" content="free invoice extractor, invoice to CSV converter, receipt to Excel, invoice math auditor, audit contractor invoices, local receipt parser, offline invoice scanner, free bookkeeping tool">
   <meta name="theme-color" content="#06080d">
-  <link rel="canonical" href="https://it-solutions-global.vercel.app/invoice-extractor.html">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/invoice-extractor.html">
 
   <!-- OpenGraph Metadata -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://it-solutions-global.vercel.app/invoice-extractor.html">
+  <meta property="og:url" content="https://itsolutions-global.vercel.app/invoice-extractor.html">
   <meta property="og:title" content="DocuPulse — Free Invoice &amp; Receipt to Excel/CSV Extractor &amp; Math Auditor">
   <meta property="og:description" content="Parse invoices into clean CSV/Excel spreadsheets and audit calculations locally in your browser. 100% confidential, zero server uploads.">
   <meta property="twitter:card" content="summary_large_image">
@@ -23,9 +23,9 @@
     "@graph": [
       {
         "@type": "WebApplication",
-        "@id": "https://it-solutions-global.vercel.app/invoice-extractor.html#webapp",
+        "@id": "https://itsolutions-global.vercel.app/invoice-extractor.html#webapp",
         "name": "DocuPulse Invoice to CSV Extractor & Math Auditor",
-        "url": "https://it-solutions-global.vercel.app/invoice-extractor.html",
+        "url": "https://itsolutions-global.vercel.app/invoice-extractor.html",
         "applicationCategory": "BusinessApplication, FinanceApplication",
         "operatingSystem": "Any (Web Browser, Offline Safe)",
         "offers": {
@@ -37,7 +37,7 @@
       },
       {
         "@type": "FAQPage",
-        "@id": "https://it-solutions-global.vercel.app/invoice-extractor.html#faq",
+        "@id": "https://itsolutions-global.vercel.app/invoice-extractor.html#faq",
         "mainEntity": [
           {
             "@type": "Question",
@@ -829,9 +829,17 @@
         provenanceHash = Math.random().toString(36).substring(2) + Date.now().toString(36);
       }
 
-      let md = `# DocuPulse Financial Audit & Reconciliation Ledger\n\n`;
+      const wlCfg = window.ITSGWhiteLabel && window.ITSGWhiteLabel.getConfig();
+      const issuerName = (wlCfg && wlCfg.active && wlCfg.firmName)
+        ? `${wlCfg.firmName}${wlCfg.firmCredential ? ' (' + wlCfg.firmCredential + ')' : ''}`
+        : 'IT Solutions Global Corporation (DocuPulse Triad OS v1.2)';
+      const attrMd = window.ITSGWhiteLabel
+        ? window.ITSGWhiteLabel.getAttribution('DocuPulse', 'Financial Reconciliation Audit')
+        : '*Audited using [DocuPulse — IT Solutions Global](https://itsolutions-global.vercel.app/invoice-extractor) (100% Client-Side Local Verification &bull; Zero Server Uploads)*';
+
+      let md = `# Financial Audit & Reconciliation Ledger\n\n`;
       md += `> **Vendor:** \`${d.vendor}\` &nbsp;|&nbsp; **Invoice #:** \`${d.invoiceNum}\` &nbsp;|&nbsp; **Status:** \`${d.isMathValid ? "MATHEMATICALLY VERIFIED ✔" : "DISCREPANCY FLAGGED ⚠"}\`\n\n`;
-      md += `*Audited using [DocuPulse — IT Solutions Global](https://it-solutions-global.vercel.app/invoice-extractor.html) (100% Client-Side Local Verification &bull; Zero Server Uploads)*\n\n`;
+      md += `${attrMd}\n\n`;
       md += `---\n\n`;
       md += `## Statement of Financial Figures\n\n`;
       md += `- **Issue Date:** ${d.issueDate}\n`;
@@ -854,10 +862,12 @@
       md += `\n---\n\n`;
       md += `### 🛡️ Cryptographic Provenance & Authenticity Seal\n`;
       md += `\`\`\`text\n`;
-      md += `ISSUER:           IT Solutions Global Corporation (DocuPulse Triad OS v1.2)\n`;
+      md += `ISSUER:           ${issuerName}\n`;
       md += `PROVENANCE HASH:  SHA256:${provenanceHash}\n`;
       md += `EXECUTION MODE:   100% Client-Side Air-Gapped Heuristics (Zero Server Ingestion)\n`;
-      md += `VERIFY AUTHENTIC: https://it-solutions-global.vercel.app/invoice-extractor.html\n`;
+      if (!wlCfg || !wlCfg.active) {
+        md += `VERIFY AUTHENTIC: https://itsolutions-global.vercel.app/invoice-extractor\n`;
+      }
       md += `\`\`\`\n`;
 
       const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });

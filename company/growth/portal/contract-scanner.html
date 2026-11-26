@@ -7,11 +7,11 @@
   <meta name="description" content="Free, 100% private contract and NDA risk scanner. Audit agreements for unlimited liability, IP grabs, auto-renewal traps, and unfair payment terms locally in your browser. Zero cloud uploads. Free & open-source.">
   <meta name="keywords" content="free contract scanner, offline contract review, NDA risk analyzer, contract redline generator, freelance contract audit, private contract analysis, unmetered contract tool, local contract checker">
   <meta name="theme-color" content="#06080d">
-  <link rel="canonical" href="https://it-solutions-global.vercel.app/contract-scanner.html">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/contract-scanner.html">
 
   <!-- OpenGraph Metadata -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://it-solutions-global.vercel.app/contract-scanner.html">
+  <meta property="og:url" content="https://itsolutions-global.vercel.app/contract-scanner.html">
   <meta property="og:title" content="ClauseGuard — Free Offline Contract &amp; NDA Risk Scanner &amp; Redline Generator">
   <meta property="og:description" content="Instantly scan contracts, MSAs, and NDAs for predatory clauses right in your browser. 100% private, zero server uploads, actionable redlines.">
   <meta property="twitter:card" content="summary_large_image">
@@ -23,9 +23,9 @@
     "@graph": [
       {
         "@type": "WebApplication",
-        "@id": "https://it-solutions-global.vercel.app/contract-scanner.html#webapp",
+        "@id": "https://itsolutions-global.vercel.app/contract-scanner.html#webapp",
         "name": "ClauseGuard Contract Risk Scanner",
-        "url": "https://it-solutions-global.vercel.app/contract-scanner.html",
+        "url": "https://itsolutions-global.vercel.app/contract-scanner.html",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Any (Web Browser, Offline Safe)",
         "offers": {
@@ -37,7 +37,7 @@
       },
       {
         "@type": "FAQPage",
-        "@id": "https://it-solutions-global.vercel.app/contract-scanner.html#faq",
+        "@id": "https://itsolutions-global.vercel.app/contract-scanner.html#faq",
         "mainEntity": [
           {
             "@type": "Question",
@@ -809,7 +809,7 @@
 
       let text = `# ClauseGuard Contract Risk Audit & Proposed Redlines\n`;
       text += `Score: ${lastContractScore}/100 | Risks Detected: ${lastAuditFindings.length}\n`;
-      text += `Generated locally via IT Solutions Global (https://it-solutions-global.vercel.app/contract-scanner.html)\n\n`;
+      text += `Generated locally via IT Solutions Global (https://itsolutions-global.vercel.app/contract-scanner.html)\n\n`;
 
       lastAuditFindings.forEach((f, idx) => {
         text += `## ${idx + 1}. [${f.severity}] ${f.title} (Line ${f.lineNum})\n`;
@@ -849,9 +849,15 @@
         text += `• ${f.redline}\n\n`;
       });
 
+      const wlCfg = window.ITSGWhiteLabel && window.ITSGWhiteLabel.getConfig();
+      const brandLine = window.ITSGWhiteLabel
+        ? window.ITSGWhiteLabel.getAttribution('ClauseGuard', 'Contract Risk Audit')
+        : 'Audit completed via ClauseGuard — IT Solutions Global';
       text += `--------------------------------------------------------------------\n`;
-      text += `Audit completed via ClauseGuard — IT Solutions Global\n`;
-      text += `https://it-solutions-global.vercel.app/contract-scanner.html\n`;
+      text += `${brandLine}\n`;
+      if (!wlCfg || !wlCfg.active) {
+        text += `https://itsolutions-global.vercel.app/contract-scanner\n`;
+      }
 
       const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
@@ -882,9 +888,17 @@
         provenanceHash = Math.random().toString(36).substring(2) + Date.now().toString(36);
       }
 
+      const wlCfg = window.ITSGWhiteLabel && window.ITSGWhiteLabel.getConfig();
+      const issuerName = (wlCfg && wlCfg.active && wlCfg.firmName)
+        ? `${wlCfg.firmName}${wlCfg.firmCredential ? ' (' + wlCfg.firmCredential + ')' : ''}`
+        : 'IT Solutions Global Corporation (ClauseGuard Triad OS v1.2)';
+      const attrMd = window.ITSGWhiteLabel
+        ? window.ITSGWhiteLabel.getAttribution('ClauseGuard', 'Contract Risk Assessment')
+        : '*Prepared using [ClauseGuard — IT Solutions Global](https://itsolutions-global.vercel.app/contract-scanner) (100% Client-Side Local Verification &bull; Zero Server Uploads)*';
+
       let md = `# Contract Risk Assessment & Proposed Redlines\n\n`;
       md += `> **Audit Score:** \`${lastContractScore}/100\` &nbsp;|&nbsp; **Identified Risks:** \`${lastAuditFindings.length}\` &nbsp;|&nbsp; **Generated:** ${new Date().toLocaleDateString()}\n\n`;
-      md += `*Prepared using [ClauseGuard — IT Solutions Global](https://it-solutions-global.vercel.app/contract-scanner.html) (100% Client-Side Local Verification &bull; Zero Server Uploads)*\n\n`;
+      md += `${attrMd}\n\n`;
       md += `---\n\n`;
       md += `## Executive Summary of Risks\n\n`;
 
@@ -901,13 +915,15 @@
       });
 
       md += `### Audit Disclaimer\n`;
-      md += `This report was generated via automated heuristic review with ClauseGuard. It helps identify commercial exposure and drafting issues for negotiation, but does not constitute formal legal counsel.\n\n`;
+      md += `This report was generated via automated heuristic review. It helps identify commercial exposure and drafting issues for negotiation, but does not constitute formal legal counsel.\n\n`;
       md += `### 🛡️ Cryptographic Provenance & Authenticity Seal\n`;
       md += `\`\`\`text\n`;
-      md += `ISSUER:           IT Solutions Global Corporation (ClauseGuard Triad OS v1.2)\n`;
+      md += `ISSUER:           ${issuerName}\n`;
       md += `PROVENANCE HASH:  SHA256:${provenanceHash}\n`;
       md += `EXECUTION MODE:   100% Client-Side Air-Gapped Heuristics (Zero Server Ingestion)\n`;
-      md += `VERIFY AUTHENTIC: https://it-solutions-global.vercel.app/contract-scanner.html\n`;
+      if (!wlCfg || !wlCfg.active) {
+        md += `VERIFY AUTHENTIC: https://itsolutions-global.vercel.app/contract-scanner\n`;
+      }
       md += `\`\`\`\n`;
 
       const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
