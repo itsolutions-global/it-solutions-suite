@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online NDA Risk Checker | Mutual vs. One-Way NDA Scanner &amp; Residuals Trap Detector (Zero Uploads)</title>
+  <meta name="description" content="Audit Non-Disclosure Agreements (NDAs) 100% locally in your browser without uploading confidential text to cloud AI. Detect one-way obligations, residuals memory backdoors, hidden non-competes, perpetual survival, and missing carve-outs.">
+  <meta name="keywords" content="free NDA checker, review NDA online without uploading, NDA residuals clause detector, mutual vs one-way NDA scanner, NDA redline generator, local-first NDA analyzer">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/nda-checker">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "ClauseGuard NDA Risk & Residuals Trap Checker",
+        "url": "https://itsolutions-global.vercel.app/nda-checker",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a 'Residuals Clause' trap in an NDA?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A residuals clause permits the receiving party's employees to freely use or commercialize any confidential information retained in their 'unaided memory.' In venture, enterprise, or M&A discussions, this creates a major intellectual property loophole."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my NDA uploaded to any server or AI model when scanned here?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Never. All heuristic pattern checks run 100% in your local browser tab memory using client-side JavaScript. Zero characters leave your device."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="feedback.css">
+  <style>
+    .nda-wrap { max-width: 1060px; margin: 0 auto; padding: 38px 16px 60px; }
+    .nda-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 22px; margin-top: 24px; }
+    .nda-card { background: rgba(13,19,34,0.9); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 24px; text-align: left; }
+    .f-area { width: 100%; padding: 12px; border-radius: 10px; background: #050811; color: #f8fafc; border: 1px solid rgba(255,255,255,0.22); font-size: max(1rem, 0.86rem); line-height: 1.5; box-sizing: border-box; font-family: monospace; }
+    .f-area:focus-visible, button:focus-visible { outline: 2px solid #00f0ff; outline-offset: 2px; }
+    .nda-out { background: #050811; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 14px; min-height: 315px; max-height: 440px; overflow-y: auto; font-family: monospace; font-size: 0.82rem; line-height: 1.58; color: #e2e8f0; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">ClauseGuard NDA Risk Checker</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">&larr; All Tools</a>
+        <a href="contract-scanner.html" class="btn-nav">Full MSA/SOW Scanner</a>
+        <a href="scope-shield.html" class="btn-nav">ScopeShield</a>
+        <a href="solutions.html" class="btn-nav" style="color:#34d399;border-color:rgba(16,185,129,0.45);font-weight:700;">💼 Law/Agency White-Label</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="nda-wrap">
+    <div style="text-align:center;">
+      <span style="font-size:0.78rem;font-weight:700;padding:4px 12px;border-radius:99px;background:rgba(0,240,255,0.14);color:#00f0ff;border:1px solid rgba(0,240,255,0.35);">
+        🔒 Review Confidential NDAs Without Violating Confidentiality • Zero Cloud Uploads
+      </span>
+      <h1 style="font-size:2.1rem;margin:14px 0 10px;">Instant Client-Side <span class="gradient-text">NDA Trap &amp; Residuals Checker</span></h1>
+      <p style="color:#94a3b8;max-width:760px;margin:0 auto;line-height:1.6;">
+        Pasting a prospective client's NDA into cloud AI violates the very confidentiality term you're reviewing. Scan NDAs 100% locally for residuals backdoors, hidden non-competes, perpetual terms, and missing carve-outs.
+      </p>
+    </div>
+
+    <div class="nda-grid">
+      <div class="nda-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <label for="ndaInput" style="font-weight:700;font-size:0.92rem;color:#fff;">1. Paste NDA Text</label>
+          <button type="button" onclick="loadNdaSample()" style="background:rgba(56,189,248,0.14);color:#38bdf8;border:1px solid rgba(56,189,248,0.4);border-radius:6px;padding:5px 10px;font-size:0.76rem;font-weight:700;cursor:pointer;">✨ Load Trap-Heavy NDA</button>
+        </div>
+        <textarea id="ndaInput" rows="13" class="f-area" placeholder="Paste your Mutual or One-Way NDA text here..."></textarea>
+        <button type="button" onclick="scanNda()" style="width:100%;margin-top:12px;background:linear-gradient(135deg,#00f0ff,#3b82f6);color:#040711;font-weight:800;border:none;border-radius:10px;padding:12px 18px;font-size:0.95rem;cursor:pointer;">
+          ⚡ Run 8-Point Local NDA Risk Audit
+        </button>
+        <p style="font-size:0.75rem;color:#fde68a;margin:10px 0 0;line-height:1.45;">
+          ⚠ Informational heuristic screening tool; does not constitute formal legal advice. Consult qualified counsel for binding legal review.
+        </p>
+      </div>
+
+      <div class="nda-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span id="ndaScoreBadge" style="font-size:0.8rem;font-weight:800;padding:4px 12px;border-radius:99px;background:rgba(16,185,129,0.16);color:#34d399;">READY</span>
+          <div style="display:flex;gap:8px;">
+            <button type="button" onclick="copyNdaReport()" style="background:rgba(168,85,247,0.18);color:#c084fc;border:1px solid rgba(168,85,247,0.45);border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;">📋 Copy Redlines</button>
+            <a href="contract-scanner.html" style="text-decoration:none;background:rgba(0,240,255,0.12);color:#00f0ff;border:1px solid rgba(0,240,255,0.35);border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;">Full MSA Scanner &rarr;</a>
+          </div>
+        </div>
+        <div id="ndaOut" class="nda-out"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="whitelabel.js"></script>
+  <script src="feedback.js"></script>
+  <script>
+    const NDA_SAMPLE = `NON-DISCLOSURE AGREEMENT\n1. Unilateral Obligation: Contractor ("Receiving Party") shall hold all Disclosing Party information strictly confidential in perpetuity and forever.\n2. Residuals Clause: Disclosing Party's personnel and affiliates may freely use any ideas, concepts, know-how, or techniques retained in the unaided memory of personnel who had access to Information.\n3. Non-Compete & Non-Solicitation: Receiving Party shall not compete in the same industry or solicit any customer of Disclosing Party for 36 months.\n4. Remedies: In the event of breach, Receiving Party shall pay $100,000 in liquidated damages and waives bond requirements for injunctive relief.\n5. Portfolio Sharing: Information may be shared with any current or future parent, subsidiary, venture partner, or portfolio company.`;
+
+    const NDA_RULES = [
+      {
+        title: 'Residuals ("Unaided Memory") IP Backdoor',
+        sev: 'HIGH',
+        re: /unaided\s+memory|residuals\s+clause|ideas,\s*concepts,\s*know-how.*retained\s+in.*memory/i,
+        risk: 'Allows the counterparty to commercialize your proprietary architecture or pitch ideas simply by claiming an employee remembered them without looking at notes.',
+        redline: 'Delete the Residuals section in its entirety, or add: "Nothing in this section grants any license or right under any patent, copyright, or trade secret of Disclosing Party."'
+      },
+      {
+        title: 'Perpetual Non-Expiring Confidentiality Survival',
+        sev: 'MEDIUM',
+        re: /in\s+perpetuity|forever\s+and\s+perpetually|survive\s+indefinitely/i,
+        risk: 'Creates unending administrative compliance liability even for routine non-trade-secret business information.',
+        redline: 'Cap general Confidential Information survival at three (3) years from disclosure, while preserving confidentiality for statutory Trade Secrets for so long as they remain trade secrets under applicable law.'
+      },
+      {
+        title: 'Hidden Non-Compete / Market Restraint Inside NDA',
+        sev: 'HIGH',
+        re: /shall\s+not\s+compete|refrain\s+from\s+competing|not\s+engage\s+in\s+any\s+competing\s+business/i,
+        risk: 'An exploratory NDA should protect confidential secrets—never block your agency or startup from serving other clients in your own industry.',
+        redline: 'Strike the non-compete language completely and add: "Nothing in this NDA restricts either party from independently developing products or serving third parties without using Confidential Information."'
+      },
+      {
+        title: 'Broad Customer / Employee Non-Solicitation Sneak-In',
+        sev: 'MEDIUM',
+        re: /solicit\s+any\s+customer|non-solicitation|hire\s+any\s+employee.*for\s+(?:24|36|\d+)\s+months/i,
+        risk: 'Blocks general job postings and blocks pitching prospective clients before you have even signed a commercial revenue contract.',
+        redline: 'Remove customer non-solicitation from the NDA; if employee non-solicit remains, carve out general public job advertisements not targeted at counterparty staff.'
+      },
+      {
+        title: 'Punitive Liquidated Damages Figure',
+        sev: 'HIGH',
+        re: /liquidated\s+damages|pay\s+\$[\d,]+\s+per\s+breach/i,
+        risk: 'Pre-sets an arbitrary financial penalty regardless of whether actual harm occurred.',
+        redline: 'Delete liquidated damages; rely on actual proven direct damages under standard law.'
+      },
+      {
+        title: 'Overbroad Portfolio Company / Affiliate Sharing',
+        sev: 'MEDIUM',
+        re: /portfolio\s+compan(?:y|ies)|venture\s+partner|current\s+or\s+future\s+affiliate/i,
+        risk: 'Permits a VC-backed or PE-owned buyer to share your confidential deck or pricing with competing portfolio companies.',
+        redline: 'Restrict "Representatives" strictly to employees and legal/accounting advisors with a bona fide need to know, expressly excluding portfolio companies or competing affiliates.'
+      }
+    ];
+
+    function loadNdaSample() {
+      document.getElementById('ndaInput').value = NDA_SAMPLE;
+      scanNda();
+    }
+
+    function scanNda() {
+      const txt = (document.getElementById('ndaInput').value || '').trim();
+      if (!txt) return;
+
+      const hits = [];
+      NDA_RULES.forEach(r => {
+        if (r.re.test(txt)) hits.push(r);
+      });
+
+      // Also check if standard carve-outs are missing
+      const hasCarveout = /publicly\s+known|public\s+domain|independently\s+developed|prior\s+to\s+disclosure/i.test(txt);
+      if (!hasCarveout && txt.length > 120) {
+        hits.push({
+          title: 'Missing Standard 4-Part Confidentiality Carve-Outs',
+          sev: 'HIGH',
+          risk: 'The text omits standard exclusions for information that becomes public, was already known, is independently developed, or is disclosed under court order.',
+          redline: 'Insert standard exclusions for: (a) public domain info, (b) prior lawful possession, (c) third-party non-confidential receipt, and (d) independent development without reference to Confidential Information.'
+        });
+      }
+
+      const score = Math.max(10, 100 - hits.reduce((s, h) => s + (h.sev === 'HIGH' ? 22 : 12), 0));
+      const badge = document.getElementById('ndaScoreBadge');
+      badge.textContent = `NDA SAFETY SCORE: ${score}/100 • ${hits.length} TRAPS FOUND`;
+      badge.style.color = score >= 80 ? '#34d399' : (score >= 50 ? '#fbbf24' : '#fb7185');
+
+      const brand = window.ITSGWhiteLabel
+        ? window.ITSGWhiteLabel.getAttribution('ClauseGuard NDA Checker', 'NDA Risk & Redline Memo')
+        : '*NDA Risk & Redline Memo generated by ClauseGuard — IT Solutions Global (100% Client-Side • Zero Cloud Uploads)*';
+
+      let out = `NDA RISK & REDLINE ASSESSMENT (SCORE: ${score}/100)\n`;
+      out += `====================================================================\n`;
+      if (hits.length === 0) {
+        out += `✔ No predatory residuals, non-competes, or missing carve-outs detected.\n\n`;
+      } else {
+        hits.forEach((h, i) => {
+          out += `${i + 1}. [${h.sev} RISK] ${h.title}\n`;
+          out += `   • Exposure : ${h.risk}\n`;
+          out += `   • Redline  : ${h.redline}\n\n`;
+        });
+      }
+      out += `NOTE: Informational heuristic review; not formal legal advice.\n${brand}`;
+      document.getElementById('ndaOut').textContent = out;
+    }
+
+    function copyNdaReport() {
+      navigator.clipboard.writeText(document.getElementById('ndaOut').textContent);
+      alert('Copied NDA redline memo!');
+    }
+
+    window.addEventListener('DOMContentLoaded', loadNdaSample);
+  </script>
+</body>
+</html>

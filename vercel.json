@@ -26,6 +26,8 @@
     { "source": "/uk-late-payment-calculator", "destination": "/company/growth/portal/uk-late-payment-calculator.html" },
     { "source": "/sbom-generator.html", "destination": "/company/growth/portal/sbom-generator.html" },
     { "source": "/sbom-generator", "destination": "/company/growth/portal/sbom-generator.html" },
+    { "source": "/nda-checker.html", "destination": "/company/growth/portal/nda-checker.html" },
+    { "source": "/nda-checker", "destination": "/company/growth/portal/nda-checker.html" },
     { "source": "/whitelabel.js", "destination": "/company/growth/portal/whitelabel.js" },
     { "source": "/styles.css", "destination": "/company/growth/portal/styles.css" },
     { "source": "/app.js", "destination": "/company/growth/portal/app.js" },

@@ -182,6 +182,7 @@ class TestPortalWebTools(unittest.TestCase):
             ("msme-43bh-calculator.html", "FAQPage"),
             ("uk-late-payment-calculator.html", "Late Payment of Commercial Debts (Interest) Act 1998"),
             ("sbom-generator.html", "parseAnyManifest"),
+            ("nda-checker.html", "NDA_RULES"),
         ]:
             content = (PORTAL_DIR / fname).read_text(encoding="utf-8")
             self.assertIn(token, content)
