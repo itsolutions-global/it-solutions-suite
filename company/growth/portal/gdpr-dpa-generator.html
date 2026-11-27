@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free GDPR Article 28 DPA Generator (SaaS &amp; Agency Data Processing Addendum + EU SCCs / UK IDTA) | 100% Client-Side</title>
+  <meta name="description" content="Generate a customized GDPR Article 28 Data Processing Addendum (DPA) with Annex I (Processing Details), Annex II (User-Attested Security TOMs), Annex III (Sub-Processors), and EU SCCs 2021/914 / UK IDTA references 100% locally in your browser.">
+  <meta name="keywords" content="free GDPR DPA generator, GDPR Article 28 Data Processing Addendum template, SaaS sub-processor list generator, EU SCCs Module 2 DPA, UK IDTA addendum generator, client-side compliance generator">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/gdpr-dpa-generator">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "ComplianceForge GDPR Article 28 DPA & Sub-Processor Generator",
+        "url": "https://itsolutions-global.vercel.app/gdpr-dpa-generator",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What must a GDPR Article 28 Data Processing Addendum (DPA) include?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Under Article 28(3) of Regulation (EU) 2016/679 (GDPR), a binding DPA between a Controller and Processor must set out the subject-matter and duration of processing, nature and purpose, categories of personal data and data subjects (Annex I), Article 32 technical and organizational security measures (Annex II), sub-processor authorization rules (Annex III), breach notification windows, and audit/deletion obligations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this GDPR DPA generator upload our vendor list or customer details?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. All fields are synthesized 100% inside your local browser memory using client-side JavaScript—zero characters are sent to any server."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="feedback.css">
+  <style>
+    .dpa-wrap { max-width: 1120px; margin: 0 auto; padding: 36px 16px 60px; }
+    .dpa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 22px; margin-top: 24px; align-items: start; }
+    .dpa-card { background: rgba(13,19,34,0.92); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 24px; text-align: left; }
+    .f-group { display: flex; flex-direction: column; gap: 0.3rem; margin-block-end: 1rem; }
+    .f-group label { font-weight: 700; font-size: 0.86rem; color: #e2e8f0; }
+    .f-inp { width: 100%; padding: 0.7rem 0.8rem; min-height: 48px; border-radius: 9px; background: #050811; color: #f8fafc; border: 1px solid rgba(255,255,255,0.24); font: inherit; font-size: max(1rem, 1em); box-sizing: border-box; }
+    textarea.f-inp { min-height: 92px; resize: vertical; font-family: monospace; line-height: 1.45; }
+    .f-inp:focus-visible, button:focus-visible, input[type="radio"]:focus-visible, input[type="checkbox"]:focus-visible { outline: 2px solid #00f0ff; outline-offset: 2px; }
+    fieldset.dpa-set { border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 12px 14px; margin: 0 0 1rem; }
+    fieldset.dpa-set legend { font-weight: 700; font-size: 0.85rem; color: #38bdf8; padding: 0 6px; }
+    .choice-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-size: 0.85rem; color: #cbd5e1; }
+    .choice-row input { accent-color: #00f0ff; width: 18px; height: 18px; flex-shrink: 0; }
+    .dpa-out { background: #050811; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 16px; min-height: 440px; max-height: 620px; overflow-y: auto; font-family: monospace; font-size: 0.81rem; line-height: 1.56; color: #e2e8f0; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">ComplianceForge GDPR Art. 28 DPA Studio</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">&larr; All Tools</a>
+        <a href="compliance-dossier.html" class="btn-nav">Full 5-Part Dossier</a>
+        <a href="sbom-generator.html" class="btn-nav">CycloneDX SBOM</a>
+        <a href="solutions.html" class="btn-nav" style="color:#34d399;border-color:rgba(16,185,129,0.45);font-weight:700;">💼 DPO / Agency White-Label</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="dpa-wrap">
+    <div style="text-align:center;">
+      <span style="font-size:0.78rem;font-weight:700;padding:4px 12px;border-radius:99px;background:rgba(56,189,248,0.14);color:#38bdf8;border:1px solid rgba(56,189,248,0.35);">
+        🏛️ GDPR Art. 28(3) + Annex I–III + EU SCCs (2021/914) &amp; UK IDTA • 100% Local Browser Synthesis
+      </span>
+      <h1 id="dpaFormHeading" style="font-size:2.05rem;margin:14px 0 10px;">Free <span class="gradient-text">GDPR Article 28 DPA</span> &amp; Sub-Processor Addendum Generator</h1>
+      <p style="color:#94a3b8;max-width:780px;margin:0 auto;line-height:1.6;">
+        Unblock EU &amp; UK B2B enterprise procurement in 60 seconds. Generate a structured Controller–Processor Data Processing Addendum with Annex I–III based strictly on the security controls you actually attest to.
+      </p>
+    </div>
+
+    <div class="dpa-grid">
+      <form id="dpaForm" class="dpa-card" aria-labelledby="dpaFormHeading">
+        <div class="f-group">
+          <label for="dpaProcessor">Processor (Your SaaS / Agency Legal Name)</label>
+          <input type="text" id="dpaProcessor" name="dpaProcessor" class="f-inp" value="CloudVelocity Labs Inc." required>
+        </div>
+
+        <div class="f-group">
+          <label for="dpaController">Controller (Enterprise Customer Name)</label>
+          <input type="text" id="dpaController" name="dpaController" class="f-inp" value="EuroFin Retail GmbH" required>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="f-group">
+            <label for="dpaBreachHours">Breach Notice Window (Hours)</label>
+            <input type="text" id="dpaBreachHours" name="dpaBreachHours" inputmode="numeric" class="f-inp" value="48" required>
+          </div>
+          <div class="f-group">
+            <label for="dpaReturnDays">Deletion Window on Exit (Days)</label>
+            <input type="text" id="dpaReturnDays" name="dpaReturnDays" inputmode="numeric" class="f-inp" value="30" required>
+          </div>
+        </div>
+
+        <fieldset class="dpa-set">
+          <legend>Cross-Border Transfer Mechanism (3 Options)</legend>
+          <div class="choice-row">
+            <input type="radio" id="xferEuUk" name="dpaTransfer" value="EU_SCC_AND_UK_IDTA" checked>
+            <label for="xferEuUk">EU SCCs (2021/914 Module 2) + UK IDTA Addendum</label>
+          </div>
+          <div class="choice-row">
+            <input type="radio" id="xferEeaOnly" name="dpaTransfer" value="EEA_RESIDENCY_ONLY">
+            <label for="xferEeaOnly">Strict EEA / EU Sovereign Hosting Only (No 3rd-Country Transfer)</label>
+          </div>
+          <div class="choice-row">
+            <input type="radio" id="xferDpf" name="dpaTransfer" value="EU_US_DPF_PLUS_SCC">
+            <label for="xferDpf">EU–U.S. Data Privacy Framework + SCC Fallback</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="dpa-set">
+          <legend>Annex II — Implemented Security Controls (Check Only Active TOMs)</legend>
+          <div class="choice-row">
+            <input type="checkbox" id="tomTls" name="tomTls" checked>
+            <label for="tomTls">TLS 1.2+/1.3 in transit &amp; AES-256 encryption at rest</label>
+          </div>
+          <div class="choice-row">
+            <input type="checkbox" id="tomMfa" name="tomMfa" checked>
+            <label for="tomMfa">Mandatory MFA &amp; least-privilege RBAC for production access</label>
+          </div>
+          <div class="choice-row">
+            <input type="checkbox" id="tomNoAi" name="tomNoAi" checked>
+            <label for="tomNoAi">Zero AI / ML foundation model training on Personal Data</label>
+          </div>
+          <div class="choice-row">
+            <input type="checkbox" id="tomBackup" name="tomBackup" checked>
+            <label for="tomBackup">Encrypted daily backups &amp; annual disaster-recovery test</label>
+          </div>
+          <div class="choice-row">
+            <input type="checkbox" id="tomSast" name="tomSast">
+            <label for="tomSast">Automated CI/CD SAST secret scanning &amp; CycloneDX SBOM tracking</label>
+          </div>
+        </fieldset>
+
+        <div class="f-group">
+          <label for="dpaSubprocessors">Annex III — Authorized Sub-Processors (One per line: Vendor | Role | Region)</label>
+          <textarea id="dpaSubprocessors" name="dpaSubprocessors" rows="4" autocorrect="off" autocapitalize="none" spellcheck="false" class="f-inp">Amazon Web Services EMEA SARL | Cloud Infrastructure | eu-central-1 (Frankfurt)
+Postmark (ActiveCampaign LLC) | Transactional Email | EU / US (SCCs)</textarea>
+        </div>
+
+        <button type="submit" style="width:100%;min-height:48px;background:linear-gradient(135deg,#00f0ff,#3b82f6);color:#040711;font-weight:800;border:none;border-radius:10px;padding:12px 18px;font-size:0.95rem;cursor:pointer;">
+          ⚡ Synthesize GDPR Article 28 DPA (.md)
+        </button>
+
+        <p style="font-size:0.75rem;color:#fde68a;margin:10px 0 0;line-height:1.45;">
+          ⚠ Operational compliance template; does not constitute formal legal advice. Have qualified privacy counsel review before execution.
+        </p>
+      </form>
+
+      <div class="dpa-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:0.8rem;font-weight:800;padding:4px 12px;border-radius:99px;background:rgba(16,185,129,0.16);color:#34d399;">GDPR ART. 28 READY</span>
+          <div style="display:flex;gap:8px;">
+            <button type="button" id="dpaCopyBtn" style="background:rgba(168,85,247,0.18);color:#c084fc;border:1px solid rgba(168,85,247,0.45);border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;">📋 Copy Markdown</button>
+            <button type="button" id="dpaDownloadBtn" style="background:rgba(16,185,129,0.18);color:#34d399;border:1px solid rgba(16,185,129,0.45);border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;">📥 Download .md</button>
+          </div>
+        </div>
+        <div id="dpaStatus" role="status" aria-live="polite" style="font-size:0.78rem;color:#34d399;margin-bottom:8px;"></div>
+        <div id="dpaOut" class="dpa-out"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="whitelabel.js"></script>
+  <script src="feedback.js"></script>
+  <script>
+    const DPA_TOM_DEFS = [
+      { id: 'tomTls', label: 'Encryption in Transit & At Rest (TLS 1.2+/1.3 & AES-256)' },
+      { id: 'tomMfa', label: 'Multi-Factor Authentication (MFA) & Least-Privilege RBAC' },
+      { id: 'tomNoAi', label: 'Strict Prohibition on AI / ML Model Training with Controller Data' },
+      { id: 'tomBackup', label: 'Encrypted Automated Backups & Annual Recovery Testing' },
+      { id: 'tomSast', label: 'Continuous SAST Secret Scanning & CycloneDX v1.5 SBOM Governance' }
+    ];
+
+    function buildDpa(announce) {
+      const processor = (document.getElementById('dpaProcessor').value || 'Processor').trim();
+      const controller = (document.getElementById('dpaController').value || 'Controller').trim();
+      const breachHrs = parseInt(document.getElementById('dpaBreachHours').value, 10) || 48;
+      const returnDays = parseInt(document.getElementById('dpaReturnDays').value, 10) || 30;
+      const xferNode = document.querySelector('input[name="dpaTransfer"]:checked');
+      const xfer = xferNode ? xferNode.value : 'EU_SCC_AND_UK_IDTA';
+      const subsRaw = (document.getElementById('dpaSubprocessors').value || '').trim();
+      const today = new Date().toISOString().slice(0, 10);
+
+      let xferClause = '';
+      if (xfer === 'EEA_RESIDENCY_ONLY') {
+        xferClause = 'Processor shall host and process all Controller Personal Data exclusively within European Economic Area (EEA) sovereign data centers and shall not transfer Personal Data outside the EEA without Controller\'s prior written consent.';
+      } else if (xfer === 'EU_US_DPF_PLUS_SCC') {
+        xferClause = 'Where Personal Data is transferred to the United States or a third country, transfers rely on certified participation in the EU–U.S. Data Privacy Framework (and UK Extension), backed automatically by the European Commission Standard Contractual Clauses (Decision (EU) 2021/914, Module Two: Controller-to-Processor).';
+      } else {
+        xferClause = 'For any Restricted Transfer outside the EEA or United Kingdom, the parties incorporate by reference: (i) European Commission Standard Contractual Clauses (Implementing Decision (EU) 2021/914, Module Two: Controller-to-Processor), and (ii) the UK ICO International Data Transfer Addendum (vB1.0).';
+      }
+
+      const tomLines = DPA_TOM_DEFS.map((t, i) => {
+        const checked = document.getElementById(t.id).checked;
+        return `${i + 1}. [${checked ? 'IMPLEMENTED' : 'PLANNED / NOT APPLICABLE'}] ${t.label}`;
+      }).join('\n');
+
+      const subLines = subsRaw
+        ? subsRaw.split(/\r?\n/).filter(Boolean).map((l, i) => `${i + 1}. ${l.trim()}`).join('\n')
+        : '1. None — Zero third-party sub-processors engaged.';
+
+      const brand = window.ITSGWhiteLabel
+        ? window.ITSGWhiteLabel.getAttribution('ComplianceForge GDPR Studio', 'GDPR Article 28 DPA')
+        : '*Generated locally via ComplianceForge GDPR Art. 28 Studio — IT Solutions Global (Zero Cloud Uploads)*';
+
+      const doc = `# DATA PROCESSING ADDENDUM (GDPR ARTICLE 28)
+**Effective Date:** ${today}
+**Data Controller:** ${controller} ("Controller")
+**Data Processor:** ${processor} ("Processor")
+
+> **Operational Draft Notice:** This Data Processing Addendum template is generated for operational procurement preparation and does not constitute formal legal advice. Review with qualified privacy counsel prior to execution.
+
+---
+
+## 1. Subject Matter, Scope & Roles (Article 28(3))
+1.1 **Roles:** Controller determines the purposes and means of processing Personal Data; Processor processes Personal Data solely on documented instructions from Controller to deliver the contracted Services.
+1.2 **Prohibition on Secondary Use:** Processor shall never sell Personal Data or use Controller Personal Data to train, fine-tune, or enrich generalized artificial intelligence or machine learning models unless explicitly instructed in writing.
+
+## 2. Confidentiality & Personnel (Article 28(3)(b))
+Processor ensures that all personnel authorized to process Personal Data have committed themselves to binding confidentiality obligations and receive regular security training.
+
+## 3. Personal Data Breach Notification (Articles 28(3)(f) & 33)
+Processor shall notify Controller without undue delay—and in no event later than **${breachHrs} hours** after becoming aware of a confirmed Personal Data Breach—providing root-cause indicators, affected categories, and containment actions.
+
+## 4. Sub-Processing Governance (Article 28(2) & 28(4))
+Controller grants general written authorization for the Sub-Processors listed in **Annex III**. Processor shall notify Controller at least fourteen (14) days prior to engaging any new Sub-Processor, affording Controller the right to object on reasonable data-protection grounds, and shall impose flow-down Article 28 obligations on every Sub-Processor.
+
+## 5. International Data Transfers (Chapter V GDPR & UK GDPR)
+${xferClause}
+
+## 6. Audits, Return & Deletion (Article 28(3)(g)–(h))
+6.1 Upon termination or expiration of the Services, Processor shall, at Controller's election, return or cryptographically erase all Controller Personal Data within **${returnDays} days**, unless Union or Member State law requires storage.
+6.2 Processor shall make available security attestations and permit reasonable annual audits upon thirty (30) days prior written notice.
+
+---
+
+## ANNEX I — DETAILS OF PROCESSING
+- **Categories of Data Subjects:** Controller's authorized employees, business contacts, and end-users utilizing the Services.
+- **Categories of Personal Data:** Business contact identifiers (name, work email), authentication logs, IP metadata, and service configuration records submitted by Controller.
+- **Special Categories (Art. 9):** Excluded unless expressly agreed in writing.
+- **Duration of Processing:** Co-terminous with the Master Subscription / Services Agreement plus the ${returnDays}-day exit window.
+
+## ANNEX II — TECHNICAL & ORGANIZATIONAL SECURITY MEASURES (ARTICLE 32)
+${tomLines}
+
+## ANNEX III — AUTHORIZED SUB-PROCESSORS
+${subLines}
+
+---
+**CONTROLLER SIGNATURE:** ___________________________ (${controller})
+**PROCESSOR SIGNATURE:**  ___________________________ (${processor})
+
+${brand}`;
+
+      document.getElementById('dpaOut').textContent = doc;
+      if (announce) {
+        document.getElementById('dpaStatus').textContent = `Synthesized GDPR Article 28 DPA for ${controller} (${breachHrs}h breach SLA).`;
+      }
+    }
+
+    document.getElementById('dpaForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      buildDpa(true);
+    });
+    document.getElementById('dpaForm').addEventListener('input', function() {
+      buildDpa(false);
+    });
+    document.getElementById('dpaCopyBtn').addEventListener('click', function() {
+      navigator.clipboard.writeText(document.getElementById('dpaOut').textContent || '');
+      document.getElementById('dpaStatus').textContent = 'Copied GDPR Article 28 DPA Markdown to clipboard.';
+    });
+    document.getElementById('dpaDownloadBtn').addEventListener('click', function() {
+      const blob = new Blob([document.getElementById('dpaOut').textContent || ''], { type: 'text/markdown;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'GDPR_Article28_DPA.md';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      document.getElementById('dpaStatus').textContent = 'Downloaded GDPR_Article28_DPA.md.';
+    });
+
+    window.addEventListener('DOMContentLoaded', function() { buildDpa(false); });
+  </script>
+</body>
+</html>

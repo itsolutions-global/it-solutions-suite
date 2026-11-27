@@ -42,6 +42,7 @@ class TestPortalWebTools(unittest.TestCase):
             "sbom-generator.html",
             "nda-checker.html",
             "secret-scanner.html",
+            "gdpr-dpa-generator.html",
             "solutions.html",
             "whitelabel.js",
             "styles.css",
@@ -119,6 +120,7 @@ class TestPortalWebTools(unittest.TestCase):
             "/sbom-generator",
             "/nda-checker",
             "/secret-scanner",
+            "/gdpr-dpa-generator",
             "/solutions.html",
             "/solutions",
             "/whitelabel.js",
@@ -188,6 +190,7 @@ class TestPortalWebTools(unittest.TestCase):
             ("sbom-generator.html", "parseAnyManifest"),
             ("nda-checker.html", "NDA_RULES"),
             ("secret-scanner.html", "SECRET_PATTERNS"),
+            ("gdpr-dpa-generator.html", "DPA_TOM_DEFS"),
         ]:
             content = (PORTAL_DIR / fname).read_text(encoding="utf-8")
             self.assertIn(token, content)

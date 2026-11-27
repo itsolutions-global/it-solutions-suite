@@ -30,6 +30,8 @@
     { "source": "/nda-checker", "destination": "/company/growth/portal/nda-checker.html" },
     { "source": "/secret-scanner.html", "destination": "/company/growth/portal/secret-scanner.html" },
     { "source": "/secret-scanner", "destination": "/company/growth/portal/secret-scanner.html" },
+    { "source": "/gdpr-dpa-generator.html", "destination": "/company/growth/portal/gdpr-dpa-generator.html" },
+    { "source": "/gdpr-dpa-generator", "destination": "/company/growth/portal/gdpr-dpa-generator.html" },
     { "source": "/whitelabel.js", "destination": "/company/growth/portal/whitelabel.js" },
     { "source": "/styles.css", "destination": "/company/growth/portal/styles.css" },
     { "source": "/app.js", "destination": "/company/growth/portal/app.js" },
