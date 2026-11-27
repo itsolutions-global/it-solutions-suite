@@ -28,6 +28,8 @@
     { "source": "/sbom-generator", "destination": "/company/growth/portal/sbom-generator.html" },
     { "source": "/nda-checker.html", "destination": "/company/growth/portal/nda-checker.html" },
     { "source": "/nda-checker", "destination": "/company/growth/portal/nda-checker.html" },
+    { "source": "/secret-scanner.html", "destination": "/company/growth/portal/secret-scanner.html" },
+    { "source": "/secret-scanner", "destination": "/company/growth/portal/secret-scanner.html" },
     { "source": "/whitelabel.js", "destination": "/company/growth/portal/whitelabel.js" },
     { "source": "/styles.css", "destination": "/company/growth/portal/styles.css" },
     { "source": "/app.js", "destination": "/company/growth/portal/app.js" },

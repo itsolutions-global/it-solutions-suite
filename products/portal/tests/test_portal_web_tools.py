@@ -40,6 +40,8 @@ class TestPortalWebTools(unittest.TestCase):
             "msme-43bh-calculator.html",
             "uk-late-payment-calculator.html",
             "sbom-generator.html",
+            "nda-checker.html",
+            "secret-scanner.html",
             "solutions.html",
             "whitelabel.js",
             "styles.css",
@@ -115,6 +117,8 @@ class TestPortalWebTools(unittest.TestCase):
             "/msme-43bh-calculator",
             "/uk-late-payment-calculator",
             "/sbom-generator",
+            "/nda-checker",
+            "/secret-scanner",
             "/solutions.html",
             "/solutions",
             "/whitelabel.js",
@@ -183,6 +187,7 @@ class TestPortalWebTools(unittest.TestCase):
             ("uk-late-payment-calculator.html", "Late Payment of Commercial Debts (Interest) Act 1998"),
             ("sbom-generator.html", "parseAnyManifest"),
             ("nda-checker.html", "NDA_RULES"),
+            ("secret-scanner.html", "SECRET_PATTERNS"),
         ]:
             content = (PORTAL_DIR / fname).read_text(encoding="utf-8")
             self.assertIn(token, content)
