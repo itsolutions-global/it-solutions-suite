@@ -43,7 +43,11 @@
 | **🛡️ ClauseGuard** | **Contract, NDA & MSA Audit**: Instant local scanner detecting uncapped liability, non-competes, IP assignment overreach, and multi-jurisdiction clauses (US / UK UCTA 1977 / EU GDPR & AI Act / Indian Contract Act § 27/28). | [Launch ClauseGuard](https://itsolutions-global.vercel.app/contract-scanner) |
 | **📄 DocuPulse** | **Invoice & Receipt to CSV/TSV**: In-browser OCR & structured table extractor with line-item math reconciliation, subtotal/tax auditing, and RFC 4180 export. | [Launch DocuPulse](https://itsolutions-global.vercel.app/invoice-extractor) |
 | **🎙️ EchoStream** | **Meeting Copilot & Calendar Action Sync**: Audio transcript triage with VoiceGuard PII/secret scrubbing and 1-click RFC 5545 iCalendar (`.ics`) action items sync. | [Launch EchoStream](https://itsolutions-global.vercel.app/meeting-followup) |
-| **💼 B2B & White-Label Desk** | **Agency White-Label Licensing & Turnkey Audits**: Perpetual cryptographic white-label branding keys (`ITSG-WL-...`) for law/CA firms & agencies, plus turnkey SAST/SBOM & compliance packages. | [Open Commercial Desk](https://itsolutions-global.vercel.app/solutions) |
+| **📦 CycloneDX SBOM Studio** | **Client-Side SBOM Generator**: Convert `package.json`, `requirements.txt`, `pyproject.toml`, `go.mod`, or `Cargo.toml` into CycloneDX v1.5 JSON SBOMs locally. | [Launch SBOM Studio](https://itsolutions-global.vercel.app/sbom-generator) |
+| **🔒 NexusShield Secret Sanitizer** | **Browser `.env` & Log Leak Scanner**: Shannon entropy + 12 credential signature scanner with 1-click safe redacted config/log output. | [Launch Secret Scanner](https://itsolutions-global.vercel.app/secret-scanner) |
+| **📑 NDA Risk & Residuals Checker** | **NDA Clause Redliner**: Flags hidden non-competes, unaided-memory residuals loopholes, and perpetual confidentiality traps. | [Launch NDA Checker](https://itsolutions-global.vercel.app/nda-checker) |
+| **🇮🇳 MSME 43B(h) & 🇬🇧 UK Calculators** | **Statutory Interest & Tax Calculators**: Dedicated MSME Sec 16 / Income Tax 43B(h) and UK Late Payment Act 1998 calculators. | [MSME 43B(h)](https://itsolutions-global.vercel.app/msme-43bh-calculator) • [UK 1998 Act](https://itsolutions-global.vercel.app/uk-late-payment-calculator) |
+| **💼 Digital White-Label Desk** | **Self-Serve Cryptographic Branding Keys**: Perpetual offline-verifiable white-label license keys (`ITSG-WL-...`) for law/CA firms, agencies, and security consultancies. | [Open Licensing Desk](https://itsolutions-global.vercel.app/solutions) |
 
 ---
 
@@ -287,4 +291,4 @@ This enterprise suite is licensed under the **MIT License**. Free to use, modify
 
 ---
 *Autonomous Enterprise Architecture by IT Solutions Global Corporation*  
-*Cloud Portal: [it-solutions-global.vercel.app](https://it-solutions-global.vercel.app)*
+*Cloud Portal: [itsolutions-global.vercel.app](https://itsolutions-global.vercel.app)*

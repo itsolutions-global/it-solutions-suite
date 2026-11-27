@@ -197,6 +197,31 @@ class CorporateCLITests(unittest.TestCase):
         self.assertEqual(proc_cap.returncode, 0)
         self.assertIn("Physical GDI Window Snapshot Captured", proc_cap.stdout)
 
+    def test_15_shield_sbom_and_international_contract_cli(self):
+        """Validates newly wired it-solutions shield sbom and multi-jurisdiction contract scan CLI commands."""
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmpdir:
+            proj = Path(tmpdir)
+            (proj / "go.mod").write_text("module example.com/app\n\nrequire github.com/gin-gonic/gin v1.9.1\n", encoding="utf-8")
+            cmd_sbom = [sys.executable, str(CLI_PATH), "shield", "sbom", str(proj), "--json"]
+            proc_sbom = subprocess.run(cmd_sbom, capture_output=True, text=True, encoding="utf-8", errors="replace")
+            self.assertEqual(proc_sbom.returncode, 0)
+            sbom_json = json.loads(proc_sbom.stdout)
+            self.assertEqual(sbom_json["bomFormat"], "CycloneDX")
+            self.assertEqual(sbom_json["summary"]["total_components"], 1)
+
+        cmd_con = [
+            sys.executable,
+            str(CLI_PATH),
+            "contract",
+            "scan",
+            "Vendor may use customer data to train AI models and retain ideas in unaided memory.",
+            "--json",
+        ]
+        proc_con = subprocess.run(cmd_con, capture_output=True, text=True, encoding="utf-8", errors="replace")
+        self.assertEqual(proc_con.returncode, 0)
+        con_json = json.loads(proc_con.stdout)
+        self.assertGreaterEqual(con_json["findings_count"], 2)
+
 
 if __name__ == "__main__":
     unittest.main()

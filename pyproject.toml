@@ -4,19 +4,23 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "it-solutions-suite"
-version = "1.0.0"
-description = "Autonomous Corporate Enterprise Suite: CorePulse + NexusShield + EchoStream"
+version = "1.1.0"
+description = "100% Local-First Zero-Dependency Python & Browser Suite: CorePulse, NexusShield (SAST & CycloneDX v1.5 SBOM), EchoStream, DocuPulse & ClauseGuard"
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
 authors = [
-    { name = "IT Solutions Global Corporation", email = "engineering@itsolutions.corp" }
+    { name = "IT Solutions Global Corporation", email = "isgc@sedain.com" }
 ]
 keywords = [
     "productivity",
     "executive-cockpit",
     "security-scanner",
     "sast",
+    "sbom",
+    "cyclonedx",
+    "contract-scanner",
+    "invoice-extractor",
     "speech-perception",
     "dlp",
     "omnibar",
@@ -44,8 +48,10 @@ dependencies = []
 it-solutions = "products.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/itsolutions-corp/it-solutions-suite"
-Repository = "https://github.com/itsolutions-corp/it-solutions-suite"
+Homepage = "https://itsolutions-global.vercel.app"
+Repository = "https://github.com/itsolutions-global/it-solutions-suite"
+Issues = "https://github.com/itsolutions-global/it-solutions-suite/issues"
+Commercial_Licensing = "https://itsolutions-global.vercel.app/solutions"
 
 [tool.setuptools.packages.find]
 where = ["."]

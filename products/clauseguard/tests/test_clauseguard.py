@@ -49,6 +49,23 @@ class TestClauseGuard(unittest.TestCase):
         self.assertEqual(res["grade"], "A+")
         self.assertEqual(res["verdict"], "SAFE TO SIGN")
 
+    def test_03_international_and_nda_residuals_rules(self):
+        scanner = ContractRiskScanner()
+        intl_contract = (
+            "1. Receiving Party may freely use any ideas retained in the unaided memory of its personnel.\n"
+            "2. Vendor may use customer data to train AI and machine learning models without restriction.\n"
+            "3. Supplier shall exclude all liability for breach of statutory warranties.\n"
+            "4. Contractor shall be restrained from exercising a lawful profession in India for 3 years.\n"
+            "5. This Agreement is governed by California law and Contractor shall not compete for 2 years.\n"
+        )
+        res = scanner.scan_contract(intl_contract, document_name="CrossBorder_MSA.txt")
+        ids = {f["id"] for f in res["findings"]}
+        self.assertIn("CLG-NDA-RESIDUALS-MEMORY", ids)
+        self.assertIn("CLG-EU-GDPR-AI-TRAINING", ids)
+        self.assertIn("CLG-UK-UCTA-EXCLUSION", ids)
+        self.assertIn("CLG-IN-SECTION27-RESTRAINT", ids)
+        self.assertIn("CLG-CA-16600-NONCOMPETE", ids)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -84,6 +84,25 @@ class TestNexusShieldAdvanced(unittest.TestCase):
             self.assertEqual(len(hist_res["findings"]), 1)
             self.assertEqual(hist_res["findings"][0]["id"], "SEC-AWS-KEY")
 
+    def test_04_go_mod_and_cargo_toml_sbom(self):
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmpdir:
+            proj = Path(tmpdir)
+            (proj / "go.mod").write_text(
+                "module github.com/acme/service\n\ngo 1.22\n\nrequire (\n\tgithub.com/gin-gonic/gin v1.9.1\n\tgolang.org/x/crypto v0.21.0 // indirect\n)\n",
+                encoding="utf-8",
+            )
+            (proj / "Cargo.toml").write_text(
+                '[package]\nname = "demo"\nversion = "0.1.0"\n\n[dependencies]\nserde = { version = "1.0.197", features = ["derive"] }\ntokio = "1.36.0"\n',
+                encoding="utf-8",
+            )
+            scanner = NexusScanner()
+            sbom = scanner.generate_sbom(proj)
+            purls = [c["purl"] for c in sbom["components"]]
+            self.assertIn("pkg:golang/github.com/gin-gonic/gin@1.9.1", purls)
+            self.assertIn("pkg:golang/golang.org/x/crypto@0.21.0", purls)
+            self.assertIn("pkg:cargo/serde@1.0.197", purls)
+            self.assertIn("pkg:cargo/tokio@1.36.0", purls)
+
 
 if __name__ == "__main__":
     unittest.main()

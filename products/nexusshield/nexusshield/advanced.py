@@ -206,6 +206,54 @@ class SBOMGenerator:
                     pkgs.append((pkg_name, ver))
         return pkgs
 
+    def parse_go_mod(self, content: str) -> List[Tuple[str, str]]:
+        """Extracts Go module dependencies from go.mod."""
+        pkgs: List[Tuple[str, str]] = []
+        in_require = False
+        for line in content.splitlines():
+            stripped = line.split("//", 1)[0].strip()
+            if not stripped:
+                continue
+            if stripped.startswith("require") and "(" in stripped:
+                in_require = True
+                continue
+            if in_require and stripped == ")":
+                in_require = False
+                continue
+            if stripped.startswith("require ") and "(" not in stripped:
+                m = re.match(r"^require\s+([^\s]+)\s+v?([0-9A-Za-z\.\-\+]+)", stripped)
+                if m:
+                    pkgs.append((m.group(1), m.group(2)))
+                continue
+            if in_require:
+                m = re.match(r"^([^\s]+)\s+v?([0-9A-Za-z\.\-\+]+)", stripped)
+                if m:
+                    pkgs.append((m.group(1), m.group(2)))
+        return pkgs
+
+    def parse_cargo_toml(self, content: str) -> List[Tuple[str, str]]:
+        """Extracts Rust crate dependencies from Cargo.toml."""
+        pkgs: List[Tuple[str, str]] = []
+        in_deps = False
+        for line in content.splitlines():
+            stripped = line.split("#", 1)[0].strip()
+            if not stripped:
+                continue
+            if stripped.startswith("["):
+                in_deps = bool(re.match(r"^\[(?:dev-|build-)?dependencies\]$", stripped, re.I))
+                continue
+            if in_deps:
+                m_simple = re.match(r"^([A-Za-z0-9_\-]+)\s*=\s*['\"]([^'\"]+)['\"]", stripped)
+                if m_simple:
+                    ver = re.sub(r"^[\^~>=<\s]+", "", m_simple.group(2)) or "latest"
+                    pkgs.append((m_simple.group(1), ver))
+                    continue
+                m_inline = re.match(r"^([A-Za-z0-9_\-]+)\s*=\s*\{.*?\bversion\s*=\s*['\"]([^'\"]+)['\"]", stripped)
+                if m_inline:
+                    ver = re.sub(r"^[\^~>=<\s]+", "", m_inline.group(2)) or "latest"
+                    pkgs.append((m_inline.group(1), ver))
+        return pkgs
+
     def generate_sbom(self, target_path: Union[str, Path]) -> Dict[str, Any]:
         """Scans directory for dependency manifests and builds CycloneDX 1.5 JSON SBOM."""
         base = Path(target_path).resolve()
@@ -224,7 +272,7 @@ class SBOMGenerator:
                 dirs[:] = [d for d in dirs if d not in IGNORED_DIRS and not d.startswith(".")]
                 for f in files:
                     fl = f.lower()
-                    if fl in ("requirements.txt", "package.json", "pyproject.toml") or (fl.endswith(".txt") and "requirements" in fl):
+                    if fl in ("requirements.txt", "package.json", "pyproject.toml", "go.mod", "cargo.toml") or (fl.endswith(".txt") and "requirements" in fl):
                         files_to_check.append(Path(root) / f)
 
         for manifest in files_to_check:
@@ -242,6 +290,12 @@ class SBOMGenerator:
             elif "pyproject.toml" in fname:
                 for pkg, ver in self.parse_pyproject_toml(content):
                     extracted.append((pkg, ver, "pypi"))
+            elif fname == "go.mod":
+                for pkg, ver in self.parse_go_mod(content):
+                    extracted.append((pkg, ver, "golang"))
+            elif fname == "cargo.toml":
+                for pkg, ver in self.parse_cargo_toml(content):
+                    extracted.append((pkg, ver, "cargo"))
             else:
                 for pkg, ver, _ in self.dep_scanner.parse_requirements_txt(content):
                     extracted.append((pkg, ver, "pypi"))

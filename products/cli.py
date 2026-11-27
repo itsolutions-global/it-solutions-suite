@@ -75,7 +75,7 @@ DIM = "\033[2m"
 RESET = "\033[0m"
 
 SUITE_NAME = "IT Solutions Enterprise Suite"
-SUITE_VERSION = "1.0.0"
+SUITE_VERSION = "1.1.0"
 
 
 def print_suite_banner():
@@ -181,6 +181,30 @@ def cmd_shield(args):
         if args.fail_under > 0:
             cmd.extend(["--fail-under", str(args.fail_under)])
 
+        proc = subprocess.run(cmd)
+        sys.exit(proc.returncode)
+    elif args.shield_action == "sbom":
+        cmd = [sys.executable, str(main_py), "sbom", args.path]
+        if getattr(args, "json", False):
+            cmd.append("--json")
+        if getattr(args, "output", None):
+            cmd.extend(["--output", args.output])
+        proc = subprocess.run(cmd)
+        sys.exit(proc.returncode)
+    elif args.shield_action == "scan-history":
+        cmd = [sys.executable, str(main_py), "scan-history", args.path, "--commits", str(args.commits)]
+        if getattr(args, "json", False):
+            cmd.append("--json")
+        if getattr(args, "output", None):
+            cmd.extend(["--output", args.output])
+        proc = subprocess.run(cmd)
+        sys.exit(proc.returncode)
+    elif args.shield_action == "remediate":
+        cmd = [sys.executable, str(main_py), "remediate", args.file]
+        if getattr(args, "env_file", None):
+            cmd.extend(["--env-file", args.env_file])
+        if getattr(args, "json", False):
+            cmd.append("--json")
         proc = subprocess.run(cmd)
         sys.exit(proc.returncode)
     else:
@@ -828,6 +852,22 @@ def main():
     scan_sub.add_argument("--json", action="store_true", help="Output audit in JSON format")
     scan_sub.add_argument("--output", "-o", help="Write report or JSON to file")
     scan_sub.add_argument("--fail-under", type=float, default=0.0, help="Exit with code 1 if score < threshold")
+
+    sbom_sub = shield_sub.add_parser("sbom", help="Generate CycloneDX v1.5 SBOM from Python, npm, Go, or Rust manifests")
+    sbom_sub.add_argument("path", nargs="?", default=".", help="Target directory or manifest file (default: .)")
+    sbom_sub.add_argument("--json", action="store_true", help="Output CycloneDX SBOM JSON to stdout")
+    sbom_sub.add_argument("--output", "-o", help="Write CycloneDX SBOM JSON to file")
+
+    hist_sub = shield_sub.add_parser("scan-history", help="Scan Git commit history ('git log -p') for historical leaked secrets")
+    hist_sub.add_argument("path", nargs="?", default=".", help="Target git repository (default: .)")
+    hist_sub.add_argument("--commits", "-n", type=int, default=50, help="Number of commits to inspect (default: 50)")
+    hist_sub.add_argument("--json", action="store_true", help="Output JSON report")
+    hist_sub.add_argument("--output", "-o", help="Write report JSON to file")
+
+    rem_sub = shield_sub.add_parser("remediate", help="1-Click extract hardcoded secrets to .env and rewrite source file")
+    rem_sub.add_argument("file", help="Source file to remediate")
+    rem_sub.add_argument("--env-file", help="Custom .env destination path")
+    rem_sub.add_argument("--json", action="store_true", help="Output remediation summary in JSON")
 
     # it-solutions stream
     stream_parser = subparsers.add_parser("stream", help="Execute EchoStream Speech & Thought Stream Perception Engine")

@@ -276,6 +276,121 @@ LEGAL_RISK_RULES: List[Dict[str, Any]] = [
             "transfer to Client exclusively upon Provider's receipt of full and final payment of all "
             "agreed fees. Until full payment is received, Provider retains all intellectual property rights.'"
         )
+    },
+    # --- Multi-Jurisdiction & NDA Residuals Expansion (v1.1) ---
+    {
+        "id": "CLG-NDA-RESIDUALS-MEMORY",
+        "title": "NDA 'Residuals' / Unaided Memory Loophole",
+        "severity": "CRITICAL",
+        "penalty": 26,
+        "category": "Confidentiality & Trade Secrets",
+        "pattern": re.compile(
+            r"(?i)\b(?:unaided\s+memory|retained\s+in\s+the\s+(?:unaided\s+)?memories|residual\s+information|residuals\s+clause|use\s+ideas,\s+concepts,\s+know-how\s+or\s+techniques\s+retained)\b"
+        ),
+        "plain_english_risk": (
+            "Allows the receiving party's engineers or executives to freely use your trade secrets and "
+            "architecture so long as they claim they 'remembered it without looking at notes.'"
+        ),
+        "suggested_alternative": (
+            "Delete the Residuals / Unaided Memory exception in its entirety, or explicitly clarify that "
+            "nothing herein grants any license under Disclosing Party's copyrights, patents, or trade secrets."
+        ),
+        "redline_counter_clause": (
+            "PROPOSED REDLINE: Delete the Residuals / Unaided Memory clause in its entirety; clarify that "
+            "'Nothing in this Agreement grants Receiving Party any right or license to use Disclosing Party's "
+            "Confidential Information, whether retained in memory or otherwise.'"
+        )
+    },
+    {
+        "id": "CLG-UK-UCTA-EXCLUSION",
+        "title": "UK UCTA 1977 Overbroad Statutory Liability Exclusion",
+        "severity": "HIGH",
+        "penalty": 18,
+        "category": "UK Commercial Law (UCTA 1977)",
+        "pattern": re.compile(
+            r"(?i)\b(?:exclude\s+all\s+liability\s+for\s+breach\s+of\s+statutory|no\s+liability\s+for\s+fundamental\s+breach|exclusion\s+of\s+implied\s+terms\s+under\s+sale\s+of\s+goods|exclude\s+liability\s+for\s+death\s+or\s+personal\s+injury\s+caused\s+by\s+negligence)\b"
+        ),
+        "plain_english_risk": (
+            "Attempts to exclude mandatory statutory protections or negligence liability restricted under "
+            "the UK Unfair Contract Terms Act 1977 (UCTA §§ 2, 6, 11)."
+        ),
+        "suggested_alternative": (
+            "Nothing in this Agreement shall limit or exclude either party's liability for death or personal "
+            "injury caused by negligence, fraud, or any other liability that cannot be lawfully excluded under "
+            "applicable UK statute."
+        ),
+        "redline_counter_clause": (
+            "PROPOSED REDLINE: 'Nothing in this Agreement shall limit or exclude either party's liability for "
+            "death or personal injury caused by negligence, fraud, fraudulent misrepresentation, or any other "
+            "liability that cannot be lawfully limited under the Unfair Contract Terms Act 1977.'"
+        )
+    },
+    {
+        "id": "CLG-EU-GDPR-AI-TRAINING",
+        "title": "Unconsented AI Model Training on Customer Data / Missing GDPR Art. 28 DPA",
+        "severity": "CRITICAL",
+        "penalty": 25,
+        "category": "EU GDPR Art. 28 & AI Governance",
+        "pattern": re.compile(
+            r"(?i)\b(?:use\s+(?:all\s+)?customer\s+data\s+to\s+train\s+(?:ai|machine\s+learning|internal\s+models)|transfer\s+personal\s+data\s+without\s+(?:standard\s+contractual|dpa)|no\s+data\s+processing\s+addendum)\b"
+        ),
+        "plain_english_risk": (
+            "Grants vendor rights to train foundation/ML models on confidential customer or personal data, "
+            "or processes EU personal data without a mandatory GDPR Article 28 Data Processing Addendum."
+        ),
+        "suggested_alternative": (
+            "Vendor shall process Customer Data solely to deliver the contracted Services in accordance with "
+            "an executed GDPR Article 28 Data Processing Addendum and shall never use Customer Data to train, "
+            "fine-tune, or enrich machine learning models."
+        ),
+        "redline_counter_clause": (
+            "PROPOSED REDLINE: 'Vendor shall process Customer Data strictly to provide the Services under a "
+            "binding GDPR Article 28 DPA and shall not use Customer Data or Confidential Information to train "
+            "or fine-tune any artificial intelligence or machine learning models.'"
+        )
+    },
+    {
+        "id": "CLG-IN-SECTION27-RESTRAINT",
+        "title": "Post-Term Restraint of Trade (Indian Contract Act, 1872 § 27)",
+        "severity": "HIGH",
+        "penalty": 20,
+        "category": "India Statutory Law (§ 27)",
+        "pattern": re.compile(
+            r"(?i)\b(?:restrained\s+from\s+exercising\s+a\s+lawful\s+profession|restraint\s+of\s+trade|shall\s+not\s+practice\s+any\s+profession\s+or\s+trade\s+in\s+india)\b"
+        ),
+        "plain_english_risk": (
+            "Under Section 27 of the Indian Contract Act, 1872, post-termination agreements restraining "
+            "anyone from exercising a lawful profession, trade, or business are generally void."
+        ),
+        "suggested_alternative": (
+            "Remove post-termination restraint of profession language and limit restrictions strictly to "
+            "protection of proprietary Confidential Information and non-solicitation of active client accounts."
+        ),
+        "redline_counter_clause": (
+            "PROPOSED REDLINE: Strike post-termination restraint of trade pursuant to Section 27 of the "
+            "Indian Contract Act, 1872, and narrow obligations strictly to Confidential Information protection."
+        )
+    },
+    {
+        "id": "CLG-CA-16600-NONCOMPETE",
+        "title": "Unenforceable California Non-Compete Covenant (Cal. Bus. & Prof. Code § 16600)",
+        "severity": "HIGH",
+        "penalty": 20,
+        "category": "US / California Law (§ 16600)",
+        "pattern": re.compile(
+            r"(?i)(?:california.*non-compete|governed\s+by\s+california\s+law.*shall\s+not\s+compete|subject\s+to\s+california.*restricting\s+employment)"
+        ),
+        "plain_english_risk": (
+            "Under California Business & Professions Code § 16600 and § 16600.1, non-compete covenants "
+            "are void and attempting to enforce them carries statutory civil liability."
+        ),
+        "suggested_alternative": (
+            "Remove the non-compete covenant in compliance with California Business & Professions Code § 16600."
+        ),
+        "redline_counter_clause": (
+            "PROPOSED REDLINE: Delete non-compete restriction in its entirety as void under California "
+            "Business & Professions Code § 16600."
+        )
     }
 ]
 
