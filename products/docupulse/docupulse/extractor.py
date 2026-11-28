@@ -112,29 +112,34 @@ class InvoiceExtractor:
             token = (curr_m.group(1) or curr_m.group(2) or "$").lower()
             currency = CURRENCY_MAP.get(token, token.upper())
 
-        # 5. Extract Subtotal, Tax, Discount, and Total Amount
+        # 5. Extract Subtotal, Tax (including multi-line CGST+SGST / GST+PST), Discount, Withholding/TDS, and Total Amount
         subtotal: Optional[float] = None
         tax: float = 0.0
         discount: float = 0.0
+        withholding_tax: float = 0.0
         total: Optional[float] = None
 
         num_pat = r"[\$€£₹]?\s*([0-9]{1,3}(?:,[0-9]{3})*(?:\.[0-9]{1,2})?|[0-9]+(?:\.[0-9]{1,2})?)"
 
         for line in lines:
             low = line.lower()
-            if re.search(r"\b(?:sub[\s\-]?total|net\s+amount)\b", low):
+            if re.search(r"\b(?:sub[\s\-]?total|net\s+amount|taxable\s+value)\b", low):
                 matches = re.findall(num_pat, line)
                 if matches:
                     subtotal = _parse_amount(matches[-1])
-            elif re.search(r"\b(?:tax|vat|gst|sales\s+tax)\b", low) and "invoice" not in low:
+            elif re.search(r"\b(?:tds|withholding\s+tax|tax\s+deducted\s+at\s+source)\b", low):
                 matches = re.findall(num_pat, line)
                 if matches:
-                    tax = _parse_amount(matches[-1])
+                    withholding_tax = round(withholding_tax + abs(_parse_amount(matches[-1])), 2)
+            elif re.search(r"\b(?:tax|vat|gst|cgst|sgst|igst|utgst|hst|pst|qst|sales\s+tax)\b", low) and "invoice" not in low and "gstin" not in low:
+                matches = re.findall(num_pat, line)
+                if matches:
+                    tax = round(tax + _parse_amount(matches[-1]), 2)
             elif re.search(r"\b(?:discount|credit)\b", low):
                 matches = re.findall(num_pat, line)
                 if matches:
-                    discount = abs(_parse_amount(matches[-1]))
-            elif re.search(r"\b(?:grand\s+total|total\s+due|amount\s+due|balance\s+due|total\s+amount|^total)\b", low):
+                    discount = round(discount + abs(_parse_amount(matches[-1])), 2)
+            elif re.search(r"\b(?:grand\s+total|total\s+due|amount\s+due|balance\s+due|net\s+payable|total\s+amount|^total)\b", low):
                 matches = re.findall(num_pat, line)
                 if matches:
                     total = _parse_amount(matches[-1])
@@ -145,7 +150,11 @@ class InvoiceExtractor:
         item_re = re.compile(
             r"^(?:[\-\*\•]|\d+[\.\)])?\s*([A-Za-z][A-Za-z0-9\s\(\)\-\/,&\.@\$]{2,70}?)\s+[\$€£₹]?\s*([0-9]{1,3}(?:,[0-9]{3})*\.[0-9]{2}|[0-9]+\.[0-9]{2})\s*$"
         )
-        skip_keywords = ("subtotal", "sub-total", "total", "tax", "vat", "gst", "discount", "amount due", "balance due")
+        skip_keywords = (
+            "subtotal", "sub-total", "taxable value", "total", "tax", "vat", "gst",
+            "cgst", "sgst", "igst", "utgst", "hst", "pst", "qst", "tds", "withholding",
+            "discount", "amount due", "balance due", "net payable", "gstin"
+        )
         for line in lines:
             if any(k in line.lower() for k in skip_keywords):
                 continue
@@ -165,20 +174,21 @@ class InvoiceExtractor:
         # Fallback computations
         items_sum = round(sum(i["amount"] for i in line_items), 2)
         if subtotal is None:
-            subtotal = items_sum if items_sum > 0 else (round(total - tax + discount, 2) if total is not None else 0.0)
+            subtotal = items_sum if items_sum > 0 else (round(total - tax + discount + withholding_tax, 2) if total is not None else 0.0)
         if total is None:
-            total = round(subtotal + tax - discount, 2)
+            total = round(subtotal + tax - discount - withholding_tax, 2)
 
         # 7. Mathematical & Anomaly Audit
         anomalies: List[Dict[str, str]] = []
-        expected_total = round(subtotal + tax - discount, 2)
+        expected_total = round(subtotal + tax - discount - withholding_tax, 2)
         if subtotal > 0 and total > 0 and abs(expected_total - total) >= 0.05:
             anomalies.append({
                 "code": "FIN-MATH-MISMATCH",
                 "severity": "HIGH",
                 "message": (
                     f"Invoice math discrepancy: Subtotal ({subtotal:.2f}) + Tax ({tax:.2f}) "
-                    f"- Discount ({discount:.2f}) = {expected_total:.2f}, but stated Total is {total:.2f}."
+                    f"- Discount ({discount:.2f}) - Withholding/TDS ({withholding_tax:.2f}) = {expected_total:.2f}, "
+                    f"but stated Total is {total:.2f}."
                 )
             })
 
@@ -207,6 +217,7 @@ class InvoiceExtractor:
             "subtotal": subtotal,
             "tax": tax,
             "discount": discount,
+            "withholding_tax": withholding_tax,
             "total": total,
             "line_items": line_items,
             "anomalies": anomalies,

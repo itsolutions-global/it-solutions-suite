@@ -80,6 +80,31 @@ class TestDocuPulse(unittest.TestCase):
             self.assertTrue(csv_file.exists())
             self.assertIn("INV-777", csv_out)
 
+    def test_04_multi_component_gst_and_tds_reconciliation(self):
+        extractor = InvoiceExtractor()
+        gst_invoice = (
+            "TAX INVOICE\n"
+            "Vendor: Bharat Cloud Engineering Solutions\n"
+            "Invoice Number: GST-2026-884\n"
+            "Date: 2026-11-20\n"
+            "Due Date: Net 15\n"
+            "- Kubernetes Security Hardening ₹40,000.00\n"
+            "- Automated Backup Architecture ₹10,000.00\n"
+            "Subtotal: ₹50,000.00\n"
+            "CGST (9%): ₹4,500.00\n"
+            "SGST (9%): ₹4,500.00\n"
+            "TDS Deducted (10% u/s 194J): ₹5,000.00\n"
+            "Net Payable: ₹54,000.00\n"
+        )
+        res = extractor.extract(gst_invoice)
+        self.assertEqual(res["currency"], "INR")
+        self.assertEqual(res["subtotal"], 50000.00)
+        self.assertEqual(res["tax"], 9000.00)
+        self.assertEqual(res["withholding_tax"], 5000.00)
+        self.assertEqual(res["total"], 54000.00)
+        self.assertEqual(len(res["line_items"]), 2)
+        self.assertTrue(res["is_verified"])
+
 
 if __name__ == "__main__":
     unittest.main()

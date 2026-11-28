@@ -84,6 +84,8 @@ class TestPortalWebTools(unittest.TestCase):
         self.assertNotIn("\u200b", extractor_html)
         self.assertIn("Vendor,Invoice Number,Issue Date,Due Date", extractor_html)
         self.assertIn("Vendor\\tInvoice #\\tIssue Date\\tDue Date", extractor_html)
+        self.assertIn("cgst|sgst|igst", extractor_html)
+        self.assertIn("visually-hidden", extractor_html)
 
     def test_04_echostream_voiceguard_and_ical_export(self):
         """Verifies EchoStream VoiceGuard secret sanitization and RFC 5545 iCalendar generation."""

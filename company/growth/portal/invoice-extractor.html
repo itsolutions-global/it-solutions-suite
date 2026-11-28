@@ -79,6 +79,23 @@
 
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="feedback.css">
+  <style>
+    .visually-hidden {
+      position: absolute;
+      clip-path: inset(50%);
+      overflow: hidden;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      white-space: nowrap;
+    }
+    label.file-upload-lbl:has(input:focus-visible) {
+      outline: 2px solid #00f0ff;
+      outline-offset: 2px;
+    }
+  </style>
 </head>
 <body>
 
@@ -105,9 +122,9 @@
 
       <div class="nav-actions">
         <a href="index.html" class="btn-nav">Home</a>
+        <a href="payment-recovery.html" class="btn-nav" style="color:#fbbf24;">ClaimForge Late-Pay</a>
         <a href="contract-scanner.html" class="btn-nav">Contract Scanner</a>
-        <a href="meeting-followup.html" class="btn-nav">Meeting Co-Pilot</a>
-        <a href="https://github.com/itsolutions-global/it-solutions-suite" class="btn-nav" target="_blank" rel="noopener">GitHub (MIT)</a>
+        <a href="solutions.html" class="btn-nav" style="color:#34d399;border-color:rgba(16,185,129,0.45);font-weight:700;">💼 CA / Firm White-Label</a>
       </div>
     </div>
   </header>
@@ -156,9 +173,10 @@
         <!-- Sample Load Pills -->
         <div class="sample-pills">
           <span style="font-size: 11px; color: var(--text-dim); align-self: center; margin-right: 4px;">Load Sample:</span>
-          <button class="sample-pill-btn" onclick="loadSampleInvoice('contractor')">💼 Freelancer Invoice</button>
-          <button class="sample-pill-btn" onclick="loadSampleInvoice('cloud')">☁️ Multi-Line Cloud Bill</button>
-          <button class="sample-pill-btn" onclick="loadSampleInvoice('error')">⚠️ Invoice With Math Error</button>
+          <button type="button" class="sample-pill-btn" onclick="loadSampleInvoice('contractor')">💼 Freelancer Invoice</button>
+          <button type="button" class="sample-pill-btn" onclick="loadSampleInvoice('cloud')">☁️ Multi-Line Cloud Bill</button>
+          <button type="button" class="sample-pill-btn" onclick="loadSampleInvoice('gst')">🇮🇳 GST Split (CGST+SGST &amp; TDS)</button>
+          <button type="button" class="sample-pill-btn" onclick="loadSampleInvoice('error')">⚠️ Invoice With Math Error</button>
         </div>
 
         <textarea 
@@ -168,15 +186,15 @@
           oninput="updateCharCount()"></textarea>
 
         <div class="tool-actions-bar">
-          <button class="btn-run-action" onclick="runInvoiceExtraction()">
+          <button type="button" class="btn-run-action" onclick="runInvoiceExtraction()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             Extract &amp; Audit Invoice
           </button>
-          <button class="btn-tool-secondary" onclick="clearInvoiceWorkspace()">Clear</button>
-          <label class="btn-tool-secondary" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+          <button type="button" class="btn-tool-secondary" onclick="clearInvoiceWorkspace()">Clear</button>
+          <label for="invoiceFileInput" class="btn-tool-secondary file-upload-lbl" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
             Upload File
-            <input type="file" id="invoiceFileInput" accept=".txt,.csv,.tsv,.eml" style="display: none;" onchange="handleInvoiceFileUpload(event)">
+            <input type="file" id="invoiceFileInput" accept=".txt,.csv,.tsv,.eml" class="visually-hidden" onchange="handleInvoiceFileUpload(event)">
           </label>
         </div>
       </div>
@@ -451,6 +469,20 @@
         "Sales Tax (8.25%): $115.50\n" +
         "Grand Total: $1,515.50",
 
+      gst:
+        "TAX INVOICE (INTRA-STATE GST + SEC 194J TDS)\n" +
+        "Vendor: Bharat Cloud Engineering Solutions Pvt. Ltd.\n" +
+        "Invoice #: GST-2026-884\n" +
+        "Date: 2026-11-20\n" +
+        "Due Date: Net 15\n\n" +
+        "1. Kubernetes Security Hardening Sprint: ₹40,000.00\n" +
+        "2. Automated Backup & DR Architecture: ₹10,000.00\n\n" +
+        "Subtotal: ₹50,000.00\n" +
+        "CGST (9%): ₹4,500.00\n" +
+        "SGST (9%): ₹4,500.00\n" +
+        "TDS Deducted (10% u/s 194J): ₹5,000.00\n" +
+        "Net Payable: ₹54,000.00",
+
       error:
         "INVOICE (AUDIT TEST - CONTAINS CALCULATION ERROR)\n" +
         "Vendor: Rapid Hardware Supply Ltd.\n" +
@@ -572,6 +604,7 @@
       let currency = "$";
       let subtotal = null;
       let tax = 0;
+      let deductions = 0;
       let total = null;
       const items = [];
 
@@ -582,7 +615,7 @@
 
         // Invoice # detection
         const invMatch = line.match(/(?:invoice\s*(?:no|number|#)?|receipt\s*#?|bill\s*#?)\s*[:\-]?\s*([A-Z0-9\-_]{3,30})/i);
-        if (invMatch && !/^(number|date|due|details)$/i.test(invMatch[1])) {
+        if (invMatch && !/^(number|date|due|details|intra-state)$/i.test(invMatch[1])) {
           invoiceNum = invMatch[1].trim();
         }
 
@@ -603,27 +636,29 @@
         const numMatches = line.match(/([0-9]{1,3}(?:,[0-9]{3})*(?:\.[0-9]{2})|[0-9]+\.[0-9]{2})/g);
         const lastAmt = numMatches ? parseFloat(numMatches[numMatches.length - 1].replace(/,/g, '')) : null;
 
-        if (/^sub[\s\-]?total/i.test(line) && lastAmt !== null) {
+        if (/^(?:sub[\s\-]?total|taxable\s+value)/i.test(line) && lastAmt !== null) {
           subtotal = lastAmt;
-        } else if (/^(?:tax|vat|gst|sales\s+tax)/i.test(line) && lastAmt !== null) {
-          tax = lastAmt;
-        } else if (/^(?:total|total\s+due|amount\s+due|grand\s+total)/i.test(line) && lastAmt !== null) {
+        } else if (/^(?:tds|withholding\s+tax|discount|credit)/i.test(line) && lastAmt !== null) {
+          deductions = Math.round((deductions + Math.abs(lastAmt)) * 100) / 100;
+        } else if (/^(?:tax|vat|gst|cgst|sgst|igst|utgst|hst|pst|qst|sales\s+tax)\b/i.test(line) && !/invoice|gstin/i.test(line) && lastAmt !== null) {
+          tax = Math.round((tax + lastAmt) * 100) / 100;
+        } else if (/^(?:total|total\s+due|amount\s+due|balance\s+due|net\s+payable|grand\s+total)/i.test(line) && lastAmt !== null) {
           total = lastAmt;
-        } else if (lastAmt !== null && !/invoice|date|due|account|from|to|acct/i.test(line)) {
+        } else if (lastAmt !== null && !/invoice|date|due|account|from|to|acct|gstin/i.test(line)) {
           // It's likely a line item!
           const desc = line.replace(/[\$€£₹]?\s*[0-9,]+\.[0-9]{2}\s*$/, '').replace(/^[\d\.\-\*\s]+/, '').replace(/<--.*$/, '').trim();
-          if (desc.length >= 3 && !/subtotal|tax|total/i.test(desc)) {
+          if (desc.length >= 3 && !/subtotal|tax|cgst|sgst|igst|vat|tds|withholding|discount|total/i.test(desc)) {
             items.push({ description: desc, amount: lastAmt });
           }
         }
       });
 
       const lineItemsSum = Math.round(items.reduce((acc, it) => acc + it.amount, 0) * 100) / 100;
-      if (subtotal === null) subtotal = lineItemsSum > 0 ? lineItemsSum : (total !== null ? Math.round((total - tax) * 100) / 100 : 0);
-      if (total === null) total = Math.round((subtotal + tax) * 100) / 100;
+      if (subtotal === null) subtotal = lineItemsSum > 0 ? lineItemsSum : (total !== null ? Math.round((total - tax + deductions) * 100) / 100 : 0);
+      if (total === null) total = Math.round((subtotal + tax - deductions) * 100) / 100;
 
       // Mathematical Verification
-      const calculatedTotal = Math.round((subtotal + tax) * 100) / 100;
+      const calculatedTotal = Math.round((subtotal + tax - deductions) * 100) / 100;
       const subtotalMatchesItems = (items.length > 0) ? (Math.abs(lineItemsSum - subtotal) < 0.05) : true;
       const totalMatchesMath = Math.abs(calculatedTotal - total) < 0.05;
       const isMathValid = subtotalMatchesItems && totalMatchesMath;
@@ -730,9 +765,13 @@
             </span>
           </div>
           <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px;">
-            <span style="color: var(--text-muted);">Tax / VAT / Fees:</span>
+            <span style="color: var(--text-muted);">Tax / GST / VAT:</span>
             <span style="font-family: var(--font-mono); font-weight: 600;">${currency}${tax.toFixed(2)}</span>
           </div>
+          ${deductions > 0 ? `<div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px;">
+            <span style="color: var(--text-muted);">Less TDS / Discount:</span>
+            <span style="font-family: var(--font-mono); font-weight: 600; color: #34d399;">-${currency}${deductions.toFixed(2)}</span>
+          </div>` : ''}
           <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px; margin-top: 8px; display: flex; justify-content: space-between; font-size: 15px;">
             <strong style="color: var(--text-main);">Grand Total Due:</strong>
             <strong style="font-family: var(--font-mono); color: ${isMathValid ? 'var(--cyan)' : '#ef4444'};">
