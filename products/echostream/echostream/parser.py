@@ -105,6 +105,44 @@ def clean_action_title(action_str: str) -> str:
     return cleaned
 
 
+def normalize_transcript_lines(transcript_text: str) -> List[str]:
+    """Normalizes raw .vtt (Zoom/Teams WebVTT), .srt, and plain transcripts into clean dialogue lines."""
+    normalized: List[str] = []
+    pending_speaker: Optional[str] = None
+    ts_re = re.compile(r"^\d{1,2}:\d{2}(?::\d{2})?[.,]\d{2,3}\s*-->\s*\d{1,2}:\d{2}(?::\d{2})?[.,]\d{2,3}")
+
+    for raw in transcript_text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        if re.match(r"^(?:WEBVTT|NOTE\b|STYLE\b|Kind:|Language:)", line, re.I):
+            continue
+        if re.match(r"^\d+$", line) or ts_re.match(line):
+            continue
+
+        # Convert WebVTT <v Speaker Name>Text</v> into [Speaker Name] Text
+        v_match = re.match(r"^<v\s+([^>]+)>(.*?)(?:</v>)?$", line, re.I)
+        if v_match:
+            spk = v_match.group(1).strip()
+            utt = re.sub(r"</?[^>]+>", "", v_match.group(2)).strip()
+            if utt:
+                normalized.append(f"[{spk}] {utt}")
+            else:
+                pending_speaker = spk
+            continue
+
+        line = re.sub(r"</?[^>]+>", "", line).strip()
+        if not line:
+            continue
+        if pending_speaker:
+            normalized.append(f"[{pending_speaker}] {line}")
+            pending_speaker = None
+        else:
+            normalized.append(line)
+
+    return normalized
+
+
 class SemanticStreamParser:
     """
     Semantic parser for unstructured spoken dialogue and spontaneous brain dumps.
@@ -119,18 +157,26 @@ class SemanticStreamParser:
           - Key Decisions Made
           - Questions & Parking Lot
         """
-        lines = [line.strip() for line in transcript_text.splitlines() if line.strip()]
+        lines = normalize_transcript_lines(transcript_text)
         action_items: List[Dict[str, Any]] = []
         decisions: List[Dict[str, Any]] = []
         parking_lot: List[Dict[str, Any]] = []
         speakers_detected: List[str] = []
 
         for line in lines:
-            # Check speaker attribution [Speaker Name]
+            # Check speaker attribution [Speaker Name] or Speaker Name:
             speaker_match = re.match(r"^\[([^\]]+)\]\s*(.*)$", line)
+            colon_match = None if speaker_match else re.match(r"^([A-Z][A-Za-z0-9\s\.\-]{1,24}):\s+(.+)$", line)
             if speaker_match:
                 speaker = speaker_match.group(1).strip()
                 utterance = speaker_match.group(2).strip()
+                if speaker not in speakers_detected:
+                    speakers_detected.append(speaker)
+            elif colon_match and colon_match.group(1).strip().lower() not in (
+                "action item", "action items", "todo", "task", "open question", "question", "blocker", "note"
+            ):
+                speaker = colon_match.group(1).strip()
+                utterance = colon_match.group(2).strip()
                 if speaker not in speakers_detected:
                     speakers_detected.append(speaker)
             else:
@@ -282,7 +328,13 @@ class SemanticStreamParser:
         and parses into structured action items.
         """
         stripped = text.strip()
-        if ("[" in stripped and "]" in stripped) or ("\n" in stripped and ":" in stripped):
+        if (
+            ("[" in stripped and "]" in stripped)
+            or ("\n" in stripped and ":" in stripped)
+            or "WEBVTT" in stripped.upper()
+            or "-->" in stripped
+            or "<v " in stripped.lower()
+        ):
             return self.parse_meeting_transcript(stripped)
         return self.parse_thought_stream(stripped)
 

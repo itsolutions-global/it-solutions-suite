@@ -97,6 +97,8 @@ class TestPortalWebTools(unittest.TestCase):
         self.assertIn("VERSION:2.0", copilot_html)
         self.assertIn("BEGIN:VEVENT", copilot_html)
         self.assertIn("END:VCALENDAR", copilot_html)
+        self.assertIn("WEBVTT", copilot_html)
+        self.assertIn("visually-hidden", copilot_html)
 
     def test_05_vercel_routing_and_security_headers(self):
         """Verifies root vercel.json contains complete subtool & SEO calculator rewrites."""

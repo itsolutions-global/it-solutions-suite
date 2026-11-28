@@ -79,6 +79,23 @@
 
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="feedback.css">
+  <style>
+    .visually-hidden {
+      position: absolute;
+      clip-path: inset(50%);
+      overflow: hidden;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      white-space: nowrap;
+    }
+    label.file-upload-lbl:has(input:focus-visible) {
+      outline: 2px solid #00f0ff;
+      outline-offset: 2px;
+    }
+  </style>
 </head>
 <body>
 
@@ -105,9 +122,9 @@
 
       <div class="nav-actions">
         <a href="index.html" class="btn-nav">Home</a>
+        <a href="scope-shield.html" class="btn-nav" style="color:#c084fc;">ScopeShield</a>
         <a href="contract-scanner.html" class="btn-nav">Contract Scanner</a>
-        <a href="invoice-extractor.html" class="btn-nav">Invoice Extractor</a>
-        <a href="https://github.com/itsolutions-global/it-solutions-suite" class="btn-nav" target="_blank" rel="noopener">GitHub (MIT)</a>
+        <a href="solutions.html" class="btn-nav" style="color:#34d399;border-color:rgba(16,185,129,0.45);font-weight:700;">💼 Agency White-Label</a>
       </div>
     </div>
   </header>
@@ -156,15 +173,16 @@
         <!-- Sample Load Pills -->
         <div class="sample-pills">
           <span style="font-size: 11px; color: var(--text-dim); align-self: center; margin-right: 4px;">Load Sample:</span>
-          <button class="sample-pill-btn" onclick="loadSampleMeeting('client')">🤝 Client Project Kickoff</button>
-          <button class="sample-pill-btn" onclick="loadSampleMeeting('sprint')">⚡ Engineering Sprint Sync</button>
-          <button class="sample-pill-btn" onclick="loadSampleMeeting('sales')">💼 Sales Strategy Call</button>
+          <button type="button" class="sample-pill-btn" onclick="loadSampleMeeting('client')">🤝 Client Project Kickoff</button>
+          <button type="button" class="sample-pill-btn" onclick="loadSampleMeeting('vtt')">🎥 Zoom / Teams .VTT</button>
+          <button type="button" class="sample-pill-btn" onclick="loadSampleMeeting('sprint')">⚡ Engineering Sprint Sync</button>
+          <button type="button" class="sample-pill-btn" onclick="loadSampleMeeting('sales')">💼 Sales Strategy Call</button>
         </div>
 
         <!-- Tone Selector Row -->
         <div style="display: flex; gap: 8px; margin-bottom: 12px; align-items: center; flex-wrap: wrap;">
-          <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Tone / Format:</span>
-          <select id="meetingToneSelect" onchange="runMeetingGeneration()" style="background: #060910; color: #f8fafc; border: 1px solid var(--border-glass); border-radius: 6px; padding: 4px 10px; font-size: 12px; outline: none; cursor: pointer;">
+          <label for="meetingToneSelect" style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Tone / Format:</label>
+          <select id="meetingToneSelect" onchange="runMeetingGeneration()" style="background: #060910; color: #f8fafc; border: 1px solid var(--border-glass); border-radius: 6px; padding: 4px 10px; font-size: 12px; cursor: pointer;">
             <option value="client" selected>👔 Professional Client Follow-Up</option>
             <option value="internal">🛠️ Internal Team Action Plan</option>
             <option value="executive">📊 Executive 3-Bullet Brief</option>
@@ -174,19 +192,19 @@
         <textarea 
           id="meetingTextInput" 
           class="tool-textarea" 
-          placeholder="Paste shorthand meeting notes, bullet points, or transcript text here..."
+          placeholder="Paste shorthand meeting notes, bullet points, or Zoom/Teams .vtt / .srt transcript text here..."
           oninput="updateCharCount()"></textarea>
 
         <div class="tool-actions-bar">
-          <button class="btn-run-action" onclick="runMeetingGeneration()">
+          <button type="button" class="btn-run-action" onclick="runMeetingGeneration()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             Generate Follow-Up Email
           </button>
-          <button class="btn-tool-secondary" onclick="clearMeetingWorkspace()">Clear</button>
-          <label class="btn-tool-secondary" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+          <button type="button" class="btn-tool-secondary" onclick="clearMeetingWorkspace()">Clear</button>
+          <label for="meetingFileInput" class="btn-tool-secondary file-upload-lbl" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            Upload Notes (.txt/.md)
-            <input type="file" id="meetingFileInput" accept=".txt,.md,.rtf" style="display: none;" onchange="handleMeetingFileUpload(event)">
+            Upload .txt / .vtt / .srt
+            <input type="file" id="meetingFileInput" accept=".txt,.md,.vtt,.srt,.rtf" class="visually-hidden" onchange="handleMeetingFileUpload(event)">
           </label>
         </div>
       </div>
@@ -454,7 +472,19 @@
         "# Discussion Highlights:\n" +
         "[Prospect Director] We decided to pilot ClauseGuard and DocuPulse with 15 legal operations team members.\n" +
         "[Account Exec] I will send the tailored pilot agreement and onboarding guide by tomorrow morning.\n" +
-        "[Prospect Director] Question: does the desktop suite work 100% offline inside our air-gapped environment?"
+        "[Prospect Director] Question: does the desktop suite work 100% offline inside our air-gapped environment?",
+
+      vtt:
+        "WEBVTT\n\n" +
+        "1\n" +
+        "00:00:05.120 --> 00:00:10.450\n" +
+        "<v Priya Nair>We agreed to finalize the GDPR Article 28 DPA and CycloneDX SBOM package before Friday.</v>\n\n" +
+        "2\n" +
+        "00:00:11.000 --> 00:00:17.300\n" +
+        "<v Liam O'Connor>I will deploy the SSO staging endpoint tomorrow morning and rotate our temporary key.</v>\n\n" +
+        "3\n" +
+        "00:00:18.100 --> 00:00:23.800\n" +
+        "<v Priya Nair>Question: should we add the custom enterprise SLA addendum to Q1 scope?</v>"
     };
 
     let lastGeneratedEmail = '';
@@ -561,12 +591,38 @@
 
       // VoiceGuard Sanitizer: strip API keys or secrets
       const sanitized = text
-        .replace(/\b(sk-(?:proj-)?[A-Za-z0-9_\-]{20,})\b/g, '[REDACTED_API_KEY]')
+        .replace(/\b(sk-(?:proj-|ant-)?[A-Za-z0-9_\-]{20,})\b/g, '[REDACTED_API_KEY]')
+        .replace(/\b((?:sk|rk)_live_[A-Za-z0-9]{16,})\b/g, '[REDACTED_STRIPE_KEY]')
         .replace(/\b(AKIA[0-9A-Z]{16})\b/g, '[REDACTED_AWS_KEY]')
-        .replace(/\b(ghp_[0-9a-zA-Z]{30,})\b/g, '[REDACTED_GITHUB_TOKEN]');
+        .replace(/\b(ghp_[0-9a-zA-Z]{30,})\b/g, '[REDACTED_GITHUB_TOKEN]')
+        .replace(/\b(xox[baprs]-[A-Za-z0-9\-]{16,})\b/g, '[REDACTED_SLACK_TOKEN]');
 
       const tone = document.getElementById('meetingToneSelect') ? document.getElementById('meetingToneSelect').value : 'client';
-      const lines = sanitized.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      const rawLines = sanitized.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      const lines = [];
+      let pendingVttSpeaker = null;
+      const vttTimestampRe = /^\d{1,2}:\d{2}(?::\d{2})?[.,]\d{2,3}\s*-->\s*\d{1,2}:\d{2}(?::\d{2})?[.,]\d{2,3}/;
+
+      rawLines.forEach(rawLine => {
+        if (/^(?:WEBVTT|NOTE\b|STYLE\b|Kind:|Language:)/i.test(rawLine)) return;
+        if (/^\d+$/.test(rawLine) || vttTimestampRe.test(rawLine)) return;
+        const vMatch = rawLine.match(/^<v\s+([^>]+)>(.*?)(?:<\/v>)?$/i);
+        if (vMatch) {
+          const spk = vMatch[1].trim();
+          const utt = vMatch[2].replace(/<\/?[^>]+>/g, '').trim();
+          if (utt) lines.push(`[${spk}] ${utt}`);
+          else pendingVttSpeaker = spk;
+          return;
+        }
+        const cleaned = rawLine.replace(/<\/?[^>]+>/g, '').trim();
+        if (!cleaned) return;
+        if (pendingVttSpeaker) {
+          lines.push(`[${pendingVttSpeaker}] ${cleaned}`);
+          pendingVttSpeaker = null;
+        } else {
+          lines.push(cleaned);
+        }
+      });
 
       const highlights = [];
       const decisions = [];

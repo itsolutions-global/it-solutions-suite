@@ -242,6 +242,26 @@ class TestEchoStream(unittest.TestCase):
             receipts_repeat = watcher.scan_once()
             self.assertEqual(len(receipts_repeat), 0)
 
+    def test_12_webvtt_and_colon_speaker_parsing(self):
+        """Verifies Zoom/Teams WebVTT (<v Speaker> & timestamps) and 'Speaker: text' attribution."""
+        vtt_sample = (
+            "WEBVTT\n\n"
+            "1\n"
+            "00:00:04.120 --> 00:00:08.500\n"
+            "<v Priya Patel>We agreed to ship the SOC 2 evidence bundle before Friday.</v>\n\n"
+            "2\n"
+            "00:00:09.000 --> 00:00:14.200\n"
+            "Liam Chen: I will configure the automated CycloneDX SBOM export tomorrow morning.\n"
+        )
+        parsed = self.parser.parse_stream(vtt_sample)
+        self.assertEqual(parsed["session_type"], "meeting_transcript")
+        self.assertIn("Priya Patel", parsed["speakers"])
+        self.assertIn("Liam Chen", parsed["speakers"])
+        self.assertGreaterEqual(len(parsed["decisions"]), 1)
+        liam_task = next((a for a in parsed["action_items"] if a["assignee"] == "Liam Chen"), None)
+        self.assertIsNotNone(liam_task)
+        self.assertIn("Tomorrow", liam_task["due_date"])
+
 
 if __name__ == "__main__":
     unittest.main()
