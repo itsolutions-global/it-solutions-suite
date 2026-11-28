@@ -49,6 +49,12 @@
     <priority>0.99</priority>
   </url>
   <url>
+    <loc>https://itsolutions-global.vercel.app/eu-ai-act-checker.html</loc>
+    <lastmod>2026-11-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.99</priority>
+  </url>
+  <url>
     <loc>https://itsolutions-global.vercel.app/payment-recovery.html</loc>
     <lastmod>2026-11-26</lastmod>
     <changefreq>daily</changefreq>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free EU AI Act Risk Tier Classifier &amp; Article 50 Transparency Notice Generator (Reg 2024/1689) | 100% Client-Side</title>
+  <meta name="description" content="Classify your SaaS or AI feature under EU AI Act Regulation (EU) 2024/1689 (Article 5 Prohibited, Annex III High-Risk, Article 50 Transparency, or Minimal Risk) and generate a ready-to-use Self-Assessment Memo &amp; Article 50 Disclosure 100% locally.">
+  <meta name="keywords" content="EU AI Act risk checker, EU AI Act Annex III high risk calculator, Article 50 AI transparency notice generator, Regulation EU 2024/1689 SaaS compliance, free EU AI Act self assessment">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/eu-ai-act-checker">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "ComplianceForge EU AI Act Risk Classifier & Article 50 Generator",
+        "url": "https://itsolutions-global.vercel.app/eu-ai-act-checker",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Are most B2B SaaS chatbots and AI copilots considered High-Risk under the EU AI Act?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not automatically. Under Regulation (EU) 2024/1689, general customer-support chatbots, document summarizers, and coding assistants typically fall under Article 50 Transparency obligations rather than Annex III High-Risk—unless they are used for Annex III decisions such as recruitment/HR screening, credit scoring, biometric identification, education grading, or critical infrastructure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does EU AI Act Article 50 require for SaaS applications?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Article 50 requires providers and deployers of interactive AI systems (such as chatbots) to inform natural persons clearly that they are interacting with an AI system, and requires synthetic audio, image, video, or public-interest text outputs to carry appropriate transparency disclosures or machine-readable markings."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="feedback.css">
+  <style>
+    .ai-wrap { max-width: 1120px; margin: 0 auto; padding: 36px 16px 60px; }
+    .ai-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 22px; margin-top: 24px; align-items: start; }
+    .ai-card { background: rgba(13,19,34,0.92); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 24px; text-align: left; }
+    .f-group { display: flex; flex-direction: column; gap: 0.3rem; margin-block-end: 1rem; }
+    .f-group label { font-weight: 700; font-size: 0.86rem; color: #e2e8f0; }
+    .f-inp { width: 100%; padding: 0.7rem 0.8rem; min-height: 48px; border-radius: 9px; background: #050811; color: #f8fafc; border: 1px solid rgba(255,255,255,0.24); font: inherit; font-size: max(1rem, 1em); box-sizing: border-box; }
+    .f-inp:focus-visible, button:focus-visible, input[type="radio"]:focus-visible, input[type="checkbox"]:focus-visible { outline: 2px solid #00f0ff; outline-offset: 2px; }
+    fieldset.ai-set { border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 12px 14px; margin: 0 0 1rem; }
+    fieldset.ai-set legend { font-weight: 700; font-size: 0.85rem; color: #38bdf8; padding: 0 6px; }
+    .choice-row { display: flex; align-items: flex-start; gap: 8px; margin: 7px 0; font-size: 0.84rem; color: #cbd5e1; line-height: 1.4; }
+    .choice-row input { accent-color: #00f0ff; width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; }
+    .ai-out { background: #050811; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 16px; min-height: 430px; max-height: 610px; overflow-y: auto; font-family: monospace; font-size: 0.81rem; line-height: 1.56; color: #e2e8f0; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">ComplianceForge EU AI Act Classifier</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">&larr; All Tools</a>
+        <a href="compliance-dossier.html" class="btn-nav">5-Part Procurement Dossier</a>
+        <a href="gdpr-dpa-generator.html" class="btn-nav">GDPR Art. 28 DPA</a>
+        <a href="solutions.html" class="btn-nav" style="color:#34d399;border-color:rgba(16,185,129,0.45);font-weight:700;">💼 DPO / Agency White-Label</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="ai-wrap">
+    <div style="text-align:center;">
+      <span style="font-size:0.78rem;font-weight:700;padding:4px 12px;border-radius:99px;background:rgba(56,189,248,0.14);color:#38bdf8;border:1px solid rgba(56,189,248,0.35);">
+        🇪🇺 Regulation (EU) 2024/1689 • Art. 5, Annex III &amp; Art. 50 Screening • 100% Air-Gapped Browser
+      </span>
+      <h1 id="aiActHeading" style="font-size:2.05rem;margin:14px 0 10px;">Free <span class="gradient-text">EU AI Act Risk Classifier</span> &amp; Article 50 Disclosure Generator</h1>
+      <p style="color:#94a3b8;max-width:780px;margin:0 auto;line-height:1.6;">
+        Enterprise buyers in Europe now ask every software vendor for an EU AI Act classification statement. Screen your AI feature against Article 5, Annex III, and Article 50 and export a procurement-ready memo locally.
+      </p>
+    </div>
+
+    <div class="ai-grid">
+      <form id="aiActForm" class="ai-card" aria-labelledby="aiActHeading">
+        <div class="f-group">
+          <label for="aiSystemName">Organization &amp; AI System / Feature Name</label>
+          <input type="text" id="aiSystemName" name="aiSystemName" class="f-inp" value="AcmeFlow — Customer Ticket Triage &amp; Reply Copilot" required>
+        </div>
+
+        <fieldset class="ai-set">
+          <legend>1. Value-Chain Role (Article 3)</legend>
+          <div class="choice-row">
+            <input type="radio" id="roleDeployer" name="aiRole" value="Deployer / Downstream SaaS Integrator (integrating 3rd-party LLM APIs)" checked>
+            <label for="roleDeployer">Deployer / Downstream SaaS Integrator (calling OpenAI, Anthropic, Gemini, etc.)</label>
+          </div>
+          <div class="choice-row">
+            <input type="radio" id="roleProvider" name="aiRole" value="AI System Provider (placing proprietary AI model/system on EU market)">
+            <label for="roleProvider">Provider (training or placing a proprietary AI system on the EU market under own brand)</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="ai-set">
+          <legend>2. Article 5 Prohibited Practices Screening (Check Any That Apply)</legend>
+          <div class="choice-row">
+            <input type="checkbox" id="art5Emotion" name="art5Emotion">
+            <label for="art5Emotion">Infers employee or student emotions in the workplace or educational institutions</label>
+          </div>
+          <div class="choice-row">
+            <input type="checkbox" id="art5Social" name="art5Social">
+            <label for="art5Social">Performs social scoring, subliminal behavioural manipulation, or untargeted facial scraping</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="ai-set">
+          <legend>3. Annex III High-Risk Use-Case Screening (Check Any That Apply)</legend>
+          <div class="choice-row">
+            <input type="checkbox" id="annexHr" name="annexHr">
+            <label for="annexHr">Employment &amp; HR: CV filtering, candidate ranking, promotion, or termination decisions (Annex III § 4)</label>
+          </div>
+          <div class="choice-row">
+            <input type="checkbox" id="annexCredit" name="annexCredit">
+            <label for="annexCredit">Essential Services: Creditworthiness scoring, health/life insurance pricing, or public benefits (Annex III § 5)</label>
+          </div>
+          <div class="choice-row">
+            <input type="checkbox" id="annexBio" name="annexBio">
+            <label for="annexBio">Biometrics, Critical Infrastructure, Education Grading, or Law Enforcement/Justice (Annex III §§ 1–3, 6–8)</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="ai-set">
+          <legend>4. Article 50 Transparency Triggers (Check Any That Apply)</legend>
+          <div class="choice-row">
+            <input type="checkbox" id="art50Chat" name="art50Chat" checked>
+            <label for="art50Chat">Interacts directly with natural persons (chatbots, support agents, voice/email copilots)</label>
+          </div>
+          <div class="choice-row">
+            <input type="checkbox" id="art50Synth" name="art50Synth" checked>
+            <label for="art50Synth">Generates synthetic text, code, audio, images, or video outputs</label>
+          </div>
+        </fieldset>
+
+        <button type="submit" style="width:100%;min-height:48px;background:linear-gradient(135deg,#00f0ff,#3b82f6);color:#040711;font-weight:800;border:none;border-radius:10px;padding:12px 18px;font-size:0.95rem;cursor:pointer;">
+          ⚡ Classify EU AI Act Tier &amp; Generate Art. 50 Notice
+        </button>
+
+        <p style="font-size:0.75rem;color:#fde68a;margin:10px 0 0;line-height:1.45;">
+          ⚠ Preliminary regulatory screening template; does not constitute formal legal advice. Consult qualified EU counsel for binding conformity assessments.
+        </p>
+      </form>
+
+      <div class="ai-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+          <span id="aiTierBadge" style="font-size:0.78rem;font-weight:800;padding:4px 12px;border-radius:99px;background:rgba(56,189,248,0.16);color:#38bdf8;">CLASSIFIED</span>
+          <div style="display:flex;gap:8px;">
+            <button type="button" id="aiCopyBtn" style="background:rgba(168,85,247,0.18);color:#c084fc;border:1px solid rgba(168,85,247,0.45);border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;">📋 Copy Memo</button>
+            <button type="button" id="aiDownloadBtn" style="background:rgba(16,185,129,0.18);color:#34d399;border:1px solid rgba(16,185,129,0.45);border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;">📥 Download .md</button>
+          </div>
+        </div>
+        <div id="aiStatus" role="status" aria-live="polite" style="font-size:0.78rem;color:#34d399;margin-bottom:8px;"></div>
+        <div id="aiOut" class="ai-out"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="whitelabel.js"></script>
+  <script src="feedback.js"></script>
+  <script>
+    const EU_AI_ACT_TIERS = {
+      PROHIBITED: 'UNACCEPTABLE / PROHIBITED PRACTICE (ARTICLE 5)',
+      HIGH_RISK: 'HIGH-RISK AI SYSTEM (ARTICLE 6 & ANNEX III)',
+      TRANSPARENCY: 'TRANSPARENCY-REGULATED SYSTEM (ARTICLE 50)',
+      MINIMAL: 'MINIMAL-RISK AI SYSTEM (ARTICLE 95 VOLUNTARY CODES)'
+    };
+
+    function evaluateEuAiAct(announce) {
+      const sysName = (document.getElementById('aiSystemName').value || 'AI System').trim();
+      const roleEl = document.querySelector('input[name="aiRole"]:checked');
+      const role = roleEl ? roleEl.value : 'Deployer';
+
+      const pEmotion = document.getElementById('art5Emotion').checked;
+      const pSocial = document.getElementById('art5Social').checked;
+      const hHr = document.getElementById('annexHr').checked;
+      const hCredit = document.getElementById('annexCredit').checked;
+      const hBio = document.getElementById('annexBio').checked;
+      const tChat = document.getElementById('art50Chat').checked;
+      const tSynth = document.getElementById('art50Synth').checked;
+
+      let tierKey = 'MINIMAL';
+      let badgeColor = '#34d399';
+      let obligations = [];
+
+      if (pEmotion || pSocial) {
+        tierKey = 'PROHIBITED';
+        badgeColor = '#fb7185';
+        obligations = [
+          'STOP / REDESIGN REQUIRED: Prohibited AI practices under Article 5 of Regulation (EU) 2024/1689 cannot be placed on or used in the EU market.',
+          'Statutory administrative fines under Article 99(3) reach up to EUR 35,000,000 or 7% of total worldwide annual turnover.',
+          'Remove workplace/education emotion inference (unless strictly medical/safety) and any social scoring or untargeted facial scraping modules.'
+        ];
+      } else if (hHr || hCredit || hBio) {
+        tierKey = 'HIGH_RISK';
+        badgeColor = '#fbbf24';
+        obligations = [
+          'Article 9 — Continuous Risk Management System documented across the AI lifecycle.',
+          'Article 10 — Data Governance & bias examination for training, validation, and testing sets.',
+          'Article 11 & Annex IV — Technical Documentation & EU Declaration of Conformity (Article 47).',
+          'Article 12 & 14 — Automatic event logging and meaningful Human-in-the-Loop oversight controls.',
+          'Article 26 & 49 — Deployer Fundamental Rights Impact Assessment (where applicable) & EU Database Registration.'
+        ];
+      } else if (tChat || tSynth) {
+        tierKey = 'TRANSPARENCY';
+        badgeColor = '#38bdf8';
+        obligations = [
+          'Article 50(1) — Inform natural persons clearly at the point of first interaction that they are interacting with an AI system.',
+          'Article 50(2) — Ensure synthetic audio, image, video, or text outputs are identifiable as artificially generated or assisted where applicable.',
+          'Article 4 — Maintain AI literacy guidance and safe-use instructions for staff operating the AI feature.',
+          'Exempt from Annex III High-Risk conformity assessment so long as the system is not repurposed for HR, credit, biometric, or critical-infrastructure decisions.'
+        ];
+      } else {
+        tierKey = 'MINIMAL';
+        badgeColor = '#34d399';
+        obligations = [
+          'Exempt from Article 5 prohibitions, Annex III High-Risk conformity obligations, and Article 50 interactive consumer notices.',
+          'Article 4 — Maintain baseline AI literacy for internal personnel operating AI tooling.',
+          'Article 95 — Optional adherence to voluntary environmental, security, and governance codes of conduct.'
+        ];
+      }
+
+      const badge = document.getElementById('aiTierBadge');
+      badge.textContent = EU_AI_ACT_TIERS[tierKey];
+      badge.style.color = badgeColor;
+
+      const today = new Date().toISOString().slice(0, 10);
+      const brand = window.ITSGWhiteLabel
+        ? window.ITSGWhiteLabel.getAttribution('ComplianceForge EU AI Act Studio', 'EU AI Act Self-Assessment')
+        : '*Generated locally via ComplianceForge — IT Solutions Global (100% Client-Side • Zero Cloud Uploads)*';
+
+      const disclosureSnippet = `AI Transparency Notice (EU AI Act Art. 50): "${sysName}" utilizes automated artificial intelligence models to assist in generating responses and summaries. Outputs are probabilistic, may contain inaccuracies, and are reviewed under human oversight before binding operational decisions are taken.`;
+
+      const memo = `# EU AI ACT REGULATORY CLASSIFICATION & ARTICLE 50 ATTESTATION
+**Regulation:** Regulation (EU) 2024/1689 (Artificial Intelligence Act)
+**Assessment Date:** ${today}
+**System / Feature:** ${sysName}
+**Assessed Role:** ${role}
+**Preliminary Classification:** **${EU_AI_ACT_TIERS[tierKey]}**
+
+> **Disclaimer:** This preliminary self-assessment is generated from user-selected operational parameters for B2B vendor due-diligence preparation and does not constitute formal legal advice.
+
+---
+
+## 1. Statutory Screening Summary
+- **Article 5 Prohibited Practices Triggered:** ${(pEmotion || pSocial) ? 'YES (ACTION REQUIRED)' : 'NO'}
+- **Article 6 / Annex III High-Risk Use Cases Triggered:** ${(hHr || hCredit || hBio) ? 'YES (HIGH-RISK CONTROLS REQUIRED)' : 'NO'}
+- **Article 50 Transparency Triggers:** ${(tChat || tSynth) ? 'YES (TRANSPARENCY NOTICE APPLICABLE)' : 'NO'}
+
+## 2. Applicable Compliance Obligations
+${obligations.map((o, i) => `${i + 1}. ${o}`).join('\n')}
+
+## 3. Ready-to-Embed Article 50 User UI / Footer Disclosure Snippet
+\`\`\`text
+${disclosureSnippet}
+\`\`\`
+
+${brand}`;
+
+      document.getElementById('aiOut').textContent = memo;
+      if (announce) {
+        document.getElementById('aiStatus').textContent = `Classified "${sysName}" as ${EU_AI_ACT_TIERS[tierKey]}.`;
+      }
+    }
+
+    document.getElementById('aiActForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      evaluateEuAiAct(true);
+    });
+    document.getElementById('aiActForm').addEventListener('change', function() {
+      evaluateEuAiAct(false);
+    });
+    document.getElementById('aiSystemName').addEventListener('input', function() {
+      evaluateEuAiAct(false);
+    });
+    document.getElementById('aiCopyBtn').addEventListener('click', function() {
+      navigator.clipboard.writeText(document.getElementById('aiOut').textContent || '');
+      document.getElementById('aiStatus').textContent = 'Copied EU AI Act classification memo to clipboard.';
+    });
+    document.getElementById('aiDownloadBtn').addEventListener('click', function() {
+      const blob = new Blob([document.getElementById('aiOut').textContent || ''], { type: 'text/markdown;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'EU_AI_Act_Assessment_Memo.md';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      document.getElementById('aiStatus').textContent = 'Downloaded EU_AI_Act_Assessment_Memo.md.';
+    });
+
+    window.addEventListener('DOMContentLoaded', function() { evaluateEuAiAct(false); });
+  </script>
+</body>
+</html>

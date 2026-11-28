@@ -44,6 +44,7 @@ class TestPortalWebTools(unittest.TestCase):
             "secret-scanner.html",
             "gdpr-dpa-generator.html",
             "scope-creep-calculator.html",
+            "eu-ai-act-checker.html",
             "solutions.html",
             "whitelabel.js",
             "styles.css",
@@ -127,6 +128,7 @@ class TestPortalWebTools(unittest.TestCase):
             "/secret-scanner",
             "/gdpr-dpa-generator",
             "/scope-creep-calculator",
+            "/eu-ai-act-checker",
             "/solutions.html",
             "/solutions",
             "/whitelabel.js",
@@ -198,6 +200,7 @@ class TestPortalWebTools(unittest.TestCase):
             ("secret-scanner.html", "SECRET_PATTERNS"),
             ("gdpr-dpa-generator.html", "DPA_TOM_DEFS"),
             ("scope-creep-calculator.html", "SCOPE_MULTIPLIER_LABELS"),
+            ("eu-ai-act-checker.html", "EU_AI_ACT_TIERS"),
         ]:
             content = (PORTAL_DIR / fname).read_text(encoding="utf-8")
             self.assertIn(token, content)

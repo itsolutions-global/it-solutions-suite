@@ -34,6 +34,8 @@
     { "source": "/gdpr-dpa-generator", "destination": "/company/growth/portal/gdpr-dpa-generator.html" },
     { "source": "/scope-creep-calculator.html", "destination": "/company/growth/portal/scope-creep-calculator.html" },
     { "source": "/scope-creep-calculator", "destination": "/company/growth/portal/scope-creep-calculator.html" },
+    { "source": "/eu-ai-act-checker.html", "destination": "/company/growth/portal/eu-ai-act-checker.html" },
+    { "source": "/eu-ai-act-checker", "destination": "/company/growth/portal/eu-ai-act-checker.html" },
     { "source": "/whitelabel.js", "destination": "/company/growth/portal/whitelabel.js" },
     { "source": "/styles.css", "destination": "/company/growth/portal/styles.css" },
     { "source": "/app.js", "destination": "/company/growth/portal/app.js" },
