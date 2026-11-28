@@ -43,6 +43,7 @@ class TestPortalWebTools(unittest.TestCase):
             "nda-checker.html",
             "secret-scanner.html",
             "gdpr-dpa-generator.html",
+            "scope-creep-calculator.html",
             "solutions.html",
             "whitelabel.js",
             "styles.css",
@@ -125,6 +126,7 @@ class TestPortalWebTools(unittest.TestCase):
             "/nda-checker",
             "/secret-scanner",
             "/gdpr-dpa-generator",
+            "/scope-creep-calculator",
             "/solutions.html",
             "/solutions",
             "/whitelabel.js",
@@ -195,6 +197,7 @@ class TestPortalWebTools(unittest.TestCase):
             ("nda-checker.html", "NDA_RULES"),
             ("secret-scanner.html", "SECRET_PATTERNS"),
             ("gdpr-dpa-generator.html", "DPA_TOM_DEFS"),
+            ("scope-creep-calculator.html", "SCOPE_MULTIPLIER_LABELS"),
         ]:
             content = (PORTAL_DIR / fname).read_text(encoding="utf-8")
             self.assertIn(token, content)

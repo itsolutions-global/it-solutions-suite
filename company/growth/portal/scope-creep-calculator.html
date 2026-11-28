@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Freelance Change Order &amp; Scope Creep Rush Fee Calculator (+ Polite Client Email Reply) | 100% Client-Side</title>
+  <meta name="description" content="Calculate out-of-scope freelance and agency change order pricing (QA buffer, PM overhead, and 1.5x/2.0x rush multipliers) and generate a diplomatic client reply email + SOW Change Order 100% locally in your browser.">
+  <meta name="keywords" content="freelance change order calculator, how to charge for scope creep, rush fee calculator freelance, polite scope creep email template, bilateral change order generator, ScopeShield">
+  <meta name="theme-color" content="#06080d">
+  <link rel="canonical" href="https://itsolutions-global.vercel.app/scope-creep-calculator">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "ScopeShield Freelance Change Order & Rush Fee Calculator",
+        "url": "https://itsolutions-global.vercel.app/scope-creep-calculator",
+        "applicationCategory": "BusinessApplication, FinanceApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much rush fee should a freelancer or agency charge for urgent out-of-scope requests?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Industry-standard B2B consulting and software agency benchmarks apply 1.0x for standard next-sprint additions, 1.5x for priority mid-sprint expedite work that displaces scheduled deliverables, and 2.0x for emergency same-day, evening, or weekend hotfixes, plus a 15–20% QA/integration buffer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you push back on scope creep politely without losing the client?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use a 'Yes, and here are the two timeline/budget options' framing: affirm enthusiasm for the new feature, reference the baseline Statement of Work (SOW), and offer Option A (swap out an equal-sized unstarted item at $0 extra) or Option B (approve a quick Change Order Addendum)."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="feedback.css">
+  <style>
+    .sc-wrap { max-width: 1100px; margin: 0 auto; padding: 36px 16px 60px; }
+    .sc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(345px, 1fr)); gap: 22px; margin-top: 24px; align-items: start; }
+    .sc-card { background: rgba(13,19,34,0.92); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 24px; text-align: left; }
+    .f-group { display: flex; flex-direction: column; gap: 0.3rem; margin-block-end: 1rem; }
+    .f-group label { font-weight: 700; font-size: 0.86rem; color: #e2e8f0; }
+    .f-inp { width: 100%; padding: 0.7rem 0.8rem; min-height: 48px; border-radius: 9px; background: #050811; color: #f8fafc; border: 1px solid rgba(255,255,255,0.24); font: inherit; font-size: max(1rem, 1em); box-sizing: border-box; }
+    .f-inp:focus-visible, button:focus-visible, input[type="radio"]:focus-visible { outline: 2px solid #00f0ff; outline-offset: 2px; }
+    fieldset.sc-set { border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 12px 14px; margin: 0 0 1rem; }
+    fieldset.sc-set legend { font-weight: 700; font-size: 0.85rem; color: #c084fc; padding: 0 6px; }
+    .choice-row { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-size: 0.85rem; color: #cbd5e1; }
+    .choice-row input { accent-color: #c084fc; width: 18px; height: 18px; flex-shrink: 0; }
+    .sc-out { background: #050811; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 16px; min-height: 390px; max-height: 560px; overflow-y: auto; font-family: monospace; font-size: 0.81rem; line-height: 1.56; color: #e2e8f0; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-link">
+        <div class="brand-logo-symbol">IT</div>
+        <div>
+          <div class="brand-name">IT Solutions Global</div>
+          <span class="brand-sub">ScopeShield Rush &amp; Change-Order Calculator</span>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-nav">&larr; All Tools</a>
+        <a href="scope-shield.html" class="btn-nav" style="color:#c084fc;">Full IP Escrow &amp; SOW Engine</a>
+        <a href="payment-recovery.html" class="btn-nav" style="color:#fbbf24;">ClaimForge</a>
+        <a href="solutions.html" class="btn-nav" style="color:#34d399;border-color:rgba(16,185,129,0.45);font-weight:700;">💼 Agency White-Label</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="sc-wrap">
+    <div style="text-align:center;">
+      <span style="font-size:0.78rem;font-weight:700;padding:4px 12px;border-radius:99px;background:rgba(192,132,252,0.14);color:#c084fc;border:1px solid rgba(192,132,252,0.35);">
+        📐 Stop Working Unpaid Weekends • Calculate True QA + Rush Cost &amp; Reply Diplomatically
+      </span>
+      <h1 id="scFormHeading" style="font-size:2.05rem;margin:14px 0 10px;">Freelance &amp; Agency <span class="gradient-text">Scope Creep &amp; Rush Fee</span> Calculator</h1>
+      <p style="color:#94a3b8;max-width:770px;margin:0 auto;line-height:1.6;">
+        Turn "Can we quickly add one small thing?" into a transparent, well-reasoned Change Order quote—complete with QA/integration overhead and a diplomatic 2-option client reply email.
+      </p>
+    </div>
+
+    <div class="sc-grid">
+      <form id="scForm" class="sc-card" aria-labelledby="scFormHeading">
+        <div class="f-group">
+          <label for="scClient">Client / Project Name</label>
+          <input type="text" id="scClient" name="scClient" class="f-inp" value="Horizon Commerce Redesign" required>
+        </div>
+
+        <div class="f-group">
+          <label for="scFeature">Out-of-Scope Request Description</label>
+          <input type="text" id="scFeature" name="scFeature" class="f-inp" value="Custom multi-currency Stripe webhook &amp; admin refund dashboard" required>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+          <div class="f-group">
+            <label for="scCurrency">Currency</label>
+            <input type="text" id="scCurrency" name="scCurrency" class="f-inp" value="USD">
+          </div>
+          <div class="f-group">
+            <label for="scRate">Base Rate / Hr</label>
+            <input type="text" id="scRate" name="scRate" inputmode="decimal" class="f-inp" value="95">
+          </div>
+          <div class="f-group">
+            <label for="scHours">Raw Dev Hours</label>
+            <input type="text" id="scHours" name="scHours" inputmode="decimal" class="f-inp" value="10">
+          </div>
+        </div>
+
+        <div class="f-group">
+          <label for="scBufferPct">QA, Testing &amp; Revision Buffer (%)</label>
+          <input type="text" id="scBufferPct" name="scBufferPct" inputmode="decimal" class="f-inp" value="20">
+        </div>
+
+        <fieldset class="sc-set">
+          <legend>Delivery Urgency &amp; Schedule Displacement Tier</legend>
+          <div class="choice-row">
+            <input type="radio" id="scTierStd" name="scTier" value="1.0">
+            <label for="scTierStd">1.0x Standard — Queued into next sprint after current SOW</label>
+          </div>
+          <div class="choice-row">
+            <input type="radio" id="scTierPri" name="scTier" value="1.5" checked>
+            <label for="scTierPri">1.5x Priority Expedite — Interrupts active sprint schedule</label>
+          </div>
+          <div class="choice-row">
+            <input type="radio" id="scTierEmg" name="scTier" value="2.0">
+            <label for="scTierEmg">2.0x Emergency Rush — Same-day, after-hours, or weekend delivery</label>
+          </div>
+        </fieldset>
+
+        <button type="submit" style="width:100%;min-height:48px;background:linear-gradient(135deg,#c084fc,#3b82f6);color:#040711;font-weight:800;border:none;border-radius:10px;padding:12px 18px;font-size:0.95rem;cursor:pointer;">
+          ⚡ Calculate Change Order &amp; Draft Polite Reply
+        </button>
+
+        <p style="font-size:0.75rem;color:#fde68a;margin:10px 0 0;line-height:1.45;">
+          ⚠ Commercial pricing calculator &amp; communication template; not formal legal advice.
+        </p>
+      </form>
+
+      <div class="sc-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+          <span id="scTotalBadge" style="font-size:0.8rem;font-weight:800;padding:4px 12px;border-radius:99px;background:rgba(192,132,252,0.16);color:#c084fc;">QUOTE READY</span>
+          <div style="display:flex;gap:8px;">
+            <button type="button" id="scCopyBtn" style="background:rgba(16,185,129,0.18);color:#34d399;border:1px solid rgba(16,185,129,0.45);border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;">📋 Copy Email &amp; Quote</button>
+            <a href="scope-shield.html" style="text-decoration:none;background:rgba(192,132,252,0.14);color:#c084fc;border:1px solid rgba(192,132,252,0.35);border-radius:6px;padding:6px 12px;font-size:0.78rem;font-weight:700;">+ IP Escrow Cert &rarr;</a>
+          </div>
+        </div>
+        <div id="scStatus" role="status" aria-live="polite" style="font-size:0.78rem;color:#34d399;margin-bottom:8px;"></div>
+        <div id="scOut" class="sc-out"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="whitelabel.js"></script>
+  <script src="feedback.js"></script>
+  <script>
+    const SCOPE_MULTIPLIER_LABELS = {
+      '1.0': 'Standard Next-Sprint Queue (1.0x)',
+      '1.5': 'Mid-Sprint Priority Expedite (1.5x)',
+      '2.0': 'Emergency / Weekend Rush (2.0x)'
+    };
+
+    function computeScopeQuote(announce) {
+      const client = (document.getElementById('scClient').value || 'Client').trim();
+      const feature = (document.getElementById('scFeature').value || 'Additional Deliverable').trim();
+      const curr = (document.getElementById('scCurrency').value || 'USD').trim().toUpperCase();
+      const rate = Math.max(1, parseFloat(document.getElementById('scRate').value) || 95);
+      const rawHrs = Math.max(0.5, parseFloat(document.getElementById('scHours').value) || 8);
+      const bufPct = Math.max(0, parseFloat(document.getElementById('scBufferPct').value) || 20);
+      const tierEl = document.querySelector('input[name="scTier"]:checked');
+      const multStr = tierEl ? tierEl.value : '1.5';
+      const mult = parseFloat(multStr) || 1.5;
+
+      const bufferHrs = Math.round(rawHrs * (bufPct / 100) * 10) / 10;
+      const totalHrs = Math.round((rawHrs + bufferHrs) * 10) / 10;
+      const stdPrice = Math.round(totalHrs * rate * 100) / 100;
+      const finalQuote = Math.round(stdPrice * mult * 100) / 100;
+      const rushPremium = Math.round((finalQuote - stdPrice) * 100) / 100;
+      const deposit50 = Math.round(finalQuote * 0.5 * 100) / 100;
+
+      document.getElementById('scTotalBadge').textContent = `RECOMMENDED QUOTE: ${curr} ${finalQuote.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+      const brand = window.ITSGWhiteLabel
+        ? window.ITSGWhiteLabel.getAttribution('ScopeShield Change Pricer', 'Change Order & Client Estimate')
+        : '*Generated locally via ScopeShield — IT Solutions Global (100% Client-Side • Zero Cloud Uploads)*';
+
+      const out = `SCOPESHIELD CHANGE-ORDER BREAKDOWN & DIPLOMATIC CLIENT REPLY
+====================================================================
+Project / Client : ${client}
+Requested Scope  : ${feature}
+Urgency Tier     : ${SCOPE_MULTIPLIER_LABELS[multStr]}
+
+1. TRANSPARENT EFFORT & PRICING MATH
+   • Core Implementation Effort : ${rawHrs} hrs @ ${curr} ${rate.toFixed(2)}/hr
+   • QA, Testing & PM Buffer    : +${bufferHrs} hrs (${bufPct}%) -> ${totalHrs} billable hrs
+   • Standard Next-Sprint Cost  : ${curr} ${stdPrice.toFixed(2)} (1.0x)
+   • Rush / Displacement Premium: ${curr} ${rushPremium.toFixed(2)} (${mult.toFixed(1)}x multiplier)
+   • TOTAL CHANGE ORDER FEE     : ${curr} ${finalQuote.toFixed(2)} (50% kickoff deposit: ${curr} ${deposit50.toFixed(2)})
+
+--------------------------------------------------------------------
+2. READY-TO-SEND DIPLOMATIC CLIENT EMAIL ("YES, AND HERE ARE 2 OPTIONS")
+--------------------------------------------------------------------
+Subject: Quick Scope & Timeline Options — ${feature} (${client})
+
+Hi Team,
+
+Great idea on adding "${feature}"—that will definitely strengthen ${client}.
+
+Because this sits outside our current baseline Statement of Work, I mapped out the engineering + QA effort (${totalHrs} hours total, including testing and integration) so we keep your launch timeline predictable. Here are three ways we can handle it:
+
+• Option A (Priority Mid-Sprint Add-On — ${curr} ${finalQuote.toFixed(2)}): We slot this in at ${SCOPE_MULTIPLIER_LABELS[multStr]} and kick off as soon as the Change Order (${curr} ${deposit50.toFixed(2)} deposit) is approved.
+• Option B (Standard Next-Sprint Queue — ${curr} ${stdPrice.toFixed(2)}): We schedule it immediately after our current milestone wraps at our standard 1.0x rate (${curr} ${stdPrice.toFixed(2)}) with zero rush premium.
+• Option C ($0 Scope Swap): If budget is fixed, we can swap out an unstarted feature of equivalent (${totalHrs}-hour) effort from the current backlog at no extra cost.
+
+Let me know which option works best for your roadmap and I will send over the 1-page Change Order!
+
+Best regards,
+
+${brand}`;
+
+      document.getElementById('scOut').textContent = out;
+      if (announce) {
+        document.getElementById('scStatus').textContent = `Calculated ${curr} ${finalQuote.toFixed(2)} Change Order (${totalHrs} hrs @ ${mult.toFixed(1)}x).`;
+      }
+    }
+
+    document.getElementById('scForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      computeScopeQuote(true);
+    });
+    document.getElementById('scForm').addEventListener('input', function() {
+      computeScopeQuote(false);
+    });
+    document.getElementById('scCopyBtn').addEventListener('click', function() {
+      navigator.clipboard.writeText(document.getElementById('scOut').textContent || '');
+      document.getElementById('scStatus').textContent = 'Copied Change Order breakdown & client email to clipboard.';
+    });
+
+    window.addEventListener('DOMContentLoaded', function() { computeScopeQuote(false); });
+  </script>
+</body>
+</html>

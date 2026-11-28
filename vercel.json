@@ -32,6 +32,8 @@
     { "source": "/secret-scanner", "destination": "/company/growth/portal/secret-scanner.html" },
     { "source": "/gdpr-dpa-generator.html", "destination": "/company/growth/portal/gdpr-dpa-generator.html" },
     { "source": "/gdpr-dpa-generator", "destination": "/company/growth/portal/gdpr-dpa-generator.html" },
+    { "source": "/scope-creep-calculator.html", "destination": "/company/growth/portal/scope-creep-calculator.html" },
+    { "source": "/scope-creep-calculator", "destination": "/company/growth/portal/scope-creep-calculator.html" },
     { "source": "/whitelabel.js", "destination": "/company/growth/portal/whitelabel.js" },
     { "source": "/styles.css", "destination": "/company/growth/portal/styles.css" },
     { "source": "/app.js", "destination": "/company/growth/portal/app.js" },

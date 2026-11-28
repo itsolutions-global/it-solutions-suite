@@ -28,9 +28,11 @@ COREPULSE_DIR = Path(__file__).resolve().parent
 PRODUCTS_DIR = COREPULSE_DIR.parent
 NEXUSSHIELD_DIR = PRODUCTS_DIR / "nexusshield"
 ECHOSTREAM_DIR = PRODUCTS_DIR / "echostream"
+CLAUSEGUARD_DIR = PRODUCTS_DIR / "clauseguard"
+DOCUPULSE_DIR = PRODUCTS_DIR / "docupulse"
 
 # Ensure all subsystem paths are available in sys.path
-for p in (PRODUCTS_DIR, COREPULSE_DIR, NEXUSSHIELD_DIR, ECHOSTREAM_DIR):
+for p in (PRODUCTS_DIR, COREPULSE_DIR, NEXUSSHIELD_DIR, ECHOSTREAM_DIR, CLAUSEGUARD_DIR, DOCUPULSE_DIR):
     p_str = str(p)
     if p_str not in sys.path:
         sys.path.insert(0, p_str)
@@ -215,10 +217,25 @@ class OmnibarRouter:
         if not text:
             return "empty", ""
 
+        # CycloneDX SBOM Generation
+        if re.match(r"(?i)^(?:/?sbom|cyclonedx)\b", text):
+            rest = re.sub(r"(?i)^(?:/?sbom|cyclonedx)\s*", "", text).strip()
+            return "sbom", rest or "."
+
         # Security Scan
         if re.match(r"(?i)^(?:/?scan|shield|secrets)\b", text):
             rest = re.sub(r"(?i)^(?:/?scan|shield(?:\s+scan)?|secrets)\s*", "", text).strip()
             return "scan", rest or "."
+
+        # ClauseGuard Contract / NDA Quick Audit
+        if re.match(r"(?i)^(?:/?contract|/?nda|/?clause)\b", text):
+            rest = re.sub(r"(?i)^(?:/?contract|/?nda|/?clause)(?:\s+scan)?\s*", "", text).strip()
+            return "contract", rest
+
+        # DocuPulse Invoice / Receipt Quick Extraction
+        if re.match(r"(?i)^(?:/?invoice|/?receipt)\b", text):
+            rest = re.sub(r"(?i)^(?:/?invoice|/?receipt)(?:\s+parse)?\s*", "", text).strip()
+            return "invoice", rest
 
         # Voice / Memo Intake
         if re.match(r"(?i)^(?:/?voice|memo|listen)\b", text):
@@ -269,6 +286,28 @@ class OmnibarRouter:
                 "mode": "scan",
                 "preview": f"Scan directory '{target}' with NexusShield SAST & Secret Scanner",
                 "badge": "SECURITY SCAN"
+            }
+
+        if mode == "sbom":
+            target = payload or "."
+            return {
+                "mode": "sbom",
+                "preview": f"Generate CycloneDX v1.5 SBOM for '{target}' (Python, npm, Go, Rust)",
+                "badge": "CYCLONEDX SBOM"
+            }
+
+        if mode == "contract":
+            return {
+                "mode": "contract",
+                "preview": f"Audit contract/NDA clause with ClauseGuard: '{payload[:50]}...'" if payload else "Paste contract clause or file path to redline",
+                "badge": "CLAUSEGUARD"
+            }
+
+        if mode == "invoice":
+            return {
+                "mode": "invoice",
+                "preview": f"Extract & math-audit invoice with DocuPulse: '{payload[:50]}...'" if payload else "Provide invoice file path or raw billing text",
+                "badge": "DOCUPULSE"
             }
 
         if mode == "voice":
@@ -493,7 +532,7 @@ class OmnibarRouter:
             parser = SemanticStreamParser()
             if hasattr(parser, "parse_thought_stream"):
                 parse_res = parser.parse_thought_stream(redacted_text)
-                action_items = parse_res.get("tasks", [])
+                action_items = parse_res.get("action_items", parse_res.get("tasks", []))
             elif hasattr(parser, "parse_meeting_transcript"):
                 parse_res = parser.parse_meeting_transcript(redacted_text)
                 action_items = parse_res.get("action_items", [])
@@ -718,6 +757,70 @@ class OmnibarRouter:
                 "error": str(ex)
             }
 
+    def execute_sbom(self, target_path: str) -> Dict[str, Any]:
+        """Generates a CycloneDX v1.5 SBOM from the Omnibar."""
+        try:
+            from nexusshield.scanner import NexusScanner
+            scanner = NexusScanner()
+            sbom = scanner.generate_sbom(target_path or ".")
+            comp_count = sbom["summary"]["total_components"]
+            vuln_count = sbom["summary"]["total_vulnerabilities"]
+            return {
+                "success": True,
+                "mode": "sbom",
+                "summary": f"✔ NexusShield CycloneDX v1.5 SBOM: {comp_count} component(s), {vuln_count} known CVE(s)",
+                "data": sbom
+            }
+        except Exception as ex:
+            return {"success": False, "mode": "sbom", "summary": f"✖ SBOM Error: {ex}", "error": str(ex)}
+
+    def execute_contract_audit(self, payload: str) -> Dict[str, Any]:
+        """Audits a contract file or inline clause directly from the Omnibar using ClauseGuard."""
+        if not payload:
+            return {"success": False, "mode": "contract", "summary": "✖ Provide contract text or file path.", "error": "Empty payload"}
+        try:
+            from clauseguard.scanner import ContractRiskScanner
+            p = Path(payload)
+            if p.exists() and p.is_file():
+                text = p.read_text(encoding="utf-8", errors="ignore")
+                doc_name = p.name
+            else:
+                text = payload
+                doc_name = "Omnibar_Clause.txt"
+            res = ContractRiskScanner().scan_contract(text, document_name=doc_name)
+            return {
+                "success": True,
+                "mode": "contract",
+                "summary": f"✔ ClauseGuard [{res['grade']} • {res['safety_score']}/100]: {res['findings_count']} risk(s) — {res['verdict']}",
+                "data": res
+            }
+        except Exception as ex:
+            return {"success": False, "mode": "contract", "summary": f"✖ ClauseGuard Error: {ex}", "error": str(ex)}
+
+    def execute_invoice_audit(self, payload: str) -> Dict[str, Any]:
+        """Extracts & reconciles an invoice file or inline text from the Omnibar using DocuPulse."""
+        if not payload:
+            return {"success": False, "mode": "invoice", "summary": "✖ Provide invoice text or file path.", "error": "Empty payload"}
+        try:
+            from docupulse.extractor import InvoiceExtractor
+            p = Path(payload)
+            if p.exists() and p.is_file():
+                text = p.read_text(encoding="utf-8", errors="ignore")
+                src = p.name
+            else:
+                text = payload
+                src = "omnibar_invoice.txt"
+            res = InvoiceExtractor().extract(text, source_name=src)
+            status_lbl = "VERIFIED" if res["is_verified"] else f"ANOMALY ({len(res['anomalies'])})"
+            return {
+                "success": True,
+                "mode": "invoice",
+                "summary": f"✔ DocuPulse [{status_lbl}]: {res['vendor']} | {res['currency']} {res['total']:,.2f}",
+                "data": res
+            }
+        except Exception as ex:
+            return {"success": False, "mode": "invoice", "summary": f"✖ DocuPulse Error: {ex}", "error": str(ex)}
+
     def parse_and_route(self, raw_command: str) -> Dict[str, Any]:
         """
         Unified dispatch entrypoint.
@@ -735,6 +838,12 @@ class OmnibarRouter:
 
         if mode == "scan":
             return self.execute_scan(payload)
+        elif mode == "sbom":
+            return self.execute_sbom(payload)
+        elif mode == "contract":
+            return self.execute_contract_audit(payload)
+        elif mode == "invoice":
+            return self.execute_invoice_audit(payload)
         elif mode == "voice":
             return self.execute_voice_intake(payload)
         elif mode == "routine":

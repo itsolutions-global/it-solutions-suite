@@ -257,6 +257,29 @@ class TestOmnibarMultiModalRouting(unittest.TestCase):
         self.assertIn("Opened CorePulse Cockpit", res["summary"])
         mock_browser.assert_called_once_with("http://127.0.0.1:8080")
 
+    def test_12b_clauseguard_docupulse_and_sbom_omnibar_routing(self):
+        """Validates unified Omnibar routing to ClauseGuard (/contract), DocuPulse (/invoice), and SBOM (/sbom)."""
+        res_con = self.router.parse_and_route("contract Contractor agrees to unlimited liability and unaided memory residuals.")
+        self.assertTrue(res_con["success"])
+        self.assertEqual(res_con["mode"], "contract")
+        self.assertGreaterEqual(res_con["data"]["findings_count"], 2)
+
+        inv_file = Path(self.temp_dir) / "sample_inv.txt"
+        inv_file.write_text("Vendor: CloudEdge Ltd.\nSubtotal: $400.00\nTax: $40.00\nTotal Due: $440.00\n", encoding="utf-8")
+        res_inv = self.router.parse_and_route(f"invoice {inv_file}")
+        self.assertTrue(res_inv["success"])
+        self.assertEqual(res_inv["mode"], "invoice")
+        self.assertTrue(res_inv["data"]["is_verified"])
+        self.assertEqual(res_inv["data"]["total"], 440.0)
+
+        sbom_dir = Path(self.temp_dir) / "sbom_proj"
+        sbom_dir.mkdir(exist_ok=True)
+        (sbom_dir / "Cargo.toml").write_text('[package]\nname="x"\n[dependencies]\nserde = "1.0.197"\n', encoding="utf-8")
+        res_sbom = self.router.parse_and_route(f"sbom {sbom_dir}")
+        self.assertTrue(res_sbom["success"])
+        self.assertEqual(res_sbom["mode"], "sbom")
+        self.assertEqual(res_sbom["data"]["summary"]["total_components"], 1)
+
 
 class TestOmnibarUIAndHotkeyLifecycle(unittest.TestCase):
     """Validates live preview generation, UI creation safety, and hotkey listener lifecycle."""
